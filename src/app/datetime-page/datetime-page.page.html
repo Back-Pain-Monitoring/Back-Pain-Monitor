@@ -5,6 +5,20 @@
 </ion-header>
 
 <ion-content>
+
+  <!--Back button to home page-->
+  <ion-fab vertical="center" horizontal="start" slot="fixed">
+    <ion-fab-button color="success" routerDirection="back" href="/home">
+      <ion-icon name="arrow-back-circle-outline" color="dark"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <!--Forward Button to bodymap page-->
+  <ion-fab vertical="center" horizontal="end" slot="fixed">
+    <ion-fab-button color="success" routerDirection="forward" href="/bodymap-page">
+      <ion-icon name="arrow-forward-circle-outline" color="dark"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
   <!-- added in multiple selection demo to try things -->
   <ion-list>
     <ion-list-header>
