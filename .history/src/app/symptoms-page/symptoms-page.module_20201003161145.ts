@@ -8,8 +8,6 @@ import { SymptomsPagePageRoutingModule } from './symptoms-page-routing.module';
 
 import { SymptomsPagePage } from './symptoms-page.page';
 
-
-
 @NgModule({
   imports: [
     CommonModule,
@@ -19,4 +17,4 @@ import { SymptomsPagePage } from './symptoms-page.page';
   ],
   declarations: [SymptomsPagePage]
 })
-export class SymptomsPagePageModule { }
+export class SymptomsPagePageModule {}
