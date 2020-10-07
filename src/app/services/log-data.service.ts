@@ -53,4 +53,29 @@ export class LogDataService {
   load(): Promise<boolean> {
     return Promise.resolve(true);
   }
+
+  setLogEntry(data): void {
+    this.logEntries.push({
+      datetime: data.datetime,
+      body_part: data.body_part,
+      intensity: data.intensity,
+      type: data.type,
+      duration: data.duration,
+      cause: data.cause,
+      mobility: data.mobility,
+      is_constant: data.is_constant,
+      redflag_symptoms: data.redflag_symptoms,
+      comment: data.comment,
+    });
+
+    this.save();
+  }
+
+  save(): void {
+
+  }
+
+  // TODO: functionality to edit log?
+
+  // TODO: more with slugs?
 }

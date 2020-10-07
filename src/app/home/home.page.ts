@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, ErrorHandler } from '@angular/core';
+import { LogDataService } from '../services/log-data.service';
 
 
 @Component({
@@ -8,6 +9,12 @@ import { Component } from '@angular/core';
 })
 export class HomePage {
 
-  constructor() { }
+  constructor(private logDataSvc: LogDataService) {
+
+  }
+
+  addLog(): void {
+    // this.logDataSvc.createLog(data);
+  }
 
 }
