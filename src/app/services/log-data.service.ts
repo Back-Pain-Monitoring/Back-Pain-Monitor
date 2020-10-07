@@ -20,6 +20,14 @@ export class LogDataService {
 
   public loaded = false;
 
+  /*
+  [4:18 PM] Victor Norman
+    One way, which I think might work well, is to have the data service we have also be able to store a partially constructed log entry object. And, an api to get/set values from/to that object. Then each page queries the data service for that object or the properties it uses from that object.  In the end, the object is moved from temporary to permanant and added to the completed list of log entries.  I think that might work well. Then nothing has to be passed back and forth between pages -- each page just goes to the data service and gets the values from this temporary/in-process object.
+ [4:19 PM] Victor Norman
+    If/when we get to editing a log entry, it gets copied into the temporary object with all the values, and the pages will display those values and allow them to be edited, before getting to the end, where the obejct is put back into the permanant list!  Cool
+<https://teams.microsoft.com/l/message/19:1e215c74df4a45a8bcceca92cd311117@thread.tacv2/1602101910156?tenantId=756349b9-0610-4b01-917b-2a4ac10df947&amp;groupId=1e35b6b8-eeca-4e53-a065-cb03b5f03c44&amp;parentMessageId=1602097707945&amp;teamName=Back Pain Monitoring App&amp;channelName=General&amp;createdTime=1602101910156>
+  */
+
   private logEntries: LogEntry[] = [
     {
       datetime: new Date(),
@@ -45,6 +53,18 @@ export class LogDataService {
       redflag_symptoms: [],
       comment: "we might need to store where on the body the pain is... like an x/y position?",
     },
+    {
+      datetime: null,
+      body_part: null,
+      intensity: null,
+      type: null,
+      duration: null,
+      cause: null,
+      mobility: null,
+      is_constant: null,
+      redflag_symptoms: [],
+      comment: null,
+    }
   ];
 
   constructor() {
@@ -52,6 +72,54 @@ export class LogDataService {
 
   load(): Promise<boolean> {
     return Promise.resolve(true);
+  }
+
+  createLogEntry(): void {
+    this.logEntries.push({
+      // TODO: should this be undefined?
+      datetime: null,
+      body_part: null,
+      intensity: null,
+      type: null,
+      duration: null,
+      cause: null,
+      mobility: null,
+      is_constant: null,
+      redflag_symptoms: [],
+      comment: null,
+    });
+  }
+
+  setValuesForLogEntry(index, data): void {
+    const entry = this.logEntries[index];
+    // TODO: individual functions?
+    if (data.datetime != undefined) {
+      entry.datetime = data.datetime;
+    }
+    if (data.body_part != undefined) {
+      entry.body_part = data.body_part;
+    }
+    if (data.intensity != undefined) {
+      entry.intensity = data.intensity;
+    }
+    if (data.type != undefined) {
+      entry.type = data.type;
+    }
+    if (data.duration != undefined) {
+      entry.duration = data.duration;
+    }
+    if (data.cause != undefined) {
+      entry.cause = data.cause;
+    }
+    if (data.mobility != undefined) {
+      entry.mobility = data.mobility;
+    }
+    if (data.is_constant != undefined) {
+      entry.is_constant = data.is_constant;
+    }
+    if (data.redflag_symptoms != undefined) {
+      entry.redflag_symptoms = data.redflag_symptoms;
+    }
   }
 
   setLogEntry(data): void {
