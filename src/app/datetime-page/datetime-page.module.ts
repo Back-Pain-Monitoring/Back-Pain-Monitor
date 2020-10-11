@@ -17,4 +17,4 @@ import { DatetimePagePage } from './datetime-page.page';
   ],
   declarations: [DatetimePagePage]
 })
-export class DatetimePagePageModule {}
+export class DatetimePagePageModule { }

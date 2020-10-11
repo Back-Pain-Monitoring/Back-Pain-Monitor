@@ -67,11 +67,51 @@ export class LogDataService {
     }
   ];
 
+  private currentLog: LogEntry = {
+    datetime: undefined,
+    body_part: undefined,
+    intensity: undefined,
+    type: undefined,
+    duration: undefined,      // in minutes
+    cause: undefined,
+    mobility: undefined,      // Moving, Resting, or Moving and Resting.  Use enumeration?
+    is_constant: undefined,  // assumes pain is either constant or intermittent
+    redflag_symptoms: undefined,  // TODO: figure out what type this is. Some kind of list probably. Whatever it is from ion-select with multiple option.
+    comment: undefined
+  }
+
   constructor() {
   }
 
   load(): Promise<boolean> {
     return Promise.resolve(true);
+  }
+
+  public set currentLogDatetime(datetime: Date) { this.currentLog.datetime = datetime; }
+  public get currentLogDatetime() { return this.currentLog.datetime; }
+  public set currentLogBody_part(body_part: string) { this.currentLog.body_part = body_part; }
+  public get currentLogBody_part() { return this.currentLog.body_part; }
+  public set currentLogIntensity(intensity: number) { this.currentLog.intensity = intensity; }
+  public get currentLogIntensity() { return this.currentLog.intensity; }
+  public set currentLogType(type: string) { this.currentLog.type = type; }
+  public get currentLogType() { return this.currentLog.type; }
+  public set currentLogDuration(duration: number) { this.currentLog.duration = duration; }
+  public get currentLogDuration() { return this.currentLog.duration; }
+  public set currentLogCause(cause: string) { this.currentLog.cause = cause; }
+  public get currentLogCause() { return this.currentLog.cause; }
+  public set currentLogMobility(mobility: string) { this.currentLog.mobility = mobility; }
+  public get currentLogMobility() { return this.currentLog.mobility; }
+  public set currentLogIs_constant(is_constant: boolean) { this.currentLog.is_constant = is_constant; }
+  public get currentLogIs_constant() { return this.currentLog.is_constant; }
+  public set currentLogRedflag_symptoms(redflag_symptoms: any) { this.currentLog.redflag_symptoms = redflag_symptoms; }
+  public get currentLogRedflag_symptoms() { return this.currentLog.redflag_symptoms; }
+  public set currentLogComment(comment: string) { this.currentLog.comment = comment; }
+  public get currentLogComment() { return this.currentLog.comment; }
+
+  // submit the current log entry
+  public submitLogEntry() {
+    this.logEntries.push(this.currentLog);
+    // TODO: reset currentLog
   }
 
   createLogEntry(): void {

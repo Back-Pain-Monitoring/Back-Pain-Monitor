@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { LogDataService } from '../services/log-data.service';
+
 @Component({
   selector: 'app-symptoms-page',
   templateUrl: './symptoms-page.page.html',
@@ -7,9 +9,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SymptomsPagePage implements OnInit {
 
-  constructor() { }
+  constructor(public dataService: LogDataService) { }
 
   ngOnInit() {
+  }
+
+  // TODO: trigger this function when the page is navigated away from
+  updateLog() {
+    // TODO: grab component
+    // TODO: connect to UI element
+    this.dataService.currentLogIntensity = 1;
+
+    console.log("datetime: " + this.dataService.currentLogDatetime);
+    console.log("intensity: " + this.dataService.currentLogIntensity);
   }
 
 }

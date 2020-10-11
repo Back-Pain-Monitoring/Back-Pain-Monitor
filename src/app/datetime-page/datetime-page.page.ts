@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { LogDataService } from '../services/log-data.service';
+
 @Component({
   selector: 'app-datetime-page',
   templateUrl: './datetime-page.page.html',
@@ -7,7 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DatetimePagePage implements OnInit {
 
-  constructor() { }
+  constructor(public dataService: LogDataService) {
+  }
+
+  // TODO: trigger this function when the page is navigated away from
+  updateLog() {
+    // TODO: grab component
+    // TODO: connect to UI element
+    this.dataService.currentLogDatetime = new Date();
+    console.log("datetime below");
+    console.log(this.dataService.currentLogDatetime);
+  }
 
   ngOnInit() {
   }
