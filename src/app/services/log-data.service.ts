@@ -87,6 +87,11 @@ export class LogDataService {
     return Promise.resolve(true);
   }
 
+  // try using getter and setter methods in case the issue was with the get and set keywords. Didn't solve the problem.
+  public setCurrentLogDatetime(datetime: Date) { this.currentLog.datetime = datetime; }
+  public getCurrentLogDatetime() { return this.currentLog.datetime; }
+
+  // getters and setters based on this: https://wizardforcel.gitbooks.io/tsbook/content/chapter09_ClassesInDepth.html#reffn_1
   public set currentLogDatetime(datetime: Date) { this.currentLog.datetime = datetime; }
   public get currentLogDatetime() { return this.currentLog.datetime; }
   public set currentLogBody_part(body_part: string) { this.currentLog.body_part = body_part; }

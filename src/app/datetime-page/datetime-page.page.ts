@@ -16,9 +16,11 @@ export class DatetimePagePage implements OnInit {
   updateLog() {
     // TODO: grab component
     // TODO: connect to UI element
-    this.dataService.currentLogDatetime = new Date();
-    console.log("datetime below");
-    console.log(this.dataService.currentLogDatetime);
+    this.dataService.setCurrentLogDatetime(new Date());
+    console.log(this.dataService.getCurrentLogDatetime());
+    // this.dataService.currentLogDatetime = new Date();
+    // console.log("datetime below");
+    // console.log(this.dataService.currentLogDatetime);
   }
 
   ngOnInit() {

@@ -14,13 +14,17 @@ export class SymptomsPagePage implements OnInit {
   ngOnInit() {
   }
 
+  helloWorld() {
+    console.log("hello world");
+  }
+
   // TODO: trigger this function when the page is navigated away from
   updateLog() {
     // TODO: grab component
     // TODO: connect to UI element
     this.dataService.currentLogIntensity = 1;
 
-    console.log("datetime: " + this.dataService.currentLogDatetime);
+    console.log("datetime: " + this.dataService.getCurrentLogDatetime());
     console.log("intensity: " + this.dataService.currentLogIntensity);
   }
 
