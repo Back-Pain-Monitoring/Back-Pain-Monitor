@@ -1,3 +1,8 @@
+<!-- <script type="module">
+  import { alertController } from 'https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/index.esm.js';
+  window.alertController = alertController;
+</script> -->
+
 <ion-header>
   <ion-toolbar>
     <ion-title>comments-page</ion-title>
@@ -5,6 +10,13 @@
 </ion-header>
 
 <ion-content>
+  <ion-text>
+    <h1>Notes</h1>
+  </ion-text>
+
+  <ion-item>
+    <ion-textarea rows="6" cols="20" placeholder="e.g. Lifting right arm caused pain on my lower back..."></ion-textarea>
+  </ion-item>
 
   <!--Back button to redflags page-->
   <ion-fab vertical="bottom" horizontal="start" slot="fixed">
@@ -12,7 +24,25 @@
       <ion-icon name="arrow-back-circle-outline" color="dark"></ion-icon>
     </ion-fab-button>
   </ion-fab>
-
-
-
+  
+  <!--Submit button that takes you back to home page-->
+  <ion-fab vertical="bottom" horizontal="center" slot="fixed">
+    <!-- <ion-alert-controller></ion-alert-controller> -->
+    <ion-button expand="block" href="/home">Submit</ion-button>
+  </ion-fab>
 </ion-content>
+
+<!-- <script>
+  const button = document.querySelector('ion-button');
+  button.addEventListener('click', handleButtonClick);
+
+  async function handleButtonClick() {
+    const alert = await alertController.create({
+      header: 'Use this lightsaber?',
+      message: 'Do you agree to use this lightsaber to do good across the galaxy?',
+      buttons: ['Disagree', 'Agree']
+    });
+
+    await alert.present();
+  } -->
+<!-- </script> -->
