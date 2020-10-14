@@ -10,14 +10,19 @@ import { LogDataService } from '../services/log-data.service';
 export class DatetimePagePage implements OnInit {
 
   constructor(public dataService: LogDataService) {
+    this.dataService.logSubject.subscribe(data => { // TODO: add type
+      console.log("datetime recieved updated log: " + data);
+    });
   }
 
   // TODO: trigger this function when the page is navigated away from
   updateLog() {
     // TODO: grab component
     // TODO: connect to UI element
-    this.dataService.setCurrentLogDatetime(new Date());
-    console.log(this.dataService.getCurrentLogDatetime());
+    this.dataService.currentLogDatetime = new Date();
+    this.dataService.updateCurrentLog();
+    console.log("datetime: " + this.dataService.currentLogDatetime);
+    console.log("intensity: " + this.dataService.currentLogIntensity);
     // this.dataService.currentLogDatetime = new Date();
     // console.log("datetime below");
     // console.log(this.dataService.currentLogDatetime);

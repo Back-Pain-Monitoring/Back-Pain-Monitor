@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 
 export interface LogEntry {
   datetime: Date;
@@ -80,11 +81,18 @@ export class LogDataService {
     comment: undefined
   }
 
+  public logSubject: BehaviorSubject<LogEntry> = new BehaviorSubject<LogEntry>(undefined);
+
   constructor() {
   }
 
   load(): Promise<boolean> {
     return Promise.resolve(true);
+  }
+
+  updateCurrentLog(): void {
+    this.logSubject.next(this.currentLog);
+    console.log("updated current log to: " + this.currentLog);
   }
 
   // try using getter and setter methods in case the issue was with the get and set keywords. Didn't solve the problem.

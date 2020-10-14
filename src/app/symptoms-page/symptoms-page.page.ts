@@ -9,7 +9,11 @@ import { LogDataService } from '../services/log-data.service';
 })
 export class SymptomsPagePage implements OnInit {
 
-  constructor(public dataService: LogDataService) { }
+  constructor(public dataService: LogDataService) {
+    this.dataService.logSubject.subscribe(data => { // TODO: add type
+      console.log("symptoms recieved updated log: " + data);
+    });
+  }
 
   ngOnInit() {
   }
@@ -23,8 +27,8 @@ export class SymptomsPagePage implements OnInit {
     // TODO: grab component
     // TODO: connect to UI element
     this.dataService.currentLogIntensity = 1;
-
-    console.log("datetime: " + this.dataService.getCurrentLogDatetime());
+    this.dataService.updateCurrentLog();
+    console.log("datetime: " + this.dataService.currentLogDatetime);
     console.log("intensity: " + this.dataService.currentLogIntensity);
   }
 
