@@ -8,7 +8,7 @@ export interface LogEntry {
   type: string;          // enumeration?
   duration: number;      // in minutes
   cause: string;
-  mobility: string;      // Moving, Resting, or Moving and Resting.  Use enumeration?
+  mobility: string[];      // TODO: could be more specific with types here. This list can only contain moving and/or resting
   is_constant: boolean;  // assumes pain is either constant or intermittent
   redflag_symptoms: any;  // TODO: figure out what type this is. Some kind of list probably. Whatever it is from ion-select with multiple option.
   comment: string;
@@ -37,7 +37,7 @@ export class LogDataService {
       type: "shooting pain",    // not what this field was intended for, i think.
       duration: 120,
       cause: "lifting",
-      mobility: "Moving",
+      mobility: ["moving"],
       is_constant: true,
       redflag_symptoms: [],
       comment: "we might need to store where on the body the pain is... like an x/y position?",
@@ -49,7 +49,7 @@ export class LogDataService {
       type: "dull ache",    // not what this field was intended for, i think.
       duration: 120,
       cause: "lifting",
-      mobility: "Moving",
+      mobility: ["moving"],
       is_constant: true,
       redflag_symptoms: [],
       comment: "we might need to store where on the body the pain is... like an x/y position?",
@@ -95,10 +95,6 @@ export class LogDataService {
     console.log("updated current log to: " + this.currentLog);
   }
 
-  // try using getter and setter methods in case the issue was with the get and set keywords. Didn't solve the problem.
-  public setCurrentLogDatetime(datetime: Date) { this.currentLog.datetime = datetime; }
-  public getCurrentLogDatetime() { return this.currentLog.datetime; }
-
   // getters and setters based on this: https://wizardforcel.gitbooks.io/tsbook/content/chapter09_ClassesInDepth.html#reffn_1
   public set currentLogDatetime(datetime: Date) { this.currentLog.datetime = datetime; }
   public get currentLogDatetime() { return this.currentLog.datetime; }
@@ -112,7 +108,7 @@ export class LogDataService {
   public get currentLogDuration() { return this.currentLog.duration; }
   public set currentLogCause(cause: string) { this.currentLog.cause = cause; }
   public get currentLogCause() { return this.currentLog.cause; }
-  public set currentLogMobility(mobility: string) { this.currentLog.mobility = mobility; }
+  public set currentLogMobility(mobility: string[]) { this.currentLog.mobility = mobility; }
   public get currentLogMobility() { return this.currentLog.mobility; }
   public set currentLogIs_constant(is_constant: boolean) { this.currentLog.is_constant = is_constant; }
   public get currentLogIs_constant() { return this.currentLog.is_constant; }
@@ -120,6 +116,20 @@ export class LogDataService {
   public get currentLogRedflag_symptoms() { return this.currentLog.redflag_symptoms; }
   public set currentLogComment(comment: string) { this.currentLog.comment = comment; }
   public get currentLogComment() { return this.currentLog.comment; }
+
+  public printLogEntry() {
+    console.log("log entry:");
+    console.log(`datetime: ${this.currentLogDatetime}`);
+    console.log(`body_part: ${this.currentLogBody_part}`);
+    console.log(`intensity: ${this.currentLogIntensity}`);
+    console.log(`type: ${this.currentLogType}`);
+    console.log(`duration: ${this.currentLogDuration}`);
+    console.log(`cause: ${this.currentLogCause}`);
+    console.log(`mobility: ${this.currentLogMobility}`);
+    console.log(`is_constant: ${this.currentLogIs_constant}`);
+    console.log(`redflag_symptoms: ${this.currentLogRedflag_symptoms}`);
+    console.log(`comment: ${this.currentLogComment}`);
+  }
 
   // submit the current log entry
   public submitLogEntry() {
