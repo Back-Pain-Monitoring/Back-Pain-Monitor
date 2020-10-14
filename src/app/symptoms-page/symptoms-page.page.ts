@@ -15,8 +15,6 @@ export class SymptomsPagePage implements OnInit {
   cause: string;
   is_constant: "true" | "false";  // TODO: there's got to be a better way to do this than this awkward string/boolean conversion
   mobility: string[];
-  moving_pain: boolean;
-  resting_pain: boolean;
 
   constructor(public dataService: LogDataService) {
 
@@ -51,9 +49,6 @@ export class SymptomsPagePage implements OnInit {
     this.cause = "backpack";
     this.mobility = ["moving", "resting"];
     this.is_constant = "true";
-
-    console.log(`moving pain: ${this.moving_pain}`);
-    console.log(`resting pain: ${this.resting_pain}`);
   }
 
   updateUIFromLog() {
