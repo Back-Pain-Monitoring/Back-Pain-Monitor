@@ -28,9 +28,10 @@
   <!--Submit button that takes you back to home page-->
   <ion-fab vertical="bottom" horizontal="center" slot="fixed">
     <!-- <ion-alert-controller></ion-alert-controller> -->
-    <ion-button expand="block" href="/home">Submit</ion-button>
+    <ion-button expand="block" (click)="makeAlert()">Submit</ion-button>
   </ion-fab>
 </ion-content>
+
 
 <!-- <script>
   const button = document.querySelector('ion-button');
