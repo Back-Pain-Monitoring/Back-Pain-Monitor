@@ -33,14 +33,6 @@ export class SymptomsPagePage implements OnInit {
     this.dataService.currentLogCause = this.cause;
     this.dataService.currentLogIs_constant = this.is_constant === "true";
     this.dataService.printLogEntry();
-
-    // for testing
-    this.intensity = 10;
-    this.painType = "numbness";
-    this.duration = 44;
-    this.cause = "backpack";
-    this.mobility = ["moving", "resting"];
-    this.is_constant = "true";
   }
 
   updateUIFromLog() {
@@ -50,6 +42,16 @@ export class SymptomsPagePage implements OnInit {
     this.mobility = this.dataService.currentLogMobility;
     this.cause = this.dataService.currentLogCause;
     this.is_constant = this.dataService.currentLogIs_constant ? "true" : "false";
+  }
+
+  // look at the UI to see the changes were made appropriately. Can trigger this function by attaching it to a button.
+  testDataBinding() {
+    this.intensity = 10;
+    this.painType = "numbness";
+    this.duration = 44;
+    this.cause = "backpack";
+    this.mobility = ["moving", "resting"];
+    this.is_constant = "true";
   }
 
 }

@@ -24,6 +24,10 @@ export class DatetimePagePage implements OnInit {
     this.datetime = this.dataService.currentLogDatetime;
   }
 
+  testDataBinding() {
+    this.datetime = new Date();
+  }
+
   ngOnInit() {
   }
 

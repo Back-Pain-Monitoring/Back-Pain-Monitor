@@ -70,14 +70,14 @@
 
   <!--Back button to bodymap page-->
   <ion-fab vertical="bottom" horizontal="start" slot="fixed">
-    <ion-fab-button color="success" routerDirection="back" routerLink="/bodymap">
+    <ion-fab-button color="success" routerDirection="back" routerLink="/bodymap" (click)="updateLog()">
       <ion-icon name="arrow-back-circle-outline" color="dark"></ion-icon>
     </ion-fab-button>
   </ion-fab>
 
   <!--Forward Button to redflags page-->
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button color="success" routerDirection="forward" routerLink="/redflags">
+    <ion-fab-button color="success" routerDirection="forward" routerLink="/redflags" (click)="updateLog()">
       <ion-icon name="arrow-forward-circle-outline" color="dark"></ion-icon>
     </ion-fab-button>
   </ion-fab>

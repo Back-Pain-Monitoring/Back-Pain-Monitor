@@ -106,7 +106,7 @@ export class LogDataService {
   public get currentLogComment() { return this.currentLog.comment; }
 
   public printLogEntry(entry?: LogEntry) {
-    if (typeof (entry) === undefined) {
+    if (typeof (entry) === "undefined") {
       entry = this.currentLog;
     }
     console.log("printing log entry:");
