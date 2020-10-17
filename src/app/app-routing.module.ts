@@ -34,7 +34,11 @@ const routes: Routes = [
   {
     path: 'log',
     loadChildren: () => import('./log-page/log-page.module').then(m => m.LogPagePageModule)
+  },  {
+    path: 'viewlogs-page',
+    loadChildren: () => import('./viewlogs-page/viewlogs-page.module').then( m => m.ViewlogsPagePageModule)
   },
+
 ];
 
 @NgModule({

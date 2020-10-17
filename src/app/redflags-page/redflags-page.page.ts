@@ -13,10 +13,9 @@ export class RedflagsPagePage implements OnInit {
   redflags_symptoms: string[];
 
   constructor(public dataService: LogDataService) { 
-      this.dataService.logSubject.subscribe(data => { // TODO: add type
-      console.log("symptoms recieved updated log: " + data);
-    });
-  }
+      
+    };
+  
 
   ngOnInit() {
   }
