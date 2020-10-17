@@ -17,7 +17,6 @@ import { LogDataService } from './services/log-data.service';
   providers: [
     StatusBar,
     SplashScreen,
-    LogDataService,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

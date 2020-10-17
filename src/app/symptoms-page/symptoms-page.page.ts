@@ -17,17 +17,9 @@ export class SymptomsPagePage implements OnInit {
   mobility: string[];
 
   constructor(public dataService: LogDataService) {
-
-    this.dataService.logSubject.subscribe(data => { // TODO: add type
-      console.log("symptoms recieved updated log: " + data);
-    });
   }
 
   ngOnInit() {
-  }
-
-  helloWorld() {
-    console.log("hello world");
   }
 
   // TODO: trigger this function when the page is navigated away from
@@ -40,9 +32,9 @@ export class SymptomsPagePage implements OnInit {
     this.dataService.currentLogMobility = this.mobility;
     this.dataService.currentLogCause = this.cause;
     this.dataService.currentLogIs_constant = this.is_constant === "true";
-    this.dataService.updateCurrentLog();
     this.dataService.printLogEntry();
 
+    // for testing
     this.intensity = 10;
     this.painType = "numbness";
     this.duration = 44;
