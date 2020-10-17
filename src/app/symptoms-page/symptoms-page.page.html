@@ -20,7 +20,7 @@
     </ion-item>
     <ion-item>
       <ion-label>Pain type</ion-label>
-      <ion-select cancelText="Cancel" okText="Ok">
+      <ion-select cancelText="Cancel" okText="Ok" [(ngModel)]="painType">
         <ion-select-option value="none">None</ion-select-option>
         <ion-select-option value="aching">Aching</ion-select-option>
         <ion-select-option value="burning">Burning</ion-select-option>
@@ -34,17 +34,16 @@
     </ion-item>
     <ion-item>
       <ion-label>Pain duration</ion-label>
-      <ion-input type="number" value="30"></ion-input>
-      <!--TODO: change to drop-down?-->
+      <ion-input type="number" value="30" [(ngModel)]="duration"></ion-input>
       <ion-label>minutes</ion-label>
     </ion-item>
     <ion-item>
       <ion-label>Cause of pain</ion-label>
-      <ion-input type="text" value="unknown"></ion-input>
+      <ion-input type="text" value="unknown" [(ngModel)]="cause"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label>When do you feel pain?</ion-label>
-      <ion-select multiple="true" cancelText="Cancel" okText="Ok">
+      <ion-select multiple="true" [(ngModel)]="mobility">
         <ion-select-option value="moving">Moving</ion-select-option>
         <ion-select-option value="resting">Resting</ion-select-option>
       </ion-select>
@@ -53,7 +52,7 @@
       <ion-label>Is the pain constant or intermittent?</ion-label>
     </ion-item>
     <ion-item>
-      <ion-radio-group value="is_constant">
+      <ion-radio-group [(ngModel)]="is_constant">
         <ion-item>
           <ion-label>Constant</ion-label>
           <ion-radio slot="start" value="true"></ion-radio>
@@ -71,14 +70,14 @@
 
   <!--Back button to bodymap page-->
   <ion-fab vertical="bottom" horizontal="start" slot="fixed">
-    <ion-fab-button color="success" routerDirection="back" href="/bodymap">
+    <ion-fab-button color="success" routerDirection="back" routerLink="/bodymap" (click)="updateLog()">
       <ion-icon name="arrow-back-circle-outline" color="dark"></ion-icon>
     </ion-fab-button>
   </ion-fab>
 
   <!--Forward Button to redflags page-->
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button color="success" routerDirection="forward" href="/redflags">
+    <ion-fab-button color="success" routerDirection="forward" routerLink="/redflags" (click)="updateLog()">
       <ion-icon name="arrow-forward-circle-outline" color="dark"></ion-icon>
     </ion-fab-button>
   </ion-fab>
