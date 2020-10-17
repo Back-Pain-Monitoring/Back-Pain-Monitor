@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { LogDataService } from '../services/log-data.service';
+
 @Component({
   selector: 'app-datetime-page',
   templateUrl: './datetime-page.page.html',
@@ -7,7 +9,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DatetimePagePage implements OnInit {
 
-  constructor() { }
+  datetime: Date;
+
+  constructor(public dataService: LogDataService) {
+  }
+
+  updateLog() {
+    this.dataService.currentLogDatetime = this.datetime;
+
+    this.dataService.printLogEntry();
+  }
+
+  updateUIFromLog() {
+    this.datetime = this.dataService.currentLogDatetime;
+  }
+
+  testDataBinding() {
+    this.datetime = new Date();
+  }
 
   ngOnInit() {
   }

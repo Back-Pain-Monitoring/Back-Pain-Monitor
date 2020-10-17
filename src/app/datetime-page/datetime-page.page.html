@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>DatetimePage</ion-title>
+    <ion-title>Date and time</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -13,21 +13,22 @@
     </ion-row>
     <ion-row>
       <ion-col class="ion-text-center">
-        <ion-datetime displayFormat="D MMM YYYY H:mm" placeholder="When did the pain start?"></ion-datetime>
+        <ion-datetime displayFormat="D MMM YYYY H:mm" placeholder="When did the pain start?" [(ngModel)]="datetime">
+        </ion-datetime>
       </ion-col>
     </ion-row>
   </ion-grid>
 
   <!--Back button to home page-->
-  <ion-fab vertical="center" horizontal="start" slot="fixed">
-    <ion-fab-button color="success" routerDirection="back" href="/home">
+  <ion-fab vertical="bottom" horizontal="start" slot="fixed">
+    <ion-fab-button color="success" routerDirection="back" routerLink="/home" (click)="updateLog()">
       <ion-icon name="arrow-back-circle-outline" color="dark"></ion-icon>
     </ion-fab-button>
   </ion-fab>
 
   <!--Forward Button to bodymap page-->
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button color="success" routerDirection="forward" href="/bodymap">
+    <ion-fab-button color="success" routerDirection="forward" routerLink="/bodymap" (click)="updateLog()">
       <ion-icon name="arrow-forward-circle-outline" color="dark"></ion-icon>
     </ion-fab-button>
   </ion-fab>
