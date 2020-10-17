@@ -7,12 +7,21 @@
 <ion-content>
   <ion-item>
     <ion-label>Do you have any of following symptoms?</ion-label>
-    <ion-select multiple="true" cancelText="Cancel" okText="Ok" [(ngModel)]="reflags">
+    <ion-select multiple="true" cancelText="Cancel" okText="Ok" [(ngModel)]="redflags_symptoms">
       <ion-select-option value="rf_numbness">Numbness</ion-select-option>
       <ion-select-option value="rf_inability">Inability to walk</ion-select-option>
       <ion-select-option value="rf_losWeight">Losing weight</ion-select-option>
       <ion-select-option value="rf_losBladder">Losing bladder control</ion-select-option>
     </ion-select>
+  </ion-item>
+  <ion-list>
+    <ion-item *ngFor="let entry of form">
+      <ion-label>{{entry.val}}</ion-label>
+      <ion-checkbox slot="end" [(ngModel)]="entry.isChecked"></ion-checkbox>
+    </ion-item>
+  </ion-list>
+  <ion-item>
+    <ion-button (click)="updateLog()">Remove this button after testing</ion-button>
   </ion-item>
 
   <!--Back button to symptoms page-->
