@@ -22,10 +22,7 @@ export class SymptomsPagePage implements OnInit {
   ngOnInit() {
   }
 
-  // TODO: trigger this function when the page is navigated away from
   updateLog() {
-    // TODO: grab component
-    // TODO: connect to UI element
     this.dataService.currentLogIntensity = this.intensity;
     this.dataService.currentLogType = this.painType;
     this.dataService.currentLogDuration = this.duration;
