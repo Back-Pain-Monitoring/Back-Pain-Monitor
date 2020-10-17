@@ -7,7 +7,7 @@
 <ion-content>
   <ion-item>
     <ion-label>Do you have any of following symptoms?</ion-label>
-    <ion-select multiple="true" cancelText="Cancel" okText="Ok">
+    <ion-select multiple="true" cancelText="Cancel" okText="Ok" [(ngModel)]="reflags">
       <ion-select-option value="rf_numbness">Numbness</ion-select-option>
       <ion-select-option value="rf_inability">Inability to walk</ion-select-option>
       <ion-select-option value="rf_losWeight">Losing weight</ion-select-option>
