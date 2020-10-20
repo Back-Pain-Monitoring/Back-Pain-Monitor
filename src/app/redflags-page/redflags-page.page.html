@@ -26,14 +26,14 @@
 
   <!--Back button to symptoms page-->
   <ion-fab vertical="bottom" horizontal="start" slot="fixed">
-    <ion-fab-button color="success" routerDirection="back" routerLink="/symptoms">
+    <ion-fab-button color="success" routerDirection="back" routerLink="/symptoms" (click)="updateLog()>
       <ion-icon name="arrow-back-circle-outline" color="dark"></ion-icon>
     </ion-fab-button>
   </ion-fab>
   
   <!--Forward Button to comments page-->
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button color="success" routerDirection="forward" routerLink="/comments">
+    <ion-fab-button color="success" routerDirection="forward" routerLink="/comments" (click)="updateLog()>
       <ion-icon name="arrow-forward-circle-outline" color="dark"></ion-icon>
     </ion-fab-button>
   </ion-fab>
