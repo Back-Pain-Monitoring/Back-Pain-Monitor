@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertController } from '@ionic/angular';
+
+import { LogDataService } from '../services/log-data.service';
+import { AlertController, NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-comments-page',
@@ -8,31 +10,34 @@ import { AlertController } from '@ionic/angular';
 })
 export class CommentsPagePage implements OnInit {
 
-  constructor( private alertCtrl: AlertController) {
+  comment: string;
 
-   }
+  constructor(public dataService: LogDataService, private alertCtrl: AlertController, private navCtrl: NavController) {
+  }
 
   ngOnInit() {
   }
-  // private toastCtrl: ToastController
-  // presentToast() {
-  //   let toast = this.toastCtrl.create({
-  //     message: 'User was added successfully',
-  //     duration: 3000,
-  //     position: 'top'
-  //   });
-  
-  //   toast.onDidDismiss(() => {
-  //     console.log('Dismissed toast');
-  //   });
-  
-  //   toast.present();
-  // }
 
-  makeAlert(): void {
+  // Check if there exists redflags symptom or not.
+  makeAlert() {
+    if (this.dataService.currentLogRedflag_symptoms.includes('True') != true ) {
+      this.case1();
+    } else {
+      this.case2();
+    }
+  }
+
+  // funciton to go back to homepage
+  backToHome() {
+    this.updateLog();
+    this.dataService.submitLogEntry();
+    this.navCtrl.navigateRoot('/home');
+  }
+
+  // In case there is no redflag symptoms
+  case1(): void {
     this.alertCtrl.create({
-      header: 'Alert',
-      message: 'Your log is submitted',
+      message: 'You log has been submitted!',
       inputs: [
         {
           type: 'text',
@@ -41,14 +46,43 @@ export class CommentsPagePage implements OnInit {
       ],
       buttons: [
         {
-          text: 'Cancel'
-        },
-        {
-          text: 'Save',
+          text: 'Okay',
+          handler: ()=> {
+            this.backToHome();
+          }
         }
       ]
     }).then((prompt) => {
       prompt.present();
     });
+  }
+
+  // In case there exists redflags symptoms
+  case2(): void {
+    this.alertCtrl.create({
+      message: 'You currently have red-flags symptoms! It is highly recommended to seek medical help immediately!',
+      inputs: [
+        {
+          type: 'text',
+          name: 'name'
+        }
+      ],
+      buttons: [
+        {
+          text: 'Okay',
+        }
+      ]
+    }).then((prompt) => {
+      prompt.present();
+    });
+  }
+
+  updateLog() {
+    this.dataService.currentLogComment = this.comment;
+    this.dataService.printLogEntry();
+  }
+
+  updateUIFromLog() {
+    this.comment = this.dataService.currentLogComment;
   }
 }

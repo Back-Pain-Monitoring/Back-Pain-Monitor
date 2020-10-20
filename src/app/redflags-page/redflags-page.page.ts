@@ -10,8 +10,6 @@ import { LogDataService } from '../services/log-data.service';
 
 export class RedflagsPagePage implements OnInit {
 
-  numbness: boolean;
-
   public form = [
     { val: 'numbness' , isChecked: false },
     { val: 'inability', isChecked: false },
@@ -22,43 +20,41 @@ export class RedflagsPagePage implements OnInit {
   redflags_symptoms: string[];
 
   constructor(public dataService: LogDataService) {
+    this.redflags_symptoms = []
   }
 
   ngOnInit() {
   }
   
+  // Converting boolean inputs as string and storing them
   convertBoolToString() {
-    if ( this.form[0].isChecked == true ) {
-      this.redflags_symptoms.push("NumbnessTrue");
-    } else {
-      this.redflags_symptoms.push("NumbnessFalse");
+    for (let i = 0; i < 4; i++) {
+      if ( this.form[i].isChecked == true ) {
+        this.redflags_symptoms.push("True");
+      } else {
+        this.redflags_symptoms.push("False");
+      }
     }
+  }
 
-    if ( this.form[1].isChecked == true ) {
-      this.redflags_symptoms.push("InabilityTrue");
-    } else {
-      this.redflags_symptoms.push("InabilityFalse");
-    }
-    
-    if ( this.form[2].isChecked == true ) {
-      this.redflags_symptoms.push("LosingWeightTrue");
-    } else {
-      this.redflags_symptoms.push("LosingWeightFalse");
-    }
-    
-    if ( this.form[3].isChecked == true ) {
-      this.redflags_symptoms.push("LosingBladderTrue");
-    } else {
-      this.redflags_symptoms.push("LosingBladderFalse");
+  // Converting string data as boolean and display on page
+  convertStringToBool() {
+    for (let i = 0; i < 4; i++) {
+      if ( this.redflags_symptoms[0] == "True" ) {
+        this.form[i].isChecked == true
+      } else if ( this.redflags_symptoms[0] == "False" ) {
+        this.form[i].isChecked == false }
     }
   }
 
   updateLog() {
+    this.convertBoolToString();
     this.dataService.currentLogRedflag_symptoms = this.redflags_symptoms;
     this.dataService.printLogEntry();
   }
 
   updateUIFromLog() {
+    this.convertStringToBool();
     this.redflags_symptoms = this.dataService.currentLogRedflag_symptoms;
   }
 }

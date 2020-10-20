@@ -1,8 +1,3 @@
-<!-- <script type="module">
-  import { alertController } from 'https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/index.esm.js';
-  window.alertController = alertController;
-</script> -->
-
 <ion-header>
   <ion-toolbar>
     <ion-title>comments-page</ion-title>
@@ -15,7 +10,11 @@
   </ion-text>
 
   <ion-item>
-    <ion-textarea rows="6" cols="20" placeholder="e.g. Lifting right arm caused pain on my lower back..."></ion-textarea>
+    <ion-textarea rows="6" cols="20" [(ngModel)]="comment" placeholder="e.g. Lifting right arm caused pain on my lower back..."></ion-textarea>
+  </ion-item>
+
+  <ion-item>
+    <ion-button (click)="updateLog()">Remove this button after testing</ion-button>
   </ion-item>
 
   <!--Back button to redflags page-->
@@ -31,19 +30,3 @@
     <ion-button expand="block" (click)="makeAlert()">Submit</ion-button>
   </ion-fab>
 </ion-content>
-
-
-<!-- <script>
-  const button = document.querySelector('ion-button');
-  button.addEventListener('click', handleButtonClick);
-
-  async function handleButtonClick() {
-    const alert = await alertController.create({
-      header: 'Use this lightsaber?',
-      message: 'Do you agree to use this lightsaber to do good across the galaxy?',
-      buttons: ['Disagree', 'Agree']
-    });
-
-    await alert.present();
-  } -->
-<!-- </script> -->
