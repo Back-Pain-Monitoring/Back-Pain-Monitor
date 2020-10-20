@@ -50,6 +50,10 @@ const routes: Routes = [
     path: 'help-page',
     loadChildren: () => import('./help-page/help-page.module').then( m => m.HelpPagePageModule)
   },
+  {
+    path: 'tabs',
+    loadChildren: () => import('./tabs/tabs.module').then( m => m.TabsPageModule)
+  },
 
 ];
 
