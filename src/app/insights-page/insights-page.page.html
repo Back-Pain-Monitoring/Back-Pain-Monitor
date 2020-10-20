@@ -1,11 +1,10 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>View Logs</ion-title>
+    <ion-title>Insights</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
   <div id="bottomNav">
     <ion-tabs>
       <ion-tab-bar slot="bottom">
@@ -14,17 +13,17 @@
           <ion-label>Home</ion-label>
         </ion-tab-button>
 
-        <ion-tab-button tab="viewLogs" routerLink="/viewlogs-page" routerDirection="root">
+        <ion-tab-button tab="viewLogs" routerLink="/viewLogs" routerDirection="back">
           <ion-icon name="documents-outline"></ion-icon>
           <ion-label>View Logs</ion-label>
         </ion-tab-button>
 
-        <ion-tab-button tab="sendLogs" routerLink="/send-logs-page" routerDirection="forward">
+        <ion-tab-button tab="sendLogs" routerLink="/sendLogs" routerDirection="back">
           <ion-icon name="share-outline"></ion-icon>
           <ion-label>Send Logs</ion-label>
         </ion-tab-button>
 
-        <ion-tab-button tab="insights" routerLink="/insights" routerDirection="forward">
+        <ion-tab-button tab="insights" routerLink="/insights" routerDirection="root">
           <ion-icon name="bar-chart-outline"></ion-icon>
           <ion-label>Insights</ion-label>
         </ion-tab-button>
@@ -36,5 +35,4 @@
       </ion-tab-bar>
     </ion-tabs>
   </div>
-
 </ion-content>
