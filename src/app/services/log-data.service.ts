@@ -36,28 +36,92 @@ export class LogDataService {
     {
       datetime: new Date(),
       body_part: "left shoulder",
-      intensity: 7,
+      intensity: 4,
       type: "dull ache",    // not what this field was intended for, i think.
-      duration: 120,
+      duration: 25,
       cause: "lifting",
       mobility: ["moving"],
       is_constant: true,
-      redflag_symptoms: [],
+      redflag_symptoms: ["loss of bowel movement", "numbness"],
       comment: "we might need to store where on the body the pain is... like an x/y position?",
     },
     {
-      datetime: null,
-      body_part: null,
-      intensity: null,
-      type: null,
-      duration: null,
-      cause: null,
-      mobility: null,
-      is_constant: null,
-      redflag_symptoms: [],
-      comment: null,
-    }
+      datetime: new Date(),
+      body_part: "right shoulder",
+      intensity: 8,
+      type: "Burning",    // not what this field was intended for, i think.
+      duration: 25,
+      cause: "unknown",
+      mobility: ["moving"],
+      is_constant: true,
+      redflag_symptoms: ["loss of bowel movement", "numbness"],
+      comment: "we might need to store where on the body the pain is... like an x/y position?",
+    },
+    {
+      datetime: new Date(),
+      body_part: "lower back",
+      intensity: 8,
+      type: "Numbness",    // not what this field was intended for, i think.
+      duration: 25,
+      cause: "unknown",
+      mobility: ["moving", "resting"],
+      is_constant: false,
+      redflag_symptoms: ["loss of bowel movement", "numbness"],
+      comment: "we might need to store where on the body the pain is... like an x/y position?",
+    },
+    {
+      datetime: new Date(),
+      body_part: "upper back",
+      intensity: 2,
+      type: "Shooting",    // not what this field was intended for, i think.
+      duration: 2,
+      cause: "unknown",
+      mobility: ["resting"],
+      is_constant: true,
+      redflag_symptoms: ["loss of bowel movement", "numbness"],
+      comment: "we might need to store where on the body the pain is... like an x/y position?",
+    },
+    {
+      datetime: new Date(),
+      body_part: "middle back",
+      intensity: 3,
+      type: "Aching",    // not what this field was intended for, i think.
+      duration: 40,
+      cause: "unknown",
+      mobility: ["resting"],
+      is_constant: true,
+      redflag_symptoms: ["loss of bowel movement", "numbness"],
+      comment: "we might need to store where on the body the pain is... like an x/y position?",
+    },
+    {
+      datetime: new Date(),
+      body_part: "upper back",
+      intensity: 2,
+      type: "Shooting",    // not what this field was intended for, i think.
+      duration: 2,
+      cause: "unknown",
+      mobility: ["resting"],
+      is_constant: true,
+      redflag_symptoms: ["loss of bowel movement", "numbness"],
+      comment: "we might need to store where on the body the pain is... like an x/y position?",
+    },
+    {
+      datetime: new Date(),
+      body_part: "middle back",
+      intensity: 3,
+      type: "Aching",    // not what this field was intended for, i think.
+      duration: 40,
+      cause: "unknown",
+      mobility: ["resting"],
+      is_constant: true,
+      redflag_symptoms: ["loss of bowel movement", "numbness"],
+      comment: "we might need to store where on the body the pain is... like an x/y position?",
+    },
   ];
+
+  public getLogs(): LogEntry[] {
+    return this.logEntries;
+  }
 
   private createEmptyLog(): LogEntry {
     return {
