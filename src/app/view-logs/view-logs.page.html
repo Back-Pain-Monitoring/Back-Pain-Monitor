@@ -5,11 +5,11 @@
 </ion-header>
 
 <ion-content>
-  <ion-card *ngFor="let log of this.dataService.getLogs()">
+  <ion-card *ngFor="let log of this.logsToDisplay">
     <ion-card-header>
       <ion-card-title>
         {{log.datetime | date:'short'}}.
-        {{log.duration}} minutes.
+        {{log.duration}} mins.
       </ion-card-title>
     </ion-card-header>
 
@@ -26,8 +26,9 @@
       </ion-grid>
     </ion-card-content>
   </ion-card>
-  <ion-infinite-scroll threshold="15%" (ionInfinite)="loadData($event)">
+  <!--currently unused, but will re-enable when we get to database-->
+  <!-- <ion-infinite-scroll threshold="15%" (ionInfinite)="loadData($event)">
     <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
     </ion-infinite-scroll-content>
-  </ion-infinite-scroll>
+  </ion-infinite-scroll> -->
 </ion-content>

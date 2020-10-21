@@ -123,6 +123,21 @@ export class LogDataService {
     return this.logEntries;
   }
 
+  /*
+  lastIndex: the index 1 after the last retrieved log
+  i.e., let's say last time we called this we did n=2 so we'd have slice(0, 2), then when we call this again we would do lastIndex=2
+  */
+  public getNextLogs(n: number, lastIndex?: number): LogEntry[] {
+    if (lastIndex === undefined) {
+      lastIndex = 0;
+    }
+    if (lastIndex >= this.logEntries.length) {
+      // we've returned all the data already, so just return an empty list
+      return [];
+    }
+    return this.logEntries.slice(lastIndex, lastIndex + n);
+  }
+
   private createEmptyLog(): LogEntry {
     return {
       datetime: undefined,
