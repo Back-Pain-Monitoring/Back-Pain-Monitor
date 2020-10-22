@@ -17,7 +17,7 @@ export class DatetimePagePage implements OnInit {
   updateLog() {
     this.dataService.currentLogDatetime = this.datetime;
 
-    this.dataService.printLogEntry();
+    // this.dataService.printLogEntry();
   }
 
   updateUIFromLog() {
@@ -29,6 +29,7 @@ export class DatetimePagePage implements OnInit {
   }
 
   ngOnInit() {
+    this.updateUIFromLog();
   }
 
 }
