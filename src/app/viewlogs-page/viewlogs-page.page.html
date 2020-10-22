@@ -1,48 +1,20 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>
-      Home
-    </ion-title>
+    <ion-title>View Logs</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <div id="container">
-    <ion-buttons slot="end">
-      <ion-back-button defaultHref="/home">
-      </ion-back-button>
-      <ion-fab>
-        <ion-fab-button href="/datetime">
-        </ion-fab-button>
-      </ion-fab>
-    </ion-buttons>
-  </div>
-
-  <div id="mainScreen">
-    <ion-row class="justify-content-center">
-      <ion-col class="align-items-end">
-        <ion-button href="/datetime" color="success" shape="round" strong="true">Report Pain</ion-button>
-      </ion-col>
-    </ion-row>
-  </div>
-
-
+<ion-content>
 
   <div id="bottomNav">
     <ion-tabs>
       <ion-tab-bar slot="bottom">
-        <ion-tab-button tab="home" routerLink="/home" routerDirection="root">
+        <ion-tab-button tab="home" routerLink="/home" routerDirection="back">
           <ion-icon name="home"></ion-icon>
           <ion-label>Home</ion-label>
         </ion-tab-button>
 
-        <ion-tab-button tab="viewLogs" routerLink="/viewlogs-page" routerDirection="forward">
+        <ion-tab-button tab="viewLogs" routerLink="/viewlogs-page" routerDirection="root">
           <ion-icon name="documents-outline"></ion-icon>
           <ion-label>View Logs</ion-label>
         </ion-tab-button>
@@ -64,7 +36,5 @@
       </ion-tab-bar>
     </ion-tabs>
   </div>
-
-
 
 </ion-content>

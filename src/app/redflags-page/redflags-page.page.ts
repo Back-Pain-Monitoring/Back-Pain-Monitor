@@ -17,10 +17,9 @@ export class RedflagsPagePage implements OnInit {
     { val: 'losBladder', isChecked: false }
   ]
 
-  redflags_symptoms: string[];
+  redflags_symptoms: string[] = [];
 
   constructor(public dataService: LogDataService) {
-    this.redflags_symptoms = []
   }
 
   ngOnInit() {

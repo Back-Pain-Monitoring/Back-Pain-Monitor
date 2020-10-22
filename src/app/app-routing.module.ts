@@ -34,7 +34,27 @@ const routes: Routes = [
   {
     path: 'log',
     loadChildren: () => import('./log-page/log-page.module').then(m => m.LogPagePageModule)
+  },  {
+    path: 'viewlogs-page',
+    loadChildren: () => import('./viewlogs-page/viewlogs-page.module').then( m => m.ViewlogsPagePageModule)
   },
+  {
+    path: 'send-logs-page',
+    loadChildren: () => import('./send-logs-page/send-logs-page.module').then( m => m.SendLogsPagePageModule)
+  },
+  {
+    path: 'insights-page',
+    loadChildren: () => import('./insights-page/insights-page.module').then( m => m.InsightsPagePageModule)
+  },
+  {
+    path: 'help-page',
+    loadChildren: () => import('./help-page/help-page.module').then( m => m.HelpPagePageModule)
+  },
+  {
+    path: 'tabs',
+    loadChildren: () => import('./tabs/tabs.module').then( m => m.TabsPageModule)
+  },
+
 ];
 
 @NgModule({
