@@ -12,14 +12,10 @@
   <ion-item>
     <ion-textarea rows="6" cols="20" [(ngModel)]="comment" placeholder="e.g. Lifting right arm caused pain on my lower back..."></ion-textarea>
   </ion-item>
-
-  <ion-item>
-    <ion-button (click)="updateLog()">Remove this button after testing</ion-button>
-  </ion-item>
-
+  
   <!--Back button to redflags page-->
   <ion-fab vertical="bottom" horizontal="start" slot="fixed">
-    <ion-fab-button color="success" routerDirection="back" routerLink="/redflags" (click)="updateLog()>
+    <ion-fab-button color="success" routerDirection="back" routerLink="/redflags" (click)="updateLog()">
       <ion-icon name="arrow-back-circle-outline" color="dark"></ion-icon>
     </ion-fab-button>
   </ion-fab>

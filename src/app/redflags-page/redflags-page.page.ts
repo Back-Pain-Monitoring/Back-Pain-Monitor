@@ -11,10 +11,10 @@ import { LogDataService } from '../services/log-data.service';
 export class RedflagsPagePage implements OnInit {
 
   public form = [
-    { val: 'numbness' , isChecked: false },
-    { val: 'inability', isChecked: false },
-    { val: 'losWeight' , isChecked: false },
-    { val: 'losBladder', isChecked: false }
+    { val: 'Numbness' , isChecked: false },
+    { val: 'Inability to walk', isChecked: false },
+    { val: 'Losing weight' , isChecked: false },
+    { val: 'Losing bladder control', isChecked: false }
   ]
 
   redflags_symptoms: string[] = [];
