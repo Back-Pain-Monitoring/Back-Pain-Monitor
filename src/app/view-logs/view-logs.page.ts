@@ -1,7 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { LogDataService } from '../services/log-data.service';
 import { LogFilter } from '../services/log-data.service';
-import { IonInfiniteScroll } from '@ionic/angular';
+import { IonInfiniteScroll, ModalController } from '@ionic/angular';
+import { FilterModalPage } from '../filter-modal/filter-modal.page';
 
 @Component({
   selector: 'app-view-logs',
@@ -18,7 +19,7 @@ export class ViewLogsPage implements OnInit {
   private logsToDisplay = [];
   private filter: LogFilter;
 
-  constructor(public dataService: LogDataService) {
+  constructor(public dataService: LogDataService, private modalCtrl: ModalController) {
   }
 
   ngOnInit() {
@@ -37,6 +38,15 @@ export class ViewLogsPage implements OnInit {
     }
     event.target.complete();
   }
+
+  // this method creates a modal which is a dialog that appears on top of app's content this will be used as a way of setting filter and passing data
+  async presentModal() {
+    const modal = await this.modalCtrl.create({
+      component: FilterModalPage,
+    });
+    return await modal.present();
+  }
+
 
   filterLogs() {
     // the commented out code was used for testing
