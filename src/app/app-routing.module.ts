@@ -11,6 +11,10 @@ const routes: Routes = [
     loadChildren: () => import('./datetime-page/datetime-page.module').then(m => m.DatetimePagePageModule)
   },
   {
+    path: 'viewlogs-page',
+    loadChildren: () => import('./view-logs/view-logs.module').then(m => m.ViewLogsPageModule)
+  },
+  {
     path: 'bodymap',
     loadChildren: () => import('./bodymap-page/bodymap-page.module').then(m => m.BodymapPagePageModule)
   },
@@ -27,11 +31,13 @@ const routes: Routes = [
     loadChildren: () => import('./redflags-page/redflags-page.module').then(m => m.RedflagsPagePageModule)
   },
   {
+    path: 'view-logs',
+    loadChildren: () => import('./view-logs/view-logs.module').then(m => m.ViewLogsPageModule)
+  },
+  {
     path: 'log',
     loadChildren: () => import('./log-page/log-page.module').then(m => m.LogPagePageModule)
   },
-
-
 ];
 
 @NgModule({

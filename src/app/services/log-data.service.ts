@@ -13,6 +13,17 @@ export interface LogEntry {
   comment: string;
 }
 
+export interface LogFilter {
+  datetime_min: Date;
+  datetime_max: Date;
+  intensity_min: number;
+  intensity_max: number;
+  body_part: string;
+  type: string;
+  duration_min: number;
+  duration_max: number;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -36,28 +47,95 @@ export class LogDataService {
     {
       datetime: new Date(),
       body_part: "left shoulder",
-      intensity: 7,
+      intensity: 4,
       type: "dull ache",    // not what this field was intended for, i think.
-      duration: 120,
+      duration: 25,
       cause: "lifting",
       mobility: ["moving"],
       is_constant: true,
-      redflag_symptoms: [],
+      redflag_symptoms: ["loss of bowel movement", "numbness"],
       comment: "we might need to store where on the body the pain is... like an x/y position?",
     },
     {
-      datetime: null,
-      body_part: null,
-      intensity: null,
-      type: null,
-      duration: null,
-      cause: null,
-      mobility: null,
-      is_constant: null,
-      redflag_symptoms: [],
-      comment: null,
-    }
+      datetime: new Date("2020-01-03"),
+      body_part: "right shoulder",
+      intensity: 8,
+      type: "Burning",    // not what this field was intended for, i think.
+      duration: 25,
+      cause: "unknown",
+      mobility: ["moving"],
+      is_constant: true,
+      redflag_symptoms: ["loss of bowel movement", "numbness"],
+      comment: "we might need to store where on the body the pain is... like an x/y position?",
+    },
+    {
+      datetime: new Date("2020-01-04"),
+      body_part: "lower back",
+      intensity: 8,
+      type: "Numbness",    // not what this field was intended for, i think.
+      duration: 25,
+      cause: "unknown",
+      mobility: ["moving", "resting"],
+      is_constant: false,
+      redflag_symptoms: ["loss of bowel movement", "numbness"],
+      comment: "we might need to store where on the body the pain is... like an x/y position?",
+    },
+    {
+      datetime: new Date("2020-01-05"),
+      body_part: "upper back",
+      intensity: 2,
+      type: "Shooting",    // not what this field was intended for, i think.
+      duration: 2,
+      cause: "unknown",
+      mobility: ["resting"],
+      is_constant: true,
+      redflag_symptoms: ["loss of bowel movement", "numbness"],
+      comment: "we might need to store where on the body the pain is... like an x/y position?",
+    },
+    {
+      datetime: new Date("2020-01-06"),
+      body_part: "middle back",
+      intensity: 3,
+      type: "Aching",    // not what this field was intended for, i think.
+      duration: 40,
+      cause: "unknown",
+      mobility: ["resting"],
+      is_constant: true,
+      redflag_symptoms: ["loss of bowel movement", "numbness"],
+      comment: "we might need to store where on the body the pain is... like an x/y position?",
+    },
+    {
+      datetime: new Date("2020-01-07"),
+      body_part: "upper back",
+      intensity: 2,
+      type: "Shooting",    // not what this field was intended for, i think.
+      duration: 2,
+      cause: "unknown",
+      mobility: ["resting"],
+      is_constant: true,
+      redflag_symptoms: ["loss of bowel movement", "numbness"],
+      comment: "we might need to store where on the body the pain is... like an x/y position?",
+    },
+    {
+      datetime: new Date("2020-01-08"),
+      body_part: "middle back",
+      intensity: 3,
+      type: "Aching",    // not what this field was intended for, i think.
+      duration: 40,
+      cause: "unknown",
+      mobility: ["resting"],
+      is_constant: true,
+      redflag_symptoms: ["loss of bowel movement", "numbness"],
+      comment: "we might need to store where on the body the pain is... like an x/y position?",
+    },
   ];
+
+  constructor() {
+  }
+
+  load(): Promise<boolean> {
+    return Promise.resolve(true);
+  }
 
   private createEmptyLog(): LogEntry {
     return {
@@ -75,13 +153,6 @@ export class LogDataService {
   }
 
   private currentLog: LogEntry = this.createEmptyLog();
-
-  constructor() {
-  }
-
-  load(): Promise<boolean> {
-    return Promise.resolve(true);
-  }
 
   // getters and setters based on this: https://wizardforcel.gitbooks.io/tsbook/content/chapter09_ClassesInDepth.html#reffn_1
   public set currentLogDatetime(datetime: Date) { this.currentLog.datetime = datetime; }
@@ -105,6 +176,13 @@ export class LogDataService {
   public set currentLogComment(comment: string) { this.currentLog.comment = comment; }
   public get currentLogComment() { return this.currentLog.comment; }
 
+  // submit the current log entry
+  public submitLogEntry() {
+    this.logEntries.push(this.currentLog);
+    // TODO: send the log to the database
+    this.currentLog = this.createEmptyLog();
+  }
+
   public printLogEntry(entry?: LogEntry) {
     if (typeof (entry) === "undefined") {
       entry = this.currentLog;
@@ -126,10 +204,50 @@ export class LogDataService {
     this.logEntries.forEach((entry: LogEntry) => this.printLogEntry(entry));
   }
 
-  // submit the current log entry
-  public submitLogEntry() {
-    this.logEntries.push(this.currentLog);
-    // TODO: send the log to the database
-    this.currentLog = this.createEmptyLog();
+
+
+  public getLogs(): LogEntry[] {
+    return this.logEntries;
+  }
+
+  /*
+  lastIndex: the index 1 after the last retrieved log
+  i.e., let's say last time we called this we did n=2 so we'd have slice(0, 2), then when we call this again we would do lastIndex=2
+  */
+  public getNextLogs(n: number, lastIndex?: number): LogEntry[] {
+    if (lastIndex === undefined) {
+      lastIndex = 0;
+    }
+    if (lastIndex >= this.logEntries.length) {
+      // we've returned all the data already, so just return an empty list
+      return [];
+    }
+    return this.logEntries.slice(lastIndex, lastIndex + n);
+  }
+
+  public createEmptyFilter(): LogFilter {
+    return {
+      datetime_min: undefined,
+      datetime_max: undefined,
+      intensity_min: undefined,
+      intensity_max: undefined,
+      body_part: undefined,
+      type: undefined,
+      duration_min: undefined,
+      duration_max: undefined,
+    }
+  }
+
+  public getLogsWithFilter(f: LogFilter): LogEntry[] {
+    return this.logEntries.filter((log) => {
+      return (f.datetime_min === undefined || log.datetime >= f.datetime_min) &&
+        (f.datetime_max === undefined || log.datetime <= f.datetime_max) &&
+        (f.intensity_min === undefined || log.intensity >= f.intensity_min) &&
+        (f.intensity_max === undefined || log.intensity <= f.intensity_max) &&
+        (f.body_part === undefined || log.body_part === f.body_part) &&
+        (f.type === undefined || log.type === f.type) &&
+        (f.duration_min === undefined || log.duration >= f.duration_min) &&
+        (f.duration_max === undefined || log.duration <= f.duration_max);
+    });
   }
 }
