@@ -1,9 +1,37 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>tabs</ion-title>
-  </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <div id="bottomNav">
+    <ion-tabs>
+      <ion-tab-bar slot="bottom">
+
+        <ion-tab-button tab="home">
+          <ion-icon name="home"></ion-icon>
+          <ion-label>Home</ion-label>
+        </ion-tab-button>
+
+        <ion-tab-button tab="viewlogs">
+          <ion-icon name="documents-outline"></ion-icon>
+          <ion-label>View Logs</ion-label>
+        </ion-tab-button>
+
+        <ion-tab-button tab="sendlogs">
+          <ion-icon name="share-outline"></ion-icon>
+          <ion-label>Send Logs</ion-label>
+        </ion-tab-button>
+
+        <ion-tab-button tab="insights">
+          <ion-icon name="bar-chart-outline"></ion-icon>
+          <ion-label>Insights</ion-label>
+        </ion-tab-button>
+
+        <ion-tab-button tab="help">
+          <ion-icon name="help"></ion-icon>
+          <ion-label>Help</ion-label>
+        </ion-tab-button>
+      </ion-tab-bar>
+    </ion-tabs>
+  </div>
 
 </ion-content>
