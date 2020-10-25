@@ -9,17 +9,41 @@ import { LogDataService } from '../services/log-data.service';
 })
 export class SymptomsPagePage implements OnInit {
 
+  // pain scale from https://www.reddit.com/r/ChronicPain/comments/5ouyu4/pain_scale_for_people_in_chronic_pain/
+  private intensityInfo = {
+    0: ["No pain", "I have no pain."],
+    1: ["Minimal", "My pain is hardly noticable."],
+    2: ["Mild", "I have a low level of pain. I am aware of my pain only when I pay attention to it."],
+    3: ["Uncomfortable", "My pain bothers me but I can ignore it most of the time"],
+    4: ["Moderate", "I am constantly aware of my pain but I can continue most activities"],
+    5: ["Distracting", "I think about my pain most of the time. I cannot do some of the activities I need to do each day because of the pain."],
+    6: ["Distressing", "I think about my pain all of the time. I give up many activities because of my pain."],
+    7: ["Unmanagable", "I am in pain most of the time. It keeps me from doing most activities."],
+    8: ["Intense", "My pain is so severe that it is hard to think of anything else. Talking and listening are difficult."],
+    9: ["Severe", "My pain is all that I can think about. I can barely talk or move because of the pain."],
+    10: ["Unable to move", "I am in bed and can't move due to my pain. I need someone to take me to the emergency room to get help for my pain."],
+  }
+
   intensity: number;
   painType: string;
   duration: number;
   cause: string;
   is_constant: "true" | "false";  // TODO: there's got to be a better way to do this than this awkward string/boolean conversion
   mobility: string[];
+  intensityTitle: string = this.intensityInfo[0][0];
+  intensityDescription: string = this.intensityInfo[0][1];
 
   constructor(public dataService: LogDataService) {
   }
 
   ngOnInit() {
+    this.updateUIFromLog();
+  }
+
+  private onIntensityChange(newIntensity) {
+    this.intensity = newIntensity;
+    this.intensityTitle = this.intensityInfo[newIntensity][0];
+    this.intensityDescription = this.intensityInfo[newIntensity][1];
   }
 
   updateLog() {
@@ -29,11 +53,16 @@ export class SymptomsPagePage implements OnInit {
     this.dataService.currentLogMobility = this.mobility;
     this.dataService.currentLogCause = this.cause;
     this.dataService.currentLogIs_constant = this.is_constant === "true";
+    console.log("updated log");
     this.dataService.printLogEntry();
   }
 
   updateUIFromLog() {
-    this.intensity = this.dataService.currentLogIntensity;
+    console.log("updating UI from dataservice");
+    this.dataService.printLogEntry();
+    if (this.dataService.currentLogIntensity !== undefined) {
+      this.onIntensityChange(this.dataService.currentLogIntensity);
+    }
     this.painType = this.dataService.currentLogType;
     this.duration = this.dataService.currentLogDuration;
     this.mobility = this.dataService.currentLogMobility;

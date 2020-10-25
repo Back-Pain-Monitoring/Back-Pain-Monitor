@@ -13,24 +13,24 @@ const routes: Routes = [
         loadChildren: () => import('../home/home.module').then(m => m.HomePageModule)
       },
       {
-        path: 'viewlogs',
-        loadChildren: () => import('../viewlogs-page/viewlogs-page.module').then( m => m.ViewlogsPagePageModule)
-      },
-      {
         path: 'sendlogs',
         loadChildren: () => import('../send-logs-page/send-logs-page.module').then( m => m.SendLogsPagePageModule)
       },
       {
-        path: 'help',
-        loadChildren: () => import('../help-page/help-page.module').then( m => m.HelpPagePageModule)
+        path: 'viewlogs',
+        loadChildren: () => import('../viewlogs-page/viewlogs-page.module').then(m => m.ViewlogsPagePageModule)
       },
       {
         path: 'insights',
-        loadChildren: () => import('../insights-page/insights-page.module').then( m => m.InsightsPagePageModule)
+        loadChildren: () => import('../insights-page/insights-page.module').then(m => m.InsightsPagePageModule)
+      },
+      {
+        path: 'help',
+        loadChildren: () => import('../help-page/help-page.module').then(m => m.HelpPagePageModule)
       },
       {
         path: '',
-        redirectTo: 'tabs/home',
+        redirectTo: '/tabs/home',
         pathMatch: 'full'
       }
     ]
@@ -44,6 +44,8 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
+
   exports: [RouterModule],
 })
-export class TabsPageRoutingModule {}
+export class TabsPageRoutingModule { }
+
