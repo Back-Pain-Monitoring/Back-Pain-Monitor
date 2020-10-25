@@ -3,13 +3,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
-    path: 'home',
-    loadChildren: () => import('./home/home.module').then(m => m.HomePageModule)
-  },
-  {
     path: '',
-    redirectTo: 'home',
-    pathMatch: 'full'
     loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
   },
   {
@@ -17,12 +11,8 @@ const routes: Routes = [
     loadChildren: () => import('./datetime-page/datetime-page.module').then(m => m.DatetimePagePageModule)
   },
   {
-    path: 'log',
-    loadChildren: () => import('./log-page/log-page.module').then(m => m.LogPagePageModule)
-  },
-  {
     path: 'viewlogs-page',
-    loadChildren: () => import('./viewlogs-page/viewlogs-page.module').then( m => m.ViewlogsPagePageModule)
+    loadChildren: () => import('./viewlogs-page/viewlogs-page.module').then(m => m.ViewlogsPagePageModule)
   },
   {
     path: 'bodymap',
@@ -42,7 +32,11 @@ const routes: Routes = [
   },
   {
     path: 'view-logs',
-    loadChildren: () => import('./view-logs/view-logs.module').then( m => m.ViewLogsPageModule)
+    loadChildren: () => import('./view-logs/view-logs.module').then(m => m.ViewLogsPageModule)
+  },
+  {
+    path: 'log',
+    loadChildren: () => import('./log-page/log-page.module').then(m => m.LogPagePageModule)
   },
 ];
 
