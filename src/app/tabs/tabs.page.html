@@ -1,0 +1,35 @@
+<ion-header>
+</ion-header>
+
+<ion-content>
+  <div>
+    <ion-tabs>
+      <ion-tab-bar slot="bottom" color="success">
+        <ion-tab-button tab="home" routerLink="/home" routerDirection="root">
+          <ion-icon name="home"></ion-icon>
+          <ion-label>Home</ion-label>
+        </ion-tab-button>
+
+        <ion-tab-button tab="viewlogs" routerDirection="forward">
+          <ion-icon name="documents-outline"></ion-icon>
+          <ion-label>View Logs</ion-label>
+        </ion-tab-button>
+
+        <ion-tab-button tab="sendlogs" routerLink="/send-logs-page" routerDirection="forward">
+          <ion-icon name="share-outline"></ion-icon>
+          <ion-label>Send Logs</ion-label>
+        </ion-tab-button>
+
+        <ion-tab-button tab="insights" routerLink="/insights-page" routerDirection="forward">
+          <ion-icon name="bar-chart-outline"></ion-icon>
+          <ion-label>Insights</ion-label>
+        </ion-tab-button>
+
+        <ion-tab-button tab="help" routerLink="/help-page" routerDirection="forward">
+          <ion-icon name="help"></ion-icon>
+          <ion-label>Help</ion-label>
+        </ion-tab-button>
+      </ion-tab-bar>
+    </ion-tabs>
+  </div>
+</ion-content>
