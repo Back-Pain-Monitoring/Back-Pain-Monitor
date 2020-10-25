@@ -12,7 +12,7 @@ const routes: Routes = [
   },
   {
     path: 'viewlogs-page',
-    loadChildren: () => import('./viewlogs-page/viewlogs-page.module').then(m => m.ViewlogsPagePageModule)
+    loadChildren: () => import('./view-logs/view-logs.module').then(m => m.ViewLogsPageModule)
   },
   {
     path: 'bodymap',
