@@ -19,6 +19,6 @@ import { TabsPage } from './tabs.page';
 })
 
 export class TabsPageModule {}
-=======
-export class TabsPageModule { }
+
+
 
