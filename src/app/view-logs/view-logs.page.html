@@ -5,7 +5,7 @@
 </ion-header>
 
 <ion-content>
-  <ion-card *ngFor="let log of this.logsToDisplay">
+  <ion-card *ngFor="let log of this.logsToDisplay" (click)="editLog(log)">
     <ion-card-header>
       <ion-card-title>
         {{log.datetime | date:'short'}}.
