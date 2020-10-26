@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertController } from '@ionic/angular';
+
+import { LogDataService } from '../services/log-data.service';
+import { AlertController, NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-comments-page',
@@ -8,47 +10,71 @@ import { AlertController } from '@ionic/angular';
 })
 export class CommentsPagePage implements OnInit {
 
-  constructor( private alertCtrl: AlertController) {
+  comment: string;
 
-   }
+  constructor(public dataService: LogDataService, private alertCtrl: AlertController, private navCtrl: NavController) {
+  }
 
   ngOnInit() {
+    this.updateUIFromLog();
   }
-  // private toastCtrl: ToastController
-  // presentToast() {
-  //   let toast = this.toastCtrl.create({
-  //     message: 'User was added successfully',
-  //     duration: 3000,
-  //     position: 'top'
-  //   });
-  
-  //   toast.onDidDismiss(() => {
-  //     console.log('Dismissed toast');
-  //   });
-  
-  //   toast.present();
-  // }
 
-  makeAlert(): void {
+  // Check if there exists redflags symptom or not.
+  makeAlert() {
+    if (this.dataService.currentLogRedflag_symptoms.includes('True') != true ) {
+      this.redflagsCase();
+    } else {
+      this.nonredflagsCase();
+    }
+  }
+
+  // funciton to go back to homepage
+  backToHome() {
+    this.updateLog();
+    this.dataService.submitLogEntry();
+    this.navCtrl.navigateRoot('/home');
+  }
+
+  // In case there is no redflag symptoms
+  redflagsCase(): void {
     this.alertCtrl.create({
-      header: 'Alert',
-      message: 'Your log is submitted',
-      inputs: [
-        {
-          type: 'text',
-          name: 'name'
-        }
-      ],
+      message: 'Your log has been submitted!',
       buttons: [
         {
-          text: 'Cancel'
-        },
-        {
-          text: 'Save',
+          text: 'Okay',
+          handler: ()=> {
+            this.backToHome();
+          }
         }
       ]
     }).then((prompt) => {
       prompt.present();
     });
+  }
+
+  // In case there exists redflags symptoms
+  nonredflagsCase(): void {
+    this.alertCtrl.create({
+      message: 'Your log has been submitted!<br><br>Please be advised!<br>- Numbness<br>- Inability to walk<br>-  Losing weight<br>-  Losing bladder control.<br><br>These are considered as red-flag symptoms which can be highly critical to health issues! <br><br> Seek medical help immediately!',
+      buttons: [
+        {
+          text: 'Okay',
+          handler: ()=> {
+            this.backToHome();
+          }
+        }
+      ]
+    }).then((prompt) => {
+      prompt.present();
+    });
+  }
+
+  updateLog() {
+    this.dataService.currentLogComment = this.comment;
+    this.dataService.printLogEntry();
+  }
+
+  updateUIFromLog() {
+    this.comment = this.dataService.currentLogComment;
   }
 }

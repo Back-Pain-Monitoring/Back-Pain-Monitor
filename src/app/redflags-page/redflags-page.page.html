@@ -1,30 +1,30 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>redflags-page</ion-title>
+    <ion-title>Redflags Symptoms</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <ion-item>
     <ion-label>Do you have any of following symptoms?</ion-label>
-    <ion-select multiple="true" cancelText="Cancel" okText="Ok" [(ngModel)]="reflags">
-      <ion-select-option value="rf_numbness">Numbness</ion-select-option>
-      <ion-select-option value="rf_inability">Inability to walk</ion-select-option>
-      <ion-select-option value="rf_losWeight">Losing weight</ion-select-option>
-      <ion-select-option value="rf_losBladder">Losing bladder control</ion-select-option>
-    </ion-select>
   </ion-item>
+  <ion-list>
+    <ion-item *ngFor="let entry of form">
+      <ion-label>{{entry.val}}</ion-label>
+      <ion-checkbox slot="end" [(ngModel)]="entry.isChecked"></ion-checkbox>
+    </ion-item>
+  </ion-list>
 
   <!--Back button to symptoms page-->
   <ion-fab vertical="bottom" horizontal="start" slot="fixed">
-    <ion-fab-button color="success" routerDirection="back" routerLink="/symptoms">
+    <ion-fab-button color="success" routerDirection="back" routerLink="/symptoms" (click)="updateLog()">
       <ion-icon name="arrow-back-circle-outline" color="dark"></ion-icon>
     </ion-fab-button>
   </ion-fab>
   
   <!--Forward Button to comments page-->
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button color="success" routerDirection="forward" routerLink="/comments">
+    <ion-fab-button color="success" routerDirection="forward" routerLink="/comments" (click)="updateLog()">
       <ion-icon name="arrow-forward-circle-outline" color="dark"></ion-icon>
     </ion-fab-button>
   </ion-fab>
