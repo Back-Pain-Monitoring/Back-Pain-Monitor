@@ -32,7 +32,7 @@ export class CommentsPagePage implements OnInit {
   backToHome() {
     this.updateLog();
     this.dataService.submitLogEntry();
-    this.navCtrl.navigateRoot('/home');
+    this.navCtrl.navigateRoot('/tabs/home');
   }
 
   // In case there is no redflag symptoms
