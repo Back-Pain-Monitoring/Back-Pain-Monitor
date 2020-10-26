@@ -69,7 +69,7 @@ export class LogDataService {
       cause: undefined,
       mobility: undefined,
       is_constant: undefined,
-      redflag_symptoms: undefined,
+      redflag_symptoms: [],
       comment: undefined
     }
   }

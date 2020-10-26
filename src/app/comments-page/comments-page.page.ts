@@ -16,6 +16,7 @@ export class CommentsPagePage implements OnInit {
   }
 
   ngOnInit() {
+    this.updateUIFromLog();
   }
 
   // Check if there exists redflags symptom or not.
@@ -38,12 +39,6 @@ export class CommentsPagePage implements OnInit {
   redflagsCase(): void {
     this.alertCtrl.create({
       message: 'Your log has been submitted!',
-      inputs: [
-        {
-          type: 'text',
-          name: 'name'
-        }
-      ],
       buttons: [
         {
           text: 'Okay',
@@ -60,13 +55,7 @@ export class CommentsPagePage implements OnInit {
   // In case there exists redflags symptoms
   nonredflagsCase(): void {
     this.alertCtrl.create({
-      message: '- Numbnes<br>- Inability to walk<br>-  Losing weight<br>-  Losing bladder control.<br><br>These are considered as red-flag symptoms which can be highly critical to health issues! <br><br> It is highly recommended to seek medical help immediately!',
-      inputs: [
-        {
-          type: 'text',
-          name: 'name'
-        }
-      ],
+      message: 'Your log has been submitted!<br><br>Please be advised!<br>- Numbness<br>- Inability to walk<br>-  Losing weight<br>-  Losing bladder control.<br><br>These are considered as red-flag symptoms which can be highly critical to health issues! <br><br> Seek medical help immediately!',
       buttons: [
         {
           text: 'Okay',
