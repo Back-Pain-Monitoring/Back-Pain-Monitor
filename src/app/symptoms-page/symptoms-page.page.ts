@@ -41,6 +41,9 @@ export class SymptomsPagePage implements OnInit {
   }
 
   private onIntensityChange(newIntensity) {
+    if (!(newIntensity in this.intensityInfo)) {
+      newIntensity = 0;
+    }
     this.intensity = newIntensity;
     this.intensityTitle = this.intensityInfo[newIntensity][0];
     this.intensityDescription = this.intensityInfo[newIntensity][1];
