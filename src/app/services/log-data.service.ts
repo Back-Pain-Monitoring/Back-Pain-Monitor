@@ -31,7 +31,7 @@ export interface LogFilter {
 export class LogDataService {
 
   public loaded = false;
-  private editing = false;  // to track whether the dataservice is currently editing a log
+  private editing = false;  // to track whether the dataservice is currently editing a log.
 
   private logEntries: LogEntry[] = [
     {
@@ -189,6 +189,10 @@ export class LogDataService {
 
   // submit the current log entry
   public submitLogEntry() {
+    if (this.editing) {
+      this.editLogEntry();
+      return;
+    }
     this.currentLog.id = this.logEntries.length;
     this.logEntries.push(this.currentLog);
     // TODO: send the log to the database
@@ -246,6 +250,10 @@ export class LogDataService {
       return [];
     }
     return this.logEntries.slice(lastIndex, lastIndex + n);
+  }
+
+  public isEditing(): boolean {
+    return this.editing;
   }
 
   public createEmptyFilter(): LogFilter {

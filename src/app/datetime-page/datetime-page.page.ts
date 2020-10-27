@@ -19,7 +19,9 @@ export class DatetimePagePage implements OnInit {
   }
 
   updateUIFromLog() {
-    this.datetime = this.dataService.currentLogDatetime.toISOString();
+    if (this.dataService.currentLogDatetime != undefined) {
+      this.datetime = this.dataService.currentLogDatetime.toISOString();
+    }
   }
 
   testDataBinding() {
