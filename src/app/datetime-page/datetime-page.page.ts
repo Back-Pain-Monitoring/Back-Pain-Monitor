@@ -9,23 +9,21 @@ import { LogDataService } from '../services/log-data.service';
 })
 export class DatetimePagePage implements OnInit {
 
-  datetime: Date;
+  datetime: string;
 
   constructor(public dataService: LogDataService) {
   }
 
   updateLog() {
-    this.dataService.currentLogDatetime = this.datetime;
-
-    // this.dataService.printLogEntry();
+    this.dataService.currentLogDatetime = new Date(this.datetime);
   }
 
   updateUIFromLog() {
-    this.datetime = this.dataService.currentLogDatetime;
+    this.datetime = this.dataService.currentLogDatetime.toISOString();
   }
 
   testDataBinding() {
-    this.datetime = new Date();
+    this.datetime = new Date().toISOString();
   }
 
   ngOnInit() {
