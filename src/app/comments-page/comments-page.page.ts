@@ -11,17 +11,21 @@ import { AlertController, NavController } from '@ionic/angular';
 export class CommentsPagePage implements OnInit {
 
   comment: string;
+  submit_button_label: string = "Submit";
 
   constructor(public dataService: LogDataService, private alertCtrl: AlertController, private navCtrl: NavController) {
   }
 
   ngOnInit() {
     this.updateUIFromLog();
+    if (this.dataService.isEditing()) {
+      this.submit_button_label = "Update";
+    }
   }
 
   // Check if there exists redflags symptom or not.
   makeAlert() {
-    if (this.dataService.currentLogRedflag_symptoms.includes('True') != true ) {
+    if (this.dataService.currentLogRedflag_symptoms.includes('True') != true) {
       this.redflagsCase();
     } else {
       this.nonredflagsCase();
@@ -31,7 +35,7 @@ export class CommentsPagePage implements OnInit {
   // funciton to go back to homepage
   backToHome() {
     this.updateLog();
-    this.dataService.submitLogEntry();
+    this.dataService.submitLogEntry();  // note that submitLogEntry will edit the log entry instead if the dataservice indicates the log is being edited
     this.navCtrl.navigateRoot('/tabs/home');
   }
 
@@ -42,7 +46,7 @@ export class CommentsPagePage implements OnInit {
       buttons: [
         {
           text: 'Okay',
-          handler: ()=> {
+          handler: () => {
             this.backToHome();
           }
         }
@@ -59,7 +63,7 @@ export class CommentsPagePage implements OnInit {
       buttons: [
         {
           text: 'Okay',
-          handler: ()=> {
+          handler: () => {
             this.backToHome();
           }
         }
