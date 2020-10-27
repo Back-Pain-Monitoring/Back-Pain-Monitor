@@ -31,7 +31,7 @@ export interface LogFilter {
 export class LogDataService {
 
   public loaded = false;
-  private editing = false;  // to track whether the dataservice is currently editing a log.
+  private editing = false;  // to track whether the dataservice is currently editing a log
 
   private logEntries: LogEntry[] = [
     {
