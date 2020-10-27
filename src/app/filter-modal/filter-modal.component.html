@@ -13,15 +13,15 @@
     <ion-item>
       <ion-item>From</ion-item>
        <ion-input> 
-        <ion-datetime displayFormat="D MMM YYYY H:mm" [(ngModel)]="startdatetime"></ion-datetime>
+        <ion-datetime displayFormat="D MMM YYYY H:mm" [(ngModel)]="datetimemin"></ion-datetime>
       </ion-input>
     </ion-item>
     <ion-item>
       <ion-item>To</ion-item>
-        <ion-input>
-          <ion-datetime displayFormat="D MMM YYYY H:mm" [(ngModel)]="enddatetime"></ion-datetime>
+        <ion-input [formControl]="intensityInput">
+          <ion-datetime displayFormat="D MMM YYYY H:mm" [(ngModel)]="datetimemax"></ion-datetime>
         </ion-input>
-      </ion-item>
+    </ion-item>
     <ion-item>
       <ion-label>Pain Intensity</ion-label>
       <ion-label>{{intensityTitle}}</ion-label>
