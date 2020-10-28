@@ -37,7 +37,7 @@ export class LogDataService {
       body_part: "back",
       intensity: 7,
       type: "shooting pain",    // not what this field was intended for, i think.
-      duration: 120,
+      duration: 70,
       cause: "lifting",
       mobility: ["moving"],
       is_constant: true,
