@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 
 export interface LogEntry {
+  id: number;
   datetime: Date;
   body_part: string;
   intensity: number;
@@ -30,9 +31,11 @@ export interface LogFilter {
 export class LogDataService {
 
   public loaded = false;
+  private editing = false;  // to track whether the dataservice is currently editing a log
 
   private logEntries: LogEntry[] = [
     {
+      id: 0,
       datetime: new Date(),
       body_part: "back",
       intensity: 7,
@@ -45,6 +48,7 @@ export class LogDataService {
       comment: "we might need to store where on the body the pain is... like an x/y position?",
     },
     {
+      id: 1,
       datetime: new Date(),
       body_part: "left shoulder",
       intensity: 4,
@@ -57,6 +61,7 @@ export class LogDataService {
       comment: "we might need to store where on the body the pain is... like an x/y position?",
     },
     {
+      id: 2,
       datetime: new Date("2020-01-03"),
       body_part: "right shoulder",
       intensity: 8,
@@ -69,6 +74,7 @@ export class LogDataService {
       comment: "we might need to store where on the body the pain is... like an x/y position?",
     },
     {
+      id: 3,
       datetime: new Date("2020-01-04"),
       body_part: "lower back",
       intensity: 8,
@@ -81,6 +87,7 @@ export class LogDataService {
       comment: "we might need to store where on the body the pain is... like an x/y position?",
     },
     {
+      id: 4,
       datetime: new Date("2020-01-05"),
       body_part: "upper back",
       intensity: 2,
@@ -93,6 +100,7 @@ export class LogDataService {
       comment: "we might need to store where on the body the pain is... like an x/y position?",
     },
     {
+      id: 5,
       datetime: new Date("2020-01-06"),
       body_part: "middle back",
       intensity: 3,
@@ -105,6 +113,7 @@ export class LogDataService {
       comment: "we might need to store where on the body the pain is... like an x/y position?",
     },
     {
+      id: 6,
       datetime: new Date("2020-01-07"),
       body_part: "upper back",
       intensity: 2,
@@ -117,6 +126,7 @@ export class LogDataService {
       comment: "we might need to store where on the body the pain is... like an x/y position?",
     },
     {
+      id: 7,
       datetime: new Date("2020-01-08"),
       body_part: "middle back",
       intensity: 3,
@@ -139,6 +149,7 @@ export class LogDataService {
 
   private createEmptyLog(): LogEntry {
     return {
+      id: -1,
       datetime: undefined,
       body_part: undefined,
       intensity: undefined,
@@ -178,8 +189,23 @@ export class LogDataService {
 
   // submit the current log entry
   public submitLogEntry() {
+    if (this.editing) {
+      this.editLogEntry();
+      return;
+    }
+    this.currentLog.id = this.logEntries.length;
     this.logEntries.push(this.currentLog);
     // TODO: send the log to the database
+    this.currentLog = this.createEmptyLog();
+  }
+
+  public startEditLog(log) {
+    this.currentLog = log;
+    this.editing = true;
+  }
+
+  public editLogEntry() {
+    this.logEntries[this.currentLog.id] = this.currentLog;
     this.currentLog = this.createEmptyLog();
   }
 
@@ -188,6 +214,7 @@ export class LogDataService {
       entry = this.currentLog;
     }
     console.log("printing log entry:");
+    console.log(`id: ${entry.id}`);
     console.log(`datetime: ${entry.datetime}`);
     console.log(`body_part: ${entry.body_part}`);
     console.log(`intensity: ${entry.intensity}`);
@@ -223,6 +250,10 @@ export class LogDataService {
       return [];
     }
     return this.logEntries.slice(lastIndex, lastIndex + n);
+  }
+
+  public isEditing(): boolean {
+    return this.editing;
   }
 
   public createEmptyFilter(): LogFilter {
