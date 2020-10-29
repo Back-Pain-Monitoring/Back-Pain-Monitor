@@ -68,8 +68,103 @@ export class InsightsPagePage implements OnInit {
       }
     });
 
-    console.log(this.createHistogram("duration"));
     this.durationFreqChart = new Chart(this.durationFreqCanvas.nativeElement, this.createHistogram("duration"));
+
+    const type_fd = this.createFreqDist(this.logsToDisplay, "type");
+    const type_labels = ["none", "aching", "burning", "cramping", "numbness", "radiating", "shooting", "stabbing", "tingling"]
+
+    this.typePieChart = new Chart(this.typePieCanvas.nativeElement, {
+      type: "pie",
+      data: {
+        labels: type_labels,
+        datasets: [
+          {
+            label: "# of Logs",
+            data: type_labels.map(element => type_fd[element]),
+            backgroundColor: ['rgb(38, 194, 129)', '#003f5c', '#2f4b7c', '#665191', 'a05195', '#d45087', '#f95d6a', '#ff7c43', '#ffa600'],
+          }
+        ]
+      }
+    });
+
+    const mobility_labels = ["moving", "resting", "moving and resting"];
+    const mobility_fd = { "moving": 0, "resting": 0, "moving and resting": 0 };
+    this.logsToDisplay.forEach(element => {
+      if (element.mobility.length === 2) {
+        mobility_fd["moving and resting"] += 1;
+      } else {
+        mobility_fd[element.mobility] += 1;
+      }
+    });
+
+    this.mobilityPieChart = new Chart(this.mobilityPieCanvas.nativeElement, {
+      type: "pie",
+      data: {
+        labels: mobility_labels,
+        datasets: [
+          {
+            data: mobility_labels.map(element => mobility_fd[element]),
+            backgroundColor: ['#003f5c', '#bc5090', '#ffa600'],
+          }
+        ]
+      }
+    });
+
+    const constantData = [0, 0];
+    this.logsToDisplay.forEach(element => {
+      if (element.is_constant) {
+        constantData[0] += 1;
+      } else {
+        constantData[1] += 1;
+      }
+    });
+
+    this.constantPieChart = new Chart(this.constantPieCanvas.nativeElement, {
+      type: "pie",
+      data: {
+        labels: ["constant", "intermittent"],
+        datasets: [
+          {
+            data: constantData,
+            backgroundColor: ['#003f5c', '#bc5090']
+          }
+        ]
+      }
+    });
+
+    const redflags_labels = ["Numbness", "Inability to walk", "Losing weight", "Losing bladder control"];
+    const redflags_fd = { "Numbness": 0, "Inability to walk": 0, "Losing weight": 0, "Losing bladder control": 0 };
+    this.logsToDisplay.forEach(element => {
+      element.redflag_symptoms.forEach(symptom => {
+        console.log(`symptom: ${symptom}`);
+        redflags_fd[symptom] += 1;
+      });
+    });
+
+    this.redflagsFreqChart = new Chart(this.redflagsFreqCanvas.nativeElement, {
+      type: "bar",
+      data: {
+        labels: redflags_labels,
+        datasets: [
+          {
+            label: '# of Logs',
+            data: redflags_labels.map(element => redflags_fd[element]),
+            backgroundColor: ['#003f5c', '#7a5195', '#ef5675', '#ffa600'],
+          }
+        ]
+      },
+      options: {
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero: true,
+              precision: 0,
+            }
+          }]
+        }
+      }
+    })
+
   }
 
   createFreqDist(myList, field?) {
@@ -176,14 +271,12 @@ export class InsightsPagePage implements OnInit {
           backgroundColor: 'rgb(38, 194, 129)', // array should have same number of elements as number of dataset
           borderColor: 'rgb(38, 194, 129)',// array should have same number of elements as number of dataset
           borderWidth: 1,
+          barPercentage: 1.0,
+          categoryPercentage: 1.0,
         }]
       },
       options: {
         scales: {
-          xAxes: [{
-            categoryPercentage: 1.0,
-            barPercentage: 1.0,
-          }],
           yAxes: [{
             ticks: {
               precision: 0,

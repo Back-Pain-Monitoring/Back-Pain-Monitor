@@ -39,7 +39,7 @@ export class LogDataService {
       datetime: new Date(),
       body_part: "back",
       intensity: 7,
-      type: "shooting pain",    // not what this field was intended for, i think.
+      type: "shooting",    // not what this field was intended for, i think.
       duration: 70,
       cause: "lifting",
       mobility: ["moving"],
@@ -52,12 +52,12 @@ export class LogDataService {
       datetime: new Date(),
       body_part: "left shoulder",
       intensity: 4,
-      type: "dull ache",    // not what this field was intended for, i think.
+      type: "numbness",    // not what this field was intended for, i think.
       duration: 25,
       cause: "lifting",
       mobility: ["moving"],
       is_constant: true,
-      redflag_symptoms: ["loss of bowel movement", "numbness"],
+      redflag_symptoms: ["Losing bladder control", "Numbness"],
       comment: "we might need to store where on the body the pain is... like an x/y position?",
     },
     {
@@ -65,12 +65,12 @@ export class LogDataService {
       datetime: new Date("2020-01-03"),
       body_part: "right shoulder",
       intensity: 8,
-      type: "Burning",    // not what this field was intended for, i think.
+      type: "burning",    // not what this field was intended for, i think.
       duration: 25,
       cause: "unknown",
       mobility: ["moving"],
-      is_constant: true,
-      redflag_symptoms: ["loss of bowel movement", "numbness"],
+      is_constant: false,
+      redflag_symptoms: ["Losing bladder control", "Numbness"],
       comment: "we might need to store where on the body the pain is... like an x/y position?",
     },
     {
@@ -78,12 +78,12 @@ export class LogDataService {
       datetime: new Date("2020-01-04"),
       body_part: "lower back",
       intensity: 8,
-      type: "Numbness",    // not what this field was intended for, i think.
+      type: "numbness",    // not what this field was intended for, i think.
       duration: 25,
       cause: "unknown",
       mobility: ["moving", "resting"],
       is_constant: false,
-      redflag_symptoms: ["loss of bowel movement", "numbness"],
+      redflag_symptoms: ["Numbness", "Inability to walk"],
       comment: "we might need to store where on the body the pain is... like an x/y position?",
     },
     {
@@ -91,12 +91,12 @@ export class LogDataService {
       datetime: new Date("2020-01-05"),
       body_part: "upper back",
       intensity: 2,
-      type: "Shooting",    // not what this field was intended for, i think.
+      type: "shooting",    // not what this field was intended for, i think.
       duration: 2,
       cause: "unknown",
       mobility: ["resting"],
       is_constant: true,
-      redflag_symptoms: ["loss of bowel movement", "numbness"],
+      redflag_symptoms: ["Inability to walk"],
       comment: "we might need to store where on the body the pain is... like an x/y position?",
     },
     {
@@ -104,12 +104,12 @@ export class LogDataService {
       datetime: new Date("2020-01-06"),
       body_part: "middle back",
       intensity: 3,
-      type: "Aching",    // not what this field was intended for, i think.
+      type: "aching",    // not what this field was intended for, i think.
       duration: 40,
       cause: "unknown",
       mobility: ["resting"],
-      is_constant: true,
-      redflag_symptoms: ["loss of bowel movement", "numbness"],
+      is_constant: false,
+      redflag_symptoms: [],
       comment: "we might need to store where on the body the pain is... like an x/y position?",
     },
     {
@@ -117,12 +117,12 @@ export class LogDataService {
       datetime: new Date("2020-01-07"),
       body_part: "upper back",
       intensity: 2,
-      type: "Shooting",    // not what this field was intended for, i think.
+      type: "shooting",    // not what this field was intended for, i think.
       duration: 2,
       cause: "unknown",
       mobility: ["resting"],
       is_constant: true,
-      redflag_symptoms: ["loss of bowel movement", "numbness"],
+      redflag_symptoms: [],
       comment: "we might need to store where on the body the pain is... like an x/y position?",
     },
     {
@@ -130,12 +130,12 @@ export class LogDataService {
       datetime: new Date("2020-01-08"),
       body_part: "middle back",
       intensity: 3,
-      type: "Aching",    // not what this field was intended for, i think.
+      type: "stabbing",    // not what this field was intended for, i think.
       duration: 40,
       cause: "unknown",
       mobility: ["resting"],
       is_constant: true,
-      redflag_symptoms: ["loss of bowel movement", "numbness"],
+      redflag_symptoms: ["Losing bladder control"],
       comment: "we might need to store where on the body the pain is... like an x/y position?",
     },
   ];
