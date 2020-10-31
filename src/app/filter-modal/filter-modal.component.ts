@@ -26,6 +26,7 @@ private filter: LogFilter;
     console.log('Filter rece', this.Filter);
   }
 
+  // Updates UI based on previous filter setting
   updateFilterUI() {
     this.datetime_max = this.Filter.datetime_max.toISOString();
     this.datetime_min = this.Filter.datetime_min.toISOString();
