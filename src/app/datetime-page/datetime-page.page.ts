@@ -14,7 +14,14 @@ export class DatetimePagePage implements OnInit {
   constructor(public dataService: LogDataService) {
   }
 
+  ngOnInit() {
+    this.updateUIFromLog();
+  }
+
   updateLog() {
+    if (!this.validateData()) {
+      console.log("updating with invalid data");
+    }
     this.dataService.currentLogDatetime = new Date(this.datetime);
   }
 
@@ -28,8 +35,8 @@ export class DatetimePagePage implements OnInit {
     this.datetime = new Date().toISOString();
   }
 
-  ngOnInit() {
-    this.updateUIFromLog();
+  validateData() {
+    return this.datetime !== undefined
   }
 
 }
