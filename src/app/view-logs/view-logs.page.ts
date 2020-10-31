@@ -55,10 +55,13 @@ export class ViewLogsPage implements OnInit {
   }
 
   editLog(log: LogEntry) {
-    console.log(`editing log`);
-    console.log(log);
     this.dataService.startEditLog(log);
     this.navCtrl.navigateRoot('/datetime');
+  }
+
+  deleteLog(log: LogEntry) {
+    this.dataService.deleteLog(log);
+    this.logsToDisplay = this.dataService.getLogs();  // TODO: change this to use the filter once we have filter working
   }
 
 }
