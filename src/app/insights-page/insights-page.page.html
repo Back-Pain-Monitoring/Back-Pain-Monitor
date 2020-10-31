@@ -5,5 +5,68 @@
 </ion-header>
 
 <ion-content>
+  <div class="ion-padding">
+    <ion-card>
+      <ion-card-header>
+        Pain Intensity Over Time
+      </ion-card-header>
+      <ion-card-content>
+        <canvas #intensityTimeCanvas></canvas>
+      </ion-card-content>
+    </ion-card>
 
+    <ion-card>
+      <ion-card-header>
+        Frequency of Pain Intensity
+      </ion-card-header>
+      <ion-card-content>
+        <canvas #intensityFreqCanvas></canvas>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card>
+      <ion-card-header>
+        Frequency of Duration of Pain (minutes)
+      </ion-card-header>
+      <ion-card-content>
+        <canvas #durationFreqCanvas></canvas>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card>
+      <ion-card-header>
+        Type of Pain
+      </ion-card-header>
+      <ion-card-content>
+        <canvas #typePieCanvas></canvas>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card>
+      <ion-card-header>
+        Mobility
+      </ion-card-header>
+      <ion-card-content>
+        <canvas #mobilityPieCanvas></canvas>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card>
+      <ion-card-header>
+        Constant or Intermittent
+      </ion-card-header>
+      <ion-card-content>
+        <canvas #constantPieCanvas></canvas>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card>
+      <ion-card-header>
+        Frequency of Redflags Symptoms
+      </ion-card-header>
+      <ion-card-content>
+        <canvas #redflagsFreqCanvas></canvas>
+      </ion-card-content>
+    </ion-card>
+  </div>
 </ion-content>
