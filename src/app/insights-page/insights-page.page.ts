@@ -37,6 +37,44 @@ export class InsightsPagePage implements OnInit {
 
   ngAfterViewInit() {
 
+    // if this.logsToDisplay is not sorted by datetime, we need to do .sort((a, b) => a.datetime - b.datetime)
+    const intensity_time_data = this.logsToDisplay.map(log => {
+      return {
+        x: log.datetime,
+        y: log.intensity,
+      }
+    });
+
+    console.log(intensity_time_data);
+
+    this.intensityTimeChart = new Chart(this.intensityTimeCanvas.nativeElement, {
+      type: 'line',
+      data: {
+        datasets: [{
+          label: 'Intensity',
+          data: intensity_time_data,
+          borderColor: 'rgb(38, 194, 129)',
+        }
+        ]
+      },
+      options: {
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero: true,
+              precision: 0,
+            }
+          }],
+          xAxes: [{
+            type: 'time',
+            time: {
+              unit: 'day'
+            }
+          }]
+        }
+      }
+    });
+
     const intensity_fd = this.createFreqDist(this.logsToDisplay, "intensity");
     const intensity_labels = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 

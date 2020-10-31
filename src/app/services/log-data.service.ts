@@ -36,6 +36,84 @@ export class LogDataService {
   private logEntries: LogEntry[] = [
     {
       id: 0,
+      datetime: new Date("2020-10-23"),
+      body_part: "right shoulder",
+      intensity: 8,
+      type: "burning",    // not what this field was intended for, i think.
+      duration: 25,
+      cause: "unknown",
+      mobility: ["moving"],
+      is_constant: false,
+      redflag_symptoms: ["Losing bladder control", "Numbness"],
+      comment: "we might need to store where on the body the pain is... like an x/y position?",
+    },
+    {
+      id: 1,
+      datetime: new Date("2020-10-24"),
+      body_part: "middle back",
+      intensity: 3,
+      type: "aching",    // not what this field was intended for, i think.
+      duration: 40,
+      cause: "unknown",
+      mobility: ["resting"],
+      is_constant: false,
+      redflag_symptoms: [],
+      comment: "we might need to store where on the body the pain is... like an x/y position?",
+    },
+    {
+      id: 2,
+      datetime: new Date("2020-10-25"),
+      body_part: "lower back",
+      intensity: 8,
+      type: "numbness",    // not what this field was intended for, i think.
+      duration: 25,
+      cause: "unknown",
+      mobility: ["moving", "resting"],
+      is_constant: false,
+      redflag_symptoms: ["Numbness", "Inability to walk"],
+      comment: "we might need to store where on the body the pain is... like an x/y position?",
+    },
+    {
+      id: 3,
+      datetime: new Date("2020-10-27"),
+      body_part: "upper back",
+      intensity: 2,
+      type: "shooting",    // not what this field was intended for, i think.
+      duration: 2,
+      cause: "unknown",
+      mobility: ["resting"],
+      is_constant: true,
+      redflag_symptoms: ["Inability to walk"],
+      comment: "we might need to store where on the body the pain is... like an x/y position?",
+    },
+    {
+      id: 4,
+      datetime: new Date("2020-10-28"),
+      body_part: "upper back",
+      intensity: 2,
+      type: "shooting",    // not what this field was intended for, i think.
+      duration: 2,
+      cause: "unknown",
+      mobility: ["resting"],
+      is_constant: true,
+      redflag_symptoms: [],
+      comment: "we might need to store where on the body the pain is... like an x/y position?",
+    },
+    {
+      id: 5,
+      datetime: new Date("2020-10-30"),
+      body_part: "middle back",
+      intensity: 3,
+      type: "stabbing",    // not what this field was intended for, i think.
+      duration: 40,
+      cause: "unknown",
+      mobility: ["resting"],
+      is_constant: true,
+      redflag_symptoms: ["Losing bladder control"],
+      comment: "we might need to store where on the body the pain is... like an x/y position?",
+    },
+    {
+      id: 6,
       datetime: new Date(),
       body_part: "back",
       intensity: 7,
@@ -48,7 +126,7 @@ export class LogDataService {
       comment: "we might need to store where on the body the pain is... like an x/y position?",
     },
     {
-      id: 1,
+      id: 7,
       datetime: new Date(),
       body_part: "left shoulder",
       intensity: 4,
@@ -58,84 +136,6 @@ export class LogDataService {
       mobility: ["moving"],
       is_constant: true,
       redflag_symptoms: ["Losing bladder control", "Numbness"],
-      comment: "we might need to store where on the body the pain is... like an x/y position?",
-    },
-    {
-      id: 2,
-      datetime: new Date("2020-01-03"),
-      body_part: "right shoulder",
-      intensity: 8,
-      type: "burning",    // not what this field was intended for, i think.
-      duration: 25,
-      cause: "unknown",
-      mobility: ["moving"],
-      is_constant: false,
-      redflag_symptoms: ["Losing bladder control", "Numbness"],
-      comment: "we might need to store where on the body the pain is... like an x/y position?",
-    },
-    {
-      id: 3,
-      datetime: new Date("2020-01-04"),
-      body_part: "lower back",
-      intensity: 8,
-      type: "numbness",    // not what this field was intended for, i think.
-      duration: 25,
-      cause: "unknown",
-      mobility: ["moving", "resting"],
-      is_constant: false,
-      redflag_symptoms: ["Numbness", "Inability to walk"],
-      comment: "we might need to store where on the body the pain is... like an x/y position?",
-    },
-    {
-      id: 4,
-      datetime: new Date("2020-01-05"),
-      body_part: "upper back",
-      intensity: 2,
-      type: "shooting",    // not what this field was intended for, i think.
-      duration: 2,
-      cause: "unknown",
-      mobility: ["resting"],
-      is_constant: true,
-      redflag_symptoms: ["Inability to walk"],
-      comment: "we might need to store where on the body the pain is... like an x/y position?",
-    },
-    {
-      id: 5,
-      datetime: new Date("2020-01-06"),
-      body_part: "middle back",
-      intensity: 3,
-      type: "aching",    // not what this field was intended for, i think.
-      duration: 40,
-      cause: "unknown",
-      mobility: ["resting"],
-      is_constant: false,
-      redflag_symptoms: [],
-      comment: "we might need to store where on the body the pain is... like an x/y position?",
-    },
-    {
-      id: 6,
-      datetime: new Date("2020-01-07"),
-      body_part: "upper back",
-      intensity: 2,
-      type: "shooting",    // not what this field was intended for, i think.
-      duration: 2,
-      cause: "unknown",
-      mobility: ["resting"],
-      is_constant: true,
-      redflag_symptoms: [],
-      comment: "we might need to store where on the body the pain is... like an x/y position?",
-    },
-    {
-      id: 7,
-      datetime: new Date("2020-01-08"),
-      body_part: "middle back",
-      intensity: 3,
-      type: "stabbing",    // not what this field was intended for, i think.
-      duration: 40,
-      cause: "unknown",
-      mobility: ["resting"],
-      is_constant: true,
-      redflag_symptoms: ["Losing bladder control"],
       comment: "we might need to store where on the body the pain is... like an x/y position?",
     },
   ];
@@ -195,6 +195,7 @@ export class LogDataService {
     }
     this.currentLog.id = this.logEntries.length;
     this.logEntries.push(this.currentLog);
+    this.logEntries.sort((a, b) => a.datetime.getTime() - b.datetime.getTime());
     // TODO: send the log to the database
     this.currentLog = this.createEmptyLog();
   }
@@ -205,6 +206,7 @@ export class LogDataService {
   }
 
   public editLogEntry() {
+    // TODO: change this
     this.logEntries[this.currentLog.id] = this.currentLog;
     this.currentLog = this.createEmptyLog();
   }
