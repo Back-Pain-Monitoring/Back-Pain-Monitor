@@ -1,11 +1,37 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>bodymap-page</ion-title>
-  </ion-toolbar>
-</ion-header>
+  </ion-toolbar></ion-header>
 
+
+  
 <ion-content>
-  <ion-img id="backMap" src="../assets/bodyMap.png"></ion-img>
+
+  <ion-grid>
+    <ion-row class="selection">
+      <ion-col class="selection">
+        <ion-item>
+          <ion-label>Pain Area</ion-label>
+          <ion-select cancelText="Cancel" okText="Ok" [(ngModel)]="painType" multiple={true} placeholder="Select Pain Area(s)">
+            <ion-select-option value="rShoulder">Right Shoulder</ion-select-option>
+            <ion-select-option value="lShoulder">Left Shoulder</ion-select-option>
+            <ion-select-option value="neck">Neck</ion-select-option>
+            <ion-select-option value="uBack">Upper Back</ion-select-option>
+            <ion-select-option value="lBack">Lower Back</ion-select-option>
+            <ion-select-option value="mBack">Middle Back</ion-select-option>
+            <ion-select-option value="glutes">Glutes</ion-select-option>
+          </ion-select> 
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <img src="./assets/bodyMap.png">
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  
 
   <!--Back button to datetime page-->
   <ion-fab vertical="bottom" horizontal="start" slot="fixed">
