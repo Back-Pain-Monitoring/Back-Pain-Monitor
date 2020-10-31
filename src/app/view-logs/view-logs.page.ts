@@ -41,35 +41,29 @@ export class ViewLogsPage implements OnInit {
 
   // this method creates a modal which is a dialog that appears on top of app's content this will be used as a way of setting filter and passing data
   async presentModal() {
+    this.filter.duration_max = 70;
     const modal = await this.modalCtrl.create({
       component: FilterModalPageComponent,
       componentProps: {
-        rfilter: 123
-        // this.filter.intensity_min = 3;
-        // this.filter.intensity_max = 7;
-        // this.filter.body_part = "upper back";
-        // this.filter.type = "Shooting";
-        // this.filter.duration_min = 20;
-        // this.filter.duration_max = 40;
+        Filter : this.filter
       }
     });
-    // await modal.present();
+    await modal.present();
 
     // const data = await modal.onWillDismiss();
     // console.log(data);
     modal.onWillDismiss().then(dataReturned => {
-      
+      // console.log(dataReturned);
       if ( dataReturned !== null ) {
         this.filter = dataReturned.data;
         this.filterLogs();
-        console.log(this.filter);
+        console.log("filter returned is: ", this.filter);
 
       }
     })
 
-    return await modal.present().then(_ => {
-      console.log(this.filter);
-    })
+    // return await modal.present().then(_ => {
+    // })
   }
 
   test() {
@@ -79,15 +73,15 @@ export class ViewLogsPage implements OnInit {
   filterLogs() {
 
     // the commented out code was used for testing
-    this.filter = this.dataService.createEmptyFilter();
-    this.filter.datetime_min = new Date("2020-01-05");
-    this.filter.datetime_max = new Date("2020-02-01");
-    this.filter.intensity_min = 3;
-    this.filter.intensity_max = 7;
+    // this.filter = this.dataService.createEmptyFilter();
+    // this.filter.datetime_min = new Date("2020-01-05");
+    // this.filter.datetime_max = new Date("2020-02-01");
+    // this.filter.intensity_min = 3;
+    // this.filter.intensity_max = 7;
     // this.filter.body_part = "upper back";
     // this.filter.type = "Shooting";
-    this.filter.duration_min = 20;
-    this.filter.duration_max = 40;
+    // this.filter.duration_min = 20;
+    // this.filter.duration_max = 40;
 
     // TODO: might change this later so we don't call the data service every time. What approach is better depends on how many records we have.
     this.logsToDisplay = this.dataService.getLogsWithFilter(this.filter);

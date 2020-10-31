@@ -16,12 +16,12 @@ export interface LogEntry {
 export interface LogFilter {
   datetime_min: Date;
   datetime_max: Date;
-  intensity_min: number;
-  intensity_max: number;
-  body_part: string;
-  type: string;
-  duration_min: number;
-  duration_max: number;
+  intensity_min: Number;
+  intensity_max: Number;
+  body_part: String;
+  type: String;
+  duration_min: Number;
+  duration_max: Number;
 }
 
 @Injectable({
