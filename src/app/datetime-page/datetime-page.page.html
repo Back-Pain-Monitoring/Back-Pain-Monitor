@@ -27,9 +27,11 @@
   </ion-fab>
 
   <!--Forward Button to bodymap page-->
-  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+  <app-log-nav-button direction="forward" link="/bodymap" (click)="navigateForward()" #forwardButton>
+  </app-log-nav-button>
+  <!-- <ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button color="success" routerDirection="forward" routerLink="/bodymap" (click)="updateLog()">
       <ion-icon name="arrow-forward-circle-outline" color="dark"></ion-icon>
     </ion-fab-button>
-  </ion-fab>
+  </ion-fab> -->
 </ion-content>

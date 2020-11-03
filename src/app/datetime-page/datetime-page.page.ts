@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 
 import { LogDataService } from '../services/log-data.service';
 
@@ -8,6 +8,8 @@ import { LogDataService } from '../services/log-data.service';
   styleUrls: ['./datetime-page.page.scss'],
 })
 export class DatetimePagePage implements OnInit {
+
+  @ViewChild('forwardButton', { static: false }) forwardButton;
 
   datetime: string;
 
@@ -19,9 +21,6 @@ export class DatetimePagePage implements OnInit {
   }
 
   updateLog() {
-    if (!this.validateData()) {
-      console.log("updating with invalid data");
-    }
     this.dataService.currentLogDatetime = new Date(this.datetime);
   }
 
@@ -37,6 +36,14 @@ export class DatetimePagePage implements OnInit {
 
   validateData() {
     return this.datetime !== undefined
+  }
+
+  navigateForward() {
+    if (!this.validateData()) {
+      this.forwardButton.failedValidate("Please provide a value for date");
+    } else {
+      this.forwardButton.navigate();
+    }
   }
 
 }
