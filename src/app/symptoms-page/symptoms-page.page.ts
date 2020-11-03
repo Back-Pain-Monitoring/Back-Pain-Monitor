@@ -50,6 +50,9 @@ export class SymptomsPagePage implements OnInit {
   }
 
   updateLog() {
+    if (!this.validateData()) {
+      console.log("updating with invalid data");
+    }
     this.dataService.currentLogIntensity = this.intensity;
     this.dataService.currentLogType = this.painType;
     this.dataService.currentLogDuration = this.duration;
@@ -57,7 +60,16 @@ export class SymptomsPagePage implements OnInit {
     this.dataService.currentLogCause = this.cause;
     this.dataService.currentLogIs_constant = this.is_constant === "true";
     console.log("updated log");
-    this.dataService.printLogEntry();
+    // this.dataService.printLogEntry();
+  }
+
+  validateData(): boolean {
+    return this.intensity !== undefined
+      && this.painType !== undefined
+      && this.duration !== undefined
+      && this.mobility !== undefined
+      && this.mobility.length > 0
+      && this.is_constant !== undefined;
   }
 
   updateUIFromLog() {
@@ -70,7 +82,7 @@ export class SymptomsPagePage implements OnInit {
     this.duration = this.dataService.currentLogDuration;
     this.mobility = this.dataService.currentLogMobility;
     this.cause = this.dataService.currentLogCause;
-    this.is_constant = this.dataService.currentLogIs_constant ? "true" : "false";
+    this.is_constant = this.dataService.currentLogIs_constant === false ? "false" : "true";
   }
 
   // look at the UI to see the changes were made appropriately. Can trigger this function by attaching it to a button.
