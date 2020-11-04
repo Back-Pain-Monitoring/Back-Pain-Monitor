@@ -12,7 +12,6 @@ export class InsightsPagePage implements OnInit {
 
   @ViewChild("intensityTimeCanvas") intensityTimeCanvas: ElementRef;
   @ViewChild("intensityFreqCanvas") intensityFreqCanvas: ElementRef;
-  @ViewChild("durationFreqCanvas") durationFreqCanvas: ElementRef;
   @ViewChild("typePieCanvas") typePieCanvas: ElementRef;
   @ViewChild("mobilityPieCanvas") mobilityPieCanvas: ElementRef;
   @ViewChild("constantPieCanvas") constantPieCanvas: ElementRef;
@@ -20,7 +19,6 @@ export class InsightsPagePage implements OnInit {
 
   private intensityTimeChart: Chart;
   private intensityFreqChart: Chart;
-  private durationFreqChart: Chart;
   private typePieChart: Chart;
   private mobilityPieChart: Chart;
   private constantPieChart: Chart;
@@ -105,8 +103,6 @@ export class InsightsPagePage implements OnInit {
         }
       }
     });
-
-    this.durationFreqChart = new Chart(this.durationFreqCanvas.nativeElement, this.createHistogram("duration"));
 
     const type_fd = this.createFreqDist(this.logsToDisplay, "type");
     const type_labels = ["none", "aching", "burning", "cramping", "numbness", "radiating", "shooting", "stabbing", "tingling"]

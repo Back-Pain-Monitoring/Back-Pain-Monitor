@@ -6,7 +6,6 @@ export interface LogEntry {
   body_part: string;
   intensity: number;
   type: string;          // enumeration?
-  duration: number;      // in minutes
   cause: string;
   mobility: string[];      // TODO: could be more specific with types here. This list can only contain moving and/or resting
   is_constant: boolean;  // assumes pain is either constant or intermittent
@@ -21,8 +20,6 @@ export interface LogFilter {
   intensity_max: number;
   body_part: string;
   type: string;
-  duration_min: number;
-  duration_max: number;
 }
 
 @Injectable({
@@ -40,7 +37,6 @@ export class LogDataService {
       body_part: "right shoulder",
       intensity: 8,
       type: "burning",    // not what this field was intended for, i think.
-      duration: 25,
       cause: "unknown",
       mobility: ["moving"],
       is_constant: false,
@@ -53,7 +49,6 @@ export class LogDataService {
       body_part: "middle back",
       intensity: 3,
       type: "aching",    // not what this field was intended for, i think.
-      duration: 40,
       cause: "unknown",
       mobility: ["resting"],
       is_constant: false,
@@ -66,7 +61,6 @@ export class LogDataService {
       body_part: "lower back",
       intensity: 8,
       type: "numbness",    // not what this field was intended for, i think.
-      duration: 25,
       cause: "unknown",
       mobility: ["moving", "resting"],
       is_constant: false,
@@ -79,7 +73,6 @@ export class LogDataService {
       body_part: "upper back",
       intensity: 2,
       type: "shooting",    // not what this field was intended for, i think.
-      duration: 2,
       cause: "unknown",
       mobility: ["resting"],
       is_constant: true,
@@ -92,7 +85,6 @@ export class LogDataService {
       body_part: "upper back",
       intensity: 2,
       type: "shooting",    // not what this field was intended for, i think.
-      duration: 2,
       cause: "unknown",
       mobility: ["resting"],
       is_constant: true,
@@ -105,7 +97,6 @@ export class LogDataService {
       body_part: "middle back",
       intensity: 3,
       type: "stabbing",    // not what this field was intended for, i think.
-      duration: 40,
       cause: "unknown",
       mobility: ["resting"],
       is_constant: true,
@@ -118,7 +109,6 @@ export class LogDataService {
       body_part: "back",
       intensity: 7,
       type: "shooting",    // not what this field was intended for, i think.
-      duration: 70,
       cause: "lifting",
       mobility: ["moving"],
       is_constant: true,
@@ -131,7 +121,6 @@ export class LogDataService {
       body_part: "left shoulder",
       intensity: 4,
       type: "numbness",    // not what this field was intended for, i think.
-      duration: 25,
       cause: "lifting",
       mobility: ["moving"],
       is_constant: true,
@@ -154,7 +143,6 @@ export class LogDataService {
       body_part: undefined,
       intensity: undefined,
       type: undefined,
-      duration: undefined,
       cause: undefined,
       mobility: undefined,
       is_constant: undefined,
@@ -174,8 +162,6 @@ export class LogDataService {
   public get currentLogIntensity() { return this.currentLog.intensity; }
   public set currentLogType(type: string) { this.currentLog.type = type; }
   public get currentLogType() { return this.currentLog.type; }
-  public set currentLogDuration(duration: number) { this.currentLog.duration = duration; }
-  public get currentLogDuration() { return this.currentLog.duration; }
   public set currentLogCause(cause: string) { this.currentLog.cause = cause; }
   public get currentLogCause() { return this.currentLog.cause; }
   public set currentLogMobility(mobility: string[]) { this.currentLog.mobility = mobility; }
@@ -221,7 +207,6 @@ export class LogDataService {
     console.log(`body_part: ${entry.body_part}`);
     console.log(`intensity: ${entry.intensity}`);
     console.log(`type: ${entry.type}`);
-    console.log(`duration: ${entry.duration}`);
     console.log(`cause: ${entry.cause}`);
     console.log(`mobility: ${entry.mobility}`);
     console.log(`is_constant: ${entry.is_constant}`);
@@ -266,8 +251,6 @@ export class LogDataService {
       intensity_max: undefined,
       body_part: undefined,
       type: undefined,
-      duration_min: undefined,
-      duration_max: undefined,
     }
   }
 
@@ -278,9 +261,7 @@ export class LogDataService {
         (f.intensity_min === undefined || log.intensity >= f.intensity_min) &&
         (f.intensity_max === undefined || log.intensity <= f.intensity_max) &&
         (f.body_part === undefined || log.body_part === f.body_part) &&
-        (f.type === undefined || log.type === f.type) &&
-        (f.duration_min === undefined || log.duration >= f.duration_min) &&
-        (f.duration_max === undefined || log.duration <= f.duration_max);
+        (f.type === undefined || log.type === f.type)
     });
   }
 }
