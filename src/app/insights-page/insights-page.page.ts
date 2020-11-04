@@ -17,6 +17,7 @@ export class InsightsPagePage implements OnInit {
   @ViewChild("constantPieCanvas") constantPieCanvas: ElementRef;
   @ViewChild("redflagsFreqCanvas") redflagsFreqCanvas: ElementRef;
   @ViewChild("nightPainPieCanvas") nightPainPieCanvas: ElementRef;
+  @ViewChild("worseBetterCanvas") worseBetterCanvas: ElementRef;
 
   private intensityTimeChart: Chart;
   private intensityFreqChart: Chart;
@@ -25,6 +26,7 @@ export class InsightsPagePage implements OnInit {
   private constantPieChart: Chart;
   private redflagsFreqChart: Chart;
   private nightPainPieChart: Chart;
+  private worseBetterChart: CharacterData;
 
   private logsToDisplay = [];
 
@@ -71,6 +73,9 @@ export class InsightsPagePage implements OnInit {
               unit: 'day'
             }
           }]
+        },
+        legend: {
+          display: false
         }
       }
     });
@@ -102,6 +107,9 @@ export class InsightsPagePage implements OnInit {
               precision: 0,
             }
           }]
+        },
+        legend: {
+          display: false
         }
       }
     });
@@ -149,7 +157,7 @@ export class InsightsPagePage implements OnInit {
             backgroundColor: ['#003f5c', '#bc5090', '#ffa600'],
           }
         ]
-      }
+      },
     });
 
     const constantData = [0, 0];
@@ -239,16 +247,74 @@ export class InsightsPagePage implements OnInit {
       }
     });
 
+    const worse_fd = this.createFreqDist(this.logsToDisplay, "worse", true);
+    const better_fd = this.createFreqDist(this.logsToDisplay, "better", true);
+    const worse_better_labels = this.dataService.activities;
+
+    console.log(worse_better_labels.map(element => {
+      return worse_fd[element] || 0;
+    }))
+
+    this.worseBetterChart = new Chart(this.worseBetterCanvas.nativeElement, {
+      type: "bar",
+      data: {
+        labels: worse_better_labels,
+        datasets: [
+          {
+            label: "worse",
+            data: worse_better_labels.map(element => {
+              return worse_fd[element] || 0;
+            }),
+            // fillColor: "blue",
+            backgroundColor: '#003f5c', // array should have same number of elements as number of dataset
+            // borderColor: 'rgb(38, 194, 129)',// array should have same number of elements as number of dataset
+            // borderWidth: 1
+          },
+          {
+            label: "better",
+            data: worse_better_labels.map(element => {
+              return better_fd[element] || 0;
+            }),
+            // fillColor: "red",
+            backgroundColor: '#bc5090', // array should have same number of elements as number of dataset
+            // borderColor: 'rgb(38, 194, 129)',// array should have same number of elements as number of dataset
+            // borderWidth: 1
+          },
+        ]
+      },
+      options: {
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero: true,
+              precision: 0,
+            }
+          }]
+        }
+      }
+    });
+
+
   }
 
-  createFreqDist(myList, field?) {
+  createFreqDist(myList, field?, is_list?) {
     const freqDist = {};
     myList.forEach(element => {
       const item = field === undefined ? element : element[field];
-      if (item in freqDist) {
-        freqDist[item] += 1;
+      if (is_list) {
+        item.forEach(listItem => {
+          if (listItem in freqDist) {
+            freqDist[listItem] += 1;
+          } else {
+            freqDist[listItem] = 1;
+          }
+        });
       } else {
-        freqDist[item] = 1;
+        if (item in freqDist) {
+          freqDist[item] += 1;
+        } else {
+          freqDist[item] = 1;
+        }
       }
     });
     return freqDist;

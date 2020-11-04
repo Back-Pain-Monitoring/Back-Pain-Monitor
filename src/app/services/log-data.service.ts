@@ -8,6 +8,8 @@ export interface LogEntry {
   type: string;
   timesBefore: number;
   nightPain: boolean;
+  worse: Array<string>;
+  better: Array<string>;
   cause: string;
   mobility: string[];      // TODO: could be more specific with types here. This list can only contain moving and/or resting
   is_constant: boolean;  // assumes pain is either constant or intermittent
@@ -32,7 +34,9 @@ export class LogDataService {
   public loaded = false;
   private editing = false;  // to track whether the dataservice is currently editing a log
   public redflags = ["Unexplained weight loss", "Pain that is increased or unrelieved by rest",
-    "Bladder or bowel incontinence", "Limited spinal range of motion"]
+    "Bladder or bowel incontinence", "Limited spinal range of motion"];
+  public activities = ["bending", "sitting", "standing", "walking", "lying",
+    "am", "as the day progresses", "pm", "still", "moving"]
 
   private logEntries: LogEntry[] = [
     {
@@ -43,6 +47,8 @@ export class LogDataService {
       type: "burning",
       timesBefore: 0,
       nightPain: true,
+      worse: ["bending", "walking"],
+      better: ["sitting", "lying", "am"],
       cause: "unknown",
       mobility: ["moving"],
       is_constant: false,
@@ -57,6 +63,8 @@ export class LogDataService {
       type: "aching",
       timesBefore: 2,
       nightPain: false,
+      worse: ["bending", "sitting"],
+      better: ["pm", "moving"],
       cause: "unknown",
       mobility: ["resting"],
       is_constant: false,
@@ -71,6 +79,8 @@ export class LogDataService {
       type: "numbness",
       timesBefore: 3,
       nightPain: true,
+      worse: ["still", "as the day progresses"],
+      better: ["bending", "standing"],
       cause: "unknown",
       mobility: ["moving", "resting"],
       is_constant: false,
@@ -85,6 +95,8 @@ export class LogDataService {
       type: "shooting",
       timesBefore: 4,
       nightPain: true,
+      worse: ["walking", "lying", "moving"],
+      better: ["sitting", "still"],
       cause: "unknown",
       mobility: ["resting"],
       is_constant: false,
@@ -99,6 +111,8 @@ export class LogDataService {
       type: "shooting",
       timesBefore: 2,
       nightPain: false,
+      worse: ["bending", "am"],
+      better: ["walking", "moving"],
       cause: "unknown",
       mobility: ["resting"],
       is_constant: false,
@@ -113,6 +127,8 @@ export class LogDataService {
       type: "stabbing",
       timesBefore: 1,
       nightPain: false,
+      worse: ["sitting", "pm"],
+      better: ["lying", "walking"],
       cause: "unknown",
       mobility: ["resting"],
       is_constant: true,
@@ -127,6 +143,8 @@ export class LogDataService {
       type: "shooting",
       timesBefore: 10,
       nightPain: true,
+      worse: ["sitting", "standing"],
+      better: ["moving", "am"],
       cause: "lifting",
       mobility: ["moving"],
       is_constant: true,
@@ -141,6 +159,8 @@ export class LogDataService {
       type: "numbness",
       timesBefore: 23,
       nightPain: true,
+      worse: ["bending", "standing"],
+      better: ["walking", "moving"],
       cause: "lifting",
       mobility: ["moving"],
       is_constant: true,
@@ -165,6 +185,8 @@ export class LogDataService {
       type: undefined,
       timesBefore: undefined,
       nightPain: undefined,
+      worse: [],
+      better: [],
       cause: undefined,
       mobility: undefined,
       is_constant: undefined,
@@ -188,6 +210,10 @@ export class LogDataService {
   public get currentLogTimesBefore() { return this.currentLog.timesBefore; }
   public set currentLogNightPain(pain: boolean) { this.currentLog.nightPain = pain; }
   public get currentLogNightPain() { return this.currentLog.nightPain; }
+  public set currentLogWorse(worse: Array<string>) { this.currentLog.worse = worse; }
+  public get currentLogWorse() { return this.currentLog.worse; }
+  public set currentLogBetter(better: Array<string>) { this.currentLog.better = better; }
+  public get currentLogBetter() { return this.currentLog.better; }
   public set currentLogCause(cause: string) { this.currentLog.cause = cause; }
   public get currentLogCause() { return this.currentLog.cause; }
   public set currentLogMobility(mobility: string[]) { this.currentLog.mobility = mobility; }
