@@ -16,6 +16,7 @@ export class InsightsPagePage implements OnInit {
   @ViewChild("mobilityPieCanvas") mobilityPieCanvas: ElementRef;
   @ViewChild("constantPieCanvas") constantPieCanvas: ElementRef;
   @ViewChild("redflagsFreqCanvas") redflagsFreqCanvas: ElementRef;
+  @ViewChild("nightPainPieCanvas") nightPainPieCanvas: ElementRef;
 
   private intensityTimeChart: Chart;
   private intensityFreqChart: Chart;
@@ -23,6 +24,7 @@ export class InsightsPagePage implements OnInit {
   private mobilityPieChart: Chart;
   private constantPieChart: Chart;
   private redflagsFreqChart: Chart;
+  private nightPainPieChart: Chart;
 
   private logsToDisplay = [];
 
@@ -118,8 +120,14 @@ export class InsightsPagePage implements OnInit {
             backgroundColor: ['rgb(38, 194, 129)', '#003f5c', '#2f4b7c', '#665191', 'a05195', '#d45087', '#f95d6a', '#ff7c43', '#ffa600'],
           }
         ]
+      },
+      options: {
+        legend: {
+          display: false
+        },
       }
     });
+
 
     const mobility_labels = ["moving", "resting", "moving and resting"];
     const mobility_fd = { "moving": 0, "resting": 0, "moving and resting": 0 };
@@ -207,7 +215,29 @@ export class InsightsPagePage implements OnInit {
           display: true,
         }
       }
-    })
+    });
+
+    const nightData = [0, 0];
+    this.logsToDisplay.forEach(element => {
+      if (element.nightPain) {
+        nightData[0] += 1;
+      } else {
+        nightData[1] += 1;
+      }
+    });
+
+    this.nightPainPieChart = new Chart(this.nightPainPieCanvas.nativeElement, {
+      type: "pie",
+      data: {
+        labels: ["No", "Yes"],
+        datasets: [
+          {
+            data: nightData,
+            backgroundColor: ['#003f5c', '#bc5090']
+          }
+        ]
+      }
+    });
 
   }
 

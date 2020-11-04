@@ -41,6 +41,10 @@
       <ion-input type="number" [(ngModel)]="timesBefore"></ion-input>
     </ion-item>
     <ion-item>
+      <ion-label>Does the pain keep you up at night?</ion-label>
+      <ion-checkbox [(ngModel)]="nightPain"></ion-checkbox>
+    </ion-item>
+    <ion-item>
       <ion-label>Cause of pain</ion-label>
       <ion-input type="text" value="unknown" [(ngModel)]="cause"></ion-input>
     </ion-item>

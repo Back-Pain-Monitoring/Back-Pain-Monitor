@@ -7,6 +7,7 @@ export interface LogEntry {
   intensity: number;
   type: string;
   timesBefore: number;
+  nightPain: boolean;
   cause: string;
   mobility: string[];      // TODO: could be more specific with types here. This list can only contain moving and/or resting
   is_constant: boolean;  // assumes pain is either constant or intermittent
@@ -41,6 +42,7 @@ export class LogDataService {
       intensity: 8,
       type: "burning",
       timesBefore: 0,
+      nightPain: true,
       cause: "unknown",
       mobility: ["moving"],
       is_constant: false,
@@ -54,6 +56,7 @@ export class LogDataService {
       intensity: 3,
       type: "aching",
       timesBefore: 2,
+      nightPain: false,
       cause: "unknown",
       mobility: ["resting"],
       is_constant: false,
@@ -67,6 +70,7 @@ export class LogDataService {
       intensity: 8,
       type: "numbness",
       timesBefore: 3,
+      nightPain: true,
       cause: "unknown",
       mobility: ["moving", "resting"],
       is_constant: false,
@@ -80,9 +84,10 @@ export class LogDataService {
       intensity: 2,
       type: "shooting",
       timesBefore: 4,
+      nightPain: true,
       cause: "unknown",
       mobility: ["resting"],
-      is_constant: true,
+      is_constant: false,
       redflag_symptoms: ["Unexplained weight loss"],
       comment: "we might need to store where on the body the pain is... like an x/y position?",
     },
@@ -93,9 +98,10 @@ export class LogDataService {
       intensity: 2,
       type: "shooting",
       timesBefore: 2,
+      nightPain: false,
       cause: "unknown",
       mobility: ["resting"],
-      is_constant: true,
+      is_constant: false,
       redflag_symptoms: [],
       comment: "we might need to store where on the body the pain is... like an x/y position?",
     },
@@ -106,6 +112,7 @@ export class LogDataService {
       intensity: 3,
       type: "stabbing",
       timesBefore: 1,
+      nightPain: false,
       cause: "unknown",
       mobility: ["resting"],
       is_constant: true,
@@ -119,6 +126,7 @@ export class LogDataService {
       intensity: 7,
       type: "shooting",
       timesBefore: 10,
+      nightPain: true,
       cause: "lifting",
       mobility: ["moving"],
       is_constant: true,
@@ -132,6 +140,7 @@ export class LogDataService {
       intensity: 4,
       type: "numbness",
       timesBefore: 23,
+      nightPain: true,
       cause: "lifting",
       mobility: ["moving"],
       is_constant: true,
@@ -155,6 +164,7 @@ export class LogDataService {
       intensity: undefined,
       type: undefined,
       timesBefore: undefined,
+      nightPain: undefined,
       cause: undefined,
       mobility: undefined,
       is_constant: undefined,
@@ -176,6 +186,8 @@ export class LogDataService {
   public get currentLogType() { return this.currentLog.type; }
   public set currentLogTimesBefore(times: number) { this.currentLog.timesBefore = times; }
   public get currentLogTimesBefore() { return this.currentLog.timesBefore; }
+  public set currentLogNightPain(pain: boolean) { this.currentLog.nightPain = pain; }
+  public get currentLogNightPain() { return this.currentLog.nightPain; }
   public set currentLogCause(cause: string) { this.currentLog.cause = cause; }
   public get currentLogCause() { return this.currentLog.cause; }
   public set currentLogMobility(mobility: string[]) { this.currentLog.mobility = mobility; }
@@ -222,6 +234,7 @@ export class LogDataService {
     console.log(`intensity: ${entry.intensity}`);
     console.log(`type: ${entry.type}`);
     console.log(`times before: ${entry.timesBefore}`);
+    console.log(`pain at night: ${entry.nightPain}`);
     console.log(`cause: ${entry.cause}`);
     console.log(`mobility: ${entry.mobility}`);
     console.log(`is_constant: ${entry.is_constant}`);
