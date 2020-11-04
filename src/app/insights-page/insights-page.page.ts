@@ -166,8 +166,12 @@ export class InsightsPagePage implements OnInit {
       }
     });
 
-    const redflags_labels = ["Numbness", "Inability to walk", "Losing weight", "Losing bladder control"];
-    const redflags_fd = { "Numbness": 0, "Inability to walk": 0, "Losing weight": 0, "Losing bladder control": 0 };
+    const redflags_labels = this.dataService.redflags;
+    const redflags_shortlabels = ["weight loss", "resting pain", "incontinence", "limited motion range"]
+    const redflags_fd = {};
+    redflags_labels.forEach(redflag => {
+      redflags_fd[redflag] = 0;
+    })
     this.logsToDisplay.forEach(element => {
       element.redflag_symptoms.forEach(symptom => {
         console.log(`symptom: ${symptom}`);
@@ -178,7 +182,7 @@ export class InsightsPagePage implements OnInit {
     this.redflagsFreqChart = new Chart(this.redflagsFreqCanvas.nativeElement, {
       type: "bar",
       data: {
-        labels: redflags_labels,
+        labels: redflags_shortlabels,
         datasets: [
           {
             label: '# of Logs',
@@ -194,7 +198,13 @@ export class InsightsPagePage implements OnInit {
               beginAtZero: true,
               precision: 0,
             }
+          }],
+          xAxes: [{
+            labelsMaxWidth: 100
           }]
+        },
+        legend: {
+          display: true,
         }
       }
     })

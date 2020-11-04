@@ -10,12 +10,7 @@ import { LogDataService } from '../services/log-data.service';
 
 export class RedflagsPagePage implements OnInit {
 
-  public form = [
-    { val: 'Numbness' , isChecked: false },
-    { val: 'Inability to walk', isChecked: false },
-    { val: 'Losing weight' , isChecked: false },
-    { val: 'Losing bladder control', isChecked: false }
-  ]
+  public form: Array<{ val: string, isChecked: boolean }> = [];
 
   redflags_symptoms: string[] = [];
 
@@ -23,14 +18,17 @@ export class RedflagsPagePage implements OnInit {
   }
 
   ngOnInit() {
+    this.dataService.redflags.forEach(redflag => {
+      this.form.push({ val: redflag, isChecked: false })
+    })
     this.updateUIFromLog();
   }
-  
+
   // Converting boolean inputs as string and storing them
   convertBoolToString() {
-    this.redflags_symptoms=[];
+    this.redflags_symptoms = [];
     for (let i = 0; i < 4; i++) {
-      if ( this.form[i].isChecked == true ) {
+      if (this.form[i].isChecked == true) {
         this.redflags_symptoms.push("True");
       } else {
         this.redflags_symptoms.push("False");
@@ -42,10 +40,11 @@ export class RedflagsPagePage implements OnInit {
   convertStringToBool() {
     console.log("covncsrioi sdss");
     for (let i = 0; i < 4; i++) {
-      if ( this.redflags_symptoms[i] == "True" ) {
+      if (this.redflags_symptoms[i] == "True") {
         this.form[i].isChecked = true
-      } else if ( this.redflags_symptoms[i] == "False" ) {
-        this.form[i].isChecked = false }
+      } else if (this.redflags_symptoms[i] == "False") {
+        this.form[i].isChecked = false
+      }
     }
   }
 

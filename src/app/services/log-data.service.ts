@@ -29,6 +29,8 @@ export class LogDataService {
 
   public loaded = false;
   private editing = false;  // to track whether the dataservice is currently editing a log
+  public redflags = ["Unexplained weight loss", "Pain that is increased or unrelieved by rest",
+    "Bladder or bowel incontinence", "Limited spinal range of motion"]
 
   private logEntries: LogEntry[] = [
     {
@@ -40,7 +42,7 @@ export class LogDataService {
       cause: "unknown",
       mobility: ["moving"],
       is_constant: false,
-      redflag_symptoms: ["Losing bladder control", "Numbness"],
+      redflag_symptoms: ["Bladder or bowel incontinence", "Limited spinal range of motion"],
       comment: "we might need to store where on the body the pain is... like an x/y position?",
     },
     {
@@ -64,7 +66,7 @@ export class LogDataService {
       cause: "unknown",
       mobility: ["moving", "resting"],
       is_constant: false,
-      redflag_symptoms: ["Numbness", "Inability to walk"],
+      redflag_symptoms: ["Limited spinal range of motion", "Pain that is increased or unrelieved by rest"],
       comment: "we might need to store where on the body the pain is... like an x/y position?",
     },
     {
@@ -76,7 +78,7 @@ export class LogDataService {
       cause: "unknown",
       mobility: ["resting"],
       is_constant: true,
-      redflag_symptoms: ["Inability to walk"],
+      redflag_symptoms: ["Unexplained weight loss"],
       comment: "we might need to store where on the body the pain is... like an x/y position?",
     },
     {
@@ -100,7 +102,7 @@ export class LogDataService {
       cause: "unknown",
       mobility: ["resting"],
       is_constant: true,
-      redflag_symptoms: ["Losing bladder control"],
+      redflag_symptoms: ["Bladder or bowel incontinence"],
       comment: "we might need to store where on the body the pain is... like an x/y position?",
     },
     {
@@ -124,7 +126,7 @@ export class LogDataService {
       cause: "lifting",
       mobility: ["moving"],
       is_constant: true,
-      redflag_symptoms: ["Losing bladder control", "Numbness"],
+      redflag_symptoms: ["Bladder or bowel incontinence"],
       comment: "we might need to store where on the body the pain is... like an x/y position?",
     },
   ];
