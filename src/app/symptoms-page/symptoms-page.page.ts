@@ -26,6 +26,8 @@ export class SymptomsPagePage implements OnInit {
 
   intensity: number;
   painType: string;
+  painBefore: boolean = false;
+  timesBefore: number;
   cause: string;
   is_constant: "true" | "false";  // TODO: there's got to be a better way to do this than this awkward string/boolean conversion
   mobility: string[];
@@ -51,6 +53,7 @@ export class SymptomsPagePage implements OnInit {
   updateLog() {
     this.dataService.currentLogIntensity = this.intensity;
     this.dataService.currentLogType = this.painType;
+    this.dataService.currentLogTimesBefore = this.painBefore ? this.timesBefore : 0;
     this.dataService.currentLogMobility = this.mobility;
     this.dataService.currentLogCause = this.cause;
     this.dataService.currentLogIs_constant = this.is_constant === "true";
@@ -65,6 +68,8 @@ export class SymptomsPagePage implements OnInit {
       this.onIntensityChange(this.dataService.currentLogIntensity);
     }
     this.painType = this.dataService.currentLogType;
+    this.painBefore = this.dataService.currentLogTimesBefore > 0;
+    this.timesBefore = this.dataService.currentLogTimesBefore;
     this.mobility = this.dataService.currentLogMobility;
     this.cause = this.dataService.currentLogCause;
     this.is_constant = this.dataService.currentLogIs_constant ? "true" : "false";

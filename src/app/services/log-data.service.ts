@@ -5,7 +5,8 @@ export interface LogEntry {
   datetime: Date;
   body_part: string;
   intensity: number;
-  type: string;          // enumeration?
+  type: string;
+  timesBefore: number;
   cause: string;
   mobility: string[];      // TODO: could be more specific with types here. This list can only contain moving and/or resting
   is_constant: boolean;  // assumes pain is either constant or intermittent
@@ -38,7 +39,8 @@ export class LogDataService {
       datetime: new Date("2020-10-23"),
       body_part: "right shoulder",
       intensity: 8,
-      type: "burning",    // not what this field was intended for, i think.
+      type: "burning",
+      timesBefore: 0,
       cause: "unknown",
       mobility: ["moving"],
       is_constant: false,
@@ -50,7 +52,8 @@ export class LogDataService {
       datetime: new Date("2020-10-24"),
       body_part: "middle back",
       intensity: 3,
-      type: "aching",    // not what this field was intended for, i think.
+      type: "aching",
+      timesBefore: 2,
       cause: "unknown",
       mobility: ["resting"],
       is_constant: false,
@@ -62,7 +65,8 @@ export class LogDataService {
       datetime: new Date("2020-10-25"),
       body_part: "lower back",
       intensity: 8,
-      type: "numbness",    // not what this field was intended for, i think.
+      type: "numbness",
+      timesBefore: 3,
       cause: "unknown",
       mobility: ["moving", "resting"],
       is_constant: false,
@@ -74,7 +78,8 @@ export class LogDataService {
       datetime: new Date("2020-10-27"),
       body_part: "upper back",
       intensity: 2,
-      type: "shooting",    // not what this field was intended for, i think.
+      type: "shooting",
+      timesBefore: 4,
       cause: "unknown",
       mobility: ["resting"],
       is_constant: true,
@@ -86,7 +91,8 @@ export class LogDataService {
       datetime: new Date("2020-10-28"),
       body_part: "upper back",
       intensity: 2,
-      type: "shooting",    // not what this field was intended for, i think.
+      type: "shooting",
+      timesBefore: 2,
       cause: "unknown",
       mobility: ["resting"],
       is_constant: true,
@@ -98,7 +104,8 @@ export class LogDataService {
       datetime: new Date("2020-10-30"),
       body_part: "middle back",
       intensity: 3,
-      type: "stabbing",    // not what this field was intended for, i think.
+      type: "stabbing",
+      timesBefore: 1,
       cause: "unknown",
       mobility: ["resting"],
       is_constant: true,
@@ -110,7 +117,8 @@ export class LogDataService {
       datetime: new Date(),
       body_part: "back",
       intensity: 7,
-      type: "shooting",    // not what this field was intended for, i think.
+      type: "shooting",
+      timesBefore: 10,
       cause: "lifting",
       mobility: ["moving"],
       is_constant: true,
@@ -122,7 +130,8 @@ export class LogDataService {
       datetime: new Date(),
       body_part: "left shoulder",
       intensity: 4,
-      type: "numbness",    // not what this field was intended for, i think.
+      type: "numbness",
+      timesBefore: 23,
       cause: "lifting",
       mobility: ["moving"],
       is_constant: true,
@@ -145,6 +154,7 @@ export class LogDataService {
       body_part: undefined,
       intensity: undefined,
       type: undefined,
+      timesBefore: undefined,
       cause: undefined,
       mobility: undefined,
       is_constant: undefined,
@@ -164,6 +174,8 @@ export class LogDataService {
   public get currentLogIntensity() { return this.currentLog.intensity; }
   public set currentLogType(type: string) { this.currentLog.type = type; }
   public get currentLogType() { return this.currentLog.type; }
+  public set currentLogTimesBefore(times: number) { this.currentLog.timesBefore = times; }
+  public get currentLogTimesBefore() { return this.currentLog.timesBefore; }
   public set currentLogCause(cause: string) { this.currentLog.cause = cause; }
   public get currentLogCause() { return this.currentLog.cause; }
   public set currentLogMobility(mobility: string[]) { this.currentLog.mobility = mobility; }
@@ -209,6 +221,7 @@ export class LogDataService {
     console.log(`body_part: ${entry.body_part}`);
     console.log(`intensity: ${entry.intensity}`);
     console.log(`type: ${entry.type}`);
+    console.log(`times before: ${entry.timesBefore}`);
     console.log(`cause: ${entry.cause}`);
     console.log(`mobility: ${entry.mobility}`);
     console.log(`is_constant: ${entry.is_constant}`);

@@ -33,6 +33,14 @@
       </ion-select>
     </ion-item>
     <ion-item>
+      <ion-label>Have you had this pain before?</ion-label>
+      <ion-checkbox [(ngModel)]="painBefore"></ion-checkbox>
+    </ion-item>
+    <ion-item *ngIf="painBefore">
+      <ion-label>How many times before?</ion-label>
+      <ion-input type="number" [(ngModel)]="timesBefore"></ion-input>
+    </ion-item>
+    <ion-item>
       <ion-label>Cause of pain</ion-label>
       <ion-input type="text" value="unknown" [(ngModel)]="cause"></ion-input>
     </ion-item>
