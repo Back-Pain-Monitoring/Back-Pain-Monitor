@@ -22,7 +22,7 @@ export class ViewLogsPage implements OnInit {
   }
 
   ngOnInit() {
-    this.logsToDisplay = this.dataService.getLogs();
+    this.logsToDisplay = this.dataService.getLogs().slice().reverse();
     this.filter = this.dataService.createEmptyFilter();
   }
 
