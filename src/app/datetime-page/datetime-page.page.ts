@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { AlertController } from '@ionic/angular';
 
 import { LogDataService } from '../services/log-data.service';
 
@@ -9,11 +10,12 @@ import { LogDataService } from '../services/log-data.service';
 })
 export class DatetimePagePage implements OnInit {
 
+  @ViewChild('backButton', { static: false }) backButton;
   @ViewChild('forwardButton', { static: false }) forwardButton;
 
   datetime: string;
 
-  constructor(public dataService: LogDataService) {
+  constructor(public dataService: LogDataService, private alertCtrl: AlertController) {
   }
 
   ngOnInit() {
@@ -42,8 +44,23 @@ export class DatetimePagePage implements OnInit {
     if (!this.validateData()) {
       this.forwardButton.failedValidate("Please provide a value for date");
     } else {
+      this.updateLog();
       this.forwardButton.navigate();
     }
+  }
+
+  ionViewCanLeave(): boolean {
+    if (!this.validateData()) {
+      this.alertCtrl.create({
+        message: 'Please provide a value for date',
+        buttons: ['OK']
+      }).then((prompt) => {
+        prompt.present();
+      });
+      return false;
+    }
+    this.updateLog();
+    return true;
   }
 
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 
 import { LogDataService } from '../services/log-data.service';
 
@@ -8,6 +8,8 @@ import { LogDataService } from '../services/log-data.service';
   styleUrls: ['./symptoms-page.page.scss'],
 })
 export class SymptomsPagePage implements OnInit {
+
+  @ViewChild('forwardButton', { static: false }) forwardButton;
 
   // pain scale from https://www.reddit.com/r/ChronicPain/comments/5ouyu4/pain_scale_for_people_in_chronic_pain/
   private intensityInfo = {
@@ -85,14 +87,13 @@ export class SymptomsPagePage implements OnInit {
     this.is_constant = this.dataService.currentLogIs_constant === false ? "false" : "true";
   }
 
-  // look at the UI to see the changes were made appropriately. Can trigger this function by attaching it to a button.
-  testDataBinding() {
-    this.intensity = 10;
-    this.painType = "numbness";
-    this.duration = 44;
-    this.cause = "backpack";
-    this.mobility = ["moving", "resting"];
-    this.is_constant = "true";
+  navigateForward() {
+    if (!this.validateData()) {
+      this.forwardButton.failedValidate("Please provide values for the required fields:");
+    } else {
+      this.updateLog();
+      this.forwardButton.navigate();
+    }
   }
 
 }
