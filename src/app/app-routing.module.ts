@@ -39,6 +39,8 @@ const routes: Routes = [
     loadChildren: () => import('./log-page/log-page.module').then(m => m.LogPagePageModule)
   },
 
+];
+
 @NgModule({
   imports: [
     RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })

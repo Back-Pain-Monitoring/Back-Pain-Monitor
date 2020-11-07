@@ -19,7 +19,6 @@ export class ViewLogsPage implements OnInit {
   private logsToDisplay = [];
   private filter: LogFilter;
 
-  constructor(public dataService: LogDataService, ) {
   constructor(public dataService: LogDataService, private navCtrl: NavController, public modalCtrl: ModalController) {
   }
 
