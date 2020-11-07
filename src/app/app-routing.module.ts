@@ -40,6 +40,7 @@ const routes: Routes = [
     path: 'log',
     loadChildren: () => import('./log-page/log-page.module').then(m => m.LogPagePageModule)
   },
+
 ];
 
 @NgModule({

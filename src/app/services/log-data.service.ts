@@ -25,6 +25,13 @@ export interface LogFilter {
   duration_max: number;
 }
 
+export interface medicationUse {
+  datetime_min: Date;
+  datetime_max: Date;
+  med_type: string;
+  comment: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -200,7 +207,7 @@ export class LogDataService {
     this.currentLog = this.createEmptyLog();
   }
 
-  public startEditLog(log) {
+  public startEditLog(log: LogEntry) {
     this.currentLog = log;
     this.editing = true;
   }
@@ -209,6 +216,15 @@ export class LogDataService {
     // TODO: change this
     this.logEntries[this.currentLog.id] = this.currentLog;
     this.currentLog = this.createEmptyLog();
+  }
+
+  public deleteLog(log: LogEntry) {
+    for (let i = 0; i < this.logEntries.length; i++) {
+      if (this.logEntries[i].id === log.id) {
+        this.logEntries.splice(i, 1);
+        break;
+      }
+    }
   }
 
   public printLogEntry(entry?: LogEntry) {
