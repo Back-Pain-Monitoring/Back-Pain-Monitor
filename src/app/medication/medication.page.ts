@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertController, NavController } from '@ionic/angular';
 import { LogDataService } from '../services/log-data.service';
+import { MedicationDataService } from '../services/medication-data.service';
 
 @Component({
   selector: 'app-medication',
@@ -30,12 +31,14 @@ export class MedicationPage implements OnInit {
   med_type: string;
   med_comment: string;
   intensity: number;
+  id: number;
 
-  constructor(private alertCtrl: AlertController, private navCtrl: NavController, public dataService: LogDataService) {
+  constructor(private alertCtrl: AlertController, private navCtrl: NavController, public dataService: MedicationDataService) {
 
   }
 
   ngOnInit() {
+    this.updateMeds();
   }
 
   private onIntensityChange(newIntensity) {
@@ -67,6 +70,15 @@ export class MedicationPage implements OnInit {
     }).then((prompt) => {
       prompt.present();
     });
+  }
+
+  updateMeds() {
+    console.log("Updating UI from dataservice");
+    this.dataService.printMedEntry();
+    this.intensity = this.dataService.currentMedIntensity;
+    this.med_comment = this.dataService.currentMedComment;
+    this.med_type = this.dataService.currentMedMed_type;
+    this.date = this.dataService.currentMedDateTime;
   }
 
 }

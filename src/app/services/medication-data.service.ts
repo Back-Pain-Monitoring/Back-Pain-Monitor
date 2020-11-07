@@ -85,7 +85,21 @@ export class MedicationDataService {
     return this.medicationEntries;
   }
 
+  public printMedEntry(entry?: medicationEntry) {
+    if (typeof (entry) === "undefined") {
+      entry = this.currentMed;
+    }
+    console.log("Printing Med Entry");
+    console.log(`id: ${entry.id}`);
+    console.log(`datetime: ${entry.datetime}`);
+    console.log(`med_type: ${entry.med_type}`);
+    console.log(`intensity: ${entry.intensity}`);
+    console.log(`comment: ${entry.comment}`);
+  }
 
+  public printMedEntries() {
+    this.medicationEntries.forEach((entry: medicationEntry) => this.printMedEntry);
+  }
 
 
 
