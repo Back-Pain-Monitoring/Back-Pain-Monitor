@@ -5,8 +5,11 @@ export interface LogEntry {
   datetime: Date;
   body_part: string;
   intensity: number;
-  type: string;          // enumeration?
-  duration: number;      // in minutes
+  type: string;
+  timesBefore: number;
+  nightPain: boolean;
+  worse: Array<string>;
+  better: Array<string>;
   cause: string;
   mobility: string[];      // TODO: could be more specific with types here. This list can only contain moving and/or resting
   is_constant: boolean;  // assumes pain is either constant or intermittent
@@ -25,13 +28,6 @@ export interface LogFilter {
   timesBefore_upper: Number;
 }
 
-export interface medicationUse {
-  datetime_min: Date;
-  datetime_max: Date;
-  med_type: string;
-  comment: string;
-}
-
 @Injectable({
   providedIn: 'root'
 })
@@ -39,6 +35,10 @@ export class LogDataService {
 
   public loaded = false;
   private editing = false;  // to track whether the dataservice is currently editing a log
+  public redflags = ["Unexplained weight loss", "Pain that is increased or unrelieved by rest",
+    "Bladder or bowel incontinence", "Limited spinal range of motion"];
+  public activities = ["bending", "sitting", "standing", "walking", "lying",
+    "am", "as the day progresses", "pm", "still", "moving"]
 
   private logEntries: LogEntry[] = [
     {
@@ -46,12 +46,15 @@ export class LogDataService {
       datetime: new Date("2020-10-23"),
       body_part: "right shoulder",
       intensity: 8,
-      type: "burning",    // not what this field was intended for, i think.
-      duration: 25,
+      type: "burning",
+      timesBefore: 0,
+      nightPain: true,
+      worse: ["bending", "walking"],
+      better: ["sitting", "lying", "am"],
       cause: "unknown",
       mobility: ["moving"],
       is_constant: false,
-      redflag_symptoms: ["Losing bladder control", "Numbness"],
+      redflag_symptoms: ["Bladder or bowel incontinence", "Limited spinal range of motion"],
       comment: "we might need to store where on the body the pain is... like an x/y position?",
     },
     {
@@ -59,8 +62,11 @@ export class LogDataService {
       datetime: new Date("2020-10-24"),
       body_part: "middle back",
       intensity: 3,
-      type: "aching",    // not what this field was intended for, i think.
-      duration: 40,
+      type: "aching",
+      timesBefore: 2,
+      nightPain: false,
+      worse: ["bending", "sitting"],
+      better: ["pm", "moving"],
       cause: "unknown",
       mobility: ["resting"],
       is_constant: false,
@@ -72,12 +78,15 @@ export class LogDataService {
       datetime: new Date("2020-10-25"),
       body_part: "lower back",
       intensity: 8,
-      type: "numbness",    // not what this field was intended for, i think.
-      duration: 25,
+      type: "numbness",
+      timesBefore: 3,
+      nightPain: true,
+      worse: ["still", "as the day progresses"],
+      better: ["bending", "standing"],
       cause: "unknown",
       mobility: ["moving", "resting"],
       is_constant: false,
-      redflag_symptoms: ["Numbness", "Inability to walk"],
+      redflag_symptoms: ["Limited spinal range of motion", "Pain that is increased or unrelieved by rest"],
       comment: "we might need to store where on the body the pain is... like an x/y position?",
     },
     {
@@ -85,12 +94,15 @@ export class LogDataService {
       datetime: new Date("2020-10-27"),
       body_part: "upper back",
       intensity: 2,
-      type: "shooting",    // not what this field was intended for, i think.
-      duration: 2,
+      type: "shooting",
+      timesBefore: 4,
+      nightPain: true,
+      worse: ["walking", "lying", "moving"],
+      better: ["sitting", "still"],
       cause: "unknown",
       mobility: ["resting"],
-      is_constant: true,
-      redflag_symptoms: ["Inability to walk"],
+      is_constant: false,
+      redflag_symptoms: ["Unexplained weight loss"],
       comment: "we might need to store where on the body the pain is... like an x/y position?",
     },
     {
@@ -98,11 +110,14 @@ export class LogDataService {
       datetime: new Date("2020-10-28"),
       body_part: "upper back",
       intensity: 2,
-      type: "shooting",    // not what this field was intended for, i think.
-      duration: 2,
+      type: "shooting",
+      timesBefore: 2,
+      nightPain: false,
+      worse: ["bending", "am"],
+      better: ["walking", "moving"],
       cause: "unknown",
       mobility: ["resting"],
-      is_constant: true,
+      is_constant: false,
       redflag_symptoms: [],
       comment: "we might need to store where on the body the pain is... like an x/y position?",
     },
@@ -111,12 +126,15 @@ export class LogDataService {
       datetime: new Date("2020-10-30"),
       body_part: "middle back",
       intensity: 3,
-      type: "stabbing",    // not what this field was intended for, i think.
-      duration: 40,
+      type: "stabbing",
+      timesBefore: 1,
+      nightPain: false,
+      worse: ["sitting", "pm"],
+      better: ["lying", "walking"],
       cause: "unknown",
       mobility: ["resting"],
       is_constant: true,
-      redflag_symptoms: ["Losing bladder control"],
+      redflag_symptoms: ["Bladder or bowel incontinence"],
       comment: "we might need to store where on the body the pain is... like an x/y position?",
     },
     {
@@ -124,8 +142,11 @@ export class LogDataService {
       datetime: new Date(),
       body_part: "back",
       intensity: 7,
-      type: "shooting",    // not what this field was intended for, i think.
-      duration: 70,
+      type: "shooting",
+      timesBefore: 10,
+      nightPain: true,
+      worse: ["sitting", "standing"],
+      better: ["moving", "am"],
       cause: "lifting",
       mobility: ["moving"],
       is_constant: true,
@@ -137,12 +158,15 @@ export class LogDataService {
       datetime: new Date(),
       body_part: "left shoulder",
       intensity: 4,
-      type: "numbness",    // not what this field was intended for, i think.
-      duration: 25,
+      type: "numbness",
+      timesBefore: 23,
+      nightPain: true,
+      worse: ["bending", "standing"],
+      better: ["walking", "moving"],
       cause: "lifting",
       mobility: ["moving"],
       is_constant: true,
-      redflag_symptoms: ["Losing bladder control", "Numbness"],
+      redflag_symptoms: ["Bladder or bowel incontinence"],
       comment: "we might need to store where on the body the pain is... like an x/y position?",
     },
   ];
@@ -161,7 +185,10 @@ export class LogDataService {
       body_part: undefined,
       intensity: undefined,
       type: undefined,
-      duration: undefined,
+      timesBefore: undefined,
+      nightPain: undefined,
+      worse: [],
+      better: [],
       cause: undefined,
       mobility: undefined,
       is_constant: undefined,
@@ -181,8 +208,14 @@ export class LogDataService {
   public get currentLogIntensity() { return this.currentLog.intensity; }
   public set currentLogType(type: string) { this.currentLog.type = type; }
   public get currentLogType() { return this.currentLog.type; }
-  public set currentLogDuration(duration: number) { this.currentLog.duration = duration; }
-  public get currentLogDuration() { return this.currentLog.duration; }
+  public set currentLogTimesBefore(times: number) { this.currentLog.timesBefore = times; }
+  public get currentLogTimesBefore() { return this.currentLog.timesBefore; }
+  public set currentLogNightPain(pain: boolean) { this.currentLog.nightPain = pain; }
+  public get currentLogNightPain() { return this.currentLog.nightPain; }
+  public set currentLogWorse(worse: Array<string>) { this.currentLog.worse = worse; }
+  public get currentLogWorse() { return this.currentLog.worse; }
+  public set currentLogBetter(better: Array<string>) { this.currentLog.better = better; }
+  public get currentLogBetter() { return this.currentLog.better; }
   public set currentLogCause(cause: string) { this.currentLog.cause = cause; }
   public get currentLogCause() { return this.currentLog.cause; }
   public set currentLogMobility(mobility: string[]) { this.currentLog.mobility = mobility; }
@@ -237,7 +270,8 @@ export class LogDataService {
     console.log(`body_part: ${entry.body_part}`);
     console.log(`intensity: ${entry.intensity}`);
     console.log(`type: ${entry.type}`);
-    console.log(`duration: ${entry.duration}`);
+    console.log(`times before: ${entry.timesBefore}`);
+    console.log(`pain at night: ${entry.nightPain}`);
     console.log(`cause: ${entry.cause}`);
     console.log(`mobility: ${entry.mobility}`);
     console.log(`is_constant: ${entry.is_constant}`);
@@ -283,7 +317,6 @@ export class LogDataService {
       body_part: undefined,
       type: undefined,
       timesBefore_lower: undefined,
-      timesBefore_upper: undefined,
     }
   }
 

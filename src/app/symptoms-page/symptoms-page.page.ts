@@ -26,7 +26,11 @@ export class SymptomsPagePage implements OnInit {
 
   intensity: number;
   painType: string;
-  duration: number;
+  painBefore: boolean = false;
+  timesBefore: number;
+  nightPain: boolean = false;
+  worse: Array<string> = [];
+  better: Array<string> = [];
   cause: string;
   is_constant: "true" | "false";  // TODO: there's got to be a better way to do this than this awkward string/boolean conversion
   mobility: string[];
@@ -52,7 +56,10 @@ export class SymptomsPagePage implements OnInit {
   updateLog() {
     this.dataService.currentLogIntensity = this.intensity;
     this.dataService.currentLogType = this.painType;
-    this.dataService.currentLogDuration = this.duration;
+    this.dataService.currentLogTimesBefore = this.painBefore ? this.timesBefore : 0;
+    this.dataService.currentLogNightPain = this.nightPain;
+    this.dataService.currentLogWorse = this.worse;
+    this.dataService.currentLogBetter = this.better;
     this.dataService.currentLogMobility = this.mobility;
     this.dataService.currentLogCause = this.cause;
     this.dataService.currentLogIs_constant = this.is_constant === "true";
@@ -67,7 +74,11 @@ export class SymptomsPagePage implements OnInit {
       this.onIntensityChange(this.dataService.currentLogIntensity);
     }
     this.painType = this.dataService.currentLogType;
-    this.duration = this.dataService.currentLogDuration;
+    this.painBefore = this.dataService.currentLogTimesBefore > 0;
+    this.timesBefore = this.dataService.currentLogTimesBefore;
+    this.nightPain = this.dataService.currentLogNightPain;
+    this.worse = this.dataService.currentLogWorse;
+    this.better = this.dataService.currentLogBetter;
     this.mobility = this.dataService.currentLogMobility;
     this.cause = this.dataService.currentLogCause;
     this.is_constant = this.dataService.currentLogIs_constant ? "true" : "false";
@@ -77,7 +88,6 @@ export class SymptomsPagePage implements OnInit {
   testDataBinding() {
     this.intensity = 10;
     this.painType = "numbness";
-    this.duration = 44;
     this.cause = "backpack";
     this.mobility = ["moving", "resting"];
     this.is_constant = "true";
