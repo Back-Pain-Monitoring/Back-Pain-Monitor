@@ -1,7 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { LogDataService, LogEntry } from '../services/log-data.service';
 import { LogFilter } from '../services/log-data.service';
-import { IonInfiniteScroll, NavController } from '@ionic/angular';
+import { IonInfiniteScroll, ModalController, NavController } from '@ionic/angular';
+import { FilterModalPageComponent } from '../filter-modal/filter-modal.component';
 
 @Component({
   selector: 'app-view-logs',
@@ -18,7 +19,8 @@ export class ViewLogsPage implements OnInit {
   private logsToDisplay = [];
   private filter: LogFilter;
 
-  constructor(public dataService: LogDataService, private navCtrl: NavController) {
+  constructor(public dataService: LogDataService, ) {
+  constructor(public dataService: LogDataService, private navCtrl: NavController, public modalCtrl: ModalController) {
   }
 
   ngOnInit() {
@@ -38,7 +40,29 @@ export class ViewLogsPage implements OnInit {
     event.target.complete();
   }
 
+  // this method creates a modal which is a dialog that appears on top of app's content this will be used as a way of setting filter and passing data
+  async presentModal() {
+    const modal = await this.modalCtrl.create({
+      component: FilterModalPageComponent,
+      backdropDismiss: false,
+      componentProps: {
+        Filter : this.filter
+      }
+    });
+    await modal.present();
+
+    modal.onWillDismiss().then(dataReturned => {
+      if ( dataReturned !== null ) {
+        this.filter = dataReturned.data;
+        this.filterLogs();
+        console.log("filter returned is: ", this.filter);
+
+      }
+    })
+  }
+
   filterLogs() {
+
     // the commented out code was used for testing
     // this.filter = this.dataService.createEmptyFilter();
     // this.filter.datetime_min = new Date("2020-01-05");
