@@ -1,8 +1,9 @@
 import { getLocaleNumberSymbol } from '@angular/common';
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ComponentFactoryResolver, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Chart } from 'chart.js';
 import { LogDataService, LogFilter } from '../services/log-data.service';
-// import { FilterModalPageComponent } from '../filter-modal/filter-modal.component';
+import { FilterModalPageComponent } from '../filter-modal/filter-modal.component';
+import { ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-insights-page',
@@ -33,11 +34,13 @@ export class InsightsPagePage implements OnInit {
   private filter: LogFilter;
   private logsToDisplay = [];
 
-  constructor(public dataService: LogDataService) {
+  constructor(public dataService: LogDataService, public modalCtrl: ModalController) {
     this.logsToDisplay = this.dataService.getLogs();
   }
 
   ngOnInit() {
+    console.log(this.logsToDisplay);
+    this.filter = this.dataService.createEmptyFilter();
   }
 
   ngAfterViewInit() {
@@ -432,27 +435,28 @@ export class InsightsPagePage implements OnInit {
   }
 
     // this method creates a modal which is a dialog that appears on top of app's content this will be used as a way of setting filter and passing data
-    // async presentModal() {
-    //   const modal = await this.modalCtrl.create({
-    //     component: FilterModalPageComponent,
-    //     backdropDismiss: false,
-    //     componentProps: {
-    //       Filter : this.filter
-    //     }
-    //   });
-    //   await modal.present();
+    async presentModal() {
+      const modal = await this.modalCtrl.create({
+        component: FilterModalPageComponent,
+        backdropDismiss: false,
+        componentProps: {
+          Filter : this.filter
+        }
+      });
+      await modal.present();
   
-    //   modal.onWillDismiss().then(dataReturned => {
-    //     if ( dataReturned !== null ) {
-    //       this.filter = dataReturned.data;
-    //       this.filterLogs();
-    //       console.log("filter returned is: ", this.filter);
+      modal.onWillDismiss().then(dataReturned => {
+        if ( dataReturned !== null ) {
+          this.filter = dataReturned.data;
+          this.filterLogs();
+          console.log("filter returned is: ", this.filter);
   
-    //     }
-    //   })
-    // }
+        }
+      })
+    }
 
-    // filterLogs() {
-    //   this.logsToDisplay = this.dataService.getLogsWithFilter(this.filter);
-    // }
+    filterLogs() {
+      this.logsToDisplay = this.dataService.getLogsWithFilter(this.filter);
+      console.log(this.logsToDisplay);
+    }
 }
