@@ -21,8 +21,8 @@ export interface LogFilter {
   intensity_max: Number;
   body_part: String;
   type: String;
-  duration_min: Number;
-  duration_max: Number;
+  timesBefore_lower: Number;
+  timesBefore_upper: Number;
 }
 
 export interface medicationUse {
@@ -282,8 +282,8 @@ export class LogDataService {
       intensity_max: undefined,
       body_part: undefined,
       type: undefined,
-      duration_min: undefined,
-      duration_max: undefined,
+      timesBefore_lower: undefined,
+      timesBefore_upper: undefined,
     }
   }
 
@@ -295,8 +295,8 @@ export class LogDataService {
         (f.intensity_max === undefined || log.intensity <= f.intensity_max) &&
         (f.body_part === undefined || log.body_part === f.body_part) &&
         (f.type === undefined || log.type === f.type) &&
-        (f.duration_min === undefined || log.duration >= f.duration_min) &&
-        (f.duration_max === undefined || log.duration <= f.duration_max);
+        (f.timesBefore_lower === undefined || log.duration >= f.timesBefore_lower) &&
+        (f.timesBefore_upper === undefined || log.duration <= f.timesBefore_upper);
     });
   }
 }

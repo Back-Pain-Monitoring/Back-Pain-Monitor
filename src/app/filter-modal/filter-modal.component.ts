@@ -16,8 +16,8 @@ export class FilterModalPageComponent implements OnInit, OnDestroy{
   datetime_max: string;
   type: String;
   body_part: String;
-  duration_min: Number;
-  duration_max: Number;
+  timesBefore_lower: Number;
+  timesBefore_upper: Number;
 
   constructor( private modalCtrl: ModalController, public dataService: LogDataService, private alertCtrl: AlertController ) {
   }
@@ -38,6 +38,7 @@ export class FilterModalPageComponent implements OnInit, OnDestroy{
     }
   }
   
+  // Method of dismissing
   @HostListener('window:popstate', ['$event'])
   dismissModal() {
     this.modalCtrl.dismiss(this.Filter, 'cancel');
@@ -67,19 +68,15 @@ export class FilterModalPageComponent implements OnInit, OnDestroy{
 
     this.type = this.Filter.type;
     this.body_part = this.Filter.body_part;
-    this.duration_min = this.Filter.duration_min;
-    this.duration_max = this.Filter.duration_max;
+    this.timesBefore_lower = this.Filter.timesBefore_lower;
+    this.timesBefore_upper = this.Filter.timesBefore_upper;
   }
   
+  // Updating Intensity dual knobs
   private onIntensityChange(newIntensity) {
     this.intensity.lower = newIntensity.lower;
     this.intensity.upper = newIntensity.upper;
   }
-
-  // method of dismissing modal
-  // dismissModal() {
-  //   this.modalCtrl.dismiss(this.Filter, 'cancel');  
-  // }
 
   // Resets current filter setting
   resetFilter() {
@@ -88,8 +85,8 @@ export class FilterModalPageComponent implements OnInit, OnDestroy{
     this.intensity =  { lower: 0, upper:10};
     this.type = undefined;
     this.body_part = undefined;
-    this.duration_min = undefined;
-    this.duration_max = undefined;
+    this.timesBefore_lower = 0;
+    this.timesBefore_upper = undefined;
   }
 
   // Checking min date is before max date
@@ -106,7 +103,9 @@ export class FilterModalPageComponent implements OnInit, OnDestroy{
 
   // Checking the max duration is bigger than min duration
   checkDuration() {
-    if ( this.duration_min < this.duration_max ) {
+    if ( this.timesBefore_upper == undefined ) {
+      return 1;
+    } else if ( this.timesBefore_lower < this.timesBefore_upper ) {
       return 1;
     } else {
       return 2;
@@ -122,8 +121,8 @@ export class FilterModalPageComponent implements OnInit, OnDestroy{
       this.Filter.intensity_max = this.intensity.upper;
       this.Filter.body_part = this.body_part;
       this.Filter.type = this.type;
-      this.Filter.duration_min = this.duration_min;
-      this.Filter.duration_max = this.duration_max;
+      this.Filter.timesBefore_lower = this.timesBefore_lower;
+      this.Filter.timesBefore_upper = this.timesBefore_upper;
       const newintensity = this.intensity;
       console.log("this.rFilter:", this.Filter);
       this.modalCtrl.dismiss(this.Filter, "submitted");
@@ -132,7 +131,7 @@ export class FilterModalPageComponent implements OnInit, OnDestroy{
         prompt.present();
       });
     } else if ( this.checkDuration() == 2 )  { 
-      this.alertCtrl.create({header: "Warning!", message: "'From' time should be smaller than 'Up to' time!", buttons:['Close']}).then((prompt) => {
+      this.alertCtrl.create({header: "Warning!", message: "Maximum number of occurence should be higher than minimum!", buttons:['Close']}).then((prompt) => {
         prompt.present();
       });
     }
