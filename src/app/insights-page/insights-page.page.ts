@@ -2,6 +2,7 @@ import { getLocaleNumberSymbol } from '@angular/common';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Chart } from 'chart.js';
 import { LogDataService } from '../services/log-data.service';
+import { MedicationDataService } from '../services/medication-data.service';
 
 @Component({
   selector: 'app-insights-page',
@@ -18,6 +19,7 @@ export class InsightsPagePage implements OnInit {
   @ViewChild("constantPieCanvas") constantPieCanvas: ElementRef;
   @ViewChild("redflagsFreqCanvas") redflagsFreqCanvas: ElementRef;
 
+  // Creating the Chart objects
   private intensityTimeChart: Chart;
   private intensityFreqChart: Chart;
   private durationFreqChart: Chart;
@@ -27,9 +29,11 @@ export class InsightsPagePage implements OnInit {
   private redflagsFreqChart: Chart;
 
   private logsToDisplay = [];
+  private medsToDisplay = [];
 
-  constructor(public dataService: LogDataService) {
+  constructor(private dataService: LogDataService, private MedService: MedicationDataService) {
     this.logsToDisplay = this.dataService.getLogs();
+    this.medsToDisplay = this.MedService.getMeds();
   }
 
   ngOnInit() {
@@ -45,6 +49,13 @@ export class InsightsPagePage implements OnInit {
       }
     });
 
+    const medication_use_data = this.medsToDisplay.map(log => {
+      return {
+        x: log.datetime,
+        y: log.intensity
+      }
+    })
+
     console.log(intensity_time_data);
 
     this.intensityTimeChart = new Chart(this.intensityTimeCanvas.nativeElement, {
@@ -54,6 +65,11 @@ export class InsightsPagePage implements OnInit {
           label: 'Intensity',
           data: intensity_time_data,
           borderColor: 'rgb(38, 194, 129)',
+        },
+        {
+          label: 'Medication Use',
+          data: medication_use_data,
+          borderColor: 'rgb(255, 204, 203)'
         }
         ]
       },

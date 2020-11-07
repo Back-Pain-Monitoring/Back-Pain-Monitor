@@ -32,6 +32,25 @@
         </ion-item>
       </ion-col>
     </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-label>Pain Intensity</ion-label>
+          <ion-label>{{intensityTitle}}</ion-label>
+        </ion-item>
+
+        <ion-item>
+          <ion-range min="0" max="10" step="1" snaps="true" pin="true" [ngModel]="intensity"
+            (ngModelChange)="onIntensityChange($event)">
+          </ion-range>
+        </ion-item>
+
+        <ion-item>
+          <ion-label class="ion-text-wrap">{{intensityDescription}}</ion-label>
+        </ion-item>
+
+      </ion-col>
+    </ion-row>
   </ion-grid>
 
   <ion-button routerLink="/tabs/home" color="success" shape="round" strong="true" id="submit" size=large

@@ -25,13 +25,6 @@ export interface LogFilter {
   duration_max: number;
 }
 
-export interface medicationUse {
-  datetime_min: Date;
-  datetime_max: Date;
-  med_type: string;
-  comment: string;
-}
-
 @Injectable({
   providedIn: 'root'
 })
@@ -39,6 +32,8 @@ export class LogDataService {
 
   public loaded = false;
   private editing = false;  // to track whether the dataservice is currently editing a log
+
+
 
   private logEntries: LogEntry[] = [
     {
