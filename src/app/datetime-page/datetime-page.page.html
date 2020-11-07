@@ -18,10 +18,10 @@
       </ion-col>
     </ion-row>
   </ion-grid>
-  <ion-fab vertical="bottom" horizontal="start" slot="fixed">
+  <ion-fab vertical="bottom" horizontal="start" slot="fixed" (click)="updateLog()">
     <app-log-nav-button direction="back" link="/tabs/home"></app-log-nav-button>
   </ion-fab>
-  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" (click)="updateLog()">
     <app-log-nav-button direction="forward" link="/bodymap" #forwardButton>
     </app-log-nav-button>
   </ion-fab>

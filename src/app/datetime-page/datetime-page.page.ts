@@ -23,7 +23,9 @@ export class DatetimePagePage implements OnInit {
   }
 
   updateLog() {
-    this.dataService.currentLogDatetime = new Date(this.datetime);
+    if (this.datetime) {
+      this.dataService.currentLogDatetime = new Date(this.datetime);
+    }
   }
 
   updateUIFromLog() {
@@ -36,31 +38,9 @@ export class DatetimePagePage implements OnInit {
     this.datetime = new Date().toISOString();
   }
 
-  validateData() {
-    return this.datetime !== undefined
-  }
-
   navigateForward() {
-    if (!this.validateData()) {
-      this.forwardButton.failedValidate("Please provide a value for date");
-    } else {
-      this.updateLog();
-      this.forwardButton.navigate();
-    }
-  }
-
-  ionViewCanLeave(): boolean {
-    if (!this.validateData()) {
-      this.alertCtrl.create({
-        message: 'Please provide a value for date',
-        buttons: ['OK']
-      }).then((prompt) => {
-        prompt.present();
-      });
-      return false;
-    }
     this.updateLog();
-    return true;
+    this.forwardButton.navigate();
   }
 
 }
