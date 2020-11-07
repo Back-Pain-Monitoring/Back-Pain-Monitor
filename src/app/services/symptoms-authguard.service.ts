@@ -23,13 +23,22 @@ export class SymptomsAuthguardService {
     if (this.dataService.currentLogType === undefined) {
       missingFields.push("Pain type");
     }
+    if (!this.dataService.currentLogTimesBefore && this.dataService.currentLogTimesBefore !== 0) {
+      missingFields.push("How many times have you experienced this pain before");
+    }
+    if (this.dataService.currentLogMobility === undefined || this.dataService.currentLogMobility === []) {
+      missingFields.push("When do you feel pain");
+    }
     if (this.dataService.currentLogIs_constant === undefined) {
       missingFields.push("Constant or intermittent");
     }
 
-    if (!this.dataService.currentLogDatetime) {
+    if (missingFields) {
       this.alertCtrl.create({
-        message: 'Please provide a value for date',
+        message: `Please provide values for the following fields:<br>
+                  <ul>
+                    ${'<li></li>'}
+                  </ul>`,
         buttons: ['OK']
       }).then((prompt) => {
         prompt.present();
