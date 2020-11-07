@@ -7,25 +7,19 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-
   <div id="mainScreen">
-    <ion-row class="justify-content-center">
-      <ion-col class="align-items-end">
-        <ion-button href="/datetime" color="success" shape="round" strong="true">Report Pain</ion-button>
+    <ion-row>
+      <ion-col>
+        <ion-button routerLink="/datetime" color="success" shape="round" strong="true">Report Pain</ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-button routerLink="/tabs/medication" color="success" shape="round" strong="true">Report Medication Use
+        </ion-button>
       </ion-col>
     </ion-row>
   </div>
-
-
-
-
-
 
 
 </ion-content>
