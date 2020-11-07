@@ -26,15 +26,6 @@
 
     <ion-card>
       <ion-card-header>
-        Frequency of Duration of Pain (minutes)
-      </ion-card-header>
-      <ion-card-content>
-        <canvas #durationFreqCanvas></canvas>
-      </ion-card-content>
-    </ion-card>
-
-    <ion-card>
-      <ion-card-header>
         Type of Pain
       </ion-card-header>
       <ion-card-content>
@@ -66,6 +57,24 @@
       </ion-card-header>
       <ion-card-content>
         <canvas #redflagsFreqCanvas></canvas>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card>
+      <ion-card-header>
+        Does the pain keep you up at night?
+      </ion-card-header>
+      <ion-card-content>
+        <canvas #nightPainPieCanvas></canvas>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card>
+      <ion-card-header>
+        What makes the pain worse or better?
+      </ion-card-header>
+      <ion-card-content>
+        <canvas #worseBetterCanvas></canvas>
       </ion-card-content>
     </ion-card>
   </div>

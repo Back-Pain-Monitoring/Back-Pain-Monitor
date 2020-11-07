@@ -12,7 +12,6 @@ import { LogDataService } from './services/log-data.service';
 
 @NgModule({
   declarations: [AppComponent],
-  entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule],
   providers: [
     StatusBar,
