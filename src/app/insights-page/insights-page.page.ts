@@ -1,7 +1,8 @@
 import { getLocaleNumberSymbol } from '@angular/common';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Chart } from 'chart.js';
-import { LogDataService } from '../services/log-data.service';
+import { LogDataService, LogFilter } from '../services/log-data.service';
+// import { FilterModalPageComponent } from '../filter-modal/filter-modal.component';
 
 @Component({
   selector: 'app-insights-page',
@@ -26,6 +27,8 @@ export class InsightsPagePage implements OnInit {
   private constantPieChart: Chart;
   private redflagsFreqChart: Chart;
 
+  
+  private filter: LogFilter;
   private logsToDisplay = [];
 
   constructor(public dataService: LogDataService) {
@@ -326,4 +329,28 @@ export class InsightsPagePage implements OnInit {
 
   }
 
+    // this method creates a modal which is a dialog that appears on top of app's content this will be used as a way of setting filter and passing data
+    // async presentModal() {
+    //   const modal = await this.modalCtrl.create({
+    //     component: FilterModalPageComponent,
+    //     backdropDismiss: false,
+    //     componentProps: {
+    //       Filter : this.filter
+    //     }
+    //   });
+    //   await modal.present();
+  
+    //   modal.onWillDismiss().then(dataReturned => {
+    //     if ( dataReturned !== null ) {
+    //       this.filter = dataReturned.data;
+    //       this.filterLogs();
+    //       console.log("filter returned is: ", this.filter);
+  
+    //     }
+    //   })
+    // }
+
+    // filterLogs() {
+    //   this.logsToDisplay = this.dataService.getLogsWithFilter(this.filter);
+    // }
 }
