@@ -103,7 +103,7 @@ export class FilterModalPageComponent implements OnInit, OnDestroy{
 
   // Checking the max duration is bigger than min duration
   checkDuration() {
-    if ( this.timesBefore_upper == undefined ) {
+    if ( this.timesBefore_upper == undefined || this.timesBefore_lower == undefined ) {
       return 1;
     } else if ( this.timesBefore_lower < this.timesBefore_upper ) {
       return 1;

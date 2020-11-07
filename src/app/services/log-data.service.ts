@@ -317,6 +317,7 @@ export class LogDataService {
       body_part: undefined,
       type: undefined,
       timesBefore_lower: undefined,
+      timesBefore_upper: undefined
     }
   }
 
@@ -328,8 +329,8 @@ export class LogDataService {
         (f.intensity_max === undefined || log.intensity <= f.intensity_max) &&
         (f.body_part === undefined || log.body_part === f.body_part) &&
         (f.type === undefined || log.type === f.type) &&
-        (f.timesBefore_lower === undefined || log.duration >= f.timesBefore_lower) &&
-        (f.timesBefore_upper === undefined || log.duration <= f.timesBefore_upper);
+        (f.timesBefore_lower === undefined || log.timesBefore >= f.timesBefore_lower) &&
+        (f.timesBefore_upper === undefined || log.timesBefore <= f.timesBefore_upper);
     });
   }
 }
