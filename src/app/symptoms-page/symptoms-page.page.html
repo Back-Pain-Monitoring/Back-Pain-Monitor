@@ -20,7 +20,7 @@
     </ion-item>
     <ion-item>
       <ion-label>Pain type</ion-label>
-      <ion-select cancelText="Cancel" okText="Ok" [(ngModel)]="painType">
+      <ion-select [(ngModel)]="painType">
         <ion-select-option value="none">None</ion-select-option>
         <ion-select-option value="aching">Aching</ion-select-option>
         <ion-select-option value="burning">Burning</ion-select-option>
@@ -33,9 +33,28 @@
       </ion-select>
     </ion-item>
     <ion-item>
-      <ion-label>Pain duration</ion-label>
-      <ion-input type="number" value="30" [(ngModel)]="duration"></ion-input>
-      <ion-label>minutes</ion-label>
+      <ion-label>Have you had this pain before?</ion-label>
+      <ion-checkbox [(ngModel)]="painBefore"></ion-checkbox>
+    </ion-item>
+    <ion-item *ngIf="painBefore">
+      <ion-label>How many times before?</ion-label>
+      <ion-input type="number" [(ngModel)]="timesBefore"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Does the pain keep you up at night?</ion-label>
+      <ion-checkbox [(ngModel)]="nightPain"></ion-checkbox>
+    </ion-item>
+    <ion-item>
+      <ion-label>What makes the pain worse?</ion-label>
+      <ion-select multiple="true" [(ngModel)]="worse">
+        <ion-select-option *ngFor="let activity of dataService.activities">{{activity}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label>What makes the pain better?</ion-label>
+      <ion-select multiple="true" [(ngModel)]="better">
+        <ion-select-option *ngFor="let activity of dataService.activities">{{activity}}</ion-select-option>
+      </ion-select>
     </ion-item>
     <ion-item>
       <ion-label>Cause of pain</ion-label>

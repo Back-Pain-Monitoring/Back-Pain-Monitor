@@ -12,19 +12,21 @@ export class InsightsPagePage implements OnInit {
 
   @ViewChild("intensityTimeCanvas") intensityTimeCanvas: ElementRef;
   @ViewChild("intensityFreqCanvas") intensityFreqCanvas: ElementRef;
-  @ViewChild("durationFreqCanvas") durationFreqCanvas: ElementRef;
   @ViewChild("typePieCanvas") typePieCanvas: ElementRef;
   @ViewChild("mobilityPieCanvas") mobilityPieCanvas: ElementRef;
   @ViewChild("constantPieCanvas") constantPieCanvas: ElementRef;
   @ViewChild("redflagsFreqCanvas") redflagsFreqCanvas: ElementRef;
+  @ViewChild("nightPainPieCanvas") nightPainPieCanvas: ElementRef;
+  @ViewChild("worseBetterCanvas") worseBetterCanvas: ElementRef;
 
   private intensityTimeChart: Chart;
   private intensityFreqChart: Chart;
-  private durationFreqChart: Chart;
   private typePieChart: Chart;
   private mobilityPieChart: Chart;
   private constantPieChart: Chart;
   private redflagsFreqChart: Chart;
+  private nightPainPieChart: Chart;
+  private worseBetterChart: CharacterData;
 
   private logsToDisplay = [];
 
@@ -71,6 +73,9 @@ export class InsightsPagePage implements OnInit {
               unit: 'day'
             }
           }]
+        },
+        legend: {
+          display: false
         }
       }
     });
@@ -102,11 +107,12 @@ export class InsightsPagePage implements OnInit {
               precision: 0,
             }
           }]
+        },
+        legend: {
+          display: false
         }
       }
     });
-
-    this.durationFreqChart = new Chart(this.durationFreqCanvas.nativeElement, this.createHistogram("duration"));
 
     const type_fd = this.createFreqDist(this.logsToDisplay, "type");
     const type_labels = ["none", "aching", "burning", "cramping", "numbness", "radiating", "shooting", "stabbing", "tingling"]
@@ -122,8 +128,14 @@ export class InsightsPagePage implements OnInit {
             backgroundColor: ['rgb(38, 194, 129)', '#003f5c', '#2f4b7c', '#665191', 'a05195', '#d45087', '#f95d6a', '#ff7c43', '#ffa600'],
           }
         ]
+      },
+      options: {
+        legend: {
+          display: false
+        },
       }
     });
+
 
     const mobility_labels = ["moving", "resting", "moving and resting"];
     const mobility_fd = { "moving": 0, "resting": 0, "moving and resting": 0 };
@@ -145,7 +157,7 @@ export class InsightsPagePage implements OnInit {
             backgroundColor: ['#003f5c', '#bc5090', '#ffa600'],
           }
         ]
-      }
+      },
     });
 
     const constantData = [0, 0];
@@ -170,8 +182,12 @@ export class InsightsPagePage implements OnInit {
       }
     });
 
-    const redflags_labels = ["Numbness", "Inability to walk", "Losing weight", "Losing bladder control"];
-    const redflags_fd = { "Numbness": 0, "Inability to walk": 0, "Losing weight": 0, "Losing bladder control": 0 };
+    const redflags_labels = this.dataService.redflags;
+    const redflags_shortlabels = ["weight loss", "resting pain", "incontinence", "limited motion range"]
+    const redflags_fd = {};
+    redflags_labels.forEach(redflag => {
+      redflags_fd[redflag] = 0;
+    })
     this.logsToDisplay.forEach(element => {
       element.redflag_symptoms.forEach(symptom => {
         console.log(`symptom: ${symptom}`);
@@ -182,7 +198,7 @@ export class InsightsPagePage implements OnInit {
     this.redflagsFreqChart = new Chart(this.redflagsFreqCanvas.nativeElement, {
       type: "bar",
       data: {
-        labels: redflags_labels,
+        labels: redflags_shortlabels,
         datasets: [
           {
             label: '# of Logs',
@@ -198,21 +214,107 @@ export class InsightsPagePage implements OnInit {
               beginAtZero: true,
               precision: 0,
             }
+          }],
+          xAxes: [{
+            labelsMaxWidth: 100
+          }]
+        },
+        legend: {
+          display: true,
+        }
+      }
+    });
+
+    const nightData = [0, 0];
+    this.logsToDisplay.forEach(element => {
+      if (element.nightPain) {
+        nightData[0] += 1;
+      } else {
+        nightData[1] += 1;
+      }
+    });
+
+    this.nightPainPieChart = new Chart(this.nightPainPieCanvas.nativeElement, {
+      type: "pie",
+      data: {
+        labels: ["No", "Yes"],
+        datasets: [
+          {
+            data: nightData,
+            backgroundColor: ['#003f5c', '#bc5090']
+          }
+        ]
+      }
+    });
+
+    const worse_fd = this.createFreqDist(this.logsToDisplay, "worse", true);
+    const better_fd = this.createFreqDist(this.logsToDisplay, "better", true);
+    const worse_better_labels = this.dataService.activities;
+
+    console.log(worse_better_labels.map(element => {
+      return worse_fd[element] || 0;
+    }))
+
+    this.worseBetterChart = new Chart(this.worseBetterCanvas.nativeElement, {
+      type: "bar",
+      data: {
+        labels: worse_better_labels,
+        datasets: [
+          {
+            label: "worse",
+            data: worse_better_labels.map(element => {
+              return worse_fd[element] || 0;
+            }),
+            // fillColor: "blue",
+            backgroundColor: '#003f5c', // array should have same number of elements as number of dataset
+            // borderColor: 'rgb(38, 194, 129)',// array should have same number of elements as number of dataset
+            // borderWidth: 1
+          },
+          {
+            label: "better",
+            data: worse_better_labels.map(element => {
+              return better_fd[element] || 0;
+            }),
+            // fillColor: "red",
+            backgroundColor: '#bc5090', // array should have same number of elements as number of dataset
+            // borderColor: 'rgb(38, 194, 129)',// array should have same number of elements as number of dataset
+            // borderWidth: 1
+          },
+        ]
+      },
+      options: {
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero: true,
+              precision: 0,
+            }
           }]
         }
       }
-    })
+    });
+
 
   }
 
-  createFreqDist(myList, field?) {
+  createFreqDist(myList, field?, is_list?) {
     const freqDist = {};
     myList.forEach(element => {
       const item = field === undefined ? element : element[field];
-      if (item in freqDist) {
-        freqDist[item] += 1;
+      if (is_list) {
+        item.forEach(listItem => {
+          if (listItem in freqDist) {
+            freqDist[listItem] += 1;
+          } else {
+            freqDist[listItem] = 1;
+          }
+        });
       } else {
-        freqDist[item] = 1;
+        if (item in freqDist) {
+          freqDist[item] += 1;
+        } else {
+          freqDist[item] = 1;
+        }
       }
     });
     return freqDist;
