@@ -14,7 +14,7 @@ const routes: Routes = [
       },
       {
         path: 'sendlogs',
-        loadChildren: () => import('../send-logs-page/send-logs-page.module').then( m => m.SendLogsPagePageModule)
+        loadChildren: () => import('../send-logs-page/send-logs-page.module').then(m => m.SendLogsPagePageModule)
       },
       {
         path: 'viewlogs',
@@ -27,6 +27,10 @@ const routes: Routes = [
       {
         path: 'help',
         loadChildren: () => import('../help-page/help-page.module').then(m => m.HelpPagePageModule)
+      },
+      {
+        path: 'medication',
+        loadChildren: () => import('../medication/medication.module').then(m => m.MedicationPageModule)
       },
       {
         path: '',

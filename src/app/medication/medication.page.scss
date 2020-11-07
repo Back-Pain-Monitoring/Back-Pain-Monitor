@@ -1,0 +1,22 @@
+ion-select {
+  color: green;
+  --placeholder-color: green;
+  --placeholder-opacity: 5;
+  justify-content: center;
+  font-size: 5vw;
+  font-weight: 500;
+}
+ion-select::part(icon) {
+  color: #1bb35a;
+  opacity: 500;
+}
+
+#submit {
+  max-width: 100%;
+  width: 50%;
+  height: 8%;
+  top: 85%;
+  left: 25%;
+  text-align: center;
+  position: absolute;
+}

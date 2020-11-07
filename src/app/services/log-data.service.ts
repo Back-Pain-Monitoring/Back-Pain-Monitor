@@ -25,6 +25,13 @@ export interface LogFilter {
   duration_max: number;
 }
 
+export interface medicationUse {
+  datetime_min: Date;
+  datetime_max: Date;
+  med_type: string;
+  comment: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
