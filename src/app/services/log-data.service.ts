@@ -20,10 +20,12 @@ export interface LogEntry {
 export interface LogFilter {
   datetime_min: Date;
   datetime_max: Date;
-  intensity_min: number;
-  intensity_max: number;
-  body_part: string;
-  type: string;
+  intensity_min: Number;
+  intensity_max: Number;
+  body_part: String;
+  type: String;
+  timesBefore_lower: Number;
+  timesBefore_upper: Number;
 }
 
 @Injectable({
@@ -314,6 +316,8 @@ export class LogDataService {
       intensity_max: undefined,
       body_part: undefined,
       type: undefined,
+      timesBefore_lower: undefined,
+      timesBefore_upper: undefined
     }
   }
 
@@ -324,7 +328,9 @@ export class LogDataService {
         (f.intensity_min === undefined || log.intensity >= f.intensity_min) &&
         (f.intensity_max === undefined || log.intensity <= f.intensity_max) &&
         (f.body_part === undefined || log.body_part === f.body_part) &&
-        (f.type === undefined || log.type === f.type)
+        (f.type === undefined || log.type === f.type) &&
+        (f.timesBefore_lower === undefined || log.timesBefore >= f.timesBefore_lower) &&
+        (f.timesBefore_upper === undefined || log.timesBefore <= f.timesBefore_upper);
     });
   }
 }

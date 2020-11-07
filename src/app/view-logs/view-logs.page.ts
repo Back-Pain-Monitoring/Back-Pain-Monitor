@@ -61,18 +61,6 @@ export class ViewLogsPage implements OnInit {
   }
 
   filterLogs() {
-
-    // the commented out code was used for testing
-    // this.filter = this.dataService.createEmptyFilter();
-    // this.filter.datetime_min = new Date("2020-01-05");
-    // this.filter.datetime_max = new Date("2020-02-01");
-    // this.filter.intensity_min = 3;
-    // this.filter.intensity_max = 7;
-    // this.filter.body_part = "upper back";
-    // this.filter.type = "Shooting";
-    // this.filter.duration_min = 20;
-    // this.filter.duration_max = 40;
-
     // TODO: might change this later so we don't call the data service every time. What approach is better depends on how many records we have.
     this.logsToDisplay = this.dataService.getLogsWithFilter(this.filter);
   }
