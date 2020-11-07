@@ -24,12 +24,6 @@ export interface LogFilter {
   intensity_max: number;
   body_part: string;
   type: string;
-
-export interface medicationUse {
-  datetime_min: Date;
-  datetime_max: Date;
-  med_type: string;
-  comment: string;
 }
 
 @Injectable({
