@@ -1,0 +1,79 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Filter</ion-title>
+    <ion-button slot="end" (click)="resetFilter()">Reset</ion-button>
+    <ion-button slot="end" (click)="dismissModal()">Close</ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item>
+      <ion-label>Time Period</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-item>From</ion-item>
+       <ion-input > 
+        <ion-datetime displayFormat="D MMM YYYY H:mm" [(ngModel)]="datetime_min"></ion-datetime>
+      </ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-item>To</ion-item>
+        <ion-input>
+          <ion-datetime displayFormat="D MMM YYYY H:mm" [(ngModel)]="datetime_max"></ion-datetime>
+        </ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Pain Intensity</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-input>
+        <ion-range dualKnobs="true" min="0" max="10" step="1" snaps="true" pin="true" [ngModel]="intensity"
+          (ngModelChange)="onIntensityChange($event)">
+        <ion-note color="primary" slot="start">{{intensity.lower}}</ion-note>
+        <ion-note color="primary" slot="end">{{intensity.upper}}</ion-note>
+        </ion-range>
+      </ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Pain Type</ion-label>
+      <ion-select cancelText="Cancel" okText="Ok" [(ngModel)]="type">
+        <ion-select-option value="none">None</ion-select-option>
+        <ion-select-option value="aching">Aching</ion-select-option>
+        <ion-select-option value="burning">Burning</ion-select-option>
+        <ion-select-option value="cramping">Cramping</ion-select-option>
+        <ion-select-option value="numbness">Numbness</ion-select-option>
+        <ion-select-option value="radiating">Radiating</ion-select-option>
+        <ion-select-option value="shooting">Shooting</ion-select-option>
+        <ion-select-option value="stabbing">Stabbing</ion-select-option>
+        <ion-select-option value="tingling">Tingling</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label>Body Part</ion-label>
+      <ion-select cancelText="Cancel" okText="Ok" [(ngModel)]="body_part" multiple={true} placeholder="Select Pain Area(s)">
+        <ion-select-option value="rShoulder">Right Shoulder</ion-select-option>
+        <ion-select-option value="lShoulder">Left Shoulder</ion-select-option>
+        <ion-select-option value="neck">Neck</ion-select-option>
+        <ion-select-option value="uBack">Upper Back</ion-select-option>
+        <ion-select-option value="lBack">Lower Back</ion-select-option>
+        <ion-select-option value="mBack">Middle Back</ion-select-option>
+        <ion-select-option value="glutes">Glutes</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label>Pain duration</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>From</ion-label>
+      <ion-input type="number" value="30" [(ngModel)]="duration_min"></ion-input>
+      <ion-label>minutes</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>Up to</ion-label>
+      <ion-input type="number" value="30" [(ngModel)]="duration_max"></ion-input>
+      <ion-label>minutes</ion-label>
+    </ion-item>
+  </ion-list>
+  <ion-button expand="block" (click)="save()" class>Submit</ion-button>
+</ion-content>
