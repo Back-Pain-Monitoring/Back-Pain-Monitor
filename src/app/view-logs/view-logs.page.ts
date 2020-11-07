@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { LogDataService } from '../services/log-data.service';
+import { LogDataService, LogEntry } from '../services/log-data.service';
 import { LogFilter } from '../services/log-data.service';
-import { IonInfiniteScroll, ModalController } from '@ionic/angular';
+import { IonInfiniteScroll, ModalController, NavController } from '@ionic/angular';
 import { FilterModalPageComponent } from '../filter-modal/filter-modal.component';
 
 @Component({
@@ -19,7 +19,8 @@ export class ViewLogsPage implements OnInit {
   private logsToDisplay = [];
   private filter: LogFilter;
 
-  constructor(public dataService: LogDataService, public modalCtrl: ModalController) {
+  constructor(public dataService: LogDataService, ) {
+  constructor(public dataService: LogDataService, private navCtrl: NavController, public modalCtrl: ModalController) {
   }
 
   ngOnInit() {
@@ -75,6 +76,16 @@ export class ViewLogsPage implements OnInit {
 
     // TODO: might change this later so we don't call the data service every time. What approach is better depends on how many records we have.
     this.logsToDisplay = this.dataService.getLogsWithFilter(this.filter);
+  }
+
+  editLog(log: LogEntry) {
+    this.dataService.startEditLog(log);
+    this.navCtrl.navigateRoot('/datetime');
+  }
+
+  deleteLog(log: LogEntry) {
+    this.dataService.deleteLog(log);
+    this.logsToDisplay = this.dataService.getLogs();  // TODO: change this to use the filter once we have filter working
   }
 
 }

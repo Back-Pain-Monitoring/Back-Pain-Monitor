@@ -5,34 +5,68 @@
 </ion-header>
 
 <ion-content>
-  <div id="bottomNav">
-    <ion-tabs>
-      <ion-tab-bar slot="bottom">
-        <ion-tab-button tab="home" routerLink="/home" routerDirection="back">
-          <ion-icon name="home"></ion-icon>
-          <ion-label>Home</ion-label>
-        </ion-tab-button>
+  <div class="ion-padding">
+    <ion-card>
+      <ion-card-header>
+        Pain Intensity Over Time
+      </ion-card-header>
+      <ion-card-content>
+        <canvas #intensityTimeCanvas></canvas>
+      </ion-card-content>
+    </ion-card>
 
-        <ion-tab-button tab="viewLogs" routerLink="/viewlogs-page" routerDirection="back">
-          <ion-icon name="documents-outline"></ion-icon>
-          <ion-label>View Logs</ion-label>
-        </ion-tab-button>
+    <ion-card>
+      <ion-card-header>
+        Frequency of Pain Intensity
+      </ion-card-header>
+      <ion-card-content>
+        <canvas #intensityFreqCanvas></canvas>
+      </ion-card-content>
+    </ion-card>
 
-        <ion-tab-button tab="sendLogs" routerLink="/send-logs-page" routerDirection="back">
-          <ion-icon name="share-outline"></ion-icon>
-          <ion-label>Send Logs</ion-label>
-        </ion-tab-button>
+    <ion-card>
+      <ion-card-header>
+        Frequency of Duration of Pain (minutes)
+      </ion-card-header>
+      <ion-card-content>
+        <canvas #durationFreqCanvas></canvas>
+      </ion-card-content>
+    </ion-card>
 
-        <ion-tab-button tab="insights" routerLink="/insights-page" routerDirection="root">
-          <ion-icon name="bar-chart-outline"></ion-icon>
-          <ion-label>Insights</ion-label>
-        </ion-tab-button>
+    <ion-card>
+      <ion-card-header>
+        Type of Pain
+      </ion-card-header>
+      <ion-card-content>
+        <canvas #typePieCanvas></canvas>
+      </ion-card-content>
+    </ion-card>
 
-        <ion-tab-button tab="help" routerLink="/help-page" routerDirection="forward">
-          <ion-icon name="help"></ion-icon>
-          <ion-label>Help</ion-label>
-        </ion-tab-button>
-      </ion-tab-bar>
-    </ion-tabs>
+    <ion-card>
+      <ion-card-header>
+        Mobility
+      </ion-card-header>
+      <ion-card-content>
+        <canvas #mobilityPieCanvas></canvas>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card>
+      <ion-card-header>
+        Constant or Intermittent
+      </ion-card-header>
+      <ion-card-content>
+        <canvas #constantPieCanvas></canvas>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card>
+      <ion-card-header>
+        Frequency of Redflags Symptoms
+      </ion-card-header>
+      <ion-card-content>
+        <canvas #redflagsFreqCanvas></canvas>
+      </ion-card-content>
+    </ion-card>
   </div>
 </ion-content>

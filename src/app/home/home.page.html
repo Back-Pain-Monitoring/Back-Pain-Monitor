@@ -7,64 +7,19 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <div id="container">
-    <ion-buttons slot="end">
-      <ion-back-button defaultHref="/home">
-      </ion-back-button>
-      <ion-fab>
-        <ion-fab-button href="/datetime">
-        </ion-fab-button>
-      </ion-fab>
-    </ion-buttons>
-  </div>
-
   <div id="mainScreen">
-    <ion-row class="justify-content-center">
-      <ion-col class="align-items-end">
-        <ion-button href="/datetime" color="success" shape="round" strong="true">Report Pain</ion-button>
+    <ion-row>
+      <ion-col>
+        <ion-button routerLink="/datetime" color="success" shape="round" strong="true">Report Pain</ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-button routerLink="/tabs/medication" color="success" shape="round" strong="true">Report Medication Use
+        </ion-button>
       </ion-col>
     </ion-row>
   </div>
-
-
-
-  <div id="bottomNav">
-    <ion-tabs>
-      <ion-tab-bar slot="bottom">
-        <ion-tab-button tab="home" routerLink="/home" routerDirection="root">
-          <ion-icon name="home"></ion-icon>
-          <ion-label>Home</ion-label>
-        </ion-tab-button>
-
-        <ion-tab-button tab="viewLogs" routerLink="/viewlogs-page" routerDirection="forward">
-          <ion-icon name="documents-outline"></ion-icon>
-          <ion-label>View Logs</ion-label>
-        </ion-tab-button>
-
-        <ion-tab-button tab="sendLogs" routerLink="/send-logs-page" routerDirection="forward">
-          <ion-icon name="share-outline"></ion-icon>
-          <ion-label>Send Logs</ion-label>
-        </ion-tab-button>
-
-        <ion-tab-button tab="insights" routerLink="/insights-page" routerDirection="forward">
-          <ion-icon name="bar-chart-outline"></ion-icon>
-          <ion-label>Insights</ion-label>
-        </ion-tab-button>
-
-        <ion-tab-button tab="help" routerLink="/help-page" routerDirection="forward">
-          <ion-icon name="help"></ion-icon>
-          <ion-label>Help</ion-label>
-        </ion-tab-button>
-      </ion-tab-bar>
-    </ion-tabs>
-  </div>
-
 
 
 </ion-content>
