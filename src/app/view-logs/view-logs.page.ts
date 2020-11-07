@@ -43,6 +43,7 @@ export class ViewLogsPage implements OnInit {
   async presentModal() {
     const modal = await this.modalCtrl.create({
       component: FilterModalPageComponent,
+      backdropDismiss: false,
       componentProps: {
         Filter : this.filter
       }
@@ -57,10 +58,6 @@ export class ViewLogsPage implements OnInit {
 
       }
     })
-  }
-
-  test() {
-    
   }
 
   filterLogs() {

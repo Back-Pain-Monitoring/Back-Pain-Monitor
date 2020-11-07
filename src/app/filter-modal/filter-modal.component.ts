@@ -1,4 +1,4 @@
-import { Component, Input, OnInit} from '@angular/core';
+import { Component, Input, OnDestroy, OnInit, HostListener} from '@angular/core';
 import { AlertController, ModalController } from '@ionic/angular'
 import { LogDataService, LogFilter } from '../services/log-data.service';
 
@@ -8,7 +8,7 @@ import { LogDataService, LogFilter } from '../services/log-data.service';
   styleUrls: ['./filter-modal.component.scss'],
 })
 
-export class FilterModalPageComponent implements OnInit{
+export class FilterModalPageComponent implements OnInit, OnDestroy{
   private filter: LogFilter;
   @Input() Filter: LogFilter;
   intensity: any = { lower: 0, upper:10};
@@ -25,6 +25,22 @@ export class FilterModalPageComponent implements OnInit{
   ngOnInit() {
     this.updateFilterUI();
     console.log('Filter rece', this.Filter);
+    const modalState = {
+      modal : true,
+      desc : 'fake state for our modal'
+    };
+    history.pushState(modalState, null);
+  }
+
+  ngOnDestroy() {
+    if (window.history.state.modal) {
+      history.back();
+    }
+  }
+  
+  @HostListener('window:popstate', ['$event'])
+  dismissModal() {
+    this.modalCtrl.dismiss(this.Filter, 'cancel');
   }
 
   // Updates UI based on previous filter setting
@@ -61,9 +77,9 @@ export class FilterModalPageComponent implements OnInit{
   }
 
   // method of dismissing modal
-  dismissModal() {
-    this.modalCtrl.dismiss(this.Filter, 'cancel');  
-  }
+  // dismissModal() {
+  //   this.modalCtrl.dismiss(this.Filter, 'cancel');  
+  // }
 
   // Resets current filter setting
   resetFilter() {
