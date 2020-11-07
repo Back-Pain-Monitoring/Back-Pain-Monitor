@@ -62,17 +62,15 @@
       </ion-select>
     </ion-item>
     <ion-item>
-      <ion-label>Pain duration</ion-label>
+      <ion-label>How many times before?</ion-label>
     </ion-item>
     <ion-item>
       <ion-label>From</ion-label>
-      <ion-input type="number" value="30" [(ngModel)]="duration_min"></ion-input>
-      <ion-label>minutes</ion-label>
+      <ion-input type="number" [(ngModel)]="timesBefore_lower"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label>Up to</ion-label>
-      <ion-input type="number" value="30" [(ngModel)]="duration_max"></ion-input>
-      <ion-label>minutes</ion-label>
+      <ion-input type="number" [(ngModel)]="timesBefore_upper"></ion-input>
     </ion-item>
   </ion-list>
   <ion-button expand="block" (click)="save()" class>Submit</ion-button>
