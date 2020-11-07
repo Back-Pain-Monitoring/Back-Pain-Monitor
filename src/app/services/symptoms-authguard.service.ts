@@ -37,7 +37,7 @@ export class SymptomsAuthguardService {
       this.alertCtrl.create({
         message: `Please provide values for the following fields:<br>
                   <ul>
-                    ${missingFields.map(item => `<li>${item}</li>`)}
+                    ${missingFields.map(item => `<li>${item}</li>`).join('')}
                   </ul>`,
         buttons: ['OK']
       }).then((prompt) => {
