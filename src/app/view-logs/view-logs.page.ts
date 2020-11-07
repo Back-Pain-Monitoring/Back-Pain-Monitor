@@ -41,7 +41,6 @@ export class ViewLogsPage implements OnInit {
 
   // this method creates a modal which is a dialog that appears on top of app's content this will be used as a way of setting filter and passing data
   async presentModal() {
-    this.filter.duration_max = 70;
     const modal = await this.modalCtrl.create({
       component: FilterModalPageComponent,
       componentProps: {
@@ -50,10 +49,7 @@ export class ViewLogsPage implements OnInit {
     });
     await modal.present();
 
-    // const data = await modal.onWillDismiss();
-    // console.log(data);
     modal.onWillDismiss().then(dataReturned => {
-      // console.log(dataReturned);
       if ( dataReturned !== null ) {
         this.filter = dataReturned.data;
         this.filterLogs();
@@ -61,9 +57,6 @@ export class ViewLogsPage implements OnInit {
 
       }
     })
-
-    // return await modal.present().then(_ => {
-    // })
   }
 
   test() {

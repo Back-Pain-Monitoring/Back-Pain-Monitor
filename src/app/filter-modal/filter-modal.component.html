@@ -1,7 +1,8 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>Filter</ion-title>
-    <ion-button slot="end"><ion-button (click)="dismissModal()">Close</ion-button>></ion-button>
+    <ion-button slot="end" (click)="resetFilter()">Reset</ion-button>
+    <ion-button slot="end" (click)="dismissModal()">Close</ion-button>
   </ion-toolbar>
 </ion-header>
 
@@ -35,7 +36,7 @@
       </ion-input>
     </ion-item>
     <ion-item>
-      <ion-label>Body part</ion-label>
+      <ion-label>Pain Type</ion-label>
       <ion-select cancelText="Cancel" okText="Ok" [(ngModel)]="type">
         <ion-select-option value="none">None</ion-select-option>
         <ion-select-option value="aching">Aching</ion-select-option>
@@ -49,17 +50,15 @@
       </ion-select>
     </ion-item>
     <ion-item>
-      <ion-label>Pain type</ion-label>
-      <ion-select cancelText="Cancel" okText="Ok" [(ngModel)]="body_part">
-        <ion-select-option value="none">None</ion-select-option>
-        <ion-select-option value="aching">Aching</ion-select-option>
-        <ion-select-option value="burning">Burning</ion-select-option>
-        <ion-select-option value="cramping">Cramping</ion-select-option>
-        <ion-select-option value="numbness">Numbness</ion-select-option>
-        <ion-select-option value="radiating">Radiating</ion-select-option>
-        <ion-select-option value="shooting">Shooting</ion-select-option>
-        <ion-select-option value="stabbing">Stabbing</ion-select-option>
-        <ion-select-option value="tingling">Tingling</ion-select-option>
+      <ion-label>Body Part</ion-label>
+      <ion-select cancelText="Cancel" okText="Ok" [(ngModel)]="body_part" multiple={true} placeholder="Select Pain Area(s)">
+        <ion-select-option value="rShoulder">Right Shoulder</ion-select-option>
+        <ion-select-option value="lShoulder">Left Shoulder</ion-select-option>
+        <ion-select-option value="neck">Neck</ion-select-option>
+        <ion-select-option value="uBack">Upper Back</ion-select-option>
+        <ion-select-option value="lBack">Lower Back</ion-select-option>
+        <ion-select-option value="mBack">Middle Back</ion-select-option>
+        <ion-select-option value="glutes">Glutes</ion-select-option>
       </ion-select>
     </ion-item>
     <ion-item>

@@ -59,11 +59,6 @@ const routes: Routes = [
     path: 'view-logs',
     loadChildren: () => import('./view-logs/view-logs.module').then( m => m.ViewLogsPageModule)
   },
-  {
-    path: 'filter-modal',
-    loadChildren: () => import('./filter-modal/filter-modal.module').then( m => m.FilterModalPageModule)
-  },
-
 ];
 
 @NgModule({
