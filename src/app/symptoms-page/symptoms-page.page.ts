@@ -9,8 +9,6 @@ import { LogDataService } from '../services/log-data.service';
 })
 export class SymptomsPagePage implements OnInit {
 
-  @ViewChild('forwardButton', { static: false }) forwardButton;
-
   // pain scale from https://www.reddit.com/r/ChronicPain/comments/5ouyu4/pain_scale_for_people_in_chronic_pain/
   private intensityInfo = {
     0: ["No pain", "I have no pain."],
@@ -56,9 +54,6 @@ export class SymptomsPagePage implements OnInit {
   }
 
   updateLog() {
-    if (!this.validateData()) {
-      console.log("updating with invalid data");
-    }
     this.dataService.currentLogIntensity = this.intensity;
     this.dataService.currentLogType = this.painType;
     this.dataService.currentLogTimesBefore = this.painBefore ? this.timesBefore : 0;
@@ -70,15 +65,6 @@ export class SymptomsPagePage implements OnInit {
     this.dataService.currentLogIs_constant = this.is_constant === "true";
     console.log("updated log");
     // this.dataService.printLogEntry();
-  }
-
-  validateData(): boolean {
-    return this.intensity !== undefined
-      && this.painType !== undefined
-      && this.duration !== undefined
-      && this.mobility !== undefined
-      && this.mobility.length > 0
-      && this.is_constant !== undefined;
   }
 
   updateUIFromLog() {
@@ -96,15 +82,6 @@ export class SymptomsPagePage implements OnInit {
     this.mobility = this.dataService.currentLogMobility;
     this.cause = this.dataService.currentLogCause;
     this.is_constant = this.dataService.currentLogIs_constant === false ? "false" : "true";
-  }
-
-  navigateForward() {
-    if (!this.validateData()) {
-      this.forwardButton.failedValidate("Please provide values for the required fields:");
-    } else {
-      this.updateLog();
-      this.forwardButton.navigate();
-    }
   }
 
 }
