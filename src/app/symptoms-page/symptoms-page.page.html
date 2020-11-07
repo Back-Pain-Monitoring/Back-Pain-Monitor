@@ -5,69 +5,84 @@
 </ion-header>
 
 <ion-content>
-
-  <form #f="ngForm">
-    <ion-list>
-      <ion-item>
-        <ion-label>Pain Intensity</ion-label>
-        <ion-label>{{intensityTitle}}</ion-label>
-      </ion-item>
-      <ion-item>
-        <ion-range min="0" max="10" step="1" snaps="true" pin="true" [ngModel]="intensity"
-          (ngModelChange)="onIntensityChange($event)" name="intensity" value="0">
-        </ion-range>
-      </ion-item>
-      <ion-item>
-        <ion-label class="ion-text-wrap">{{intensityDescription}}</ion-label>
-      </ion-item>
-      <ion-item>
-        <ion-label>Pain type</ion-label>
-        <ion-select [(ngModel)]="painType" name="painType" required>
-          <ion-select-option value="none">None</ion-select-option>
-          <ion-select-option value="aching">Aching</ion-select-option>
-          <ion-select-option value="burning">Burning</ion-select-option>
-          <ion-select-option value="cramping">Cramping</ion-select-option>
-          <ion-select-option value="numbness">Numbness</ion-select-option>
-          <ion-select-option value="radiating">Radiating</ion-select-option>
-          <ion-select-option value="shooting">Shooting</ion-select-option>
-          <ion-select-option value="stabbing">Stabbing</ion-select-option>
-          <ion-select-option value="tingling">Tingling</ion-select-option>
-        </ion-select>
-      </ion-item>
-      <ion-item>
-        <ion-label>Pain duration</ion-label>
-        <ion-input type="number" value="30" [(ngModel)]="duration" name="duration" required></ion-input>
-        <ion-label>minutes</ion-label>
-      </ion-item>
-      <ion-item>
-        <ion-label>Cause of pain</ion-label>
-        <ion-input type="text" value="unknown" [(ngModel)]="cause" name="cause"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label>When do you feel pain?</ion-label>
-        <ion-select multiple="true" [(ngModel)]="mobility" name="mobility" required>
-          <ion-select-option value="moving">Moving</ion-select-option>
-          <ion-select-option value="resting">Resting</ion-select-option>
-        </ion-select>
-      </ion-item>
-      <ion-item>
-        <ion-label>Is the pain constant or intermittent?</ion-label>
-      </ion-item>
-      <ion-item>
-        <ion-radio-group [(ngModel)]="is_constant" name="is_constant" required>
-          <ion-item>
-            <ion-label>Constant</ion-label>
-            <ion-radio slot="start" value="true"></ion-radio>
-          </ion-item>
-          <ion-item>
-            <ion-label>Intermittent</ion-label>
-            <ion-radio slot="start" value="false"></ion-radio>
-          </ion-item>
-        </ion-radio-group>
-      </ion-item>
-    </ion-list>
-  </form>
-
+  <ion-list>
+    <ion-item>
+      <ion-label>Pain Intensity</ion-label>
+      <ion-label>{{intensityTitle}}</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-range min="0" max="10" step="1" snaps="true" pin="true" [ngModel]="intensity"
+        (ngModelChange)="onIntensityChange($event)">
+      </ion-range>
+    </ion-item>
+    <ion-item>
+      <ion-label class="ion-text-wrap">{{intensityDescription}}</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>Pain type</ion-label>
+      <ion-select [(ngModel)]="painType">
+        <ion-select-option value="none">None</ion-select-option>
+        <ion-select-option value="aching">Aching</ion-select-option>
+        <ion-select-option value="burning">Burning</ion-select-option>
+        <ion-select-option value="cramping">Cramping</ion-select-option>
+        <ion-select-option value="numbness">Numbness</ion-select-option>
+        <ion-select-option value="radiating">Radiating</ion-select-option>
+        <ion-select-option value="shooting">Shooting</ion-select-option>
+        <ion-select-option value="stabbing">Stabbing</ion-select-option>
+        <ion-select-option value="tingling">Tingling</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label>Have you had this pain before?</ion-label>
+      <ion-checkbox [(ngModel)]="painBefore"></ion-checkbox>
+    </ion-item>
+    <ion-item *ngIf="painBefore">
+      <ion-label>How many times before?</ion-label>
+      <ion-input type="number" [(ngModel)]="timesBefore"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Does the pain keep you up at night?</ion-label>
+      <ion-checkbox [(ngModel)]="nightPain"></ion-checkbox>
+    </ion-item>
+    <ion-item>
+      <ion-label>What makes the pain worse?</ion-label>
+      <ion-select multiple="true" [(ngModel)]="worse">
+        <ion-select-option *ngFor="let activity of dataService.activities">{{activity}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label>What makes the pain better?</ion-label>
+      <ion-select multiple="true" [(ngModel)]="better">
+        <ion-select-option *ngFor="let activity of dataService.activities">{{activity}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label>Cause of pain</ion-label>
+      <ion-input type="text" value="unknown" [(ngModel)]="cause"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>When do you feel pain?</ion-label>
+      <ion-select multiple="true" [(ngModel)]="mobility">
+        <ion-select-option value="moving">Moving</ion-select-option>
+        <ion-select-option value="resting">Resting</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label>Is the pain constant or intermittent?</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-radio-group [(ngModel)]="is_constant">
+        <ion-item>
+          <ion-label>Constant</ion-label>
+          <ion-radio slot="start" value="true"></ion-radio>
+        </ion-item>
+        <ion-item>
+          <ion-label>Intermittent</ion-label>
+          <ion-radio slot="start" value="false"></ion-radio>
+        </ion-item>
+      </ion-radio-group>
+    </ion-item>
+  </ion-list>
 
   <!--Back button to bodymap page-->
   <ion-fab vertical="bottom" horizontal="start" slot="fixed">
@@ -78,13 +93,5 @@
 
   <app-log-nav-button direction="forward" link="/redflags" (click)="navigateForward()" #forwardButton>
   </app-log-nav-button>
-  <!--Forward Button to redflags page-->
-  <!-- <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button color="success" routerDirection="forward" routerLink="/redflags" (click)="updateLog()">
-      <ion-icon name="arrow-forward-circle-outline" color="dark"></ion-icon>
-    </ion-fab-button>
-  </ion-fab> -->
-
-
 
 </ion-content>
