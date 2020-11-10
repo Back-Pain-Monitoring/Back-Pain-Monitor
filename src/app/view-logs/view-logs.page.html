@@ -6,27 +6,12 @@
 
 <ion-content>
 
-  <mat-expansion-panel hideToggle>
-    <mat-expansion-panel-header>
-      <mat-panel-title>
-        This is the expansion title
-      </mat-panel-title>
-      <mat-panel-description>
-        This is a summary of the content
-      </mat-panel-description>
-    </mat-expansion-panel-header>
-    <p>This is the primary content of the panel.</p>
-  </mat-expansion-panel>
-
   <!-- <ion-card *ngFor="let log of this.logsToDisplay"> -->
   <mat-expansion-panel *ngFor="let log of this.logsToDisplay">
-    <mat-expansion-panel-header>
-      <!-- <ion-card-header> -->
-      <!-- <ion-card-title> -->
+    <mat-expansion-panel-header collapsedHeight="*" expandedHeight="*">
       <mat-panel-title>
         {{log.datetime | date:'short'}}
       </mat-panel-title>
-      <!-- </ion-card-title> -->
       <mat-panel-description>
         <ion-grid>
           <ion-row>
@@ -39,40 +24,42 @@
           </ion-row>
         </ion-grid>
       </mat-panel-description>
-      <!-- </ion-card-header> -->
     </mat-expansion-panel-header>
-    <!-- <ion-card-content> -->
-    <ion-grid>
-      <ion-row>
+    <ion-list>
+      <ion-item>
         <ion-label>Type: {{log.type}}</ion-label>
-      </ion-row>
-      <ion-row>
-        <ion-label>Number of times experienced before: {{log.timesBefore}}</ion-label>
-      </ion-row>
-      <ion-row>
-        <ion-col>
-          <ion-label>Pain made worse by: {{log.worse}}</ion-label>
-        </ion-col>
-        <ion-col>
-          <ion-label>Pain made better by: {{log.better}}</ion-label>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-label>Cause: {{log.cause}}</ion-label>
-      </ion-row>
-      <ion-row>
-        <ion-label>Mobility: {{log.mobility}}</ion-label>
-      </ion-row>
-      <ion-row>
-        <ion-label>Constant or intermittent: {{log.is_constant ? 'Constant' : 'Intermittent'}}</ion-label>
-      </ion-row>
-      <ion-row>
-        <ion-label>Redflags symptoms: {{log.redflag_symptoms}}</ion-label>
-      </ion-row>
-    </ion-grid>
-    <!-- </ion-card-content> -->
+      </ion-item>
+      <ion-item>
+        <ion-label text-wrap>Experienced {{log.timesBefore}} times before</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label text-wrap>Pain made worse by: {{log.worse}}</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label text-wrap>Pain made better by: {{log.better}}</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label text-wrap>Cause: {{log.cause}}</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label text-wrap>Mobility: {{log.mobility}}</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label text-wrap>Constant or intermittent: {{log.is_constant ? 'Constant' : 'Intermittent'}}</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label text-wrap>Redflags symptoms: {{log.redflag_symptoms}}</ion-label>
+      </ion-item>
+    </ion-list>
+
+    <button size="large" (click)="editLog(log)">
+      <ion-icon slot="icon-only" name="create-outline"></ion-icon>
+    </button>
+    <button size="large" (click)="deleteLog(log)" color="danger">
+      <ion-icon slot="icon-only" name="trash"></ion-icon>
+    </button>
+
   </mat-expansion-panel>
-  <!-- </ion-card> -->
   <!--currently unused, but will re-enable when we get to database-->
   <!-- <ion-infinite-scroll threshold="15%" (ionInfinite)="loadData($event)">
     <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
