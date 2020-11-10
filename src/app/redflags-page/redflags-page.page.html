@@ -1,16 +1,13 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Redflags Symptoms</ion-title>
+    <ion-title text-wrap>Do you have any of these?</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-item>
-    <ion-label>Do you have any of following symptoms?</ion-label>
-  </ion-item>
   <ion-list>
     <ion-item *ngFor="let entry of form">
-      <ion-label>{{entry.val}}</ion-label>
+      <ion-label text-wrap>{{entry.val}}</ion-label>
       <ion-checkbox slot="end" [(ngModel)]="entry.isChecked"></ion-checkbox>
     </ion-item>
   </ion-list>
@@ -21,7 +18,7 @@
       <ion-icon name="arrow-back-circle-outline" color="dark"></ion-icon>
     </ion-fab-button>
   </ion-fab>
-  
+
   <!--Forward Button to comments page-->
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button color="success" routerDirection="forward" routerLink="/comments" (click)="updateLog()">

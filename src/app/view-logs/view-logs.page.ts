@@ -1,7 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { LogDataService, LogEntry } from '../services/log-data.service';
 import { LogFilter } from '../services/log-data.service';
-import { IonInfiniteScroll, NavController } from '@ionic/angular';
+import { IonInfiniteScroll, ModalController, NavController } from '@ionic/angular';
+import { FilterModalPageComponent } from '../filter-modal/filter-modal.component';
 
 @Component({
   selector: 'app-view-logs',
@@ -18,11 +19,11 @@ export class ViewLogsPage implements OnInit {
   private logsToDisplay = [];
   private filter: LogFilter;
 
-  constructor(public dataService: LogDataService, private navCtrl: NavController) {
+  constructor(public dataService: LogDataService, private navCtrl: NavController, public modalCtrl: ModalController) {
   }
 
   ngOnInit() {
-    this.logsToDisplay = this.dataService.getLogs();
+    this.logsToDisplay = this.dataService.getLogs().slice().reverse();
     this.filter = this.dataService.createEmptyFilter();
   }
 
@@ -38,18 +39,28 @@ export class ViewLogsPage implements OnInit {
     event.target.complete();
   }
 
-  filterLogs() {
-    // the commented out code was used for testing
-    // this.filter = this.dataService.createEmptyFilter();
-    // this.filter.datetime_min = new Date("2020-01-05");
-    // this.filter.datetime_max = new Date("2020-02-01");
-    // this.filter.intensity_min = 3;
-    // this.filter.intensity_max = 7;
-    // this.filter.body_part = "upper back";
-    // this.filter.type = "Shooting";
-    // this.filter.duration_min = 20;
-    // this.filter.duration_max = 40;
+  // this method creates a modal which is a dialog that appears on top of app's content this will be used as a way of setting filter and passing data
+  async presentModal() {
+    const modal = await this.modalCtrl.create({
+      component: FilterModalPageComponent,
+      backdropDismiss: false,
+      componentProps: {
+        Filter : this.filter
+      }
+    });
+    await modal.present();
 
+    modal.onWillDismiss().then(dataReturned => {
+      if ( dataReturned !== null ) {
+        this.filter = dataReturned.data;
+        this.filterLogs();
+        console.log("filter returned is: ", this.filter);
+
+      }
+    })
+  }
+
+  filterLogs() {
     // TODO: might change this later so we don't call the data service every time. What approach is better depends on how many records we have.
     this.logsToDisplay = this.dataService.getLogsWithFilter(this.filter);
   }
