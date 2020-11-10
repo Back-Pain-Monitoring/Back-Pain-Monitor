@@ -16,7 +16,7 @@ export class MedicationDataService {
     {
       id: 0,
       datetime: new Date("2020-10-23"),
-      med_type: ["Acetamenophine"],
+      med_type: ["Acetaminiophen"],
       comment: "It is not working",
       intensity: 5
     },
@@ -30,7 +30,7 @@ export class MedicationDataService {
     {
       id: 2,
       datetime: new Date("2020-11-4"),
-      med_type: ["Anti Seizure Medication"],
+      med_type: ["COX-2 Inhibitors"],
       comment: "Makes Pain Worse",
       intensity: 8
     },
@@ -41,6 +41,13 @@ export class MedicationDataService {
       comment: "First Dose",
       intensity: 4
     },
+    {
+      id: 4,
+      datetime: new Date("2020-11-6"),
+      med_type: ["Antidepressants"],
+      comment: "Helps A lot",
+      intensity: 3
+    }
   ];
 
   constructor() {

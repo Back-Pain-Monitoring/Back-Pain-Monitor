@@ -233,7 +233,7 @@ export class InsightsPagePage implements OnInit {
 
     this.medicationUseChart = new Chart(this.medicationUseCanvas.nativeElement, {
       type: "bar",
-      date: {
+      data: {
         labels: medication_labels,
         datasets: [
           {
