@@ -23,7 +23,7 @@ export class SymptomsAuthguardService {
     if (this.dataService.currentLogType === undefined) {
       missingFields.push("Pain type");
     }
-    if (!this.dataService.currentLogTimesBefore && this.dataService.currentLogTimesBefore !== 0) {
+    if (this.dataService.currentLogTimesBefore === undefined) {
       missingFields.push("How many times have you experienced this pain before");
     }
     if (this.dataService.currentLogMobility === undefined || this.dataService.currentLogMobility === []) {
@@ -33,7 +33,7 @@ export class SymptomsAuthguardService {
       missingFields.push("Constant or intermittent");
     }
 
-    if (missingFields) {
+    if (missingFields.length > 0) {
       this.alertCtrl.create({
         message: `Please provide values for the following fields:<br>
                   <ul>
