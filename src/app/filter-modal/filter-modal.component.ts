@@ -24,7 +24,6 @@ export class FilterModalPageComponent implements OnInit, OnDestroy{
 
   ngOnInit() {
     this.updateFilterUI();
-    console.log('Filter rece', this.Filter);
     const modalState = {
       modal : true,
       desc : 'fake state for our modal'
@@ -67,11 +66,11 @@ export class FilterModalPageComponent implements OnInit, OnDestroy{
     }
 
     if ( this.Filter.type == undefined ) {
-      this.type = 'none';
+      this.type = 'nofilter';
     } else {
       this.type = this.Filter.type;
     }
-
+    
     this.body_part = this.Filter.body_part;
     this.timesBefore_lower = this.Filter.timesBefore_lower;
     this.timesBefore_upper = this.Filter.timesBefore_upper;
@@ -88,7 +87,7 @@ export class FilterModalPageComponent implements OnInit, OnDestroy{
     this.datetime_min = new Date("2015-01-02").toISOString();
     this.datetime_max = new Date().toISOString();
     this.intensity =  { lower: 0, upper:10};
-    this.type = 'none';
+    this.type = 'nofilter';
     this.body_part = undefined;
     this.timesBefore_lower = undefined;
     this.timesBefore_upper = undefined;
@@ -120,15 +119,15 @@ export class FilterModalPageComponent implements OnInit, OnDestroy{
   // function to save filter settings and passing to view-log page
   save() {
     if ( this.checkDate() == 1 && this.checkDuration() == 1) {
-      if ( this.type == 'none' ) {
-        this.Filter.type = undefined;
-      } else {
-        this.Filter.type = this.type;
-      }
       this.Filter.datetime_min = new Date(this.datetime_min);
       this.Filter.datetime_max = new Date(this.datetime_max);
       this.Filter.intensity_min = this.intensity.lower;
       this.Filter.intensity_max = this.intensity.upper;
+      if ( this.type == 'nofilter' ) {
+        this.Filter.type = undefined;
+      } else {
+        this.Filter.type = this.type;
+      }   
       this.Filter.body_part = this.body_part;
       this.Filter.timesBefore_lower = this.timesBefore_lower;
       this.Filter.timesBefore_upper = this.timesBefore_upper;
