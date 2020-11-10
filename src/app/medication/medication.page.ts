@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertController, NavController } from '@ionic/angular';
-import { LogDataService } from '../services/log-data.service';
 import { MedicationDataService } from '../services/medication-data.service';
 
 @Component({
@@ -27,8 +26,8 @@ export class MedicationPage implements OnInit {
 
   intensityTitle: string = this.intensityInfo[0][0];
   intensityDescription: string = this.intensityInfo[0][1];
-  date: Date;
-  med_type: string;
+  datetime: Date;
+  med_type: string[];
   med_comment: string;
   intensity: number;
   id: number;
@@ -38,7 +37,7 @@ export class MedicationPage implements OnInit {
   }
 
   ngOnInit() {
-    this.updateMeds();
+    this.updateUIFromMed;
   }
 
   private onIntensityChange(newIntensity) {
@@ -52,6 +51,8 @@ export class MedicationPage implements OnInit {
 
   // Goes back to home page -- Thanks to Leo
   backToHome() {
+    this.updateMeds();
+    this.dataService.submitMedEntry();
     this.navCtrl.navigateRoot('/tabs/home')
   }
 
@@ -74,11 +75,19 @@ export class MedicationPage implements OnInit {
 
   updateMeds() {
     console.log("Updating UI from dataservice");
+    this.dataService.currentMedDateTime = this.datetime;
+    this.dataService.currentMedMed_type = this.med_type;
+    this.dataService.currentMedIntensity = this.intensity;
+    this.dataService.currentMedComment = this.med_comment;
     this.dataService.printMedEntry();
+  }
+
+  updateUIFromMed() {
+    this.dataService.printMedEntry();
+    this.datetime = this.dataService.currentMedDateTime;
+    this.med_type = this.dataService.currentMedMed_type;
     this.intensity = this.dataService.currentMedIntensity;
     this.med_comment = this.dataService.currentMedComment;
-    this.med_type = this.dataService.currentMedMed_type;
-    this.date = this.dataService.currentMedDateTime;
   }
 
 }

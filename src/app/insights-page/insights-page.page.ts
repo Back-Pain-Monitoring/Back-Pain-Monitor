@@ -1,6 +1,7 @@
 import { getLocaleNumberSymbol } from '@angular/common';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Chart } from 'chart.js';
+import { element } from 'protractor';
 import { LogDataService } from '../services/log-data.service';
 import { MedicationDataService } from '../services/medication-data.service';
 
@@ -18,6 +19,7 @@ export class InsightsPagePage implements OnInit {
   @ViewChild("mobilityPieCanvas") mobilityPieCanvas: ElementRef;
   @ViewChild("constantPieCanvas") constantPieCanvas: ElementRef;
   @ViewChild("redflagsFreqCanvas") redflagsFreqCanvas: ElementRef;
+  @ViewChild("medicationUseCanvas") medicationUseCanvas: ElementRef;
 
   // Creating the Chart objects
   private intensityTimeChart: Chart;
@@ -27,6 +29,7 @@ export class InsightsPagePage implements OnInit {
   private mobilityPieChart: Chart;
   private constantPieChart: Chart;
   private redflagsFreqChart: Chart;
+  private medicationUseChart: CharacterData;
 
   private logsToDisplay = [];
   private medsToDisplay = [];
@@ -204,6 +207,39 @@ export class InsightsPagePage implements OnInit {
             label: '# of Logs',
             data: redflags_labels.map(element => redflags_fd[element]),
             backgroundColor: ['#003f5c', '#7a5195', '#ef5675', '#ffa600'],
+          }
+        ]
+      },
+      options: {
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero: true,
+              precision: 0,
+            }
+          }]
+        }
+      }
+    })
+
+    const medication_fd = { "NSAID": 0, "Acetaminiophen": 0, "COX-2 Inhibitors": 0, "Antidepressants": 0, "Anti-Seizure": 0 };
+    const medication_labels = ["NSAID", "Acetaminiophen", "COX-2 Inhibitors", "Antidepressants", "Anti-Seizure"]
+    this.medsToDisplay.forEach(element => {
+      element.med_type.forEach(med_type => {
+        console.log(`Medication: ${med_type}`);
+        medication_fd[med_type] += 1;
+      });
+    });
+
+    this.medicationUseChart = new Chart(this.medicationUseCanvas.nativeElement, {
+      type: "bar",
+      date: {
+        labels: medication_labels,
+        datasets: [
+          {
+            label: "# of Medication Uses",
+            data: medication_labels.map(element => medication_fd[element]),
+            backgroundColor: ['#FF0000', '#008080', '#00FF00', '#9932CC', '	#FFD700']
           }
         ]
       },
