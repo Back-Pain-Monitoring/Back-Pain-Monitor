@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>medication</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col class="ion-text-center">
+        Date of Medication use:
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="ion-text-center">
+        <ion-datetime displayFormat="D MMM YYYY H:mm" placeholder="When was your first dose?" [(ngModel)]="medication">
+        </ion-datetime>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="ion-text-left">
+        <ion-item>
+          <ion-label>Type of Medication</ion-label>
+          <ion-select cancelText="Cancel" okText="Ok" [(ngModel)]="painType" class="ion-text-left" id="type">
+            <ion-select-option value="NSAID">NSAID</ion-select-option>
+            <ion-select-option value="acetaminiophen">Acetaminiophen</ion-select-option>
+            <ion-select-option value="COX-2-inhibitors">COX-2 inhibitors</ion-select-option>
+            <ion-select-option value="antidepressants">Antidepressants</ion-select-option>
+            <ion-select-option value="anti-seizure medication">Anti-seizure medication</ion-select-option>
+            <ion-select-option value="opioids">Opioids</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-button routerLink="/tabs/home" color="success" shape="round" strong="true" id="submit" size=large
+    (click)="submitMedication()">
+    Submit
+  </ion-button>
+</ion-content>
