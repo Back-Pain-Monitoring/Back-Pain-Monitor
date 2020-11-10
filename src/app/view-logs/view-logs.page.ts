@@ -54,8 +54,6 @@ export class ViewLogsPage implements OnInit {
       if ( dataReturned !== null ) {
         this.filter = dataReturned.data;
         this.filterLogs();
-        console.log("filter returned is: ", this.filter);
-
       }
     })
   }

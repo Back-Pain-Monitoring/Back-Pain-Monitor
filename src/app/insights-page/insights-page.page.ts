@@ -39,12 +39,14 @@ export class InsightsPagePage implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.logsToDisplay);
     this.filter = this.dataService.createEmptyFilter();
   }
 
   ngAfterViewInit() {
+    this.createCharts();
+  }
 
+  createCharts() {
     // if this.logsToDisplay is not sorted by datetime, we need to do .sort((a, b) => a.datetime - b.datetime)
     const intensity_time_data = this.logsToDisplay.map(log => {
       return {
@@ -52,8 +54,6 @@ export class InsightsPagePage implements OnInit {
         y: log.intensity,
       }
     });
-
-    console.log(intensity_time_data);
 
     this.intensityTimeChart = new Chart(this.intensityTimeCanvas.nativeElement, {
       type: 'line',
@@ -196,7 +196,6 @@ export class InsightsPagePage implements OnInit {
     })
     this.logsToDisplay.forEach(element => {
       element.redflag_symptoms.forEach(symptom => {
-        console.log(`symptom: ${symptom}`);
         redflags_fd[symptom] += 1;
       });
     });
@@ -257,10 +256,6 @@ export class InsightsPagePage implements OnInit {
     const better_fd = this.createFreqDist(this.logsToDisplay, "better", true);
     const worse_better_labels = this.dataService.activities;
 
-    console.log(worse_better_labels.map(element => {
-      return worse_fd[element] || 0;
-    }))
-
     this.worseBetterChart = new Chart(this.worseBetterCanvas.nativeElement, {
       type: "bar",
       data: {
@@ -299,8 +294,6 @@ export class InsightsPagePage implements OnInit {
         }
       }
     });
-
-
   }
 
   createFreqDist(myList, field?, is_list?) {
@@ -431,32 +424,29 @@ export class InsightsPagePage implements OnInit {
         }
       }
     };
-
   }
 
-    // this method creates a modal which is a dialog that appears on top of app's content this will be used as a way of setting filter and passing data
-    async presentModal() {
-      const modal = await this.modalCtrl.create({
-        component: FilterModalPageComponent,
-        backdropDismiss: false,
-        componentProps: {
-          Filter : this.filter
-        }
-      });
-      await modal.present();
-  
-      modal.onWillDismiss().then(dataReturned => {
-        if ( dataReturned !== null ) {
-          this.filter = dataReturned.data;
-          this.filterLogs();
-          console.log("filter returned is: ", this.filter);
-  
-        }
-      })
-    }
+  // this method creates a modal which is a dialog that appears on top of app's content this will be used as a way of setting filter and passing data
+  async presentModal() {
+    const modal = await this.modalCtrl.create({
+      component: FilterModalPageComponent,
+      backdropDismiss: false,
+      componentProps: {
+        Filter : this.filter
+      }
+    });
+    await modal.present();
 
-    filterLogs() {
-      this.logsToDisplay = this.dataService.getLogsWithFilter(this.filter);
-      console.log(this.logsToDisplay);
-    }
+    modal.onWillDismiss().then(dataReturned => {
+      if ( dataReturned !== null ) {
+        this.filter = dataReturned.data;
+        this.filterLogs();
+      }
+    })
+  }
+
+  filterLogs() {
+    this.logsToDisplay = this.dataService.getLogsWithFilter(this.filter);
+    this.createCharts();
+  }
 }
