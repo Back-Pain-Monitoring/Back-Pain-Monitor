@@ -52,12 +52,14 @@
       </ion-item>
     </ion-list>
 
-    <button size="large" (click)="editLog(log)">
-      <ion-icon slot="icon-only" name="create-outline"></ion-icon>
-    </button>
-    <button size="large" (click)="deleteLog(log)" color="danger">
-      <ion-icon slot="icon-only" name="trash"></ion-icon>
-    </button>
+    <ion-toolbar>
+      <ion-button (click)="editLog(log)" color="primary">
+        <ion-icon slot="icon-only" name="create-outline" size="large"></ion-icon>
+      </ion-button>
+      <ion-button (click)="deleteLog(log)" slot="end" color="danger">
+        <ion-icon slot="icon-only" name="trash" size="large"></ion-icon>
+      </ion-button>
+    </ion-toolbar>
 
   </mat-expansion-panel>
   <!--currently unused, but will re-enable when we get to database-->
