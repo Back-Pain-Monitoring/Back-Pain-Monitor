@@ -12,14 +12,16 @@
     </ion-item>
     <ion-item>
       <ion-range min="0" max="10" step="1" snaps="true" pin="true" [ngModel]="intensity"
-        (ngModelChange)="onIntensityChange($event)" class="required-field">
+        (ngModelChange)="onIntensityChange($event)">
       </ion-range>
     </ion-item>
     <ion-item>
       <ion-label class="ion-text-wrap">{{intensityDescription}}</ion-label>
     </ion-item>
-    <ion-item class="required-field">
+    <ion-item>
       <ion-label>Pain type</ion-label>
+      <ion-icon class="required-icon" name="alert-circle-outline" *ngIf="painType === undefined" color="danger">
+      </ion-icon>
       <ion-select [(ngModel)]="painType">
         <ion-select-option value="none">None</ion-select-option>
         <ion-select-option value="aching">Aching</ion-select-option>
@@ -38,7 +40,10 @@
     </ion-item>
     <ion-item *ngIf="painBefore">
       <ion-label>How many times before?</ion-label>
-      <ion-input type="number" [(ngModel)]="timesBefore" class="required-field"></ion-input>
+      <ion-icon class="required-icon" name="alert-circle-outline" *ngIf="timesBefore === undefined || timesBefore < 1"
+        color="danger">
+      </ion-icon>
+      <ion-input type="number" [(ngModel)]="timesBefore"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label>Does the pain keep you up at night?</ion-label>
@@ -62,6 +67,9 @@
     </ion-item>
     <ion-item>
       <ion-label>When do you feel pain?</ion-label>
+      <ion-icon class="required-icon" name="alert-circle-outline"
+        *ngIf="mobility === undefined || mobility.length === 0" color="danger">
+      </ion-icon>
       <ion-select multiple="true" [(ngModel)]="mobility">
         <ion-select-option value="moving">Moving</ion-select-option>
         <ion-select-option value="resting">Resting</ion-select-option>
@@ -69,9 +77,11 @@
     </ion-item>
     <ion-item>
       <ion-label>Is the pain constant or intermittent?</ion-label>
+      <ion-icon class="required-icon" name="alert-circle-outline" *ngIf="is_constant === undefined" color="danger">
+      </ion-icon>
     </ion-item>
     <ion-item>
-      <ion-radio-group [(ngModel)]="is_constant" class="required-field">
+      <ion-radio-group [(ngModel)]="is_constant">
         <ion-item>
           <ion-label>Constant</ion-label>
           <ion-radio slot="start" value="true"></ion-radio>

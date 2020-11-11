@@ -73,6 +73,8 @@ export class SymptomsPagePage implements OnInit {
     this.dataService.printLogEntry();
     if (this.dataService.currentLogIntensity !== undefined) {
       this.onIntensityChange(this.dataService.currentLogIntensity);
+    } else {
+      this.onIntensityChange(0);
     }
     this.painType = this.dataService.currentLogType;
     this.painBefore = this.dataService.currentLogTimesBefore > 0;
