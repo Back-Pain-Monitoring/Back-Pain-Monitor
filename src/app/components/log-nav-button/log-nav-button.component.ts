@@ -38,7 +38,9 @@ export class LogNavButtonComponent implements OnInit {
         } else {
           this.navCtrl.navigateBack(this.link);
         }
-        this.subscription.unsubscribe();
+        if (this.subscription) {
+          this.subscription.unsubscribe();
+        }
       }
     })
 
