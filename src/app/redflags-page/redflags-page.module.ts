@@ -8,6 +8,8 @@ import { RedflagsPagePageRoutingModule } from './redflags-page-routing.module';
 
 import { RedflagsPagePage } from './redflags-page.page';
 
+import { LogNavButtonComponent } from '../components/log-nav-button/log-nav-button.component';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -15,6 +17,6 @@ import { RedflagsPagePage } from './redflags-page.page';
     IonicModule,
     RedflagsPagePageRoutingModule
   ],
-  declarations: [RedflagsPagePage]
+  declarations: [RedflagsPagePage, LogNavButtonComponent]
 })
-export class RedflagsPagePageModule {}
+export class RedflagsPagePageModule { }

@@ -16,6 +16,7 @@ export class SymptomsAuthguardService {
   constructor(private router: Router, private dataService: LogDataService, private alertCtrl: AlertController) { }
 
   canDeactivate(component: CanComponentDeactivate): boolean {
+    console.log("checking candeactivate");
     const missingFields: string[] = [];
     if (this.dataService.currentLogIntensity === undefined) {
       missingFields.push("Intensity");

@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { AlertController, NavController } from '@ionic/angular';
+import { NavController } from '@ionic/angular';
+import { Subscription } from 'rxjs';
+import { LogDataService } from 'src/app/services/log-data.service';
 
 @Component({
   selector: 'app-log-nav-button',
@@ -10,26 +12,36 @@ export class LogNavButtonComponent implements OnInit {
 
   @Input() direction: "forward" | "backward";
   @Input() link: string;
+  private subscription: Subscription;
 
-  constructor(private alertCtrl: AlertController, private navCtrl: NavController) { }
+  constructor(private navCtrl: NavController, private dataService: LogDataService) { }
 
-  ngOnInit() { }
+  ngOnInit() {
 
-  failedValidate(msg: string) {
-    this.alertCtrl.create({
-      message: msg,
-      buttons: ['OK']
-    }).then((prompt) => {
-      prompt.present();
-    });
   }
 
   navigate() {
-    if (this.direction === "forward") {
-      this.navCtrl.navigateForward(this.link);
-    } else {
-      this.navCtrl.navigateBack(this.link);
-    }
+
+    console.log('navigating');
+
+    // if (this.subscription) {
+    //   console.log('unsubscribing');
+    //   this.subscription.unsubscribe();
+    //   this.subscription = null;
+    // }
+
+    this.subscription = this.dataService.isEnteredSubj.subscribe((is_entered) => {
+      if (is_entered) {
+        console.log('activating navCtrl');
+        if (this.direction === "forward") {
+          this.navCtrl.navigateForward(this.link);
+        } else {
+          this.navCtrl.navigateBack(this.link);
+        }
+        this.subscription.unsubscribe();
+      }
+    })
+
   }
 
 }

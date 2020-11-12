@@ -26,9 +26,11 @@ export class DatetimePagePage implements OnInit {
     if (this.datetime) {
       this.dataService.currentLogDatetime = new Date(this.datetime);
     }
+    this.dataService.updateIsEntered(true);
   }
 
   updateUIFromLog() {
+    this.dataService.updateIsEntered(false);
     if (this.dataService.currentLogDatetime != undefined) {
       this.datetime = this.dataService.currentLogDatetime.toISOString();
     }

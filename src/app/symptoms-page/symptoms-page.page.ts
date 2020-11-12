@@ -64,12 +64,11 @@ export class SymptomsPagePage implements OnInit {
     this.dataService.currentLogMobility = this.mobility;
     this.dataService.currentLogCause = this.cause;
     this.dataService.currentLogIs_constant = this.is_constant === "true";
-    console.log("updated log");
-    // this.dataService.printLogEntry();
+    this.dataService.updateIsEntered(true);
   }
 
   updateUIFromLog() {
-    console.log("updating UI from dataservice");
+    this.dataService.updateIsEntered(false);
     this.dataService.printLogEntry();
     if (this.dataService.currentLogIntensity !== undefined) {
       this.onIntensityChange(this.dataService.currentLogIntensity);
