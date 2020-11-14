@@ -62,6 +62,24 @@
 
     <ion-card>
       <ion-card-header>
+        Night pain
+      </ion-card-header>
+      <ion-card-content>
+        <canvas #nightPainPieCanvas></canvas>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card>
+      <ion-card-header>
+        What makes pain worse/better
+      </ion-card-header>
+      <ion-card-content>
+        <canvas #worseBetterCanvas></canvas>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card>
+      <ion-card-header>
         Frequency of Medication Use
       </ion-card-header>
       <ion-card-content>
@@ -69,7 +87,7 @@
       </ion-card-content>
     </ion-card>
   </div>
-  
+
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button (click)="presentModal()">
       <ion-icon name="filter" color="dark"></ion-icon>

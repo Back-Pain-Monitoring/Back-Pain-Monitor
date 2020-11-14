@@ -333,7 +333,7 @@ export class InsightsPagePage implements OnInit {
           {
             label: "# of Medication Uses",
             data: medication_labels.map(element => medication_fd[element]),
-            backgroundColor: ['#FF0000', '#008080', '#00FF00', '#9932CC', '	#FFD700']
+            backgroundColor: ['#003f5c', '#2f4b7c', '#665191', '#d45087', '#f95d6a']
           }
         ]
       },
