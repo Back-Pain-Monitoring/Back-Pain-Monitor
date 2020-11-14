@@ -38,7 +38,6 @@ export class RedflagsPagePage implements OnInit {
 
   // Converting string data as boolean and display on page
   convertStringToBool() {
-    console.log("covncsrioi sdss");
     for (let i = 0; i < 4; i++) {
       if (this.redflags_symptoms[i] == "True") {
         this.form[i].isChecked = true

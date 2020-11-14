@@ -44,18 +44,34 @@
       <ion-label>Does the pain keep you up at night?</ion-label>
       <ion-checkbox [(ngModel)]="nightPain"></ion-checkbox>
     </ion-item>
-
-    
     <ion-item>
       <ion-label>What makes the pain worse?</ion-label>
       <ion-select multiple="true" [(ngModel)]="worse">
-        <ion-select-option *ngFor="let activity of activities">{{activity}}</ion-select-option>
+        <ion-select-option value="bending">Bending</ion-select-option>
+        <ion-select-option value="sitting">Sitting</ion-select-option>
+        <ion-select-option value="standing">Standing</ion-select-option>
+        <ion-select-option value="walking">Walking</ion-select-option>
+        <ion-select-option value="lying">Lying</ion-select-option>
+        <ion-select-option value="am">AM</ion-select-option>
+        <ion-select-option value="as the day progresses">as the day progresses</ion-select-option>
+        <ion-select-option value="pm">PM</ion-select-option>
+        <ion-select-option value="still">Still</ion-select-option>
+        <ion-select-option value="moving">Moving</ion-select-option>
       </ion-select>
     </ion-item>
     <ion-item>
       <ion-label>What makes the pain better?</ion-label>
       <ion-select multiple="true" [(ngModel)]="better">
-        <ion-select-option *ngFor="let activity of dataService.activities">{{activity}}</ion-select-option>
+        <ion-select-option value="bending">Bending</ion-select-option>
+        <ion-select-option value="sitting">Sitting</ion-select-option>
+        <ion-select-option value="standing">Standing</ion-select-option>
+        <ion-select-option value="walking">Walking</ion-select-option>
+        <ion-select-option value="lying">Lying</ion-select-option>
+        <ion-select-option value="am">AM</ion-select-option>
+        <ion-select-option value="as the day progresses">as the day progresses</ion-select-option>
+        <ion-select-option value="pm">PM</ion-select-option>
+        <ion-select-option value="still">Still</ion-select-option>
+        <ion-select-option value="moving">Moving</ion-select-option>
       </ion-select>
     </ion-item>
     <ion-item>
