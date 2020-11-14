@@ -15,11 +15,13 @@ export class DatetimePagePage implements OnInit {
   }
 
   updateLog() {
+    if ( this.datetime !== undefined ) { 
     this.dataService.currentLogDatetime = new Date(this.datetime);
+    }
   }
 
   updateUIFromLog() {
-    if (this.dataService.currentLogDatetime != undefined) {
+    if (this.dataService.currentLogDatetime !== undefined) {
       this.datetime = this.dataService.currentLogDatetime.toISOString();
     }
   }
