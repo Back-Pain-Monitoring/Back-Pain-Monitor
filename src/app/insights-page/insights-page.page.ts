@@ -98,6 +98,9 @@ export class InsightsPagePage implements OnInit {
             type: 'time',
             time: {
               unit: 'day'
+            },
+            ticks: {
+              autoSkip: true
             }
           }]
         },

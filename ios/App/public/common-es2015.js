@@ -248,6 +248,172 @@ const SPINNERS = spinners;
 
 /***/ }),
 
+/***/ "DAih":
+/*!********************************************************!*\
+  !*** ./src/app/filter-modal/filter-modal.component.ts ***!
+  \********************************************************/
+/*! exports provided: FilterModalPageComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FilterModalPageComponent", function() { return FilterModalPageComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "mrSG");
+/* harmony import */ var _raw_loader_filter_modal_component_html__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! raw-loader!./filter-modal.component.html */ "iXb8");
+/* harmony import */ var _filter_modal_component_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./filter-modal.component.scss */ "aw+1");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ "fXoL");
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic/angular */ "TEn/");
+/* harmony import */ var _services_log_data_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../services/log-data.service */ "YKFw");
+
+
+
+
+
+
+let FilterModalPageComponent = class FilterModalPageComponent {
+    constructor(modalCtrl, dataService, alertCtrl) {
+        this.modalCtrl = modalCtrl;
+        this.dataService = dataService;
+        this.alertCtrl = alertCtrl;
+        this.intensity = { lower: 0, upper: 10 };
+    }
+    ngOnInit() {
+        this.updateFilterUI();
+        const modalState = {
+            modal: true,
+            desc: 'fake state for our modal'
+        };
+        history.pushState(modalState, null);
+    }
+    ngOnDestroy() {
+        if (window.history.state.modal) {
+            history.back();
+        }
+    }
+    // Method of dismissing
+    dismissModal() {
+        this.modalCtrl.dismiss(this.Filter, 'cancel');
+    }
+    // Updates UI based on previous filter setting
+    updateFilterUI() {
+        if (this.Filter.datetime_min != undefined) {
+            this.datetime_min = this.Filter.datetime_min.toISOString();
+        }
+        else {
+            this.datetime_min = new Date("2015-01-02").toISOString();
+        }
+        if (this.Filter.datetime_max != undefined) {
+            this.datetime_max = this.Filter.datetime_max.toISOString();
+        }
+        else {
+            this.datetime_max = new Date().toISOString();
+        }
+        if (this.Filter.intensity_min != undefined) {
+            this.intensity.lower = this.Filter.intensity_min;
+        }
+        if (this.Filter.intensity_max != undefined) {
+            this.intensity.upper = this.Filter.intensity_max;
+        }
+        if (this.Filter.type == undefined) {
+            this.type = 'nofilter';
+        }
+        else {
+            this.type = this.Filter.type;
+        }
+        this.body_part = this.Filter.body_part;
+        this.timesBefore_lower = this.Filter.timesBefore_lower;
+        this.timesBefore_upper = this.Filter.timesBefore_upper;
+    }
+    // Updating Intensity dual knobs
+    onIntensityChange(newIntensity) {
+        this.intensity.lower = newIntensity.lower;
+        this.intensity.upper = newIntensity.upper;
+    }
+    // Resets current filter setting
+    resetFilter() {
+        this.datetime_min = new Date("2015-01-02").toISOString();
+        this.datetime_max = new Date().toISOString();
+        this.intensity = { lower: 0, upper: 10 };
+        this.type = 'nofilter';
+        this.body_part = undefined;
+        this.timesBefore_lower = undefined;
+        this.timesBefore_upper = undefined;
+    }
+    // Checking min date is before max date
+    checkDate() {
+        let minDate = new Date(this.datetime_min);
+        let maxDate = new Date(this.datetime_max);
+        if (minDate < maxDate) {
+            return 1;
+        }
+        else {
+            return 2;
+        }
+    }
+    // Checking the max duration is bigger than min duration
+    checkDuration() {
+        if (this.timesBefore_upper == undefined || this.timesBefore_lower == undefined) {
+            return 1;
+        }
+        else if (this.timesBefore_lower < this.timesBefore_upper) {
+            return 1;
+        }
+        else {
+            return 2;
+        }
+    }
+    // function to save filter settings and passing to view-log page
+    save() {
+        if (this.checkDate() == 1 && this.checkDuration() == 1) {
+            this.Filter.datetime_min = new Date(this.datetime_min);
+            this.Filter.datetime_max = new Date(this.datetime_max);
+            this.Filter.intensity_min = this.intensity.lower;
+            this.Filter.intensity_max = this.intensity.upper;
+            if (this.type == 'nofilter') {
+                this.Filter.type = undefined;
+            }
+            else {
+                this.Filter.type = this.type;
+            }
+            this.Filter.body_part = this.body_part;
+            this.Filter.timesBefore_lower = this.timesBefore_lower;
+            this.Filter.timesBefore_upper = this.timesBefore_upper;
+            const newintensity = this.intensity;
+            this.modalCtrl.dismiss(this.Filter, "submitted");
+        }
+        else if (this.checkDate() == 2) {
+            this.alertCtrl.create({ header: "Warning!", message: "'From' date should be before 'To' date!", buttons: ['Close'] }).then((prompt) => {
+                prompt.present();
+            });
+        }
+        else if (this.checkDuration() == 2) {
+            this.alertCtrl.create({ header: "Warning!", message: "Maximum number of occurence should be higher than minimum!", buttons: ['Close'] }).then((prompt) => {
+                prompt.present();
+            });
+        }
+    }
+};
+FilterModalPageComponent.ctorParameters = () => [
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["ModalController"] },
+    { type: _services_log_data_service__WEBPACK_IMPORTED_MODULE_5__["LogDataService"] },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["AlertController"] }
+];
+FilterModalPageComponent.propDecorators = {
+    Filter: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["Input"] }],
+    dismissModal: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["HostListener"], args: ['window:popstate', ['$event'],] }]
+};
+FilterModalPageComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["Component"])({
+        selector: 'app-filter-modal',
+        template: _raw_loader_filter_modal_component_html__WEBPACK_IMPORTED_MODULE_1__["default"],
+        styles: [_filter_modal_component_scss__WEBPACK_IMPORTED_MODULE_2__["default"]]
+    })
+], FilterModalPageComponent);
+
+
+
+/***/ }),
+
 /***/ "NqGI":
 /*!**************************************************************************!*\
   !*** ./node_modules/@ionic/core/dist/esm/framework-delegate-d1eb6504.js ***!
@@ -490,6 +656,32 @@ const createButtonActiveGesture = (el, isButton) => {
 
 
 
+
+/***/ }),
+
+/***/ "aw+1":
+/*!**********************************************************!*\
+  !*** ./src/app/filter-modal/filter-modal.component.scss ***!
+  \**********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2ZpbHRlci1tb2RhbC9maWx0ZXItbW9kYWwuY29tcG9uZW50LnNjc3MifQ== */");
+
+/***/ }),
+
+/***/ "iXb8":
+/*!************************************************************************************************!*\
+  !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/filter-modal/filter-modal.component.html ***!
+  \************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\n  <ion-toolbar>\n    <ion-title>Filter</ion-title>\n    <ion-button slot=\"end\" (click)=\"resetFilter()\">Reset</ion-button>\n    <ion-button slot=\"end\" (click)=\"dismissModal()\">Close</ion-button>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <ion-list>\n    <ion-item>\n      <ion-label>Time Period</ion-label>\n    </ion-item>\n    <ion-item>\n      <ion-item>From</ion-item>\n       <ion-input > \n        <ion-datetime displayFormat=\"D MMM YYYY H:mm\" [(ngModel)]=\"datetime_min\"></ion-datetime>\n      </ion-input>\n    </ion-item>\n    <ion-item>\n      <ion-item>To</ion-item>\n        <ion-input>\n          <ion-datetime displayFormat=\"D MMM YYYY H:mm\" [(ngModel)]=\"datetime_max\"></ion-datetime>\n        </ion-input>\n    </ion-item>\n    <ion-item>\n      <ion-label>Pain Intensity</ion-label>\n    </ion-item>\n    <ion-item>\n      <ion-input>\n        <ion-range dualKnobs=\"true\" min=\"0\" max=\"10\" step=\"1\" snaps=\"true\" pin=\"true\" [ngModel]=\"intensity\"\n          (ngModelChange)=\"onIntensityChange($event)\">\n        <ion-note color=\"primary\" slot=\"start\">{{intensity.lower}}</ion-note>\n        <ion-note color=\"primary\" slot=\"end\">{{intensity.upper}}</ion-note>\n        </ion-range>\n      </ion-input>\n    </ion-item>\n    <ion-item>\n      <ion-label>Pain Type</ion-label>\n      <ion-select cancelText=\"Cancel\" okText=\"Ok\" [(ngModel)]=\"type\">\n        <ion-select-option value=\"nofilter\">All of Them</ion-select-option>\n        <ion-select-option value=\"none\">None</ion-select-option>\n        <ion-select-option value=\"aching\">Aching</ion-select-option>\n        <ion-select-option value=\"burning\">Burning</ion-select-option>\n        <ion-select-option value=\"cramping\">Cramping</ion-select-option>\n        <ion-select-option value=\"numbness\">Numbness</ion-select-option>\n        <ion-select-option value=\"radiating\">Radiating</ion-select-option>\n        <ion-select-option value=\"shooting\">Shooting</ion-select-option>\n        <ion-select-option value=\"stabbing\">Stabbing</ion-select-option>\n        <ion-select-option value=\"tingling\">Tingling</ion-select-option>\n      </ion-select>\n    </ion-item>\n    <ion-item>\n      <ion-label>Body Part</ion-label>\n      <ion-select cancelText=\"Cancel\" okText=\"Ok\" [(ngModel)]=\"body_part\" multiple={true} placeholder=\"Select Pain Area(s)\">\n        <ion-select-option value=\"rShoulder\">Right Shoulder</ion-select-option>\n        <ion-select-option value=\"lShoulder\">Left Shoulder</ion-select-option>\n        <ion-select-option value=\"neck\">Neck</ion-select-option>\n        <ion-select-option value=\"uBack\">Upper Back</ion-select-option>\n        <ion-select-option value=\"lBack\">Lower Back</ion-select-option>\n        <ion-select-option value=\"mBack\">Middle Back</ion-select-option>\n        <ion-select-option value=\"glutes\">Glutes</ion-select-option>\n      </ion-select>\n    </ion-item>\n    <ion-item>\n      <ion-label>How many times before?</ion-label>\n    </ion-item>\n    <ion-item>\n      <ion-label>From</ion-label>\n      <ion-input type=\"number\" [(ngModel)]=\"timesBefore_lower\"></ion-input>\n    </ion-item>\n    <ion-item>\n      <ion-label>Up to</ion-label>\n      <ion-input type=\"number\" [(ngModel)]=\"timesBefore_upper\"></ion-input>\n    </ion-item>\n  </ion-list>\n  <ion-button expand=\"block\" (click)=\"save()\" class>Submit</ion-button>\n</ion-content>");
 
 /***/ }),
 

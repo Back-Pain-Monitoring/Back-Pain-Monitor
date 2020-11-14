@@ -420,7 +420,7 @@ const routes = [
     },
     {
         path: 'viewlogs-page',
-        loadChildren: () => Promise.all(/*! import() | view-logs-view-logs-module */[__webpack_require__.e("default~comments-page-comments-page-module~datetime-page-datetime-page-module~home-home-module~insig~80563b72"), __webpack_require__.e("view-logs-view-logs-module")]).then(__webpack_require__.bind(null, /*! ./view-logs/view-logs.module */ "pKcb")).then(m => m.ViewLogsPageModule)
+        loadChildren: () => Promise.all(/*! import() | view-logs-view-logs-module */[__webpack_require__.e("default~comments-page-comments-page-module~datetime-page-datetime-page-module~home-home-module~insig~80563b72"), __webpack_require__.e("common"), __webpack_require__.e("view-logs-view-logs-module")]).then(__webpack_require__.bind(null, /*! ./view-logs/view-logs.module */ "pKcb")).then(m => m.ViewLogsPageModule)
     },
     {
         path: 'bodymap',
@@ -440,7 +440,7 @@ const routes = [
     },
     {
         path: 'view-logs',
-        loadChildren: () => Promise.all(/*! import() | view-logs-view-logs-module */[__webpack_require__.e("default~comments-page-comments-page-module~datetime-page-datetime-page-module~home-home-module~insig~80563b72"), __webpack_require__.e("view-logs-view-logs-module")]).then(__webpack_require__.bind(null, /*! ./view-logs/view-logs.module */ "pKcb")).then(m => m.ViewLogsPageModule)
+        loadChildren: () => Promise.all(/*! import() | view-logs-view-logs-module */[__webpack_require__.e("default~comments-page-comments-page-module~datetime-page-datetime-page-module~home-home-module~insig~80563b72"), __webpack_require__.e("common"), __webpack_require__.e("view-logs-view-logs-module")]).then(__webpack_require__.bind(null, /*! ./view-logs/view-logs.module */ "pKcb")).then(m => m.ViewLogsPageModule)
     },
     {
         path: 'log',
