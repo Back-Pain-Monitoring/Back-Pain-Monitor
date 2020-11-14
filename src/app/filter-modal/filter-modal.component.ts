@@ -24,7 +24,6 @@ export class FilterModalPageComponent implements OnInit, OnDestroy{
 
   ngOnInit() {
     this.updateFilterUI();
-    console.log('Filter rece', this.Filter);
     const modalState = {
       modal : true,
       desc : 'fake state for our modal'
@@ -49,7 +48,7 @@ export class FilterModalPageComponent implements OnInit, OnDestroy{
     if ( this.Filter.datetime_min != undefined ) {
       this.datetime_min = this.Filter.datetime_min.toISOString();
     } else {
-      this.datetime_min = new Date("2017-01-05").toISOString();
+      this.datetime_min = new Date("2015-01-02").toISOString();
     }
 
     if ( this.Filter.datetime_max != undefined ) {
@@ -66,7 +65,12 @@ export class FilterModalPageComponent implements OnInit, OnDestroy{
       this.intensity.upper = this.Filter.intensity_max;  
     }
 
-    this.type = this.Filter.type;
+    if ( this.Filter.type == undefined ) {
+      this.type = 'nofilter';
+    } else {
+      this.type = this.Filter.type;
+    }
+    
     this.body_part = this.Filter.body_part;
     this.timesBefore_lower = this.Filter.timesBefore_lower;
     this.timesBefore_upper = this.Filter.timesBefore_upper;
@@ -80,12 +84,12 @@ export class FilterModalPageComponent implements OnInit, OnDestroy{
 
   // Resets current filter setting
   resetFilter() {
-    this.datetime_min = new Date("2017-01-05").toISOString();
+    this.datetime_min = new Date("2015-01-02").toISOString();
     this.datetime_max = new Date().toISOString();
     this.intensity =  { lower: 0, upper:10};
-    this.type = undefined;
+    this.type = 'nofilter';
     this.body_part = undefined;
-    this.timesBefore_lower = 0;
+    this.timesBefore_lower = undefined;
     this.timesBefore_upper = undefined;
   }
 
@@ -119,12 +123,15 @@ export class FilterModalPageComponent implements OnInit, OnDestroy{
       this.Filter.datetime_max = new Date(this.datetime_max);
       this.Filter.intensity_min = this.intensity.lower;
       this.Filter.intensity_max = this.intensity.upper;
+      if ( this.type == 'nofilter' ) {
+        this.Filter.type = undefined;
+      } else {
+        this.Filter.type = this.type;
+      }   
       this.Filter.body_part = this.body_part;
-      this.Filter.type = this.type;
       this.Filter.timesBefore_lower = this.timesBefore_lower;
       this.Filter.timesBefore_upper = this.timesBefore_upper;
       const newintensity = this.intensity;
-      console.log("this.rFilter:", this.Filter);
       this.modalCtrl.dismiss(this.Filter, "submitted");
     } else if ( this.checkDate() == 2 ) {
       this.alertCtrl.create({header: "Warning!", message: "'From' date should be before 'To' date!", buttons:['Close']}).then((prompt) => {
