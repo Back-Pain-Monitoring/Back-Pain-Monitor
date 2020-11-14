@@ -22,6 +22,8 @@ export class InsightsPagePage implements OnInit {
   @ViewChild('nightPainPieCanvas') nightPainPieCanvas: ElementRef;
   @ViewChild('worseBetterCanvas') worseBetterCanvas: ElementRef;
 
+
+
   // Creating the Chart objects
   private intensityTimeChart: Chart;
   private intensityFreqChart: Chart;
@@ -29,7 +31,9 @@ export class InsightsPagePage implements OnInit {
   private mobilityPieChart: Chart;
   private constantPieChart: Chart;
   private redflagsFreqChart: Chart;
+
   private medicationUseChart: Chart;
+
   private nightPainPieChart: CharacterData;
   private worseBetterChart: CharacterData;
 
