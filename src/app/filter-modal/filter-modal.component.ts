@@ -24,7 +24,6 @@ export class FilterModalPageComponent implements OnInit, OnDestroy{
 
   ngOnInit() {
     this.updateFilterUI();
-    console.log('Filter rece', this.Filter);
     const modalState = {
       modal : true,
       desc : 'fake state for our modal'

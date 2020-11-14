@@ -32,7 +32,7 @@ export class MedicationPage implements OnInit {
   intensity: number;
   id: number;
 
-  constructor(private alertCtrl: AlertController, private navCtrl: NavController, public dataService: MedicationDataService) {
+  constructor(private alertCtrl: AlertController, private navCtrl: NavController, private dataService: MedicationDataService) {
 
   }
 

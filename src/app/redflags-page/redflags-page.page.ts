@@ -14,7 +14,7 @@ export class RedflagsPagePage implements OnInit {
 
   redflags_symptoms: string[] = [];
 
-  constructor(public dataService: LogDataService) {
+  constructor(private dataService: LogDataService) {
   }
 
   ngOnInit() {

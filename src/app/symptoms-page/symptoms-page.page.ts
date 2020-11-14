@@ -37,14 +37,14 @@ export class SymptomsPagePage implements OnInit {
   intensityTitle: string = this.intensityInfo[0][0];
   intensityDescription: string = this.intensityInfo[0][1];
 
-  constructor(public dataService: LogDataService) {
+  constructor(private dataService: LogDataService) {
   }
 
   ngOnInit() {
     this.updateUIFromLog();
   }
 
-  public onIntensityChange(newIntensity) {
+  private onIntensityChange(newIntensity) {
     if (!(newIntensity in this.intensityInfo)) {
       newIntensity = 0;
     }
