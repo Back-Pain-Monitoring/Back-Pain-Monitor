@@ -44,10 +44,12 @@
       <ion-label>Does the pain keep you up at night?</ion-label>
       <ion-checkbox [(ngModel)]="nightPain"></ion-checkbox>
     </ion-item>
+
+    
     <ion-item>
       <ion-label>What makes the pain worse?</ion-label>
       <ion-select multiple="true" [(ngModel)]="worse">
-        <ion-select-option *ngFor="let activity of dataService.activities">{{activity}}</ion-select-option>
+        <ion-select-option *ngFor="let activity of activities">{{activity}}</ion-select-option>
       </ion-select>
     </ion-item>
     <ion-item>

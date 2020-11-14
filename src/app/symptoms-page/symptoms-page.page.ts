@@ -23,6 +23,8 @@ export class SymptomsPagePage implements OnInit {
     9: ["Severe", "My pain is all that I can think about. I can barely talk or move because of the pain."],
     10: ["Unable to move", "I am in bed and can't move due to my pain. I need someone to take me to the emergency room to get help for my pain."],
   }
+  private activities = ["bending", "sitting", "standing", "walking", "lying",
+    "am", "as the day progresses", "pm", "still", "moving"]
 
   intensity: number;
   painType: string;
@@ -44,7 +46,7 @@ export class SymptomsPagePage implements OnInit {
     this.updateUIFromLog();
   }
 
-  private onIntensityChange(newIntensity) {
+  public onIntensityChange(newIntensity) {
     if (!(newIntensity in this.intensityInfo)) {
       newIntensity = 0;
     }
