@@ -31,11 +31,11 @@ export class InsightsPagePage implements OnInit {
   private mobilityPieChart: Chart;
   private constantPieChart: Chart;
   private redflagsFreqChart: Chart;
-  private medicationUseChart: CharacterData;
-  private nightPainPieChart: CharacterData;
-  private worseBetterChart: CharacterData;
+  private medicationUseChart: Chart;
+  private nightPainPieChart: Chart;
+  private worseBetterChart: Chart;
 
-  
+
   private filter: LogFilter;
   private logsToDisplay = [];
   private medsToDisplay = [];
@@ -61,7 +61,7 @@ export class InsightsPagePage implements OnInit {
         y: log.intensity,
       }
     });
-    
+
     const medication_use_data = this.medsToDisplay.map(log => {
       return {
         x: log.datetime,
@@ -91,7 +91,7 @@ export class InsightsPagePage implements OnInit {
           yAxes: [{
             ticks: {
               beginAtZero: true,
-              precision: 0,
+              stepSize: 1,
             }
           }],
           xAxes: [{
@@ -131,7 +131,7 @@ export class InsightsPagePage implements OnInit {
           yAxes: [{
             ticks: {
               beginAtZero: true,
-              precision: 0,
+              stepSize: 1,
             }
           }]
         },
@@ -238,12 +238,12 @@ export class InsightsPagePage implements OnInit {
           yAxes: [{
             ticks: {
               beginAtZero: true,
-              precision: 0,
+              stepSize: 1,
             }
           }],
-          xAxes: [{
-            labelsMaxWidth: 100
-          }]
+          // xAxes: [{
+          //   labelWrap: 100
+          // }]
         },
         legend: {
           display: true,
@@ -309,13 +309,13 @@ export class InsightsPagePage implements OnInit {
           yAxes: [{
             ticks: {
               beginAtZero: true,
-              precision: 0,
+              stepSize: 1,
             }
           }]
         }
       }
     });
-    
+
     const medication_fd = { "NSAID": 0, "Acetaminiophen": 0, "COX-2 Inhibitors": 0, "Antidepressants": 0, "Anti-Seizure": 0 };
     const medication_labels = ["NSAID", "Acetaminiophen", "COX-2 Inhibitors", "Antidepressants", "Anti-Seizure"]
     this.medsToDisplay.forEach(element => {
@@ -342,7 +342,7 @@ export class InsightsPagePage implements OnInit {
           yAxes: [{
             ticks: {
               beginAtZero: true,
-              precision: 0,
+              stepSize: 1,
             }
           }]
         }
@@ -486,13 +486,13 @@ export class InsightsPagePage implements OnInit {
       component: FilterModalPageComponent,
       backdropDismiss: false,
       componentProps: {
-        Filter : this.filter
+        Filter: this.filter
       }
     });
     await modal.present();
 
     modal.onWillDismiss().then(dataReturned => {
-      if ( dataReturned !== null ) {
+      if (dataReturned !== null) {
         this.filter = dataReturned.data;
         this.filterLogs();
       }
