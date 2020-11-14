@@ -13,7 +13,7 @@
 
   (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[27], {
     /***/
-    "./node_modules/@ionic/core/dist/esm/ion-reorder_2.entry.js":
+    "smMY":
     /*!******************************************************************!*\
       !*** ./node_modules/@ionic/core/dist/esm/ion-reorder_2.entry.js ***!
       \******************************************************************/
@@ -21,7 +21,7 @@
     /*! exports provided: ion_reorder, ion_reorder_group */
 
     /***/
-    function node_modulesIonicCoreDistEsmIonReorder_2EntryJs(module, __webpack_exports__, __webpack_require__) {
+    function smMY(module, __webpack_exports__, __webpack_require__) {
       "use strict";
 
       __webpack_require__.r(__webpack_exports__);
@@ -42,19 +42,19 @@
 
       var _index_92848855_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! ./index-92848855.js */
-      "./node_modules/@ionic/core/dist/esm/index-92848855.js");
+      "sxy2");
       /* harmony import */
 
 
       var _ionic_global_23e7365a_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! ./ionic-global-23e7365a.js */
-      "./node_modules/@ionic/core/dist/esm/ionic-global-23e7365a.js");
+      "N4tN");
       /* harmony import */
 
 
       var _haptic_7b8ba70a_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! ./haptic-7b8ba70a.js */
-      "./node_modules/@ionic/core/dist/esm/haptic-7b8ba70a.js");
+      "2c9M");
 
       var reorderIosCss = ":host([slot]){display:none;line-height:0;z-index:100}.reorder-icon{display:block;font-size:22px}.reorder-icon{font-size:34px;opacity:0.4}";
       var reorderMdCss = ":host([slot]){display:none;line-height:0;z-index:100}.reorder-icon{display:block;font-size:22px}.reorder-icon{font-size:31px;opacity:0.3}";
@@ -165,7 +165,7 @@
                       _context.next = 7;
                       return Promise.resolve().then(__webpack_require__.bind(null,
                       /*! ./index-eea61379.js */
-                      "./node_modules/@ionic/core/dist/esm/index-eea61379.js"));
+                      "ItpF"));
 
                     case 7:
                       this.gesture = _context.sent.createGesture({

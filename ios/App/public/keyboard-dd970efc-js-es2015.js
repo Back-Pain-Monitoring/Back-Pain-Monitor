@@ -1,6 +1,6 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([["keyboard-dd970efc-js"],{
 
-/***/ "./node_modules/@ionic/core/dist/esm/keyboard-dd970efc.js":
+/***/ "SLyW":
 /*!****************************************************************!*\
   !*** ./node_modules/@ionic/core/dist/esm/keyboard-dd970efc.js ***!
   \****************************************************************/

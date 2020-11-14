@@ -1,136 +1,6 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([["common"],{
 
-/***/ "./node_modules/@ionic/core/dist/esm/button-active-5da929d4.js":
-/*!*********************************************************************!*\
-  !*** ./node_modules/@ionic/core/dist/esm/button-active-5da929d4.js ***!
-  \*********************************************************************/
-/*! exports provided: c */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return createButtonActiveGesture; });
-/* harmony import */ var _index_92848855_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index-92848855.js */ "./node_modules/@ionic/core/dist/esm/index-92848855.js");
-/* harmony import */ var _index_eea61379_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./index-eea61379.js */ "./node_modules/@ionic/core/dist/esm/index-eea61379.js");
-/* harmony import */ var _haptic_7b8ba70a_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./haptic-7b8ba70a.js */ "./node_modules/@ionic/core/dist/esm/haptic-7b8ba70a.js");
-
-
-
-
-const createButtonActiveGesture = (el, isButton) => {
-    let currentTouchedButton;
-    let initialTouchedButton;
-    const activateButtonAtPoint = (x, y, hapticFeedbackFn) => {
-        if (typeof document === 'undefined') {
-            return;
-        }
-        const target = document.elementFromPoint(x, y);
-        if (!target || !isButton(target)) {
-            clearActiveButton();
-            return;
-        }
-        if (target !== currentTouchedButton) {
-            clearActiveButton();
-            setActiveButton(target, hapticFeedbackFn);
-        }
-    };
-    const setActiveButton = (button, hapticFeedbackFn) => {
-        currentTouchedButton = button;
-        if (!initialTouchedButton) {
-            initialTouchedButton = currentTouchedButton;
-        }
-        const buttonToModify = currentTouchedButton;
-        Object(_index_92848855_js__WEBPACK_IMPORTED_MODULE_0__["c"])(() => buttonToModify.classList.add('ion-activated'));
-        hapticFeedbackFn();
-    };
-    const clearActiveButton = (dispatchClick = false) => {
-        if (!currentTouchedButton) {
-            return;
-        }
-        const buttonToModify = currentTouchedButton;
-        Object(_index_92848855_js__WEBPACK_IMPORTED_MODULE_0__["c"])(() => buttonToModify.classList.remove('ion-activated'));
-        /**
-         * Clicking on one button, but releasing on another button
-         * does not dispatch a click event in browsers, so we
-         * need to do it manually here. Some browsers will
-         * dispatch a click if clicking on one button, dragging over
-         * another button, and releasing on the original button. In that
-         * case, we need to make sure we do not cause a double click there.
-         */
-        if (dispatchClick && initialTouchedButton !== currentTouchedButton) {
-            currentTouchedButton.click();
-        }
-        currentTouchedButton = undefined;
-    };
-    return Object(_index_eea61379_js__WEBPACK_IMPORTED_MODULE_1__["createGesture"])({
-        el,
-        gestureName: 'buttonActiveDrag',
-        threshold: 0,
-        onStart: ev => activateButtonAtPoint(ev.currentX, ev.currentY, _haptic_7b8ba70a_js__WEBPACK_IMPORTED_MODULE_2__["a"]),
-        onMove: ev => activateButtonAtPoint(ev.currentX, ev.currentY, _haptic_7b8ba70a_js__WEBPACK_IMPORTED_MODULE_2__["b"]),
-        onEnd: () => {
-            clearActiveButton(true);
-            Object(_haptic_7b8ba70a_js__WEBPACK_IMPORTED_MODULE_2__["h"])();
-            initialTouchedButton = undefined;
-        }
-    });
-};
-
-
-
-
-/***/ }),
-
-/***/ "./node_modules/@ionic/core/dist/esm/framework-delegate-d1eb6504.js":
-/*!**************************************************************************!*\
-  !*** ./node_modules/@ionic/core/dist/esm/framework-delegate-d1eb6504.js ***!
-  \**************************************************************************/
-/*! exports provided: a, d */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return attachComponent; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return detachComponent; });
-const attachComponent = async (delegate, container, component, cssClasses, componentProps) => {
-    if (delegate) {
-        return delegate.attachViewToDom(container, component, componentProps, cssClasses);
-    }
-    if (typeof component !== 'string' && !(component instanceof HTMLElement)) {
-        throw new Error('framework delegate is missing');
-    }
-    const el = (typeof component === 'string')
-        ? container.ownerDocument && container.ownerDocument.createElement(component)
-        : component;
-    if (cssClasses) {
-        cssClasses.forEach(c => el.classList.add(c));
-    }
-    if (componentProps) {
-        Object.assign(el, componentProps);
-    }
-    container.appendChild(el);
-    if (el.componentOnReady) {
-        await el.componentOnReady();
-    }
-    return el;
-};
-const detachComponent = (delegate, element) => {
-    if (element) {
-        if (delegate) {
-            const container = element.parentElement;
-            return delegate.removeViewFromDom(container, element);
-        }
-        element.remove();
-    }
-    return Promise.resolve();
-};
-
-
-
-
-/***/ }),
-
-/***/ "./node_modules/@ionic/core/dist/esm/haptic-7b8ba70a.js":
+/***/ "2c9M":
 /*!**************************************************************!*\
   !*** ./node_modules/@ionic/core/dist/esm/haptic-7b8ba70a.js ***!
   \**************************************************************/
@@ -254,7 +124,7 @@ const hapticImpact = (options) => {
 
 /***/ }),
 
-/***/ "./node_modules/@ionic/core/dist/esm/spinner-configs-c78e170e.js":
+/***/ "6i10":
 /*!***********************************************************************!*\
   !*** ./node_modules/@ionic/core/dist/esm/spinner-configs-c78e170e.js ***!
   \***********************************************************************/
@@ -378,7 +248,252 @@ const SPINNERS = spinners;
 
 /***/ }),
 
-/***/ "./node_modules/@ionic/core/dist/esm/theme-5641d27f.js":
+/***/ "NqGI":
+/*!**************************************************************************!*\
+  !*** ./node_modules/@ionic/core/dist/esm/framework-delegate-d1eb6504.js ***!
+  \**************************************************************************/
+/*! exports provided: a, d */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return attachComponent; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return detachComponent; });
+const attachComponent = async (delegate, container, component, cssClasses, componentProps) => {
+    if (delegate) {
+        return delegate.attachViewToDom(container, component, componentProps, cssClasses);
+    }
+    if (typeof component !== 'string' && !(component instanceof HTMLElement)) {
+        throw new Error('framework delegate is missing');
+    }
+    const el = (typeof component === 'string')
+        ? container.ownerDocument && container.ownerDocument.createElement(component)
+        : component;
+    if (cssClasses) {
+        cssClasses.forEach(c => el.classList.add(c));
+    }
+    if (componentProps) {
+        Object.assign(el, componentProps);
+    }
+    container.appendChild(el);
+    if (el.componentOnReady) {
+        await el.componentOnReady();
+    }
+    return el;
+};
+const detachComponent = (delegate, element) => {
+    if (element) {
+        if (delegate) {
+            const container = element.parentElement;
+            return delegate.removeViewFromDom(container, element);
+        }
+        element.remove();
+    }
+    return Promise.resolve();
+};
+
+
+
+
+/***/ }),
+
+/***/ "SW+M":
+/*!*****************************************************!*\
+  !*** ./src/app/services/medication-data.service.ts ***!
+  \*****************************************************/
+/*! exports provided: MedicationDataService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MedicationDataService", function() { return MedicationDataService; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "mrSG");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "fXoL");
+
+
+let MedicationDataService = class MedicationDataService {
+    constructor() {
+        this.medicationEntries = [
+            {
+                id: 0,
+                datetime: new Date("2020-10-23"),
+                med_type: ["Acetaminiophen"],
+                comment: "It is not working",
+                intensity: 5
+            },
+            {
+                id: 1,
+                datetime: new Date("2020-10-28"),
+                med_type: ["NSAID"],
+                comment: "Makes me queezy",
+                intensity: 4
+            },
+            {
+                id: 2,
+                datetime: new Date("2020-11-4"),
+                med_type: ["COX-2 Inhibitors"],
+                comment: "Makes Pain Worse",
+                intensity: 8
+            },
+            {
+                id: 3,
+                datetime: new Date("2020-11-5"),
+                med_type: ["NSAID"],
+                comment: "First Dose",
+                intensity: 4
+            },
+            {
+                id: 4,
+                datetime: new Date("2020-11-6"),
+                med_type: ["Antidepressants"],
+                comment: "Helps A lot",
+                intensity: 3
+            }
+        ];
+        this.currentMed = this.createEmptyMed();
+    }
+    load() {
+        return Promise.resolve(true);
+    }
+    createEmptyMed() {
+        return {
+            id: undefined,
+            datetime: undefined,
+            med_type: undefined,
+            comment: undefined,
+            intensity: undefined
+        };
+    }
+    // getters & setters based on this: https://wizardforcel.gitbooks.io/tsbook/content/chapter09_ClassesInDepth.html#reffn_1
+    set currentMedId(id) { this.currentMed.intensity = id; }
+    get currentMedId() { return this.currentMed.id; }
+    set currentMedDateTime(datetime) { this.currentMed.datetime = datetime; }
+    get currentMedDateTime() { return this.currentMed.datetime; }
+    set currentMedMed_type(med_type) { this.currentMed.med_type = med_type; }
+    get currentMedMed_type() { return this.currentMed.med_type; }
+    set currentMedComment(comment) { this.currentMed.comment = comment; }
+    get currentMedComment() { return this.currentMed.comment; }
+    set currentMedIntensity(intensity) { this.currentMed.intensity = intensity; }
+    get currentMedIntensity() { return this.currentMed.intensity; }
+    // Submit current Med Entry
+    submitMedEntry() {
+        this.currentMed.id = this.medicationEntries.length;
+        this.medicationEntries.push(this.currentMed);
+        this.printMedEntry();
+        // TODO: Send the log to the database
+        this.currentMed = this.createEmptyMed();
+    }
+    getMeds() {
+        return this.medicationEntries;
+    }
+    printMedEntry(entry) {
+        if (typeof (entry) === "undefined") {
+            entry = this.currentMed;
+        }
+        console.log("Printing Med Entry");
+        console.log(`id: ${entry.id}`);
+        console.log(`datetime: ${entry.datetime}`);
+        console.log(`med_type: ${entry.med_type}`);
+        console.log(`intensity: ${entry.intensity}`);
+        console.log(`comment: ${entry.comment}`);
+    }
+    printMedEntries() {
+        this.medicationEntries.forEach((entry) => this.printMedEntry);
+    }
+};
+MedicationDataService.ctorParameters = () => [];
+MedicationDataService = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
+        providedIn: 'root'
+    })
+], MedicationDataService);
+
+
+
+/***/ }),
+
+/***/ "U/uv":
+/*!*********************************************************************!*\
+  !*** ./node_modules/@ionic/core/dist/esm/button-active-5da929d4.js ***!
+  \*********************************************************************/
+/*! exports provided: c */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return createButtonActiveGesture; });
+/* harmony import */ var _index_92848855_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index-92848855.js */ "sxy2");
+/* harmony import */ var _index_eea61379_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./index-eea61379.js */ "ItpF");
+/* harmony import */ var _haptic_7b8ba70a_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./haptic-7b8ba70a.js */ "2c9M");
+
+
+
+
+const createButtonActiveGesture = (el, isButton) => {
+    let currentTouchedButton;
+    let initialTouchedButton;
+    const activateButtonAtPoint = (x, y, hapticFeedbackFn) => {
+        if (typeof document === 'undefined') {
+            return;
+        }
+        const target = document.elementFromPoint(x, y);
+        if (!target || !isButton(target)) {
+            clearActiveButton();
+            return;
+        }
+        if (target !== currentTouchedButton) {
+            clearActiveButton();
+            setActiveButton(target, hapticFeedbackFn);
+        }
+    };
+    const setActiveButton = (button, hapticFeedbackFn) => {
+        currentTouchedButton = button;
+        if (!initialTouchedButton) {
+            initialTouchedButton = currentTouchedButton;
+        }
+        const buttonToModify = currentTouchedButton;
+        Object(_index_92848855_js__WEBPACK_IMPORTED_MODULE_0__["c"])(() => buttonToModify.classList.add('ion-activated'));
+        hapticFeedbackFn();
+    };
+    const clearActiveButton = (dispatchClick = false) => {
+        if (!currentTouchedButton) {
+            return;
+        }
+        const buttonToModify = currentTouchedButton;
+        Object(_index_92848855_js__WEBPACK_IMPORTED_MODULE_0__["c"])(() => buttonToModify.classList.remove('ion-activated'));
+        /**
+         * Clicking on one button, but releasing on another button
+         * does not dispatch a click event in browsers, so we
+         * need to do it manually here. Some browsers will
+         * dispatch a click if clicking on one button, dragging over
+         * another button, and releasing on the original button. In that
+         * case, we need to make sure we do not cause a double click there.
+         */
+        if (dispatchClick && initialTouchedButton !== currentTouchedButton) {
+            currentTouchedButton.click();
+        }
+        currentTouchedButton = undefined;
+    };
+    return Object(_index_eea61379_js__WEBPACK_IMPORTED_MODULE_1__["createGesture"])({
+        el,
+        gestureName: 'buttonActiveDrag',
+        threshold: 0,
+        onStart: ev => activateButtonAtPoint(ev.currentX, ev.currentY, _haptic_7b8ba70a_js__WEBPACK_IMPORTED_MODULE_2__["a"]),
+        onMove: ev => activateButtonAtPoint(ev.currentX, ev.currentY, _haptic_7b8ba70a_js__WEBPACK_IMPORTED_MODULE_2__["b"]),
+        onEnd: () => {
+            clearActiveButton(true);
+            Object(_haptic_7b8ba70a_js__WEBPACK_IMPORTED_MODULE_2__["h"])();
+            initialTouchedButton = undefined;
+        }
+    });
+};
+
+
+
+
+/***/ }),
+
+/***/ "sPtc":
 /*!*************************************************************!*\
   !*** ./node_modules/@ionic/core/dist/esm/theme-5641d27f.js ***!
   \*************************************************************/
@@ -429,138 +544,6 @@ const openURL = async (url, ev, direction, animation) => {
     return false;
 };
 
-
-
-
-/***/ }),
-
-/***/ "./src/app/services/log-data.service.ts":
-/*!**********************************************!*\
-  !*** ./src/app/services/log-data.service.ts ***!
-  \**********************************************/
-/*! exports provided: LogDataService */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LogDataService", function() { return LogDataService; });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
-
-
-let LogDataService = class LogDataService {
-    constructor() {
-        this.loaded = false;
-        this.logEntries = [
-            {
-                datetime: new Date(),
-                body_part: "back",
-                intensity: 7,
-                type: "shooting pain",
-                duration: 120,
-                cause: "lifting",
-                mobility: ["moving"],
-                is_constant: true,
-                redflag_symptoms: [],
-                comment: "we might need to store where on the body the pain is... like an x/y position?",
-            },
-            {
-                datetime: new Date(),
-                body_part: "left shoulder",
-                intensity: 7,
-                type: "dull ache",
-                duration: 120,
-                cause: "lifting",
-                mobility: ["moving"],
-                is_constant: true,
-                redflag_symptoms: [],
-                comment: "we might need to store where on the body the pain is... like an x/y position?",
-            },
-            {
-                datetime: null,
-                body_part: null,
-                intensity: null,
-                type: null,
-                duration: null,
-                cause: null,
-                mobility: null,
-                is_constant: null,
-                redflag_symptoms: [],
-                comment: null,
-            }
-        ];
-        this.currentLog = this.createEmptyLog();
-    }
-    createEmptyLog() {
-        return {
-            datetime: undefined,
-            body_part: undefined,
-            intensity: undefined,
-            type: undefined,
-            duration: undefined,
-            cause: undefined,
-            mobility: undefined,
-            is_constant: undefined,
-            redflag_symptoms: undefined,
-            comment: undefined
-        };
-    }
-    load() {
-        return Promise.resolve(true);
-    }
-    // getters and setters based on this: https://wizardforcel.gitbooks.io/tsbook/content/chapter09_ClassesInDepth.html#reffn_1
-    set currentLogDatetime(datetime) { this.currentLog.datetime = datetime; }
-    get currentLogDatetime() { return this.currentLog.datetime; }
-    set currentLogBody_part(body_part) { this.currentLog.body_part = body_part; }
-    get currentLogBody_part() { return this.currentLog.body_part; }
-    set currentLogIntensity(intensity) { this.currentLog.intensity = intensity; }
-    get currentLogIntensity() { return this.currentLog.intensity; }
-    set currentLogType(type) { this.currentLog.type = type; }
-    get currentLogType() { return this.currentLog.type; }
-    set currentLogDuration(duration) { this.currentLog.duration = duration; }
-    get currentLogDuration() { return this.currentLog.duration; }
-    set currentLogCause(cause) { this.currentLog.cause = cause; }
-    get currentLogCause() { return this.currentLog.cause; }
-    set currentLogMobility(mobility) { this.currentLog.mobility = mobility; }
-    get currentLogMobility() { return this.currentLog.mobility; }
-    set currentLogIs_constant(is_constant) { this.currentLog.is_constant = is_constant; }
-    get currentLogIs_constant() { return this.currentLog.is_constant; }
-    set currentLogRedflag_symptoms(redflag_symptoms) { this.currentLog.redflag_symptoms = redflag_symptoms; }
-    get currentLogRedflag_symptoms() { return this.currentLog.redflag_symptoms; }
-    set currentLogComment(comment) { this.currentLog.comment = comment; }
-    get currentLogComment() { return this.currentLog.comment; }
-    printLogEntry(entry) {
-        if (typeof (entry) === "undefined") {
-            entry = this.currentLog;
-        }
-        console.log("printing log entry:");
-        console.log(`datetime: ${entry.datetime}`);
-        console.log(`body_part: ${entry.body_part}`);
-        console.log(`intensity: ${entry.intensity}`);
-        console.log(`type: ${entry.type}`);
-        console.log(`duration: ${entry.duration}`);
-        console.log(`cause: ${entry.cause}`);
-        console.log(`mobility: ${entry.mobility}`);
-        console.log(`is_constant: ${entry.is_constant}`);
-        console.log(`redflag_symptoms: ${entry.redflag_symptoms}`);
-        console.log(`comment: ${entry.comment}`);
-    }
-    printLogEntries() {
-        this.logEntries.forEach((entry) => this.printLogEntry(entry));
-    }
-    // submit the current log entry
-    submitLogEntry() {
-        this.logEntries.push(this.currentLog);
-        // TODO: send the log to the database
-        this.currentLog = this.createEmptyLog();
-    }
-};
-LogDataService.ctorParameters = () => [];
-LogDataService = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
-    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
-        providedIn: 'root'
-    })
-], LogDataService);
 
 
 

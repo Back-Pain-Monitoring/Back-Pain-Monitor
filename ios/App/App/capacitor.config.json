@@ -1,6 +1,6 @@
 {
   "appId": "io.ionic.starter",
-  "appName": "quicklists",
+  "appName": "back-pain-monitor",
   "bundledWebRuntime": false,
   "npmClient": "npm",
   "webDir": "www",
