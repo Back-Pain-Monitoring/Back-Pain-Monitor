@@ -13,7 +13,7 @@ export class CommentsPagePage implements OnInit {
   comment: string;
   submit_button_label: string = "Submit";
 
-  constructor(public dataService: LogDataService, private alertCtrl: AlertController, private navCtrl: NavController) {
+  constructor(private dataService: LogDataService, private alertCtrl: AlertController, private navCtrl: NavController) {
   }
 
   ngOnInit() {

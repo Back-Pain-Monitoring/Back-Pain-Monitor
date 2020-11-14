@@ -11,7 +11,7 @@ export class DatetimePagePage implements OnInit {
 
   datetime: string;
 
-  constructor(public dataService: LogDataService) {
+  constructor(private dataService: LogDataService) {
   }
 
   updateLog() {

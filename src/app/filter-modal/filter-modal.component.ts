@@ -19,7 +19,7 @@ export class FilterModalPageComponent implements OnInit, OnDestroy{
   timesBefore_lower: Number;
   timesBefore_upper: Number;
 
-  constructor( public modalCtrl: ModalController, public dataService: LogDataService, private alertCtrl: AlertController ) {
+  constructor( public modalCtrl: ModalController, private dataService: LogDataService, private alertCtrl: AlertController ) {
   }
 
   ngOnInit() {
