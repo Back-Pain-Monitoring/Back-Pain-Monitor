@@ -40,6 +40,8 @@ export class LogDataService {
   public activities = ["bending", "sitting", "standing", "walking", "lying",
     "am", "as the day progresses", "pm", "still", "moving"]
 
+
+
   private logEntries: LogEntry[] = [
     {
       id: 0,
