@@ -4,6 +4,8 @@ import { Chart } from 'chart.js';
 import { LogDataService, LogFilter } from '../services/log-data.service';
 import { FilterModalPageComponent } from '../filter-modal/filter-modal.component';
 import { ModalController } from '@ionic/angular';
+import { element } from 'protractor';
+import { MedicationDataService } from '../services/medication-data.service';
 
 @Component({
   selector: 'app-insights-page',
@@ -18,24 +20,29 @@ export class InsightsPagePage implements OnInit {
   @ViewChild("mobilityPieCanvas") mobilityPieCanvas: ElementRef;
   @ViewChild("constantPieCanvas") constantPieCanvas: ElementRef;
   @ViewChild("redflagsFreqCanvas") redflagsFreqCanvas: ElementRef;
+  @ViewChild("medicationUseCanvas") medicationUseCanvas: ElementRef;
   @ViewChild("nightPainPieCanvas") nightPainPieCanvas: ElementRef;
   @ViewChild("worseBetterCanvas") worseBetterCanvas: ElementRef;
 
+  // Creating the Chart objects
   private intensityTimeChart: Chart;
   private intensityFreqChart: Chart;
   private typePieChart: Chart;
   private mobilityPieChart: Chart;
   private constantPieChart: Chart;
   private redflagsFreqChart: Chart;
-  private nightPainPieChart: Chart;
+  private medicationUseChart: CharacterData;
+  private nightPainPieChart: CharacterData;
   private worseBetterChart: CharacterData;
 
   
   private filter: LogFilter;
   private logsToDisplay = [];
+  private medsToDisplay = [];
 
-  constructor(public dataService: LogDataService, public modalCtrl: ModalController) {
+  constructor(private dataService: LogDataService, public modalCtrl: ModalController, private MedService: MedicationDataService) {
     this.logsToDisplay = this.dataService.getLogs();
+    this.medsToDisplay = this.MedService.getMeds();
   }
 
   ngOnInit() {
@@ -54,6 +61,15 @@ export class InsightsPagePage implements OnInit {
         y: log.intensity,
       }
     });
+    
+    const medication_use_data = this.medsToDisplay.map(log => {
+      return {
+        x: log.datetime,
+        y: log.intensity
+      }
+    })
+
+    console.log(intensity_time_data);
 
     this.intensityTimeChart = new Chart(this.intensityTimeCanvas.nativeElement, {
       type: 'line',
@@ -62,6 +78,11 @@ export class InsightsPagePage implements OnInit {
           label: 'Intensity',
           data: intensity_time_data,
           borderColor: 'rgb(38, 194, 129)',
+        },
+        {
+          label: 'Medication Use',
+          data: medication_use_data,
+          borderColor: 'rgb(255, 204, 203)'
         }
         ]
       },
@@ -294,6 +315,39 @@ export class InsightsPagePage implements OnInit {
         }
       }
     });
+    
+    const medication_fd = { "NSAID": 0, "Acetaminiophen": 0, "COX-2 Inhibitors": 0, "Antidepressants": 0, "Anti-Seizure": 0 };
+    const medication_labels = ["NSAID", "Acetaminiophen", "COX-2 Inhibitors", "Antidepressants", "Anti-Seizure"]
+    this.medsToDisplay.forEach(element => {
+      element.med_type.forEach(med_type => {
+        console.log(`Medication: ${med_type}`);
+        medication_fd[med_type] += 1;
+      });
+    });
+
+    this.medicationUseChart = new Chart(this.medicationUseCanvas.nativeElement, {
+      type: "bar",
+      data: {
+        labels: medication_labels,
+        datasets: [
+          {
+            label: "# of Medication Uses",
+            data: medication_labels.map(element => medication_fd[element]),
+            backgroundColor: ['#FF0000', '#008080', '#00FF00', '#9932CC', '	#FFD700']
+          }
+        ]
+      },
+      options: {
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero: true,
+              precision: 0,
+            }
+          }]
+        }
+      }
+    })
   }
 
   createFreqDist(myList, field?, is_list?) {
