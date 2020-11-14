@@ -1,8 +1,10 @@
 import { getLocaleNumberSymbol } from '@angular/common';
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ComponentFactoryResolver, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Chart } from 'chart.js';
+import { LogDataService, LogFilter } from '../services/log-data.service';
+import { FilterModalPageComponent } from '../filter-modal/filter-modal.component';
+import { ModalController } from '@ionic/angular';
 import { element } from 'protractor';
-import { LogDataService } from '../services/log-data.service';
 import { MedicationDataService } from '../services/medication-data.service';
 
 @Component({
@@ -29,23 +31,29 @@ export class InsightsPagePage implements OnInit {
   private mobilityPieChart: Chart;
   private constantPieChart: Chart;
   private redflagsFreqChart: Chart;
-  private medicationUseChart: CharacterData;
-  private nightPainPieChart: CharacterData;
-  private worseBetterChart: CharacterData;
+  private medicationUseChart: Chart;
+  private nightPainPieChart: Chart;
+  private worseBetterChart: Chart;
 
+
+  private filter: LogFilter;
   private logsToDisplay = [];
   private medsToDisplay = [];
 
-  constructor(private dataService: LogDataService, private MedService: MedicationDataService) {
+  constructor(private dataService: LogDataService, public modalCtrl: ModalController, private MedService: MedicationDataService) {
     this.logsToDisplay = this.dataService.getLogs();
     this.medsToDisplay = this.MedService.getMeds();
   }
 
   ngOnInit() {
+    this.filter = this.dataService.createEmptyFilter();
   }
 
   ngAfterViewInit() {
+    this.createCharts();
+  }
 
+  createCharts() {
     // if this.logsToDisplay is not sorted by datetime, we need to do .sort((a, b) => a.datetime - b.datetime)
     const intensity_time_data = this.logsToDisplay.map(log => {
       return {
@@ -83,7 +91,7 @@ export class InsightsPagePage implements OnInit {
           yAxes: [{
             ticks: {
               beginAtZero: true,
-              precision: 0,
+              stepSize: 1,
             }
           }],
           xAxes: [{
@@ -123,7 +131,7 @@ export class InsightsPagePage implements OnInit {
           yAxes: [{
             ticks: {
               beginAtZero: true,
-              precision: 0,
+              stepSize: 1,
             }
           }]
         },
@@ -209,7 +217,6 @@ export class InsightsPagePage implements OnInit {
     })
     this.logsToDisplay.forEach(element => {
       element.redflag_symptoms.forEach(symptom => {
-        console.log(`symptom: ${symptom}`);
         redflags_fd[symptom] += 1;
       });
     });
@@ -231,12 +238,12 @@ export class InsightsPagePage implements OnInit {
           yAxes: [{
             ticks: {
               beginAtZero: true,
-              precision: 0,
+              stepSize: 1,
             }
           }],
-          xAxes: [{
-            labelsMaxWidth: 100
-          }]
+          // xAxes: [{
+          //   labelWrap: 100
+          // }]
         },
         legend: {
           display: true,
@@ -270,10 +277,6 @@ export class InsightsPagePage implements OnInit {
     const better_fd = this.createFreqDist(this.logsToDisplay, "better", true);
     const worse_better_labels = this.dataService.activities;
 
-    console.log(worse_better_labels.map(element => {
-      return worse_fd[element] || 0;
-    }))
-
     this.worseBetterChart = new Chart(this.worseBetterCanvas.nativeElement, {
       type: "bar",
       data: {
@@ -306,13 +309,12 @@ export class InsightsPagePage implements OnInit {
           yAxes: [{
             ticks: {
               beginAtZero: true,
-              precision: 0,
+              stepSize: 1,
             }
           }]
         }
       }
     });
-
 
     const medication_fd = { "NSAID": 0, "Acetaminiophen": 0, "COX-2 Inhibitors": 0, "Antidepressants": 0, "Anti-Seizure": 0 };
     const medication_labels = ["NSAID", "Acetaminiophen", "COX-2 Inhibitors", "Antidepressants", "Anti-Seizure"]
@@ -331,7 +333,7 @@ export class InsightsPagePage implements OnInit {
           {
             label: "# of Medication Uses",
             data: medication_labels.map(element => medication_fd[element]),
-            backgroundColor: ['#FF0000', '#008080', '#00FF00', '#9932CC', '	#FFD700']
+            backgroundColor: ['#003f5c', '#2f4b7c', '#665191', '#d45087', '#f95d6a']
           }
         ]
       },
@@ -340,13 +342,12 @@ export class InsightsPagePage implements OnInit {
           yAxes: [{
             ticks: {
               beginAtZero: true,
-              precision: 0,
+              stepSize: 1,
             }
           }]
         }
       }
     })
-
   }
 
   createFreqDist(myList, field?, is_list?) {
@@ -477,7 +478,29 @@ export class InsightsPagePage implements OnInit {
         }
       }
     };
-
   }
 
+  // this method creates a modal which is a dialog that appears on top of app's content this will be used as a way of setting filter and passing data
+  async presentModal() {
+    const modal = await this.modalCtrl.create({
+      component: FilterModalPageComponent,
+      backdropDismiss: false,
+      componentProps: {
+        Filter: this.filter
+      }
+    });
+    await modal.present();
+
+    modal.onWillDismiss().then(dataReturned => {
+      if (dataReturned !== null) {
+        this.filter = dataReturned.data;
+        this.filterLogs();
+      }
+    })
+  }
+
+  filterLogs() {
+    this.logsToDisplay = this.dataService.getLogsWithFilter(this.filter);
+    this.createCharts();
+  }
 }
