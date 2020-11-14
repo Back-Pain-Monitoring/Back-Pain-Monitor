@@ -19,7 +19,7 @@ export class FilterModalPageComponent implements OnInit, OnDestroy{
   timesBefore_lower: Number;
   timesBefore_upper: Number;
 
-  constructor( private modalCtrl: ModalController, public dataService: LogDataService, private alertCtrl: AlertController ) {
+  constructor( public modalCtrl: ModalController, public dataService: LogDataService, private alertCtrl: AlertController ) {
   }
 
   ngOnInit() {
@@ -73,7 +73,7 @@ export class FilterModalPageComponent implements OnInit, OnDestroy{
   }
   
   // Updating Intensity dual knobs
-  private onIntensityChange(newIntensity) {
+  public onIntensityChange(newIntensity) {
     this.intensity.lower = newIntensity.lower;
     this.intensity.upper = newIntensity.upper;
   }

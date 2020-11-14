@@ -6,7 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./bodymap-page.page.scss'],
 })
 export class BodymapPagePage implements OnInit {
-
+  painType: string;
+  
   constructor() { }
 
   ngOnInit() {
