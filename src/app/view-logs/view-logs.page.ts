@@ -19,7 +19,7 @@ export class ViewLogsPage implements OnInit {
   public logsToDisplay = [];
   private filter: LogFilter;
 
-  constructor(public dataService: LogDataService, private navCtrl: NavController, public modalCtrl: ModalController) {
+  constructor(private dataService: LogDataService, private navCtrl: NavController, public modalCtrl: ModalController) {
   }
 
   ngOnInit() {
