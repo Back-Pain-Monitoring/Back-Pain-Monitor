@@ -57,14 +57,15 @@ export class InsightsPagePage implements OnInit {
       }
     });
 
-    const medication_use_data = this.medsToDisplay.map(log => {
+    const medication_use_data = this.medsToDisplay.map(med => {
       return {
-        x: log.datetime,
-        y: log.intensity
+        x: med.datetime,
+        y: med.intensity
       }
     })
 
     console.log(intensity_time_data);
+    console.log(medication_use_data);
 
     this.intensityTimeChart = new Chart(this.intensityTimeCanvas.nativeElement, {
       type: 'line',
@@ -277,44 +278,44 @@ export class InsightsPagePage implements OnInit {
     //   return worse_fd[element] || 0;
     // }))
 
-    // this.worseBetterChart = new Chart(this.worseBetterCanvas.nativeElement, {
-    //   type: "bar",
-    //   data: {
-    //     labels: worse_better_labels,
-    //     datasets: [
-    //       {
-    //         label: "worse",
-    //         data: worse_better_labels.map(element => {
-    //           return worse_fd[element] || 0;
-    //         }),
-    //         // fillColor: "blue",
-    //         backgroundColor: '#003f5c', // array should have same number of elements as number of dataset
-    //         // borderColor: 'rgb(38, 194, 129)',// array should have same number of elements as number of dataset
-    //         // borderWidth: 1
-    //       },
-    //       {
-    //         label: "better",
-    //         data: worse_better_labels.map(element => {
-    //           return better_fd[element] || 0;
-    //         }),
-    //         // fillColor: "red",
-    //         backgroundColor: '#bc5090', // array should have same number of elements as number of dataset
-    //         // borderColor: 'rgb(38, 194, 129)',// array should have same number of elements as number of dataset
-    //         // borderWidth: 1
-    //       },
-    //     ]
-    //   },
-    //   options: {
-    //     scales: {
-    //       yAxes: [{
-    //         ticks: {
-    //           beginAtZero: true,
-    //           precision: 0,
-    //         }
-    //       }]
+    //   this.worseBetterChart = new Chart(this.worseBetterCanvas.nativeElement, {
+    //     type: "bar",
+    //     data: {
+    //       labels: worse_better_labels,
+    //       datasets: [
+    //         {
+    //           label: "worse",
+    //           data: worse_better_labels.map(element => {
+    //             return worse_fd[element] || 0;
+    //           }),
+    //           // fillColor: "blue",
+    //           backgroundColor: '#003f5c', // array should have same number of elements as number of dataset
+    //           // borderColor: 'rgb(38, 194, 129)',// array should have same number of elements as number of dataset
+    //           // borderWidth: 1
+    //         },
+    //         {
+    //           label: "better",
+    //           data: worse_better_labels.map(element => {
+    //             return better_fd[element] || 0;
+    //           }),
+    //           // fillColor: "red",
+    //           backgroundColor: '#bc5090', // array should have same number of elements as number of dataset
+    //           // borderColor: 'rgb(38, 194, 129)',// array should have same number of elements as number of dataset
+    //           // borderWidth: 1
+    //         },
+    //       ]
+    //     },
+    //     options: {
+    //       scales: {
+    //         yAxes: [{
+    //           ticks: {
+    //             beginAtZero: true,
+    //             precision: 0,
+    //           }
+    //         }]
+    //       }
     //     }
-    //   }
-    // });
+    //   });
 
 
     const medication_fd = { "NSAID": 0, "Acetaminiophen": 0, "COX-2 Inhibitors": 0, "Antidepressants": 0, "Anti-Seizure": 0 };

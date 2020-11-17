@@ -59,7 +59,7 @@ export class MedicationDataService {
 
   private createEmptyMed(): medicationEntry {
     return {
-      id: undefined,
+      id: -1,
       datetime: undefined,
       med_type: undefined,
       med_comment: undefined,
@@ -71,9 +71,6 @@ export class MedicationDataService {
   private currentMed: medicationEntry = this.createEmptyMed();
 
   // getters & setters based on this: https://wizardforcel.gitbooks.io/tsbook/content/chapter09_ClassesInDepth.html#reffn_1
-  public set currentMedId(id: number) { this.currentMed.intensity = id; }
-  public get currentMedId() { return this.currentMed.id; }
-
   public set currentMedDateTime(datetime: Date) { this.currentMed.datetime = datetime; }
   public get currentMedDateTime() { return this.currentMed.datetime; }
 
@@ -85,6 +82,9 @@ export class MedicationDataService {
 
   public set currentMedIntensity(intensity: number) { this.currentMed.intensity = intensity; }
   public get currentMedIntensity() { return this.currentMed.intensity; }
+
+  public set currentMedId(id: number) { this.currentMed.id = id; }
+  public get currentMedId() { return this.currentMed.id; }
 
 
   // Submit current Med Entry
