@@ -21,8 +21,10 @@ export class InsightsPagePage implements OnInit {
   @ViewChild("constantPieCanvas") constantPieCanvas: ElementRef;
   @ViewChild("redflagsFreqCanvas") redflagsFreqCanvas: ElementRef;
   @ViewChild("medicationUseCanvas") medicationUseCanvas: ElementRef;
-  @ViewChild("nightPainPieCanvas") nightPainPieCanvas: ElementRef;
-  @ViewChild("worseBetterCanvas") worseBetterCanvas: ElementRef;
+  @ViewChild('nightPainPieCanvas') nightPainPieCanvas: ElementRef;
+  @ViewChild('worseBetterCanvas') worseBetterCanvas: ElementRef;
+
+
 
   // Creating the Chart objects
   private intensityTimeChart: Chart;
@@ -62,14 +64,15 @@ export class InsightsPagePage implements OnInit {
       }
     });
 
-    const medication_use_data = this.medsToDisplay.map(log => {
+    const medication_use_data = this.medsToDisplay.map(med => {
       return {
-        x: log.datetime,
-        y: log.intensity
+        x: med.datetime,
+        y: med.intensity
       }
     })
 
     console.log(intensity_time_data);
+    console.log(medication_use_data);
 
     this.intensityTimeChart = new Chart(this.intensityTimeCanvas.nativeElement, {
       type: 'line',
@@ -254,6 +257,8 @@ export class InsightsPagePage implements OnInit {
       }
     });
 
+
+
     const nightData = [0, 0];
     this.logsToDisplay.forEach(element => {
       if (element.nightPain) {
@@ -279,6 +284,10 @@ export class InsightsPagePage implements OnInit {
     const worse_fd = this.createFreqDist(this.logsToDisplay, "worse", true);
     const better_fd = this.createFreqDist(this.logsToDisplay, "better", true);
     const worse_better_labels = this.dataService.activities;
+
+    console.log(worse_better_labels.map(element => {
+      return worse_fd[element] || 0;
+    }))
 
     this.worseBetterChart = new Chart(this.worseBetterCanvas.nativeElement, {
       type: "bar",
@@ -312,12 +321,16 @@ export class InsightsPagePage implements OnInit {
           yAxes: [{
             ticks: {
               beginAtZero: true,
-              stepSize: 1,
+              precision: 0,
             }
           }]
         }
       }
     });
+
+
+
+
 
     const medication_fd = { "NSAID": 0, "Acetaminiophen": 0, "COX-2 Inhibitors": 0, "Antidepressants": 0, "Anti-Seizure": 0 };
     const medication_labels = ["NSAID", "Acetaminiophen", "COX-2 Inhibitors", "Antidepressants", "Anti-Seizure"]

@@ -12,8 +12,8 @@
       </ion-col>
     </ion-row>
     <ion-row>
-      <ion-col class="ion-text-center">
-        <ion-datetime displayFormat="D MMM YYYY" placeholder="When was your first dose?" [(ngModel)]="medication">
+      <ion-col class="ion-text-center" id="time">
+        <ion-datetime displayFormat="D MMM YYYY" placeholder="When was your first dose?" [(ngModel)]="datetime">
         </ion-datetime>
       </ion-col>
     </ion-row>
@@ -21,7 +21,7 @@
       <ion-col class="ion-text-left">
         <ion-item>
           <ion-label>Type of Medication</ion-label>
-          <ion-select cancelText="Cancel" okText="Ok" [(ngModel)]="painType" class="ion-text-left" id="type">
+          <ion-select cancelText="Cancel" okText="Ok" [(ngModel)]="med_type" class="ion-text-left" id="type">
             <ion-select-option value="NSAID">NSAID</ion-select-option>
             <ion-select-option value="acetaminiophen">Acetaminiophen</ion-select-option>
             <ion-select-option value="COX-2-inhibitors">COX-2 inhibitors</ion-select-option>
@@ -53,7 +53,7 @@
     <ion-row>
       <ion-col>
         <ion-item>
-          <ion-textarea rows="4" cols="20" [(ngModel)]="comment"
+          <ion-textarea rows="4" cols="20" [(ngModel)]="med_comment"
             placeholder="Pain at first dose, reason for medication, etc..." id="comment">
           </ion-textarea>
         </ion-item>
