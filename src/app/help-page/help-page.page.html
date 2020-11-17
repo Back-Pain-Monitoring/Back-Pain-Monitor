@@ -11,7 +11,9 @@
         <ion-icon name="caret-down-sharp"></ion-icon>
         When should I see my doctor?
       </ion-button>
-      <ion-text id="doctor" *ngIf="doctorShown">
+    </ion-item>
+    <ion-item *ngIf="doctorShown">
+      <ion-text id="doctor">
         Most pain improves gradually with treatment and self-care within a few weeks. You should contact your doctor if:
         <ul>
           <li>
@@ -36,12 +38,15 @@
         </a>
       </ion-text>
     </ion-item>
+
     <ion-item>
       <ion-button expand="block" (click)="exportLogs = !exportLogs" class="export" shape="round" color="dark">
         <ion-icon slot="start" name="caret-down-sharp" class="questions"></ion-icon>
         How to export my logs?
       </ion-button>
-      <ion-text id="export" *ngIf="exportLogs">
+    </ion-item>
+    <ion-item *ngIf="exportLogs">
+      <ion-text id="export">
         In order to export your logs follow the steps below:
         <ol>
           <li>
