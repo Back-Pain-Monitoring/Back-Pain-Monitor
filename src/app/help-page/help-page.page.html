@@ -5,6 +5,31 @@
 </ion-header>
 
 <ion-content>
+  <ion-button expand="full" (click)="tutorialShown = !tutorialShown">
+    <span>When To See A Doctor</span>
+    <ion-icon id="tutorialIcon" name="arrow-dropdown" slot="end"></ion-icon>
+  </ion-button>
 
+  <ion-text id="tutorial" *ngIf="tutorialShown">
+    Most pain improves gradually with treatment and self-care within a few weeks. You should contact your doctor if:
+    <ul>
+      <li>
+        Pain Persists past a few weeks.
+      </li>
+      <li>
+        Spreads down 1 or both legs, especially if pain begins to extened below the knee.
+      </li>
+      <li>
+        Pain causes weakness, numbness, or tingling in 1 or both legs.
+      </li>
+      <li>
+        Pain is acompanied by a fever.
+      </li>
+      <li>
+        If pain is from a fall, blow to the back, or any other type of injury.
+      </li>
+    </ul>
+    For more information visit
+  </ion-text>
 
 </ion-content>
