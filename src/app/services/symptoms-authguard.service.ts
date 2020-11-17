@@ -27,7 +27,7 @@ export class SymptomsAuthguardService {
     if (this.dataService.currentLogTimesBefore === undefined) {
       missingFields.push("How many times have you experienced this pain before");
     }
-    if (this.dataService.currentLogMobility === undefined || this.dataService.currentLogMobility === []) {
+    if (this.dataService.currentLogMobility === undefined || this.dataService.currentLogMobility.length === 0) {
       missingFields.push("When do you feel pain");
     }
     if (this.dataService.currentLogIs_constant === undefined) {
