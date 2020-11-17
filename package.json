@@ -9,7 +9,10 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "copyios": "npx cap copy ios",
+    "openios": "npx cap open ios",
+    "ios": "ng build && npm run copyios && npm run openios"
   },
   "private": true,
   "dependencies": {
