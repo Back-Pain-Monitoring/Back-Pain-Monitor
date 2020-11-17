@@ -704,31 +704,31 @@
             id: 0,
             datetime: new Date("2020-10-23"),
             med_type: ["Acetaminiophen"],
-            comment: "It is not working",
+            med_comment: "It is not working",
             intensity: 5
           }, {
             id: 1,
             datetime: new Date("2020-10-28"),
             med_type: ["NSAID"],
-            comment: "Makes me queezy",
+            med_comment: "Makes me queezy",
             intensity: 4
           }, {
             id: 2,
             datetime: new Date("2020-11-4"),
             med_type: ["COX-2 Inhibitors"],
-            comment: "Makes Pain Worse",
+            med_comment: "Makes Pain Worse",
             intensity: 8
           }, {
             id: 3,
             datetime: new Date("2020-11-5"),
             med_type: ["NSAID"],
-            comment: "First Dose",
+            med_comment: "First Dose",
             intensity: 4
           }, {
             id: 4,
             datetime: new Date("2020-11-6"),
             med_type: ["Antidepressants"],
-            comment: "Helps A lot",
+            med_comment: "Helps A lot",
             intensity: 3
           }];
           this.currentMed = this.createEmptyMed();
@@ -743,10 +743,10 @@
           key: "createEmptyMed",
           value: function createEmptyMed() {
             return {
-              id: undefined,
+              id: -1,
               datetime: undefined,
               med_type: undefined,
-              comment: undefined,
+              med_comment: undefined,
               intensity: undefined
             };
           } // getters & setters based on this: https://wizardforcel.gitbooks.io/tsbook/content/chapter09_ClassesInDepth.html#reffn_1
@@ -756,8 +756,7 @@
           // Submit current Med Entry
           value: function submitMedEntry() {
             this.currentMed.id = this.medicationEntries.length;
-            this.medicationEntries.push(this.currentMed);
-            this.printMedEntry(); // TODO: Send the log to the database
+            this.medicationEntries.push(this.currentMed); // TODO: Send the log to the database
 
             this.currentMed = this.createEmptyMed();
           }
@@ -778,7 +777,7 @@
             console.log("datetime: ".concat(entry.datetime));
             console.log("med_type: ".concat(entry.med_type));
             console.log("intensity: ".concat(entry.intensity));
-            console.log("comment: ".concat(entry.comment));
+            console.log("comment: ".concat(entry.med_comment));
           }
         }, {
           key: "printMedEntries",
@@ -788,14 +787,6 @@
             this.medicationEntries.forEach(function (entry) {
               return _this.printMedEntry;
             });
-          }
-        }, {
-          key: "currentMedId",
-          set: function set(id) {
-            this.currentMed.intensity = id;
-          },
-          get: function get() {
-            return this.currentMed.id;
           }
         }, {
           key: "currentMedDateTime",
@@ -815,11 +806,11 @@
           }
         }, {
           key: "currentMedComment",
-          set: function set(comment) {
-            this.currentMed.comment = comment;
+          set: function set(med_comment) {
+            this.currentMed.med_comment = med_comment;
           },
           get: function get() {
-            return this.currentMed.comment;
+            return this.currentMed.med_comment;
           }
         }, {
           key: "currentMedIntensity",
@@ -828,6 +819,14 @@
           },
           get: function get() {
             return this.currentMed.intensity;
+          }
+        }, {
+          key: "currentMedId",
+          set: function set(id) {
+            this.currentMed.id = id;
+          },
+          get: function get() {
+            return this.currentMed.id;
           }
         }]);
 

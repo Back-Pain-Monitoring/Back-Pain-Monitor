@@ -484,35 +484,35 @@ let MedicationDataService = class MedicationDataService {
                 id: 0,
                 datetime: new Date("2020-10-23"),
                 med_type: ["Acetaminiophen"],
-                comment: "It is not working",
+                med_comment: "It is not working",
                 intensity: 5
             },
             {
                 id: 1,
                 datetime: new Date("2020-10-28"),
                 med_type: ["NSAID"],
-                comment: "Makes me queezy",
+                med_comment: "Makes me queezy",
                 intensity: 4
             },
             {
                 id: 2,
                 datetime: new Date("2020-11-4"),
                 med_type: ["COX-2 Inhibitors"],
-                comment: "Makes Pain Worse",
+                med_comment: "Makes Pain Worse",
                 intensity: 8
             },
             {
                 id: 3,
                 datetime: new Date("2020-11-5"),
                 med_type: ["NSAID"],
-                comment: "First Dose",
+                med_comment: "First Dose",
                 intensity: 4
             },
             {
                 id: 4,
                 datetime: new Date("2020-11-6"),
                 med_type: ["Antidepressants"],
-                comment: "Helps A lot",
+                med_comment: "Helps A lot",
                 intensity: 3
             }
         ];
@@ -523,29 +523,28 @@ let MedicationDataService = class MedicationDataService {
     }
     createEmptyMed() {
         return {
-            id: undefined,
+            id: -1,
             datetime: undefined,
             med_type: undefined,
-            comment: undefined,
+            med_comment: undefined,
             intensity: undefined
         };
     }
     // getters & setters based on this: https://wizardforcel.gitbooks.io/tsbook/content/chapter09_ClassesInDepth.html#reffn_1
-    set currentMedId(id) { this.currentMed.intensity = id; }
-    get currentMedId() { return this.currentMed.id; }
     set currentMedDateTime(datetime) { this.currentMed.datetime = datetime; }
     get currentMedDateTime() { return this.currentMed.datetime; }
     set currentMedMed_type(med_type) { this.currentMed.med_type = med_type; }
     get currentMedMed_type() { return this.currentMed.med_type; }
-    set currentMedComment(comment) { this.currentMed.comment = comment; }
-    get currentMedComment() { return this.currentMed.comment; }
+    set currentMedComment(med_comment) { this.currentMed.med_comment = med_comment; }
+    get currentMedComment() { return this.currentMed.med_comment; }
     set currentMedIntensity(intensity) { this.currentMed.intensity = intensity; }
     get currentMedIntensity() { return this.currentMed.intensity; }
+    set currentMedId(id) { this.currentMed.id = id; }
+    get currentMedId() { return this.currentMed.id; }
     // Submit current Med Entry
     submitMedEntry() {
         this.currentMed.id = this.medicationEntries.length;
         this.medicationEntries.push(this.currentMed);
-        this.printMedEntry();
         // TODO: Send the log to the database
         this.currentMed = this.createEmptyMed();
     }
@@ -561,7 +560,7 @@ let MedicationDataService = class MedicationDataService {
         console.log(`datetime: ${entry.datetime}`);
         console.log(`med_type: ${entry.med_type}`);
         console.log(`intensity: ${entry.intensity}`);
-        console.log(`comment: ${entry.comment}`);
+        console.log(`comment: ${entry.med_comment}`);
     }
     printMedEntries() {
         this.medicationEntries.forEach((entry) => this.printMedEntry);
