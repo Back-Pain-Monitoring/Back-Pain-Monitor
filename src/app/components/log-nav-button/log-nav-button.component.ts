@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
-import { BehaviorSubject } from 'rxjs';
 import { LogDataService } from 'src/app/services/log-data.service';
 
 @Component({
