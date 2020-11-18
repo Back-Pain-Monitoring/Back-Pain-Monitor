@@ -1,6 +1,6 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([["status-tap-0b3e89c4-js"],{
 
-/***/ "./node_modules/@ionic/core/dist/esm/status-tap-0b3e89c4.js":
+/***/ "9r5H":
 /*!******************************************************************!*\
   !*** ./node_modules/@ionic/core/dist/esm/status-tap-0b3e89c4.js ***!
   \******************************************************************/
@@ -10,7 +10,7 @@
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "startStatusTap", function() { return startStatusTap; });
-/* harmony import */ var _index_92848855_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index-92848855.js */ "./node_modules/@ionic/core/dist/esm/index-92848855.js");
+/* harmony import */ var _index_92848855_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index-92848855.js */ "sxy2");
 
 
 const startStatusTap = () => {

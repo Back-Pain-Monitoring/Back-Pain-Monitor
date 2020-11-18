@@ -13,7 +13,7 @@
 
   (window["webpackJsonp"] = window["webpackJsonp"] || []).push([["shadow-css-c63963b5-js"], {
     /***/
-    "./node_modules/@ionic/core/dist/esm/shadow-css-c63963b5.js":
+    "YBs9":
     /*!******************************************************************!*\
       !*** ./node_modules/@ionic/core/dist/esm/shadow-css-c63963b5.js ***!
       \******************************************************************/
@@ -21,7 +21,7 @@
     /*! exports provided: scopeCss */
 
     /***/
-    function node_modulesIonicCoreDistEsmShadowCssC63963b5Js(module, __webpack_exports__, __webpack_require__) {
+    function YBs9(module, __webpack_exports__, __webpack_require__) {
       "use strict";
 
       __webpack_require__.r(__webpack_exports__);

@@ -23,7 +23,7 @@
 
   (window["webpackJsonp"] = window["webpackJsonp"] || []).push([["swiper-bundle-95afeea2-js"], {
     /***/
-    "./node_modules/@ionic/core/dist/esm/swiper.bundle-95afeea2.js":
+    "7WBn":
     /*!*********************************************************************!*\
       !*** ./node_modules/@ionic/core/dist/esm/swiper.bundle-95afeea2.js ***!
       \*********************************************************************/
@@ -31,7 +31,7 @@
     /*! exports provided: Swiper */
 
     /***/
-    function node_modulesIonicCoreDistEsmSwiperBundle95afeea2Js(module, __webpack_exports__, __webpack_require__) {
+    function WBn(module, __webpack_exports__, __webpack_require__) {
       "use strict";
 
       __webpack_require__.r(__webpack_exports__);

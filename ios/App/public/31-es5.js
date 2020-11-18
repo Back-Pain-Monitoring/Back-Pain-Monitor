@@ -19,7 +19,7 @@
 
   (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[31], {
     /***/
-    "./node_modules/@ionic/core/dist/esm/ion-segment_2.entry.js":
+    "fSgp":
     /*!******************************************************************!*\
       !*** ./node_modules/@ionic/core/dist/esm/ion-segment_2.entry.js ***!
       \******************************************************************/
@@ -27,7 +27,7 @@
     /*! exports provided: ion_segment, ion_segment_button */
 
     /***/
-    function node_modulesIonicCoreDistEsmIonSegment_2EntryJs(module, __webpack_exports__, __webpack_require__) {
+    function fSgp(module, __webpack_exports__, __webpack_require__) {
       "use strict";
 
       __webpack_require__.r(__webpack_exports__);
@@ -48,25 +48,25 @@
 
       var _index_92848855_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! ./index-92848855.js */
-      "./node_modules/@ionic/core/dist/esm/index-92848855.js");
+      "sxy2");
       /* harmony import */
 
 
       var _ionic_global_23e7365a_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! ./ionic-global-23e7365a.js */
-      "./node_modules/@ionic/core/dist/esm/ionic-global-23e7365a.js");
+      "N4tN");
       /* harmony import */
 
 
       var _helpers_5c745fbd_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! ./helpers-5c745fbd.js */
-      "./node_modules/@ionic/core/dist/esm/helpers-5c745fbd.js");
+      "gHap");
       /* harmony import */
 
 
       var _theme_5641d27f_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! ./theme-5641d27f.js */
-      "./node_modules/@ionic/core/dist/esm/theme-5641d27f.js");
+      "sPtc");
 
       var segmentIosCss = ":host{--ripple-color:currentColor;-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased;display:-ms-flexbox;display:flex;position:relative;-ms-flex-align:stretch;align-items:stretch;-ms-flex-pack:center;justify-content:center;width:100%;background:var(--background);font-family:var(--ion-font-family, inherit);text-align:center;contain:paint;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}:host(.segment-scrollable){-ms-flex-pack:start;justify-content:start;width:auto;overflow-x:auto}:host(.segment-scrollable::-webkit-scrollbar){display:none}:host{--background:rgba(var(--ion-text-color-rgb, 0, 0, 0), 0.065);border-radius:8px;overflow:hidden;z-index:0}:host(.ion-color){background:rgba(var(--ion-color-base-rgb), 0.065)}:host(.in-toolbar){margin-left:auto;margin-right:auto;margin-top:0;margin-bottom:0;width:auto}@supports ((-webkit-margin-start: 0) or (margin-inline-start: 0)) or (-webkit-margin-start: 0){:host(.in-toolbar){margin-left:unset;margin-right:unset;-webkit-margin-start:auto;margin-inline-start:auto;-webkit-margin-end:auto;margin-inline-end:auto}}:host(.in-toolbar:not(.ion-color)){background:var(--ion-toolbar-segment-background, var(--background))}:host(.in-toolbar-color:not(.ion-color)){background:rgba(var(--ion-color-contrast-rgb), 0.11)}";
       var segmentMdCss = ":host{--ripple-color:currentColor;-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased;display:-ms-flexbox;display:flex;position:relative;-ms-flex-align:stretch;align-items:stretch;-ms-flex-pack:center;justify-content:center;width:100%;background:var(--background);font-family:var(--ion-font-family, inherit);text-align:center;contain:paint;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}:host(.segment-scrollable){-ms-flex-pack:start;justify-content:start;width:auto;overflow-x:auto}:host(.segment-scrollable::-webkit-scrollbar){display:none}:host{--background:transparent}:host(.segment-scrollable) ::slotted(ion-segment-button){min-width:auto}";
@@ -181,7 +181,7 @@
                       _context.next = 3;
                       return Promise.resolve().then(__webpack_require__.bind(null,
                       /*! ./index-eea61379.js */
-                      "./node_modules/@ionic/core/dist/esm/index-eea61379.js"));
+                      "ItpF"));
 
                     case 3:
                       this.gesture = _context.sent.createGesture({

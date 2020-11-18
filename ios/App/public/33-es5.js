@@ -25,7 +25,7 @@
 
   (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[33], {
     /***/
-    "./node_modules/@ionic/core/dist/esm/ion-slide_2.entry.js":
+    "5xYT":
     /*!****************************************************************!*\
       !*** ./node_modules/@ionic/core/dist/esm/ion-slide_2.entry.js ***!
       \****************************************************************/
@@ -33,7 +33,7 @@
     /*! exports provided: ion_slide, ion_slides */
 
     /***/
-    function node_modulesIonicCoreDistEsmIonSlide_2EntryJs(module, __webpack_exports__, __webpack_require__) {
+    function xYT(module, __webpack_exports__, __webpack_require__) {
       "use strict";
 
       __webpack_require__.r(__webpack_exports__);
@@ -54,13 +54,13 @@
 
       var _index_92848855_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! ./index-92848855.js */
-      "./node_modules/@ionic/core/dist/esm/index-92848855.js");
+      "sxy2");
       /* harmony import */
 
 
       var _ionic_global_23e7365a_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! ./ionic-global-23e7365a.js */
-      "./node_modules/@ionic/core/dist/esm/ionic-global-23e7365a.js");
+      "N4tN");
 
       var slideCss = "ion-slide{display:block;width:100%;height:100%}.slide-zoom{display:block;width:100%;text-align:center}.swiper-slide{display:-ms-flexbox;display:flex;position:relative;-ms-flex-negative:0;flex-shrink:0;-ms-flex-align:center;align-items:center;-ms-flex-pack:center;justify-content:center;width:100%;height:100%;font-size:18px;text-align:center;-webkit-box-sizing:border-box;box-sizing:border-box}.swiper-slide img{width:auto;max-width:100%;height:auto;max-height:100%}";
 
@@ -819,7 +819,7 @@
                       /*! import() | swiper-bundle-95afeea2-js */
                       "swiper-bundle-95afeea2-js").then(__webpack_require__.bind(null,
                       /*! ./swiper.bundle-95afeea2.js */
-                      "./node_modules/@ionic/core/dist/esm/swiper.bundle-95afeea2.js"));
+                      "7WBn"));
 
                     case 3:
                       _yield$__webpack_requ = _context18.sent;
