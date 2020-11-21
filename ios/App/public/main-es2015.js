@@ -803,7 +803,7 @@ const routes = [
     },
     {
         path: 'bodymap',
-        loadChildren: () => __webpack_require__.e(/*! import() | bodymap-page-bodymap-page-module */ "bodymap-page-bodymap-page-module").then(__webpack_require__.bind(null, /*! ./bodymap-page/bodymap-page.module */ "SL9C")).then(m => m.BodymapPagePageModule)
+        loadChildren: () => Promise.all(/*! import() | bodymap-page-bodymap-page-module */[__webpack_require__.e("common"), __webpack_require__.e("bodymap-page-bodymap-page-module")]).then(__webpack_require__.bind(null, /*! ./bodymap-page/bodymap-page.module */ "SL9C")).then(m => m.BodymapPagePageModule)
     },
     {
         path: 'symptoms',
@@ -812,7 +812,7 @@ const routes = [
     },
     {
         path: 'comments',
-        loadChildren: () => __webpack_require__.e(/*! import() | comments-page-comments-page-module */ "comments-page-comments-page-module").then(__webpack_require__.bind(null, /*! ./comments-page/comments-page.module */ "Z713")).then(m => m.CommentsPagePageModule)
+        loadChildren: () => Promise.all(/*! import() | comments-page-comments-page-module */[__webpack_require__.e("common"), __webpack_require__.e("comments-page-comments-page-module")]).then(__webpack_require__.bind(null, /*! ./comments-page/comments-page.module */ "Z713")).then(m => m.CommentsPagePageModule)
     },
     {
         path: 'redflags',

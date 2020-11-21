@@ -37,7 +37,7 @@ let CommentsPagePage = class CommentsPagePage {
     }
     // Check if there exists redflags symptom or not.
     makeAlert() {
-        if (this.dataService.currentLogRedflag_symptoms.includes('True') != true) {
+        if (this.dataService.currentLogRedflag_symptoms.length > 0) {
             this.redflagsCase();
         }
         else {
@@ -51,7 +51,7 @@ let CommentsPagePage = class CommentsPagePage {
         this.navCtrl.navigateRoot('/tabs/home');
     }
     // In case there is no redflag symptoms
-    redflagsCase() {
+    nonredflagsCase() {
         this.alertCtrl.create({
             message: 'Your log has been submitted!',
             buttons: [
@@ -67,7 +67,7 @@ let CommentsPagePage = class CommentsPagePage {
         });
     }
     // In case there exists redflags symptoms
-    nonredflagsCase() {
+    redflagsCase() {
         this.alertCtrl.create({
             message: 'Your log has been submitted!<br><br>Please be advised!<br>- Numbness<br>- Inability to walk<br>-  Losing weight<br>-  Losing bladder control.<br><br>These are considered as red-flag symptoms which can be highly critical to health issues! <br><br> Seek medical help immediately!',
             buttons: [
@@ -84,7 +84,6 @@ let CommentsPagePage = class CommentsPagePage {
     }
     updateLog() {
         this.dataService.currentLogComment = this.comment;
-        this.dataService.printLogEntry();
         this.dataService.updateIsEntered(true);
     }
     updateUIFromLog() {
@@ -124,8 +123,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common */ "ofXK");
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/forms */ "3Pt+");
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic/angular */ "TEn/");
-/* harmony import */ var _comments_page_routing_module__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./comments-page-routing.module */ "e34Q");
-/* harmony import */ var _comments_page_page__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./comments-page.page */ "3i5R");
+/* harmony import */ var _components_log_nav_button_log_nav_button_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/log-nav-button/log-nav-button.component */ "q3LG");
+/* harmony import */ var _comments_page_routing_module__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./comments-page-routing.module */ "e34Q");
+/* harmony import */ var _comments_page_page__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./comments-page.page */ "3i5R");
+
 
 
 
@@ -141,9 +142,9 @@ CommentsPagePageModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]
             _angular_common__WEBPACK_IMPORTED_MODULE_2__["CommonModule"],
             _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormsModule"],
             _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["IonicModule"],
-            _comments_page_routing_module__WEBPACK_IMPORTED_MODULE_5__["CommentsPagePageRoutingModule"]
+            _comments_page_routing_module__WEBPACK_IMPORTED_MODULE_6__["CommentsPagePageRoutingModule"]
         ],
-        declarations: [_comments_page_page__WEBPACK_IMPORTED_MODULE_6__["CommentsPagePage"]]
+        declarations: [_comments_page_page__WEBPACK_IMPORTED_MODULE_7__["CommentsPagePage"], _components_log_nav_button_log_nav_button_component__WEBPACK_IMPORTED_MODULE_5__["LogNavButtonComponent"]]
     })
 ], CommentsPagePageModule);
 
@@ -197,7 +198,7 @@ CommentsPagePageRoutingModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__dec
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\n  <ion-toolbar>\n    <ion-title>Comments</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <ion-text>\n    <h1>Notes</h1>\n  </ion-text>\n\n  <ion-item>\n    <ion-textarea rows=\"6\" cols=\"20\" [(ngModel)]=\"comment\"\n      placeholder=\"e.g. Lifting right arm caused pain on my lower back...\"></ion-textarea>\n  </ion-item>\n\n  <!--Back button to redflags page-->\n  <ion-fab vertical=\"bottom\" horizontal=\"start\" slot=\"fixed\">\n    <ion-fab-button color=\"success\" routerDirection=\"back\" routerLink=\"/redflags\" (click)=\"updateLog()\">\n      <ion-icon name=\"arrow-back-circle-outline\" color=\"dark\"></ion-icon>\n    </ion-fab-button>\n  </ion-fab>\n\n  <!--Submit button that takes you back to home page-->\n  <ion-fab vertical=\"bottom\" horizontal=\"center\" slot=\"fixed\">\n    <ion-button expand=\"block\" (click)=\"makeAlert()\">Submit</ion-button>\n  </ion-fab>\n</ion-content>");
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\n  <ion-toolbar>\n    <ion-title>Comments</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <ion-text>\n    <h1>Notes</h1>\n  </ion-text>\n\n  <ion-item>\n    <ion-textarea rows=\"6\" cols=\"20\" [(ngModel)]=\"comment\"\n      placeholder=\"e.g. Lifting right arm caused pain on my lower back...\"></ion-textarea>\n  </ion-item>\n\n  <ion-fab vertical=\"bottom\" horizontal=\"start\" slot=\"fixed\" (click)=\"updateLog()\">\n    <app-log-nav-button direction=\"back\" link=\"/redflags\"></app-log-nav-button>\n  </ion-fab>\n\n  <!--Submit button that takes you back to home page-->\n  <ion-fab vertical=\"bottom\" horizontal=\"center\" slot=\"fixed\">\n    <ion-button expand=\"block\" (click)=\"makeAlert()\">{{submit_button_label}}</ion-button>\n  </ion-fab>\n</ion-content>");
 
 /***/ }),
 

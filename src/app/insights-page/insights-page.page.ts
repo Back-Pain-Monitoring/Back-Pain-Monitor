@@ -12,7 +12,7 @@ import { MedicationDataService } from '../services/medication-data.service';
   templateUrl: './insights-page.page.html',
   styleUrls: ['./insights-page.page.scss'],
 })
-export class InsightsPagePage implements OnInit {
+export class InsightsPagePage {
 
   @ViewChild("intensityTimeCanvas") intensityTimeCanvas: ElementRef;
   @ViewChild("intensityFreqCanvas") intensityFreqCanvas: ElementRef;
@@ -43,15 +43,12 @@ export class InsightsPagePage implements OnInit {
   private medsToDisplay = [];
 
   constructor(private dataService: LogDataService, public modalCtrl: ModalController, private MedService: MedicationDataService) {
+  }
+
+  ionViewWillEnter() {
+    this.filter = this.dataService.createEmptyFilter();
     this.logsToDisplay = this.dataService.getLogs();
     this.medsToDisplay = this.MedService.getMeds();
-  }
-
-  ngOnInit() {
-    this.filter = this.dataService.createEmptyFilter();
-  }
-
-  ngAfterViewInit() {
     this.createCharts();
   }
 
@@ -69,10 +66,10 @@ export class InsightsPagePage implements OnInit {
         x: med.datetime,
         y: med.intensity
       }
-    })
+    });
 
-    console.log(intensity_time_data);
-    console.log(medication_use_data);
+    const min_x = intensity_time_data[0].x < medication_use_data[0].x ? intensity_time_data[0].x : medication_use_data[0].x;
+    const max_x = intensity_time_data[intensity_time_data.length - 1].x > medication_use_data[medication_use_data.length - 1].x ? intensity_time_data[intensity_time_data.length - 1].x : medication_use_data[medication_use_data.length - 1].x;
 
     this.intensityTimeChart = new Chart(this.intensityTimeCanvas.nativeElement, {
       type: 'line',
@@ -81,11 +78,13 @@ export class InsightsPagePage implements OnInit {
           label: 'Intensity',
           data: intensity_time_data,
           borderColor: 'rgb(38, 194, 129)',
+          fill: false
         },
         {
           label: 'Medication Use',
           data: medication_use_data,
-          borderColor: 'rgb(255, 204, 203)'
+          borderColor: 'rgb(255, 204, 203)',
+          fill: false
         }
         ]
       },
@@ -103,7 +102,9 @@ export class InsightsPagePage implements OnInit {
               unit: 'day'
             },
             ticks: {
-              autoSkip: true
+              autoSkip: true,
+              min: min_x,
+              max: max_x
             }
           }]
         },
@@ -285,9 +286,9 @@ export class InsightsPagePage implements OnInit {
     const better_fd = this.createFreqDist(this.logsToDisplay, "better", true);
     const worse_better_labels = this.dataService.activities;
 
-    console.log(worse_better_labels.map(element => {
+    worse_better_labels.map(element => {
       return worse_fd[element] || 0;
-    }))
+    });
 
     this.worseBetterChart = new Chart(this.worseBetterCanvas.nativeElement, {
       type: "bar",
@@ -336,7 +337,6 @@ export class InsightsPagePage implements OnInit {
     const medication_labels = ["NSAID", "Acetaminiophen", "COX-2 Inhibitors", "Antidepressants", "Anti-Seizure"]
     this.medsToDisplay.forEach(element => {
       element.med_type.forEach(med_type => {
-        console.log(`Medication: ${med_type}`);
         medication_fd[med_type] += 1;
       });
     });

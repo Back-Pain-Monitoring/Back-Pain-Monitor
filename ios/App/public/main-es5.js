@@ -996,9 +996,9 @@
       }, {
         path: 'bodymap',
         loadChildren: function loadChildren() {
-          return __webpack_require__.e(
+          return Promise.all(
           /*! import() | bodymap-page-bodymap-page-module */
-          "bodymap-page-bodymap-page-module").then(__webpack_require__.bind(null,
+          [__webpack_require__.e("common"), __webpack_require__.e("bodymap-page-bodymap-page-module")]).then(__webpack_require__.bind(null,
           /*! ./bodymap-page/bodymap-page.module */
           "SL9C")).then(function (m) {
             return m.BodymapPagePageModule;
@@ -1019,9 +1019,9 @@
       }, {
         path: 'comments',
         loadChildren: function loadChildren() {
-          return __webpack_require__.e(
+          return Promise.all(
           /*! import() | comments-page-comments-page-module */
-          "comments-page-comments-page-module").then(__webpack_require__.bind(null,
+          [__webpack_require__.e("common"), __webpack_require__.e("comments-page-comments-page-module")]).then(__webpack_require__.bind(null,
           /*! ./comments-page/comments-page.module */
           "Z713")).then(function (m) {
             return m.CommentsPagePageModule;

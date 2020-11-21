@@ -78,13 +78,19 @@
       /* harmony import */
 
 
-      var _bodymap_page_routing_module__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+      var _components_log_nav_button_log_nav_button_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+      /*! ../components/log-nav-button/log-nav-button.component */
+      "q3LG");
+      /* harmony import */
+
+
+      var _bodymap_page_routing_module__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
       /*! ./bodymap-page-routing.module */
       "wPG8");
       /* harmony import */
 
 
-      var _bodymap_page_page__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
+      var _bodymap_page_page__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! ./bodymap-page.page */
       "x0lV");
 
@@ -93,8 +99,8 @@
       };
 
       BodymapPagePageModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
-        imports: [_angular_common__WEBPACK_IMPORTED_MODULE_2__["CommonModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormsModule"], _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["IonicModule"], _bodymap_page_routing_module__WEBPACK_IMPORTED_MODULE_5__["BodymapPagePageRoutingModule"]],
-        declarations: [_bodymap_page_page__WEBPACK_IMPORTED_MODULE_6__["BodymapPagePage"]]
+        imports: [_angular_common__WEBPACK_IMPORTED_MODULE_2__["CommonModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormsModule"], _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["IonicModule"], _bodymap_page_routing_module__WEBPACK_IMPORTED_MODULE_6__["BodymapPagePageRoutingModule"]],
+        declarations: [_bodymap_page_page__WEBPACK_IMPORTED_MODULE_7__["BodymapPagePage"], _components_log_nav_button_log_nav_button_component__WEBPACK_IMPORTED_MODULE_5__["LogNavButtonComponent"]]
       })], BodymapPagePageModule);
       /***/
     },
@@ -115,7 +121,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "<ion-header>\n  <ion-toolbar>\n    <ion-title>bodymap-page</ion-title>\n  </ion-toolbar></ion-header>\n\n\n  \n<ion-content>\n\n  <ion-grid>\n    <ion-row class=\"selection\">\n      <ion-col class=\"selection\">\n        <ion-item>\n          <ion-label>Pain Area</ion-label>\n          <ion-select cancelText=\"Cancel\" okText=\"Ok\" [(ngModel)]=\"painType\" multiple={true} placeholder=\"Select Pain Area(s)\">\n            <ion-select-option value=\"rShoulder\">Right Shoulder</ion-select-option>\n            <ion-select-option value=\"lShoulder\">Left Shoulder</ion-select-option>\n            <ion-select-option value=\"neck\">Neck</ion-select-option>\n            <ion-select-option value=\"uBack\">Upper Back</ion-select-option>\n            <ion-select-option value=\"lBack\">Lower Back</ion-select-option>\n            <ion-select-option value=\"mBack\">Middle Back</ion-select-option>\n            <ion-select-option value=\"glutes\">Glutes</ion-select-option>\n          </ion-select> \n        </ion-item>\n      </ion-col>\n    </ion-row>\n    <ion-row>\n      <ion-col>\n        <img src=\"./assets/bodyMap.png\">\n      </ion-col>\n    </ion-row>\n  </ion-grid>\n\n  \n\n  <!--Back button to datetime page-->\n  <ion-fab vertical=\"bottom\" horizontal=\"start\" slot=\"fixed\">\n    <ion-fab-button color=\"success\" routerDirection=\"back\" routerLink=\"/datetime\">\n      <ion-icon name=\"arrow-back-circle-outline\" color=\"dark\"></ion-icon>\n    </ion-fab-button>\n  </ion-fab>\n\n  <!--Forward Button to symptoms page-->\n  <ion-fab vertical=\"bottom\" horizontal=\"end\" slot=\"fixed\">\n    <ion-fab-button color=\"success\" routerDirection=\"forward\" routerLink=\"/symptoms\">\n      <ion-icon name=\"arrow-forward-circle-outline\" color=\"dark\"></ion-icon>\n    </ion-fab-button>\n  </ion-fab>\n\n\n\n</ion-content>";
+      __webpack_exports__["default"] = "<ion-header>\n  <ion-toolbar>\n    <ion-title>bodymap-page</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n\n\n<ion-content>\n\n  <ion-grid>\n    <ion-row class=\"selection\">\n      <ion-col class=\"selection\">\n        <ion-item>\n          <ion-label>Pain Area</ion-label>\n          <ion-select cancelText=\"Cancel\" okText=\"Ok\" [(ngModel)]=\"painType\" multiple={true}\n            placeholder=\"Select Pain Area(s)\">\n            <ion-select-option value=\"rShoulder\">Right Shoulder</ion-select-option>\n            <ion-select-option value=\"lShoulder\">Left Shoulder</ion-select-option>\n            <ion-select-option value=\"neck\">Neck</ion-select-option>\n            <ion-select-option value=\"uBack\">Upper Back</ion-select-option>\n            <ion-select-option value=\"lBack\">Lower Back</ion-select-option>\n            <ion-select-option value=\"mBack\">Middle Back</ion-select-option>\n            <ion-select-option value=\"glutes\">Glutes</ion-select-option>\n          </ion-select>\n        </ion-item>\n      </ion-col>\n    </ion-row>\n    <ion-row>\n      <ion-col>\n        <img src=\"./assets/bodyMap.png\">\n      </ion-col>\n    </ion-row>\n  </ion-grid>\n\n  <ion-fab vertical=\"bottom\" horizontal=\"start\" slot=\"fixed\" (click)=\"updateLog()\">\n    <app-log-nav-button direction=\"back\" link=\"/datetime\"></app-log-nav-button>\n  </ion-fab>\n\n  <ion-fab vertical=\"bottom\" horizontal=\"end\" slot=\"fixed\" (click)=\"updateLog()\">\n    <app-log-nav-button direction=\"forward\" link=\"/symptoms\">\n    </app-log-nav-button>\n  </ion-fab>\n\n</ion-content>";
       /***/
     },
 
@@ -222,22 +228,37 @@
       var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/core */
       "fXoL");
+      /* harmony import */
+
+
+      var _services_log_data_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+      /*! ../services/log-data.service */
+      "YKFw");
 
       var BodymapPagePage = /*#__PURE__*/function () {
-        function BodymapPagePage() {
+        function BodymapPagePage(dataService) {
           _classCallCheck(this, BodymapPagePage);
+
+          this.dataService = dataService;
         }
 
         _createClass(BodymapPagePage, [{
           key: "ngOnInit",
           value: function ngOnInit() {}
+        }, {
+          key: "updateLog",
+          value: function updateLog() {
+            this.dataService.updateIsEntered(true);
+          }
         }]);
 
         return BodymapPagePage;
       }();
 
       BodymapPagePage.ctorParameters = function () {
-        return [];
+        return [{
+          type: _services_log_data_service__WEBPACK_IMPORTED_MODULE_4__["LogDataService"]
+        }];
       };
 
       BodymapPagePage = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["Component"])({
