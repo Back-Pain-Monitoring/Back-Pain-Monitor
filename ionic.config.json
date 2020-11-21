@@ -1,7 +1,8 @@
 {
   "name": "back-pain-monitor",
   "integrations": {
-    "capacitor": {}
+    "capacitor": {},
+    "cordova": {}
   },
   "type": "angular"
 }

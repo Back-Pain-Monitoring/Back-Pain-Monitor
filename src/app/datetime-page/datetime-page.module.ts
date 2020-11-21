@@ -8,13 +8,15 @@ import { DatetimePagePageRoutingModule } from './datetime-page-routing.module';
 
 import { DatetimePagePage } from './datetime-page.page';
 
+import { LogNavButtonComponent } from '../components/log-nav-button/log-nav-button.component';
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    DatetimePagePageRoutingModule
+    DatetimePagePageRoutingModule,
   ],
-  declarations: [DatetimePagePage]
+  declarations: [DatetimePagePage, LogNavButtonComponent]
 })
 export class DatetimePagePageModule { }

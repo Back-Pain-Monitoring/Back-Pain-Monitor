@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { AlertController } from '@ionic/angular';
 
 import { LogDataService } from '../services/log-data.service';
 
@@ -63,15 +64,15 @@ export class SymptomsPagePage implements OnInit {
     this.dataService.currentLogMobility = this.mobility;
     this.dataService.currentLogCause = this.cause;
     this.dataService.currentLogIs_constant = this.is_constant === "true";
-    console.log("updated log");
-    this.dataService.printLogEntry();
+    this.dataService.updateIsEntered(true);
   }
 
   updateUIFromLog() {
-    console.log("updating UI from dataservice");
-    this.dataService.printLogEntry();
+    this.dataService.updateIsEntered(false);
     if (this.dataService.currentLogIntensity !== undefined) {
       this.onIntensityChange(this.dataService.currentLogIntensity);
+    } else {
+      this.onIntensityChange(0);
     }
     this.painType = this.dataService.currentLogType;
     this.painBefore = this.dataService.currentLogTimesBefore > 0;
@@ -81,16 +82,7 @@ export class SymptomsPagePage implements OnInit {
     this.better = this.dataService.currentLogBetter;
     this.mobility = this.dataService.currentLogMobility;
     this.cause = this.dataService.currentLogCause;
-    this.is_constant = this.dataService.currentLogIs_constant ? "true" : "false";
-  }
-
-  // look at the UI to see the changes were made appropriately. Can trigger this function by attaching it to a button.
-  testDataBinding() {
-    this.intensity = 10;
-    this.painType = "numbness";
-    this.cause = "backpack";
-    this.mobility = ["moving", "resting"];
-    this.is_constant = "true";
+    this.is_constant = this.dataService.currentLogIs_constant === false ? "false" : "true";
   }
 
 }

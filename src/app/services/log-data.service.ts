@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 
 export interface LogEntry {
   id: number;
@@ -39,6 +40,7 @@ export class LogDataService {
     "Bladder or bowel incontinence", "Limited spinal range of motion"];
   public activities = ["bending", "sitting", "standing", "walking", "lying",
     "am", "as the day progresses", "pm", "still", "moving"]
+  public isEnteredSubj: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(undefined);
 
 
 
@@ -334,5 +336,9 @@ export class LogDataService {
         (f.timesBefore_lower === undefined || log.timesBefore >= f.timesBefore_lower) &&
         (f.timesBefore_upper === undefined || log.timesBefore <= f.timesBefore_upper);
     });
+  }
+
+  public updateIsEntered(value: boolean) {
+    this.isEnteredSubj.next(value);
   }
 }

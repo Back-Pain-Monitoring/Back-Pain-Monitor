@@ -49,13 +49,13 @@ export class RedflagsPagePage implements OnInit {
   }
 
   updateLog() {
-    console.log("updating log");
     this.convertBoolToString();
     this.dataService.currentLogRedflag_symptoms = this.redflags_symptoms;
+    this.dataService.updateIsEntered(true);
   }
 
   updateUIFromLog() {
-    console.log("updating UI from dataservice");
+    this.dataService.updateIsEntered(false);
     this.redflags_symptoms = this.dataService.currentLogRedflag_symptoms;
     this.convertStringToBool();
   }
