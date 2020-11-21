@@ -24,7 +24,8 @@ export class SymptomsAuthguardService {
     if (this.dataService.currentLogType === undefined) {
       missingFields.push("Pain type");
     }
-    if (this.dataService.currentLogTimesBefore === undefined) {
+    console.log(`times before: ${this.dataService.currentLogTimesBefore}`);
+    if (!this.dataService.currentLogTimesBefore && this.dataService.currentLogTimesBefore !== 0) {
       missingFields.push("How many times have you experienced this pain before");
     }
     if (this.dataService.currentLogMobility === undefined || this.dataService.currentLogMobility.length === 0) {

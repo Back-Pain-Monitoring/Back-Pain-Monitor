@@ -69,7 +69,6 @@ export class SymptomsPagePage implements OnInit {
 
   updateUIFromLog() {
     this.dataService.updateIsEntered(false);
-    this.dataService.printLogEntry();
     if (this.dataService.currentLogIntensity !== undefined) {
       this.onIntensityChange(this.dataService.currentLogIntensity);
     } else {

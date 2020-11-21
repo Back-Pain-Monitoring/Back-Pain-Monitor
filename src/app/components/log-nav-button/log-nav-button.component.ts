@@ -26,15 +26,12 @@ export class LogNavButtonComponent implements OnInit {
 
   requestNav() {
     this.navRequested = true;
-    console.log(`requesting nav for ${this.direction}`);
   }
 
   navigate() {
     if (!this.navRequested) {
-      console.log(`nav not requested for ${this.direction}`);
       return;
     }
-    console.log('activating navCtrl');
     if (this.direction === "forward") {
       this.navCtrl.navigateForward(this.link);
     } else {
