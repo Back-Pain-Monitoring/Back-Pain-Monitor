@@ -22,7 +22,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "<ion-header>\n  <ion-toolbar>\n    <ion-title text-wrap>Do you have any of these?</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <ion-list>\n    <ion-item *ngFor=\"let entry of form\">\n      <ion-label text-wrap>{{entry.val}}</ion-label>\n      <ion-checkbox slot=\"end\" [(ngModel)]=\"entry.isChecked\"></ion-checkbox>\n    </ion-item>\n  </ion-list>\n\n  <ion-fab vertical=\"bottom\" horizontal=\"start\" slot=\"fixed\" (click)=\"updateLog()\">\n    <app-log-nav-button direction=\"back\" link=\"/symptoms\"></app-log-nav-button>\n  </ion-fab>\n\n  <ion-fab vertical=\"bottom\" horizontal=\"end\" slot=\"fixed\" (click)=\"updateLog()\">\n    <app-log-nav-button direction=\"forward\" link=\"/comments\">\n    </app-log-nav-button>\n  </ion-fab>\n\n</ion-content>";
+      __webpack_exports__["default"] = "<ion-header>\n  <ion-toolbar>\n    <ion-title text-wrap>Do you have any of these?</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <ion-list>\n    <ion-item *ngFor=\"let item of form | keyvalue\">\n      <ion-label text-wrap>{{item.key}}</ion-label>\n      <ion-checkbox slot=\"end\" [(ngModel)]=\"form[item.key]\"></ion-checkbox>\n    </ion-item>\n  </ion-list>\n\n  <ion-fab vertical=\"bottom\" horizontal=\"start\" slot=\"fixed\" (click)=\"updateLog()\">\n    <app-log-nav-button direction=\"back\" link=\"/symptoms\"></app-log-nav-button>\n  </ion-fab>\n\n  <ion-fab vertical=\"bottom\" horizontal=\"end\" slot=\"fixed\" (click)=\"updateLog()\">\n    <app-log-nav-button direction=\"forward\" link=\"/comments\">\n    </app-log-nav-button>\n  </ion-fab>\n\n</ion-content>";
       /***/
     },
 
@@ -141,64 +141,40 @@
           _classCallCheck(this, RedflagsPagePage);
 
           this.dataService = dataService;
-          this.form = [];
-          this.redflags_symptoms = [];
+          this.form = {};
         }
 
         _createClass(RedflagsPagePage, [{
           key: "ngOnInit",
           value: function ngOnInit() {
-            var _this = this;
-
-            this.dataService.redflags.forEach(function (redflag) {
-              _this.form.push({
-                val: redflag,
-                isChecked: false
-              });
-            });
             this.updateUIFromLog();
-          } // Converting boolean inputs as string and storing them
-
-        }, {
-          key: "convertBoolToString",
-          value: function convertBoolToString() {
-            this.redflags_symptoms = [];
-
-            for (var i = 0; i < 4; i++) {
-              if (this.form[i].isChecked == true) {
-                this.redflags_symptoms.push("True");
-              } else {
-                this.redflags_symptoms.push("False");
-              }
-            }
-          } // Converting string data as boolean and display on page
-
-        }, {
-          key: "convertStringToBool",
-          value: function convertStringToBool() {
-            console.log("covncsrioi sdss");
-
-            for (var i = 0; i < 4; i++) {
-              if (this.redflags_symptoms[i] == "True") {
-                this.form[i].isChecked = true;
-              } else if (this.redflags_symptoms[i] == "False") {
-                this.form[i].isChecked = false;
-              }
-            }
           }
         }, {
           key: "updateLog",
           value: function updateLog() {
-            this.convertBoolToString();
-            this.dataService.currentLogRedflag_symptoms = this.redflags_symptoms;
+            var symptoms = [];
+
+            for (var flag in this.form) {
+              if (this.form[flag]) {
+                symptoms.push(flag);
+              }
+            }
+
+            this.dataService.currentLogRedflag_symptoms = symptoms;
             this.dataService.updateIsEntered(true);
           }
         }, {
           key: "updateUIFromLog",
           value: function updateUIFromLog() {
+            var _this = this;
+
             this.dataService.updateIsEntered(false);
-            this.redflags_symptoms = this.dataService.currentLogRedflag_symptoms;
-            this.convertStringToBool();
+            this.dataService.redflags.forEach(function (flag) {
+              _this.form[flag] = false;
+            });
+            this.dataService.currentLogRedflag_symptoms.forEach(function (flag) {
+              _this.form[flag] = true;
+            });
           }
         }]);
 

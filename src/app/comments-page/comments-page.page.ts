@@ -25,7 +25,7 @@ export class CommentsPagePage implements OnInit {
 
   // Check if there exists redflags symptom or not.
   makeAlert() {
-    if (this.dataService.currentLogRedflag_symptoms.includes('True') != true) {
+    if (this.dataService.currentLogRedflag_symptoms.length > 0) {
       this.redflagsCase();
     } else {
       this.nonredflagsCase();
@@ -40,7 +40,7 @@ export class CommentsPagePage implements OnInit {
   }
 
   // In case there is no redflag symptoms
-  redflagsCase(): void {
+  nonredflagsCase(): void {
     this.alertCtrl.create({
       message: 'Your log has been submitted!',
       buttons: [
@@ -57,7 +57,7 @@ export class CommentsPagePage implements OnInit {
   }
 
   // In case there exists redflags symptoms
-  nonredflagsCase(): void {
+  redflagsCase(): void {
     this.alertCtrl.create({
       message: 'Your log has been submitted!<br><br>Please be advised!<br>- Numbness<br>- Inability to walk<br>-  Losing weight<br>-  Losing bladder control.<br><br>These are considered as red-flag symptoms which can be highly critical to health issues! <br><br> Seek medical help immediately!',
       buttons: [
@@ -75,7 +75,6 @@ export class CommentsPagePage implements OnInit {
 
   updateLog() {
     this.dataService.currentLogComment = this.comment;
-    this.dataService.printLogEntry();
     this.dataService.updateIsEntered(true);
   }
 
