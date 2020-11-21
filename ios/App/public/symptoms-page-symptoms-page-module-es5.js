@@ -67,6 +67,12 @@
       var _symptoms_page_page__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
       /*! ./symptoms-page.page */
       "gx8U");
+      /* harmony import */
+
+
+      var _components_log_nav_button_log_nav_button_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
+      /*! ../components/log-nav-button/log-nav-button.component */
+      "q3LG");
 
       var SymptomsPagePageModule = function SymptomsPagePageModule() {
         _classCallCheck(this, SymptomsPagePageModule);
@@ -74,7 +80,7 @@
 
       SymptomsPagePageModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
         imports: [_angular_common__WEBPACK_IMPORTED_MODULE_2__["CommonModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormsModule"], _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["IonicModule"], _symptoms_page_routing_module__WEBPACK_IMPORTED_MODULE_5__["SymptomsPagePageRoutingModule"]],
-        declarations: [_symptoms_page_page__WEBPACK_IMPORTED_MODULE_6__["SymptomsPagePage"]]
+        declarations: [_symptoms_page_page__WEBPACK_IMPORTED_MODULE_6__["SymptomsPagePage"], _components_log_nav_button_log_nav_button_component__WEBPACK_IMPORTED_MODULE_7__["LogNavButtonComponent"]]
       })], SymptomsPagePageModule);
       /***/
     },
@@ -95,7 +101,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "<ion-header>\n  <ion-toolbar>\n    <ion-title>Symptoms</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <ion-list>\n    <ion-item>\n      <ion-label>Pain Intensity</ion-label>\n      <ion-label>{{intensityTitle}}</ion-label>\n    </ion-item>\n    <ion-item>\n      <ion-range min=\"0\" max=\"10\" step=\"1\" snaps=\"true\" pin=\"true\" [ngModel]=\"intensity\"\n        (ngModelChange)=\"onIntensityChange($event)\">\n      </ion-range>\n    </ion-item>\n    <ion-item>\n      <ion-label class=\"ion-text-wrap\">{{intensityDescription}}</ion-label>\n    </ion-item>\n    <ion-item>\n      <ion-label>Pain type</ion-label>\n      <ion-select [(ngModel)]=\"painType\">\n        <ion-select-option value=\"none\">None</ion-select-option>\n        <ion-select-option value=\"aching\">Aching</ion-select-option>\n        <ion-select-option value=\"burning\">Burning</ion-select-option>\n        <ion-select-option value=\"cramping\">Cramping</ion-select-option>\n        <ion-select-option value=\"numbness\">Numbness</ion-select-option>\n        <ion-select-option value=\"radiating\">Radiating</ion-select-option>\n        <ion-select-option value=\"shooting\">Shooting</ion-select-option>\n        <ion-select-option value=\"stabbing\">Stabbing</ion-select-option>\n        <ion-select-option value=\"tingling\">Tingling</ion-select-option>\n      </ion-select>\n    </ion-item>\n    <ion-item>\n      <ion-label>Have you had this pain before?</ion-label>\n      <ion-checkbox [(ngModel)]=\"painBefore\"></ion-checkbox>\n    </ion-item>\n    <ion-item *ngIf=\"painBefore\">\n      <ion-label>How many times before?</ion-label>\n      <ion-input type=\"number\" [(ngModel)]=\"timesBefore\"></ion-input>\n    </ion-item>\n    <ion-item>\n      <ion-label>Does the pain keep you up at night?</ion-label>\n      <ion-checkbox [(ngModel)]=\"nightPain\"></ion-checkbox>\n    </ion-item>\n    <ion-item>\n      <ion-label>What makes the pain worse?</ion-label>\n      <ion-select multiple=\"true\" [(ngModel)]=\"worse\">\n        <ion-select-option *ngFor=\"let activity of dataService.activities\">{{activity}}</ion-select-option>\n      </ion-select>\n    </ion-item>\n    <ion-item>\n      <ion-label>What makes the pain better?</ion-label>\n      <ion-select multiple=\"true\" [(ngModel)]=\"better\">\n        <ion-select-option *ngFor=\"let activity of dataService.activities\">{{activity}}</ion-select-option>\n      </ion-select>\n    </ion-item>\n    <ion-item>\n      <ion-label>Cause of pain</ion-label>\n      <ion-input type=\"text\" value=\"unknown\" [(ngModel)]=\"cause\"></ion-input>\n    </ion-item>\n    <ion-item>\n      <ion-label>When do you feel pain?</ion-label>\n      <ion-select multiple=\"true\" [(ngModel)]=\"mobility\">\n        <ion-select-option value=\"moving\">Moving</ion-select-option>\n        <ion-select-option value=\"resting\">Resting</ion-select-option>\n      </ion-select>\n    </ion-item>\n    <ion-item>\n      <ion-label>Is the pain constant or intermittent?</ion-label>\n    </ion-item>\n    <ion-item>\n      <ion-radio-group [(ngModel)]=\"is_constant\">\n        <ion-item>\n          <ion-label>Constant</ion-label>\n          <ion-radio slot=\"start\" value=\"true\"></ion-radio>\n        </ion-item>\n        <ion-item>\n          <ion-label>Intermittent</ion-label>\n          <ion-radio slot=\"start\" value=\"false\"></ion-radio>\n        </ion-item>\n      </ion-radio-group>\n    </ion-item>\n  </ion-list>\n\n  <!--Back button to bodymap page-->\n  <ion-fab vertical=\"bottom\" horizontal=\"start\" slot=\"fixed\">\n    <ion-fab-button color=\"success\" routerDirection=\"back\" routerLink=\"/bodymap\" (click)=\"updateLog()\">\n      <ion-icon name=\"arrow-back-circle-outline\" color=\"dark\"></ion-icon>\n    </ion-fab-button>\n  </ion-fab>\n\n  <!--Forward Button to redflags page-->\n  <ion-fab vertical=\"bottom\" horizontal=\"end\" slot=\"fixed\">\n    <ion-fab-button color=\"success\" routerDirection=\"forward\" routerLink=\"/redflags\" (click)=\"updateLog()\">\n      <ion-icon name=\"arrow-forward-circle-outline\" color=\"dark\"></ion-icon>\n    </ion-fab-button>\n  </ion-fab>\n\n\n\n</ion-content>";
+      __webpack_exports__["default"] = "<ion-header>\n  <ion-toolbar>\n    <ion-title>Symptoms</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <ion-list>\n    <ion-item>\n      <ion-label>Pain Intensity</ion-label>\n      <ion-label>{{intensityTitle}}</ion-label>\n    </ion-item>\n    <ion-item>\n      <ion-range min=\"0\" max=\"10\" step=\"1\" snaps=\"true\" pin=\"true\" [ngModel]=\"intensity\"\n        (ngModelChange)=\"onIntensityChange($event)\">\n      </ion-range>\n    </ion-item>\n    <ion-item>\n      <ion-label class=\"ion-text-wrap\">{{intensityDescription}}</ion-label>\n    </ion-item>\n    <ion-item>\n      <ion-label>Pain type</ion-label>\n      <ion-icon class=\"required-icon\" name=\"alert-circle-outline\" *ngIf=\"painType === undefined\" color=\"danger\">\n      </ion-icon>\n      <ion-select [(ngModel)]=\"painType\">\n        <ion-select-option value=\"none\">None</ion-select-option>\n        <ion-select-option value=\"aching\">Aching</ion-select-option>\n        <ion-select-option value=\"burning\">Burning</ion-select-option>\n        <ion-select-option value=\"cramping\">Cramping</ion-select-option>\n        <ion-select-option value=\"numbness\">Numbness</ion-select-option>\n        <ion-select-option value=\"radiating\">Radiating</ion-select-option>\n        <ion-select-option value=\"shooting\">Shooting</ion-select-option>\n        <ion-select-option value=\"stabbing\">Stabbing</ion-select-option>\n        <ion-select-option value=\"tingling\">Tingling</ion-select-option>\n      </ion-select>\n    </ion-item>\n    <ion-item>\n      <ion-label>Have you had this pain before?</ion-label>\n      <ion-checkbox [(ngModel)]=\"painBefore\"></ion-checkbox>\n    </ion-item>\n    <ion-item *ngIf=\"painBefore\">\n      <ion-label>How many times before?</ion-label>\n      <ion-icon class=\"required-icon\" name=\"alert-circle-outline\" *ngIf=\"timesBefore === undefined || timesBefore < 1\"\n        color=\"danger\">\n      </ion-icon>\n      <ion-input type=\"number\" [(ngModel)]=\"timesBefore\"></ion-input>\n    </ion-item>\n    <ion-item>\n      <ion-label>Does the pain keep you up at night?</ion-label>\n      <ion-checkbox [(ngModel)]=\"nightPain\"></ion-checkbox>\n    </ion-item>\n    <ion-item>\n      <ion-label>What makes the pain worse?</ion-label>\n      <ion-select multiple=\"true\" [(ngModel)]=\"worse\">\n        <ion-select-option *ngFor=\"let activity of dataService.activities\">{{activity}}</ion-select-option>\n      </ion-select>\n    </ion-item>\n    <ion-item>\n      <ion-label>What makes the pain better?</ion-label>\n      <ion-select multiple=\"true\" [(ngModel)]=\"better\">\n        <ion-select-option *ngFor=\"let activity of dataService.activities\">{{activity}}</ion-select-option>\n      </ion-select>\n    </ion-item>\n    <ion-item>\n      <ion-label>Cause of pain</ion-label>\n      <ion-input type=\"text\" value=\"unknown\" [(ngModel)]=\"cause\"></ion-input>\n    </ion-item>\n    <ion-item>\n      <ion-label>When do you feel pain?</ion-label>\n      <ion-icon class=\"required-icon\" name=\"alert-circle-outline\"\n        *ngIf=\"mobility === undefined || mobility.length === 0\" color=\"danger\">\n      </ion-icon>\n      <ion-select multiple=\"true\" [(ngModel)]=\"mobility\">\n        <ion-select-option value=\"moving\">Moving</ion-select-option>\n        <ion-select-option value=\"resting\">Resting</ion-select-option>\n      </ion-select>\n    </ion-item>\n    <ion-item>\n      <ion-label>Is the pain constant or intermittent?</ion-label>\n      <ion-icon class=\"required-icon\" name=\"alert-circle-outline\" *ngIf=\"is_constant === undefined\" color=\"danger\">\n      </ion-icon>\n    </ion-item>\n    <ion-item>\n      <ion-radio-group [(ngModel)]=\"is_constant\">\n        <ion-item>\n          <ion-label>Constant</ion-label>\n          <ion-radio slot=\"start\" value=\"true\"></ion-radio>\n        </ion-item>\n        <ion-item>\n          <ion-label>Intermittent</ion-label>\n          <ion-radio slot=\"start\" value=\"false\"></ion-radio>\n        </ion-item>\n      </ion-radio-group>\n    </ion-item>\n  </ion-list>\n\n  <ion-fab vertical=\"bottom\" horizontal=\"start\" slot=\"fixed\" (click)=\"updateLog()\">\n    <app-log-nav-button direction=\"back\" link=\"/bodymap\"></app-log-nav-button>\n  </ion-fab>\n\n  <ion-fab vertical=\"bottom\" horizontal=\"end\" slot=\"fixed\" (click)=\"updateLog()\">\n    <app-log-nav-button direction=\"forward\" link=\"/redflags\">\n    </app-log-nav-button>\n  </ion-fab>\n</ion-content>";
       /***/
     },
 
@@ -204,17 +210,17 @@
             this.dataService.currentLogMobility = this.mobility;
             this.dataService.currentLogCause = this.cause;
             this.dataService.currentLogIs_constant = this.is_constant === "true";
-            console.log("updated log");
-            this.dataService.printLogEntry();
+            this.dataService.updateIsEntered(true);
           }
         }, {
           key: "updateUIFromLog",
           value: function updateUIFromLog() {
-            console.log("updating UI from dataservice");
-            this.dataService.printLogEntry();
+            this.dataService.updateIsEntered(false);
 
             if (this.dataService.currentLogIntensity !== undefined) {
               this.onIntensityChange(this.dataService.currentLogIntensity);
+            } else {
+              this.onIntensityChange(0);
             }
 
             this.painType = this.dataService.currentLogType;
@@ -225,17 +231,7 @@
             this.better = this.dataService.currentLogBetter;
             this.mobility = this.dataService.currentLogMobility;
             this.cause = this.dataService.currentLogCause;
-            this.is_constant = this.dataService.currentLogIs_constant ? "true" : "false";
-          } // look at the UI to see the changes were made appropriately. Can trigger this function by attaching it to a button.
-
-        }, {
-          key: "testDataBinding",
-          value: function testDataBinding() {
-            this.intensity = 10;
-            this.painType = "numbness";
-            this.cause = "backpack";
-            this.mobility = ["moving", "resting"];
-            this.is_constant = "true";
+            this.is_constant = this.dataService.currentLogIs_constant === false ? "false" : "true";
           }
         }]);
 

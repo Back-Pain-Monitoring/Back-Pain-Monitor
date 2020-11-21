@@ -52,25 +52,43 @@
       /* harmony import */
 
 
-      var _services_log_data_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+      var _ionic_angular__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+      /*! @ionic/angular */
+      "TEn/");
+      /* harmony import */
+
+
+      var _services_log_data_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! ../services/log-data.service */
       "YKFw");
 
       var DatetimePagePage = /*#__PURE__*/function () {
-        function DatetimePagePage(dataService) {
+        function DatetimePagePage(dataService, alertCtrl) {
           _classCallCheck(this, DatetimePagePage);
 
           this.dataService = dataService;
+          this.alertCtrl = alertCtrl;
         }
 
         _createClass(DatetimePagePage, [{
+          key: "ngOnInit",
+          value: function ngOnInit() {
+            this.updateUIFromLog();
+          }
+        }, {
           key: "updateLog",
           value: function updateLog() {
-            this.dataService.currentLogDatetime = new Date(this.datetime);
+            if (this.datetime) {
+              this.dataService.currentLogDatetime = new Date(this.datetime);
+            }
+
+            this.dataService.updateIsEntered(true);
           }
         }, {
           key: "updateUIFromLog",
           value: function updateUIFromLog() {
+            this.dataService.updateIsEntered(false);
+
             if (this.dataService.currentLogDatetime != undefined) {
               this.datetime = this.dataService.currentLogDatetime.toISOString();
             }
@@ -81,9 +99,10 @@
             this.datetime = new Date().toISOString();
           }
         }, {
-          key: "ngOnInit",
-          value: function ngOnInit() {
-            this.updateUIFromLog();
+          key: "navigateForward",
+          value: function navigateForward() {
+            this.updateLog();
+            this.forwardButton.navigate();
           }
         }]);
 
@@ -92,10 +111,26 @@
 
       DatetimePagePage.ctorParameters = function () {
         return [{
-          type: _services_log_data_service__WEBPACK_IMPORTED_MODULE_4__["LogDataService"]
+          type: _services_log_data_service__WEBPACK_IMPORTED_MODULE_5__["LogDataService"]
+        }, {
+          type: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["AlertController"]
         }];
       };
 
+      DatetimePagePage.propDecorators = {
+        backButton: [{
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["ViewChild"],
+          args: ['backButton', {
+            "static": false
+          }]
+        }],
+        forwardButton: [{
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["ViewChild"],
+          args: ['forwardButton', {
+            "static": false
+          }]
+        }]
+      };
       DatetimePagePage = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["Component"])({
         selector: 'app-datetime-page',
         template: _raw_loader_datetime_page_page_html__WEBPACK_IMPORTED_MODULE_1__["default"],
@@ -225,6 +260,12 @@
       var _datetime_page_page__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
       /*! ./datetime-page.page */
       "DAps");
+      /* harmony import */
+
+
+      var _components_log_nav_button_log_nav_button_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
+      /*! ../components/log-nav-button/log-nav-button.component */
+      "q3LG");
 
       var DatetimePagePageModule = function DatetimePagePageModule() {
         _classCallCheck(this, DatetimePagePageModule);
@@ -232,7 +273,7 @@
 
       DatetimePagePageModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
         imports: [_angular_common__WEBPACK_IMPORTED_MODULE_2__["CommonModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormsModule"], _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["IonicModule"], _datetime_page_routing_module__WEBPACK_IMPORTED_MODULE_5__["DatetimePagePageRoutingModule"]],
-        declarations: [_datetime_page_page__WEBPACK_IMPORTED_MODULE_6__["DatetimePagePage"]]
+        declarations: [_datetime_page_page__WEBPACK_IMPORTED_MODULE_6__["DatetimePagePage"], _components_log_nav_button_log_nav_button_component__WEBPACK_IMPORTED_MODULE_7__["LogNavButtonComponent"]]
       })], DatetimePagePageModule);
       /***/
     },
@@ -273,7 +314,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "<ion-header>\n  <ion-toolbar>\n    <ion-title>Date and time</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <ion-grid>\n    <ion-row>\n      <ion-col class=\"ion-text-center\">\n        Start time of pain\n      </ion-col>\n    </ion-row>\n    <ion-row>\n      <ion-col class=\"ion-text-center\">\n        <ion-datetime displayFormat=\"D MMM YYYY H:mm\" placeholder=\"When did the pain start?\" [(ngModel)]=\"datetime\">\n        </ion-datetime>\n      </ion-col>\n    </ion-row>\n  </ion-grid>\n\n  <!--Back button to home page-->\n  <ion-fab vertical=\"bottom\" horizontal=\"start\" slot=\"fixed\">\n    <ion-fab-button color=\"success\" routerDirection=\"back\" routerLink=\"/tabs/home\" (click)=\"updateLog()\">\n      <ion-icon name=\"arrow-back-circle-outline\" color=\"dark\"></ion-icon>\n    </ion-fab-button>\n  </ion-fab>\n\n  <!--Forward Button to bodymap page-->\n  <ion-fab vertical=\"bottom\" horizontal=\"end\" slot=\"fixed\">\n    <ion-fab-button color=\"success\" routerDirection=\"forward\" routerLink=\"/bodymap\" (click)=\"updateLog()\">\n      <ion-icon name=\"arrow-forward-circle-outline\" color=\"dark\"></ion-icon>\n    </ion-fab-button>\n  </ion-fab>\n</ion-content>";
+      __webpack_exports__["default"] = "<ion-header>\n  <ion-toolbar>\n    <ion-title>Date and time</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <ion-grid>\n    <ion-row>\n      <ion-col class=\"ion-text-center\">\n        Start time of pain\n      </ion-col>\n    </ion-row>\n    <ion-row>\n      <ion-col class=\"ion-text-center\">\n        <ion-datetime displayFormat=\"D MMM YYYY H:mm\" placeholder=\"When did the pain start?\" [(ngModel)]=\"datetime\">\n        </ion-datetime>\n      </ion-col>\n    </ion-row>\n  </ion-grid>\n  <ion-fab vertical=\"bottom\" horizontal=\"start\" slot=\"fixed\" (click)=\"updateLog()\">\n    <app-log-nav-button direction=\"back\" link=\"/tabs/home\"></app-log-nav-button>\n  </ion-fab>\n  <ion-fab vertical=\"bottom\" horizontal=\"end\" slot=\"fixed\" (click)=\"updateLog()\">\n    <app-log-nav-button direction=\"forward\" link=\"/bodymap\" #forwardButton>\n    </app-log-nav-button>\n  </ion-fab>\n</ion-content>";
       /***/
     }
   }]);

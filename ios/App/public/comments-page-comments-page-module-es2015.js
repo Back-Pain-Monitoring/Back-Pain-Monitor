@@ -85,8 +85,10 @@ let CommentsPagePage = class CommentsPagePage {
     updateLog() {
         this.dataService.currentLogComment = this.comment;
         this.dataService.printLogEntry();
+        this.dataService.updateIsEntered(true);
     }
     updateUIFromLog() {
+        this.dataService.updateIsEntered(false);
         this.comment = this.dataService.currentLogComment;
     }
 };

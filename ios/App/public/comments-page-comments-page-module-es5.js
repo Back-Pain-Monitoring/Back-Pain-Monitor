@@ -141,10 +141,12 @@
           value: function updateLog() {
             this.dataService.currentLogComment = this.comment;
             this.dataService.printLogEntry();
+            this.dataService.updateIsEntered(true);
           }
         }, {
           key: "updateUIFromLog",
           value: function updateUIFromLog() {
+            this.dataService.updateIsEntered(false);
             this.comment = this.dataService.currentLogComment;
           }
         }]);

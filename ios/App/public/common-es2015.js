@@ -124,6 +124,19 @@ const hapticImpact = (options) => {
 
 /***/ }),
 
+/***/ "2gYu":
+/*!***************************************************************************************************************!*\
+  !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/components/log-nav-button/log-nav-button.component.html ***!
+  \***************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-fab-button color=\"success\" (click)=\"requestNav()\">\n  <ion-icon name=\"arrow-{{direction}}-circle-outline\" color=\"dark\"></ion-icon>\n</ion-fab-button>");
+
+/***/ }),
+
 /***/ "6i10":
 /*!***********************************************************************!*\
   !*** ./node_modules/@ionic/core/dist/esm/spinner-configs-c78e170e.js ***!
@@ -658,6 +671,19 @@ const createButtonActiveGesture = (el, isButton) => {
 
 /***/ }),
 
+/***/ "UWQ4":
+/*!*************************************************************************!*\
+  !*** ./src/app/components/log-nav-button/log-nav-button.component.scss ***!
+  \*************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudHMvbG9nLW5hdi1idXR0b24vbG9nLW5hdi1idXR0b24uY29tcG9uZW50LnNjc3MifQ== */");
+
+/***/ }),
+
 /***/ "aw+1":
 /*!**********************************************************!*\
   !*** ./src/app/filter-modal/filter-modal.component.scss ***!
@@ -681,6 +707,77 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\n  <ion-toolbar>\n    <ion-title>Filter</ion-title>\n    <ion-button slot=\"end\" (click)=\"resetFilter()\">Reset</ion-button>\n    <ion-button slot=\"end\" (click)=\"dismissModal()\">Close</ion-button>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <ion-list>\n    <ion-item>\n      <ion-label>Time Period</ion-label>\n    </ion-item>\n    <ion-item>\n      <ion-item>From</ion-item>\n        <ion-datetime displayFormat=\"D MMM YYYY H:mm\" [(ngModel)]=\"datetime_min\"></ion-datetime>\n    </ion-item>\n    <ion-item>\n      <ion-item>To</ion-item>\n          <ion-datetime displayFormat=\"D MMM YYYY H:mm\" [(ngModel)]=\"datetime_max\"></ion-datetime>\n    </ion-item>\n    <ion-item>\n      <ion-label>Pain Intensity</ion-label>\n    </ion-item>\n    <ion-item>\n        <ion-range dualKnobs=\"true\" min=\"0\" max=\"10\" step=\"1\" snaps=\"true\" pin=\"true\" [ngModel]=\"intensity\"\n          (ngModelChange)=\"onIntensityChange($event)\">\n        <ion-note color=\"primary\" slot=\"start\">{{intensity.lower}}</ion-note>\n        <ion-note color=\"primary\" slot=\"end\">{{intensity.upper}}</ion-note>\n        </ion-range>\n    </ion-item>\n    <ion-item>\n      <ion-label>Pain Type</ion-label>\n      <ion-select cancelText=\"Cancel\" okText=\"Ok\" [(ngModel)]=\"type\">\n        <ion-select-option value=\"nofilter\">All of Them</ion-select-option>\n        <ion-select-option value=\"none\">None</ion-select-option>\n        <ion-select-option value=\"aching\">Aching</ion-select-option>\n        <ion-select-option value=\"burning\">Burning</ion-select-option>\n        <ion-select-option value=\"cramping\">Cramping</ion-select-option>\n        <ion-select-option value=\"numbness\">Numbness</ion-select-option>\n        <ion-select-option value=\"radiating\">Radiating</ion-select-option>\n        <ion-select-option value=\"shooting\">Shooting</ion-select-option>\n        <ion-select-option value=\"stabbing\">Stabbing</ion-select-option>\n        <ion-select-option value=\"tingling\">Tingling</ion-select-option>\n      </ion-select>\n    </ion-item>\n    <ion-item>\n      <ion-label>Body Part</ion-label>\n      <ion-select cancelText=\"Cancel\" okText=\"Ok\" [(ngModel)]=\"body_part\" multiple={true} placeholder=\"Select Pain Area(s)\">\n        <ion-select-option value=\"rShoulder\">Right Shoulder</ion-select-option>\n        <ion-select-option value=\"lShoulder\">Left Shoulder</ion-select-option>\n        <ion-select-option value=\"neck\">Neck</ion-select-option>\n        <ion-select-option value=\"uBack\">Upper Back</ion-select-option>\n        <ion-select-option value=\"lBack\">Lower Back</ion-select-option>\n        <ion-select-option value=\"mBack\">Middle Back</ion-select-option>\n        <ion-select-option value=\"glutes\">Glutes</ion-select-option>\n      </ion-select>\n    </ion-item>\n    <ion-item>\n      <ion-label>How many times before?</ion-label>\n    </ion-item>\n    <ion-item>\n      <ion-label>From</ion-label>\n      <ion-input type=\"number\" [(ngModel)]=\"timesBefore_lower\"></ion-input>\n    </ion-item>\n    <ion-item>\n      <ion-label>Up to</ion-label>\n      <ion-input type=\"number\" [(ngModel)]=\"timesBefore_upper\"></ion-input>\n    </ion-item>\n  </ion-list>\n  <ion-button expand=\"block\" (click)=\"save()\" class>Submit</ion-button>\n</ion-content>");
+
+/***/ }),
+
+/***/ "q3LG":
+/*!***********************************************************************!*\
+  !*** ./src/app/components/log-nav-button/log-nav-button.component.ts ***!
+  \***********************************************************************/
+/*! exports provided: LogNavButtonComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LogNavButtonComponent", function() { return LogNavButtonComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "mrSG");
+/* harmony import */ var _raw_loader_log_nav_button_component_html__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! raw-loader!./log-nav-button.component.html */ "2gYu");
+/* harmony import */ var _log_nav_button_component_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./log-nav-button.component.scss */ "UWQ4");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ "fXoL");
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic/angular */ "TEn/");
+/* harmony import */ var src_app_services_log_data_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/app/services/log-data.service */ "YKFw");
+
+
+
+
+
+
+let LogNavButtonComponent = class LogNavButtonComponent {
+    constructor(navCtrl, dataService) {
+        this.navCtrl = navCtrl;
+        this.dataService = dataService;
+        this.navRequested = false;
+    }
+    ngOnInit() {
+        this.dataService.isEnteredSubj.subscribe((data) => {
+            if (data === true) {
+                this.navigate();
+            }
+        });
+    }
+    requestNav() {
+        this.navRequested = true;
+    }
+    navigate() {
+        if (!this.navRequested) {
+            return;
+        }
+        if (this.direction === "forward") {
+            this.navCtrl.navigateForward(this.link);
+        }
+        else {
+            this.navCtrl.navigateBack(this.link);
+        }
+        this.navRequested = false;
+    }
+};
+LogNavButtonComponent.ctorParameters = () => [
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["NavController"] },
+    { type: src_app_services_log_data_service__WEBPACK_IMPORTED_MODULE_5__["LogDataService"] }
+];
+LogNavButtonComponent.propDecorators = {
+    direction: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["Input"] }],
+    link: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["Input"] }]
+};
+LogNavButtonComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["Component"])({
+        selector: 'app-log-nav-button',
+        template: _raw_loader_log_nav_button_component_html__WEBPACK_IMPORTED_MODULE_1__["default"],
+        styles: [_log_nav_button_component_scss__WEBPACK_IMPORTED_MODULE_2__["default"]]
+    })
+], LogNavButtonComponent);
+
+
 
 /***/ }),
 

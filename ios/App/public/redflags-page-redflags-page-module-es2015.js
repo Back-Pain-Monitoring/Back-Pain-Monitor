@@ -9,7 +9,7 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\n  <ion-toolbar>\n    <ion-title text-wrap>Do you have any of these?</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <ion-list>\n    <ion-item *ngFor=\"let entry of form\">\n      <ion-label text-wrap>{{entry.val}}</ion-label>\n      <ion-checkbox slot=\"end\" [(ngModel)]=\"entry.isChecked\"></ion-checkbox>\n    </ion-item>\n  </ion-list>\n\n  <!--Back button to symptoms page-->\n  <ion-fab vertical=\"bottom\" horizontal=\"start\" slot=\"fixed\">\n    <ion-fab-button color=\"success\" routerDirection=\"back\" routerLink=\"/symptoms\" (click)=\"updateLog()\">\n      <ion-icon name=\"arrow-back-circle-outline\" color=\"dark\"></ion-icon>\n    </ion-fab-button>\n  </ion-fab>\n\n  <!--Forward Button to comments page-->\n  <ion-fab vertical=\"bottom\" horizontal=\"end\" slot=\"fixed\">\n    <ion-fab-button color=\"success\" routerDirection=\"forward\" routerLink=\"/comments\" (click)=\"updateLog()\">\n      <ion-icon name=\"arrow-forward-circle-outline\" color=\"dark\"></ion-icon>\n    </ion-fab-button>\n  </ion-fab>\n\n</ion-content>");
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\n  <ion-toolbar>\n    <ion-title text-wrap>Do you have any of these?</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <ion-list>\n    <ion-item *ngFor=\"let entry of form\">\n      <ion-label text-wrap>{{entry.val}}</ion-label>\n      <ion-checkbox slot=\"end\" [(ngModel)]=\"entry.isChecked\"></ion-checkbox>\n    </ion-item>\n  </ion-list>\n\n  <ion-fab vertical=\"bottom\" horizontal=\"start\" slot=\"fixed\" (click)=\"updateLog()\">\n    <app-log-nav-button direction=\"back\" link=\"/symptoms\"></app-log-nav-button>\n  </ion-fab>\n\n  <ion-fab vertical=\"bottom\" horizontal=\"end\" slot=\"fixed\" (click)=\"updateLog()\">\n    <app-log-nav-button direction=\"forward\" link=\"/comments\">\n    </app-log-nav-button>\n  </ion-fab>\n\n</ion-content>");
 
 /***/ }),
 
@@ -107,12 +107,12 @@ let RedflagsPagePage = class RedflagsPagePage {
         }
     }
     updateLog() {
-        console.log("updating log");
         this.convertBoolToString();
         this.dataService.currentLogRedflag_symptoms = this.redflags_symptoms;
+        this.dataService.updateIsEntered(true);
     }
     updateUIFromLog() {
-        console.log("updating UI from dataservice");
+        this.dataService.updateIsEntered(false);
         this.redflags_symptoms = this.dataService.currentLogRedflag_symptoms;
         this.convertStringToBool();
     }
@@ -162,6 +162,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic/angular */ "TEn/");
 /* harmony import */ var _redflags_page_routing_module__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./redflags-page-routing.module */ "7j3R");
 /* harmony import */ var _redflags_page_page__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./redflags-page.page */ "Cajt");
+/* harmony import */ var _components_log_nav_button_log_nav_button_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../components/log-nav-button/log-nav-button.component */ "q3LG");
+
 
 
 
@@ -179,7 +181,7 @@ RedflagsPagePageModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]
             _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["IonicModule"],
             _redflags_page_routing_module__WEBPACK_IMPORTED_MODULE_5__["RedflagsPagePageRoutingModule"]
         ],
-        declarations: [_redflags_page_page__WEBPACK_IMPORTED_MODULE_6__["RedflagsPagePage"]]
+        declarations: [_redflags_page_page__WEBPACK_IMPORTED_MODULE_6__["RedflagsPagePage"], _components_log_nav_button_log_nav_button_component__WEBPACK_IMPORTED_MODULE_7__["LogNavButtonComponent"]]
     })
 ], RedflagsPagePageModule);
 
