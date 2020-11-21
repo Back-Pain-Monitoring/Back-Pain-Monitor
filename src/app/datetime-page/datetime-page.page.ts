@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { AlertController } from '@ionic/angular';
 
 import { LogDataService } from '../services/log-data.service';
 
@@ -9,16 +10,27 @@ import { LogDataService } from '../services/log-data.service';
 })
 export class DatetimePagePage implements OnInit {
 
+  @ViewChild('backButton', { static: false }) backButton;
+  @ViewChild('forwardButton', { static: false }) forwardButton;
+
   datetime: string;
 
-  constructor(public dataService: LogDataService) {
+  constructor(public dataService: LogDataService, private alertCtrl: AlertController) {
+  }
+
+  ngOnInit() {
+    this.updateUIFromLog();
   }
 
   updateLog() {
-    this.dataService.currentLogDatetime = new Date(this.datetime);
+    if (this.datetime) {
+      this.dataService.currentLogDatetime = new Date(this.datetime);
+    }
+    this.dataService.updateIsEntered(true);
   }
 
   updateUIFromLog() {
+    this.dataService.updateIsEntered(false);
     if (this.dataService.currentLogDatetime != undefined) {
       this.datetime = this.dataService.currentLogDatetime.toISOString();
     }
@@ -28,8 +40,9 @@ export class DatetimePagePage implements OnInit {
     this.datetime = new Date().toISOString();
   }
 
-  ngOnInit() {
-    this.updateUIFromLog();
+  navigateForward() {
+    this.updateLog();
+    this.forwardButton.navigate();
   }
 
 }

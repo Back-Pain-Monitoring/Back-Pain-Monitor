@@ -8,7 +8,7 @@ import { SymptomsPagePageRoutingModule } from './symptoms-page-routing.module';
 
 import { SymptomsPagePage } from './symptoms-page.page';
 
-
+import { LogNavButtonComponent } from '../components/log-nav-button/log-nav-button.component';
 
 @NgModule({
   imports: [
@@ -17,6 +17,6 @@ import { SymptomsPagePage } from './symptoms-page.page';
     IonicModule,
     SymptomsPagePageRoutingModule
   ],
-  declarations: [SymptomsPagePage]
+  declarations: [SymptomsPagePage, LogNavButtonComponent]
 })
 export class SymptomsPagePageModule { }

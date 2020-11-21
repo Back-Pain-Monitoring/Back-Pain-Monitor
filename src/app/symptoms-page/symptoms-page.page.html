@@ -20,6 +20,8 @@
     </ion-item>
     <ion-item>
       <ion-label>Pain type</ion-label>
+      <ion-icon class="required-icon" name="alert-circle-outline" *ngIf="painType === undefined" color="danger">
+      </ion-icon>
       <ion-select [(ngModel)]="painType">
         <ion-select-option value="none">None</ion-select-option>
         <ion-select-option value="aching">Aching</ion-select-option>
@@ -38,6 +40,9 @@
     </ion-item>
     <ion-item *ngIf="painBefore">
       <ion-label>How many times before?</ion-label>
+      <ion-icon class="required-icon" name="alert-circle-outline" *ngIf="timesBefore === undefined || timesBefore < 1"
+        color="danger">
+      </ion-icon>
       <ion-input type="number" [(ngModel)]="timesBefore"></ion-input>
     </ion-item>
     <ion-item>
@@ -62,6 +67,9 @@
     </ion-item>
     <ion-item>
       <ion-label>When do you feel pain?</ion-label>
+      <ion-icon class="required-icon" name="alert-circle-outline"
+        *ngIf="mobility === undefined || mobility.length === 0" color="danger">
+      </ion-icon>
       <ion-select multiple="true" [(ngModel)]="mobility">
         <ion-select-option value="moving">Moving</ion-select-option>
         <ion-select-option value="resting">Resting</ion-select-option>
@@ -69,6 +77,8 @@
     </ion-item>
     <ion-item>
       <ion-label>Is the pain constant or intermittent?</ion-label>
+      <ion-icon class="required-icon" name="alert-circle-outline" *ngIf="is_constant === undefined" color="danger">
+      </ion-icon>
     </ion-item>
     <ion-item>
       <ion-radio-group [(ngModel)]="is_constant">
@@ -84,20 +94,12 @@
     </ion-item>
   </ion-list>
 
-  <!--Back button to bodymap page-->
-  <ion-fab vertical="bottom" horizontal="start" slot="fixed">
-    <ion-fab-button color="success" routerDirection="back" routerLink="/bodymap" (click)="updateLog()">
-      <ion-icon name="arrow-back-circle-outline" color="dark"></ion-icon>
-    </ion-fab-button>
+  <ion-fab vertical="bottom" horizontal="start" slot="fixed" (click)="updateLog()">
+    <app-log-nav-button direction="back" link="/bodymap"></app-log-nav-button>
   </ion-fab>
 
-  <!--Forward Button to redflags page-->
-  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button color="success" routerDirection="forward" routerLink="/redflags" (click)="updateLog()">
-      <ion-icon name="arrow-forward-circle-outline" color="dark"></ion-icon>
-    </ion-fab-button>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" (click)="updateLog()">
+    <app-log-nav-button direction="forward" link="/redflags">
+    </app-log-nav-button>
   </ion-fab>
-
-
-
 </ion-content>
