@@ -14,15 +14,12 @@
       placeholder="e.g. Lifting right arm caused pain on my lower back..."></ion-textarea>
   </ion-item>
 
-  <!--Back button to redflags page-->
-  <ion-fab vertical="bottom" horizontal="start" slot="fixed">
-    <ion-fab-button color="success" routerDirection="back" routerLink="/redflags" (click)="updateLog()">
-      <ion-icon name="arrow-back-circle-outline" color="dark"></ion-icon>
-    </ion-fab-button>
+  <ion-fab vertical="bottom" horizontal="start" slot="fixed" (click)="updateLog()">
+    <app-log-nav-button direction="back" link="/redflags"></app-log-nav-button>
   </ion-fab>
 
   <!--Submit button that takes you back to home page-->
   <ion-fab vertical="bottom" horizontal="center" slot="fixed">
-    <ion-button expand="block" (click)="makeAlert()">Submit</ion-button>
+    <ion-button expand="block" (click)="makeAlert()">{{submit_button_label}}</ion-button>
   </ion-fab>
 </ion-content>

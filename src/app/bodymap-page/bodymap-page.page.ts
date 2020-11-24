@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { LogDataService } from '../services/log-data.service';
 
 @Component({
   selector: 'app-bodymap-page',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BodymapPagePage implements OnInit {
 
-  constructor() { }
+  constructor(private dataService: LogDataService) { }
 
   ngOnInit() {
+  }
+
+  updateLog() {
+    this.dataService.updateIsEntered(true);
   }
 
 }

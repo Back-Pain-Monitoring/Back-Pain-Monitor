@@ -1,10 +1,11 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>bodymap-page</ion-title>
-  </ion-toolbar></ion-header>
+  </ion-toolbar>
+</ion-header>
 
 
-  
+
 <ion-content>
 
   <ion-grid>
@@ -12,7 +13,8 @@
       <ion-col class="selection">
         <ion-item>
           <ion-label>Pain Area</ion-label>
-          <ion-select cancelText="Cancel" okText="Ok" [(ngModel)]="painType" multiple={true} placeholder="Select Pain Area(s)">
+          <ion-select cancelText="Cancel" okText="Ok" [(ngModel)]="painType" multiple={true}
+            placeholder="Select Pain Area(s)">
             <ion-select-option value="rShoulder">Right Shoulder</ion-select-option>
             <ion-select-option value="lShoulder">Left Shoulder</ion-select-option>
             <ion-select-option value="neck">Neck</ion-select-option>
@@ -20,7 +22,7 @@
             <ion-select-option value="lBack">Lower Back</ion-select-option>
             <ion-select-option value="mBack">Middle Back</ion-select-option>
             <ion-select-option value="glutes">Glutes</ion-select-option>
-          </ion-select> 
+          </ion-select>
         </ion-item>
       </ion-col>
     </ion-row>
@@ -31,22 +33,13 @@
     </ion-row>
   </ion-grid>
 
-  
-
-  <!--Back button to datetime page-->
-  <ion-fab vertical="bottom" horizontal="start" slot="fixed">
-    <ion-fab-button color="success" routerDirection="back" routerLink="/datetime">
-      <ion-icon name="arrow-back-circle-outline" color="dark"></ion-icon>
-    </ion-fab-button>
+  <ion-fab vertical="bottom" horizontal="start" slot="fixed" (click)="updateLog()">
+    <app-log-nav-button direction="back" link="/datetime"></app-log-nav-button>
   </ion-fab>
 
-  <!--Forward Button to symptoms page-->
-  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button color="success" routerDirection="forward" routerLink="/symptoms">
-      <ion-icon name="arrow-forward-circle-outline" color="dark"></ion-icon>
-    </ion-fab-button>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" (click)="updateLog()">
+    <app-log-nav-button direction="forward" link="/symptoms">
+    </app-log-nav-button>
   </ion-fab>
-
-
 
 </ion-content>

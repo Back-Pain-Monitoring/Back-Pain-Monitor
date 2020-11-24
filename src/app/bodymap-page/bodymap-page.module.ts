@@ -4,6 +4,8 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
+import { LogNavButtonComponent } from '../components/log-nav-button/log-nav-button.component';
+
 import { BodymapPagePageRoutingModule } from './bodymap-page-routing.module';
 
 import { BodymapPagePage } from './bodymap-page.page';
@@ -15,6 +17,6 @@ import { BodymapPagePage } from './bodymap-page.page';
     IonicModule,
     BodymapPagePageRoutingModule
   ],
-  declarations: [BodymapPagePage]
+  declarations: [BodymapPagePage, LogNavButtonComponent]
 })
-export class BodymapPagePageModule {}
+export class BodymapPagePageModule { }

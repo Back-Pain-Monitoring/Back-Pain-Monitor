@@ -9,7 +9,7 @@ import { FilterModalPageComponent } from '../filter-modal/filter-modal.component
   templateUrl: './view-logs.page.html',
   styleUrls: ['./view-logs.page.scss'],
 })
-export class ViewLogsPage implements OnInit {
+export class ViewLogsPage {
 
   @ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll;
 
@@ -22,7 +22,8 @@ export class ViewLogsPage implements OnInit {
   constructor(public dataService: LogDataService, private navCtrl: NavController, public modalCtrl: ModalController) {
   }
 
-  ngOnInit() {
+  ionViewWillEnter() {
+    console.log("loading");
     this.logsToDisplay = this.dataService.getLogs().slice().reverse();
     this.filter = this.dataService.createEmptyFilter();
   }
@@ -45,13 +46,13 @@ export class ViewLogsPage implements OnInit {
       component: FilterModalPageComponent,
       backdropDismiss: false,
       componentProps: {
-        Filter : this.filter
+        Filter: this.filter
       }
     });
     await modal.present();
 
     modal.onWillDismiss().then(dataReturned => {
-      if ( dataReturned !== null ) {
+      if (dataReturned !== null) {
         this.filter = dataReturned.data;
         this.filterLogs();
       }

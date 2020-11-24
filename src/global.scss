@@ -25,6 +25,24 @@
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
 
+/*
+ * This adds a scroll bar to ionic alerts
+ */
+ .alert-radio-group::-webkit-scrollbar, .alert-checkbox-group::-webkit-scrollbar {
+  width: 0.7em;
+  display: block !important;
+}
+
+.alert-radio-group::-webkit-scrollbar-track, .alert-checkbox-group::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+  box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+}
+
+.alert-radio-group::-webkit-scrollbar-thumb, .alert-checkbox-group::-webkit-scrollbar-thumb {
+  background-color: darkgrey;
+  outline: 1px solid slategrey;
+}
+
 .required-icon {
   margin-inline-start: 16px;
 }

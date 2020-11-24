@@ -1,6 +1,6 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([["swipe-back-0a6a44c8-js"],{
 
-/***/ "./node_modules/@ionic/core/dist/esm/swipe-back-0a6a44c8.js":
+/***/ "nGUn":
 /*!******************************************************************!*\
   !*** ./node_modules/@ionic/core/dist/esm/swipe-back-0a6a44c8.js ***!
   \******************************************************************/
@@ -10,9 +10,9 @@
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createSwipeBackGesture", function() { return createSwipeBackGesture; });
-/* harmony import */ var _helpers_5c745fbd_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./helpers-5c745fbd.js */ "./node_modules/@ionic/core/dist/esm/helpers-5c745fbd.js");
-/* harmony import */ var _gesture_controller_89173521_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./gesture-controller-89173521.js */ "./node_modules/@ionic/core/dist/esm/gesture-controller-89173521.js");
-/* harmony import */ var _index_eea61379_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./index-eea61379.js */ "./node_modules/@ionic/core/dist/esm/index-eea61379.js");
+/* harmony import */ var _helpers_5c745fbd_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./helpers-5c745fbd.js */ "gHap");
+/* harmony import */ var _gesture_controller_89173521_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./gesture-controller-89173521.js */ "rxGk");
+/* harmony import */ var _index_eea61379_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./index-eea61379.js */ "ItpF");
 
 
 

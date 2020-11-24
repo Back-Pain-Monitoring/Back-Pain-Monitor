@@ -10,53 +10,34 @@ import { LogDataService } from '../services/log-data.service';
 
 export class RedflagsPagePage implements OnInit {
 
-  public form: Array<{ val: string, isChecked: boolean }> = [];
-
-  redflags_symptoms: string[] = [];
+  public form: {} = {};
 
   constructor(public dataService: LogDataService) {
   }
 
   ngOnInit() {
-    this.dataService.redflags.forEach(redflag => {
-      this.form.push({ val: redflag, isChecked: false })
-    })
     this.updateUIFromLog();
   }
 
-  // Converting boolean inputs as string and storing them
-  convertBoolToString() {
-    this.redflags_symptoms = [];
-    for (let i = 0; i < 4; i++) {
-      if (this.form[i].isChecked == true) {
-        this.redflags_symptoms.push("True");
-      } else {
-        this.redflags_symptoms.push("False");
-      }
-    }
-  }
-
-  // Converting string data as boolean and display on page
-  convertStringToBool() {
-    console.log("covncsrioi sdss");
-    for (let i = 0; i < 4; i++) {
-      if (this.redflags_symptoms[i] == "True") {
-        this.form[i].isChecked = true
-      } else if (this.redflags_symptoms[i] == "False") {
-        this.form[i].isChecked = false
-      }
-    }
-  }
-
   updateLog() {
-    this.convertBoolToString();
-    this.dataService.currentLogRedflag_symptoms = this.redflags_symptoms;
+    const symptoms = [];
+    for (const flag in this.form) {
+      if (this.form[flag]) {
+        symptoms.push(flag);
+      }
+    }
+    this.dataService.currentLogRedflag_symptoms = symptoms;
     this.dataService.updateIsEntered(true);
   }
 
   updateUIFromLog() {
     this.dataService.updateIsEntered(false);
-    this.redflags_symptoms = this.dataService.currentLogRedflag_symptoms;
-    this.convertStringToBool();
+    this.dataService.redflags.forEach(flag => {
+      this.form[flag] = false;
+    });
+    this.dataService.currentLogRedflag_symptoms.forEach(flag => {
+      this.form[flag] = true;
+    });
   }
+
 }

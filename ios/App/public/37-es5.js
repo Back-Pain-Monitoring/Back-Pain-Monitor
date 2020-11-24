@@ -11,7 +11,7 @@
 
   (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[37], {
     /***/
-    "./node_modules/@ionic/core/dist/esm/ion-tab_2.entry.js":
+    "TpdJ":
     /*!**************************************************************!*\
       !*** ./node_modules/@ionic/core/dist/esm/ion-tab_2.entry.js ***!
       \**************************************************************/
@@ -19,7 +19,7 @@
     /*! exports provided: ion_tab, ion_tabs */
 
     /***/
-    function node_modulesIonicCoreDistEsmIonTab_2EntryJs(module, __webpack_exports__, __webpack_require__) {
+    function TpdJ(module, __webpack_exports__, __webpack_require__) {
       "use strict";
 
       __webpack_require__.r(__webpack_exports__);
@@ -40,13 +40,13 @@
 
       var _index_92848855_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! ./index-92848855.js */
-      "./node_modules/@ionic/core/dist/esm/index-92848855.js");
+      "sxy2");
       /* harmony import */
 
 
       var _framework_delegate_d1eb6504_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! ./framework-delegate-d1eb6504.js */
-      "./node_modules/@ionic/core/dist/esm/framework-delegate-d1eb6504.js");
+      "NqGI");
 
       var tabCss = ":host(.tab-hidden){display:none !important}";
 
