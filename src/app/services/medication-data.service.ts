@@ -47,6 +47,13 @@ export class MedicationDataService {
       med_type: ["Antidepressants"],
       med_comment: "Helps A lot",
       intensity: 3
+    },
+    {
+      id: 5,
+      datetime: new Date("2020-11-9"),
+      med_type: ["Anti-Seizure"],
+      med_comment: "MY GOODNESS IT HURTS!",
+      intensity: 9
     }
   ];
 
@@ -82,9 +89,6 @@ export class MedicationDataService {
 
   public set currentMedIntensity(intensity: number) { this.currentMed.intensity = intensity; }
   public get currentMedIntensity() { return this.currentMed.intensity; }
-
-  public set currentMedId(id: number) { this.currentMed.id = id; }
-  public get currentMedId() { return this.currentMed.id; }
 
 
   // Submit current Med Entry

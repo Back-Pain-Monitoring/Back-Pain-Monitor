@@ -27,10 +27,9 @@ export class MedicationPage implements OnInit {
   intensityTitle: string = this.intensityInfo[0][0];
   intensityDescription: string = this.intensityInfo[0][1];
   datetime: Date;
-  med_type: string[];
+  med_type: Array<string> = [];
   med_comment: string;
   intensity: number;
-  id: number;
 
   constructor(private alertCtrl: AlertController, private navCtrl: NavController, public dataService: MedicationDataService) {
 
