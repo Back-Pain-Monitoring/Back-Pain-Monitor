@@ -7,6 +7,23 @@
 <ion-content>
   <ion-list>
     <ion-item>
+      <ion-button expand="block" (click)="appNameHere = !appNameHere" class="appName" shape="round" color="dark">
+        <ion-icon name="caret-down-sharp"></ion-icon>
+        What is the Back Pain Monitoring App?
+      </ion-button>
+    </ion-item>
+    <ion-item *ngIf="appNameHere">
+      <ion-text>
+        Back Pain Monitor is an application that allows you to track your Back Pain & your Medication use. The app will
+        give you insights
+        into what may be causing your pain, and how medication use is affecting it. In addition the app will also notify
+        you if you have any
+        symptoms that could be a precursor for a more severe injury. We are trying to make it easier for you to recover
+        safely, and get an inside
+        look into your pain, and how to make it better.
+      </ion-text>
+    </ion-item>
+    <ion-item>
       <ion-button expand="block" (click)="doctorShown = !doctorShown" class="doctor" shape="round" color="dark">
         <ion-icon name="caret-down-sharp"></ion-icon>
         When should I see my doctor?
@@ -14,7 +31,8 @@
     </ion-item>
     <ion-item *ngIf="doctorShown">
       <ion-text id="doctor">
-        Most pain improves gradually with treatment and self-care within a few weeks. You should contact your doctor if:
+        Most pain improves gradually with treatment and self-care within a few weeks. You should contact your doctor
+        if:
         <ul>
           <li>
             Pain Persists past a few weeks.
@@ -50,10 +68,37 @@
         In order to export your logs follow the steps below:
         <ol>
           <li>
-            Navigate to <a routerLink="/tabs/viewlogs">View Logs</a>
+            Navigate to <a routerLink="/tabs/sendlogs">Send Logs</a>
+          </li>
+          <li>
+            Filter to choose the log(s) you wish to export.
           </li>
         </ol>
+      </ion-text>
+    </ion-item>
 
+    <ion-item>
+      <ion-button expand="block" (click)="filter = !filter" class="appName" shape="round" color="dark">
+        <ion-icon name="caret-down-sharp"></ion-icon>
+        How do I filter the graphs?
+      </ion-button>
+    </ion-item>
+    <ion-item *ngIf="filter">
+      <ion-text id="filter">
+        You can filter the graphs by doing the following:
+        <ol>
+          <li>
+            Navigate to <a routerLink="/tabs/viewlogs">viewlogs</a> or <a routerLink="/tabs/insights"> insights
+              page.</a>
+          </li>
+          <li>
+            Click the blue filter button in the right lower corner.
+          </li>
+          <li>
+            Select your specifications, and click submit to filter the results.
+          </li>
+        </ol>
+        *Filtering on the viewlogs page will also filter the insights page and vice-versa.
       </ion-text>
     </ion-item>
   </ion-list>
