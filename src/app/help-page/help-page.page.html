@@ -18,9 +18,8 @@
         give you insights
         into what may be causing your pain, and how medication use is affecting it. In addition the app will also notify
         you if you have any
-        symptoms that could be a precursor for a more severe injury. We are trying to make it easier for you to recover
-        safely, and get an inside
-        look into your pain, and how to make it better.
+        symptoms that could be a precursor for a more severe injury. We are striving to give you an inside look into
+        your pain, understand how to make it better, and make sure you recover safely.
       </ion-text>
     </ion-item>
     <ion-item>
@@ -57,30 +56,11 @@
       </ion-text>
     </ion-item>
 
-    <ion-item>
-      <ion-button expand="block" (click)="exportLogs = !exportLogs" class="export" shape="round" color="dark">
-        <ion-icon slot="start" name="caret-down-sharp" class="questions"></ion-icon>
-        How to export my logs?
-      </ion-button>
-    </ion-item>
-    <ion-item *ngIf="exportLogs">
-      <ion-text id="export">
-        In order to export your logs follow the steps below:
-        <ol>
-          <li>
-            Navigate to <a routerLink="/tabs/sendlogs">Send Logs</a>
-          </li>
-          <li>
-            Filter to choose the log(s) you wish to export.
-          </li>
-        </ol>
-      </ion-text>
-    </ion-item>
 
     <ion-item>
       <ion-button expand="block" (click)="filter = !filter" class="appName" shape="round" color="dark">
         <ion-icon name="caret-down-sharp"></ion-icon>
-        How do I filter the graphs?
+        How do I filter my logs?
       </ion-button>
     </ion-item>
     <ion-item *ngIf="filter">
@@ -98,7 +78,6 @@
             Select your specifications, and click submit to filter the results.
           </li>
         </ol>
-        *Filtering on the viewlogs page will also filter the insights page and vice-versa.
       </ion-text>
     </ion-item>
   </ion-list>
