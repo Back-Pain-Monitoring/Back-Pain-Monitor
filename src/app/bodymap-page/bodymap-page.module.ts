@@ -10,13 +10,16 @@ import { BodymapPagePageRoutingModule } from './bodymap-page-routing.module';
 
 import { BodymapPagePage } from './bodymap-page.page';
 
+import { LogNavButtonModule } from '../components/log-nav-button/log-nav-button.module';
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    BodymapPagePageRoutingModule
+    BodymapPagePageRoutingModule,
+    LogNavButtonModule,
   ],
-  declarations: [BodymapPagePage, LogNavButtonComponent]
+  declarations: [BodymapPagePage]
 })
 export class BodymapPagePageModule { }

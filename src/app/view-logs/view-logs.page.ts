@@ -16,7 +16,7 @@ export class ViewLogsPage {
   private initialLogCount = 10;
   private moreCount = 5;
   private logCount = this.initialLogCount;  // we are using logCount and not just logsToDisplay.length because logsToDisplay.length may be lower due to filtering
-  private logsToDisplay = [];
+  public logsToDisplay = [];
   private filter: LogFilter;
 
   constructor(public dataService: LogDataService, private navCtrl: NavController, public modalCtrl: ModalController) {

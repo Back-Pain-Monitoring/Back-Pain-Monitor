@@ -7,6 +7,8 @@ import { LogDataService } from '../services/log-data.service';
   styleUrls: ['./bodymap-page.page.scss'],
 })
 export class BodymapPagePage implements OnInit {
+  
+  public painType: string;    // TODO: fix this!
 
   constructor(private dataService: LogDataService) { }
 
