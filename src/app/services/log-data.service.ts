@@ -77,11 +77,11 @@ export class LogDataService {
       nightPain: undefined,
       worse: [],
       better: [],
-      cause: undefined,
+      cause: "",
       mobility: undefined,
       is_constant: undefined,
       redflag_symptoms: [],
-      comment: undefined
+      comment: ""
     }
   }
 
