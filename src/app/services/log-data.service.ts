@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { BehaviorSubject } from 'rxjs';
 
 export interface LogEntry {
@@ -39,143 +40,26 @@ export class LogDataService {
   public redflags = ["Unexplained weight loss", "Pain that is increased or unrelieved by rest",
     "Bladder or bowel incontinence", "Limited spinal range of motion"];
   public activities = ["bending", "sitting", "standing", "walking", "lying",
-    "am", "as the day progresses", "pm", "still", "moving"]
+    "am", "as the day progresses", "pm", "still", "moving"];
   public isEnteredSubj: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(undefined);
+  private logCollection: AngularFirestoreCollection<LogEntry>;
+  logSubj: BehaviorSubject<LogEntry[]> = new BehaviorSubject<LogEntry[]>([]);
 
+  private logEntries: LogEntry[] = [];
 
-
-  private logEntries: LogEntry[] = [
-    {
-      id: 0,
-      datetime: new Date("2020-10-23"),
-      body_part: "right shoulder",
-      intensity: 8,
-      type: "burning",
-      timesBefore: 0,
-      nightPain: true,
-      worse: ["bending", "walking"],
-      better: ["sitting", "lying", "am"],
-      cause: "unknown",
-      mobility: ["moving"],
-      is_constant: false,
-      redflag_symptoms: ["Bladder or bowel incontinence", "Limited spinal range of motion"],
-      comment: "we might need to store where on the body the pain is... like an x/y position?",
-    },
-    {
-      id: 1,
-      datetime: new Date("2020-10-24"),
-      body_part: "middle back",
-      intensity: 3,
-      type: "aching",
-      timesBefore: 2,
-      nightPain: false,
-      worse: ["bending", "sitting"],
-      better: ["pm", "moving"],
-      cause: "unknown",
-      mobility: ["resting"],
-      is_constant: false,
-      redflag_symptoms: [],
-      comment: "we might need to store where on the body the pain is... like an x/y position?",
-    },
-    {
-      id: 2,
-      datetime: new Date("2020-10-25"),
-      body_part: "lower back",
-      intensity: 8,
-      type: "numbness",
-      timesBefore: 3,
-      nightPain: true,
-      worse: ["still", "as the day progresses"],
-      better: ["bending", "standing"],
-      cause: "unknown",
-      mobility: ["moving", "resting"],
-      is_constant: false,
-      redflag_symptoms: ["Limited spinal range of motion", "Pain that is increased or unrelieved by rest"],
-      comment: "we might need to store where on the body the pain is... like an x/y position?",
-    },
-    {
-      id: 3,
-      datetime: new Date("2020-10-27"),
-      body_part: "upper back",
-      intensity: 2,
-      type: "shooting",
-      timesBefore: 4,
-      nightPain: true,
-      worse: ["walking", "lying", "moving"],
-      better: ["sitting", "still"],
-      cause: "unknown",
-      mobility: ["resting"],
-      is_constant: false,
-      redflag_symptoms: ["Unexplained weight loss"],
-      comment: "we might need to store where on the body the pain is... like an x/y position?",
-    },
-    {
-      id: 4,
-      datetime: new Date("2020-10-28"),
-      body_part: "upper back",
-      intensity: 2,
-      type: "shooting",
-      timesBefore: 2,
-      nightPain: false,
-      worse: ["bending", "am"],
-      better: ["walking", "moving"],
-      cause: "unknown",
-      mobility: ["resting"],
-      is_constant: false,
-      redflag_symptoms: [],
-      comment: "we might need to store where on the body the pain is... like an x/y position?",
-    },
-    {
-      id: 5,
-      datetime: new Date("2020-10-30"),
-      body_part: "middle back",
-      intensity: 3,
-      type: "stabbing",
-      timesBefore: 1,
-      nightPain: false,
-      worse: ["sitting", "pm"],
-      better: ["lying", "walking"],
-      cause: "unknown",
-      mobility: ["resting"],
-      is_constant: true,
-      redflag_symptoms: ["Bladder or bowel incontinence"],
-      comment: "we might need to store where on the body the pain is... like an x/y position?",
-    },
-    {
-      id: 6,
-      datetime: new Date(),
-      body_part: "back",
-      intensity: 7,
-      type: "shooting",
-      timesBefore: 10,
-      nightPain: true,
-      worse: ["sitting", "standing"],
-      better: ["moving", "am"],
-      cause: "lifting",
-      mobility: ["moving"],
-      is_constant: true,
-      redflag_symptoms: [],
-      comment: "we might need to store where on the body the pain is... like an x/y position?",
-    },
-    {
-      id: 7,
-      datetime: new Date(),
-      body_part: "left shoulder",
-      intensity: 4,
-      type: "numbness",
-      timesBefore: 23,
-      nightPain: true,
-      worse: ["bending", "standing"],
-      better: ["walking", "moving"],
-      cause: "lifting",
-      mobility: ["moving"],
-      is_constant: true,
-      redflag_symptoms: ["Bladder or bowel incontinence"],
-      comment: "we might need to store where on the body the pain is... like an x/y position?",
-    },
-  ];
-
-  constructor() {
+  constructor(private db: AngularFirestore) {
+    this.logCollection = db.collection<LogEntry>('logs', ref => ref.orderBy('datetime'));
+    this.logCollection.snapshotChanges().subscribe(
+      (value: any) => {
+        const logs = value.map(item => {
+          const data = item.payload.doc.data() as LogEntry;
+          const id = item.payload.doc.id;
+          return { id, ...data };
+        });
+        console.log(logs);
+        this.logSubj.next(logs);
+      }
+    );
   }
 
   load(): Promise<boolean> {
@@ -237,10 +121,7 @@ export class LogDataService {
       this.editLogEntry();
       return;
     }
-    this.currentLog.id = this.logEntries.length;
-    this.logEntries.push(this.currentLog);
-    this.logEntries.sort((a, b) => a.datetime.getTime() - b.datetime.getTime());
-    // TODO: send the log to the database
+    this.logCollection.add(this.currentLog);
     this.currentLog = this.createEmptyLog();
   }
 
@@ -250,18 +131,12 @@ export class LogDataService {
   }
 
   public editLogEntry() {
-    // TODO: change this
-    this.logEntries[this.currentLog.id] = this.currentLog;
+    this.logCollection.doc(`${this.currentLog.id}`).update(this.currentLog);
     this.currentLog = this.createEmptyLog();
   }
 
   public deleteLog(log: LogEntry) {
-    for (let i = 0; i < this.logEntries.length; i++) {
-      if (this.logEntries[i].id === log.id) {
-        this.logEntries.splice(i, 1);
-        break;
-      }
-    }
+    this.logCollection.doc(`${log.id}`).delete();
   }
 
   public printLogEntry(entry?: LogEntry) {
