@@ -20,22 +20,18 @@ export class ViewLogsPage {
   private filter: LogFilter;
 
   constructor(public dataService: LogDataService, private navCtrl: NavController, public modalCtrl: ModalController) {
+    this.filter = this.dataService.createEmptyFilter();
     dataService.logSubj.subscribe(logs => {
       if (this.filter === this.dataService.createEmptyFilter()) {
         console.log("filtering");
         this.filterLogs();
       } else {
+        console.log("displaying");
         this.logsToDisplay.length = 0;
         logs.forEach(log => this.logsToDisplay.push(log));
-        // this.logsToDisplay = logs;
+        console.log(this.logsToDisplay);
       }
     });
-  }
-
-  ionViewWillEnter() {
-    console.log("loading");
-    this.logsToDisplay = this.dataService.getLogs().slice().reverse();
-    this.filter = this.dataService.createEmptyFilter();
   }
 
   // this method is currently unused, but when we get to stuff with the database we may want something like this
