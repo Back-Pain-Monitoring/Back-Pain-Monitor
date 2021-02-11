@@ -47,9 +47,15 @@ export class InsightsPagePage {
 
   ionViewWillEnter() {
     this.filter = this.dataService.createEmptyFilter();
-    this.logsToDisplay = this.dataService.getLogs();
     this.medsToDisplay = this.MedService.getMeds();
-    this.createCharts();
+    this.dataService.logSubj.subscribe(logs => {
+      if (this.filter === this.dataService.createEmptyFilter()) {
+        this.filterLogs();
+      } else {
+        this.logsToDisplay = logs;
+      }
+      this.createCharts();
+    });
   }
 
   createCharts() {

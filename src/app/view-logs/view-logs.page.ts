@@ -20,6 +20,13 @@ export class ViewLogsPage {
   private filter: LogFilter;
 
   constructor(public dataService: LogDataService, private navCtrl: NavController, public modalCtrl: ModalController) {
+    dataService.logSubj.subscribe(logs => {
+      if (this.filter === this.dataService.createEmptyFilter()) {
+        this.filterLogs();
+      } else {
+        this.logsToDisplay = logs;
+      }
+    });
   }
 
   ionViewWillEnter() {
@@ -60,7 +67,6 @@ export class ViewLogsPage {
   }
 
   filterLogs() {
-    // TODO: might change this later so we don't call the data service every time. What approach is better depends on how many records we have.
     this.logsToDisplay = this.dataService.getLogsWithFilter(this.filter);
   }
 
@@ -71,7 +77,6 @@ export class ViewLogsPage {
 
   deleteLog(log: LogEntry) {
     this.dataService.deleteLog(log);
-    this.logsToDisplay = this.dataService.getLogs();  // TODO: change this to use the filter once we have filter working
   }
 
 }
