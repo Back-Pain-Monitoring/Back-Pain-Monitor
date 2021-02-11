@@ -22,9 +22,12 @@ export class ViewLogsPage {
   constructor(public dataService: LogDataService, private navCtrl: NavController, public modalCtrl: ModalController) {
     dataService.logSubj.subscribe(logs => {
       if (this.filter === this.dataService.createEmptyFilter()) {
+        console.log("filtering");
         this.filterLogs();
       } else {
-        this.logsToDisplay = logs;
+        this.logsToDisplay.length = 0;
+        logs.forEach(log => this.logsToDisplay.push(log));
+        // this.logsToDisplay = logs;
       }
     });
   }

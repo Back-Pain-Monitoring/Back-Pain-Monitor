@@ -52,7 +52,8 @@ export class LogDataService {
     this.logCollection.snapshotChanges().subscribe(
       (value: any) => {
         const logs = value.map(item => {
-          const data = item.payload.doc.data() as LogEntry;
+          const data = item.payload.doc.data();
+          data.datetime = new Date(data.datetime.seconds * 1000);
           const id = item.payload.doc.id;
           return { id, ...data };
         });
