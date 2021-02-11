@@ -45,8 +45,6 @@ export class LogDataService {
   private logCollection: AngularFirestoreCollection<LogEntry>;
   logSubj: BehaviorSubject<LogEntry[]> = new BehaviorSubject<LogEntry[]>([]);
 
-  private logEntries: LogEntry[] = [];
-
   constructor(private db: AngularFirestore) {
     this.logCollection = db.collection<LogEntry>('logs', ref => ref.orderBy('datetime'));
     this.logCollection.snapshotChanges().subscribe(
@@ -55,7 +53,8 @@ export class LogDataService {
           const data = item.payload.doc.data();
           data.datetime = new Date(data.datetime.seconds * 1000);
           const id = item.payload.doc.id;
-          return { id, ...data };
+          data.id = id;
+          return data;
         });
         console.log(logs);
         this.logSubj.next(logs);
@@ -160,14 +159,14 @@ export class LogDataService {
   }
 
   public printLogEntries() {
-    this.logEntries.forEach((entry: LogEntry) => this.printLogEntry(entry));
+    this.logSubj.value.forEach((entry: LogEntry) => this.printLogEntry(entry));
   }
 
 
 
-  public getLogs(): LogEntry[] {
-    return this.logEntries;
-  }
+  // public getLogs(): LogEntry[] {
+  //   return this.logSubj.vla;
+  // }
 
   /*
   lastIndex: the index 1 after the last retrieved log
@@ -177,11 +176,11 @@ export class LogDataService {
     if (lastIndex === undefined) {
       lastIndex = 0;
     }
-    if (lastIndex >= this.logEntries.length) {
+    if (lastIndex >= this.logSubj.value.length) {
       // we've returned all the data already, so just return an empty list
       return [];
     }
-    return this.logEntries.slice(lastIndex, lastIndex + n);
+    return this.logSubj.value.slice(lastIndex, lastIndex + n);
   }
 
   public isEditing(): boolean {
@@ -202,7 +201,7 @@ export class LogDataService {
   }
 
   public getLogsWithFilter(f: LogFilter): LogEntry[] {
-    return this.logEntries.filter((log) => {
+    return this.logSubj.value.filter((log) => {
       return (f.datetime_min === undefined || log.datetime >= f.datetime_min) &&
         (f.datetime_max === undefined || log.datetime <= f.datetime_max) &&
         (f.intensity_min === undefined || log.intensity >= f.intensity_min) &&
