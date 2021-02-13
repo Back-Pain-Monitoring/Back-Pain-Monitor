@@ -90,15 +90,15 @@ export class LogDataService {
   // getters and setters based on this: https://wizardforcel.gitbooks.io/tsbook/content/chapter09_ClassesInDepth.html#reffn_1
   public set currentLogDatetime(datetime: Date) { this.currentLog.datetime = datetime; }
   public get currentLogDatetime() { return this.currentLog.datetime; }
-  public set currentLogBody_part(body_part: string) { this.currentLog.body_part = body_part; }
+  public set currentLogBody_part(body_part: string) { this.currentLog.body_part = ""; }
   public get currentLogBody_part() { return this.currentLog.body_part; }
   public set currentLogIntensity(intensity: number) { this.currentLog.intensity = intensity; }
   public get currentLogIntensity() { return this.currentLog.intensity; }
   public set currentLogType(type: string) { this.currentLog.type = type; }
   public get currentLogType() { return this.currentLog.type; }
-  public set currentLogTimesBefore(times: number) { this.currentLog.timesBefore = times; }
+  public set currentLogTimesBefore(times: number) { this.currentLog.timesBefore = 0; }
   public get currentLogTimesBefore() { return this.currentLog.timesBefore; }
-  public set currentLogNightPain(pain: boolean) { this.currentLog.nightPain = pain; }
+  public set currentLogNightPain(pain: boolean) { this.currentLog.nightPain = false; }
   public get currentLogNightPain() { return this.currentLog.nightPain; }
   public set currentLogWorse(worse: Array<string>) { this.currentLog.worse = worse; }
   public get currentLogWorse() { return this.currentLog.worse; }
