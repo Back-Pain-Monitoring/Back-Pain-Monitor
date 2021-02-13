@@ -8,13 +8,24 @@ import { LogDataService } from '../services/log-data.service';
 })
 export class BodymapPagePage implements OnInit {
 
+  public body_part: string;
+
   constructor(private dataService: LogDataService) { }
 
   ngOnInit() {
+    this.updateUIFromLog();
   }
 
   updateLog() {
+    this.dataService.currentLogBody_part = this.body_part;
     this.dataService.updateIsEntered(true);
+  }
+
+  updateUIFromLog() {
+    this.dataService.updateIsEntered(false);
+    if (this.dataService.currentLogBody_part != undefined) {
+      this.body_part = this.dataService.currentLogBody_part;
+    }
   }
 
 }

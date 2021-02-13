@@ -20,12 +20,18 @@ export class ViewLogsPage {
   private filter: LogFilter;
 
   constructor(public dataService: LogDataService, private navCtrl: NavController, public modalCtrl: ModalController) {
-  }
-
-  ionViewWillEnter() {
-    console.log("loading");
-    this.logsToDisplay = this.dataService.getLogs().slice().reverse();
     this.filter = this.dataService.createEmptyFilter();
+    dataService.logSubj.subscribe(logs => {
+      if (this.filter === this.dataService.createEmptyFilter()) {
+        console.log("filtering");
+        this.filterLogs();
+      } else {
+        console.log("displaying");
+        this.logsToDisplay.length = 0;
+        logs.forEach(log => this.logsToDisplay.push(log));
+        console.log(this.logsToDisplay);
+      }
+    });
   }
 
   // this method is currently unused, but when we get to stuff with the database we may want something like this
@@ -60,7 +66,6 @@ export class ViewLogsPage {
   }
 
   filterLogs() {
-    // TODO: might change this later so we don't call the data service every time. What approach is better depends on how many records we have.
     this.logsToDisplay = this.dataService.getLogsWithFilter(this.filter);
   }
 
@@ -71,7 +76,6 @@ export class ViewLogsPage {
 
   deleteLog(log: LogEntry) {
     this.dataService.deleteLog(log);
-    this.logsToDisplay = this.dataService.getLogs();  // TODO: change this to use the filter once we have filter working
   }
 
 }

@@ -47,13 +47,22 @@ export class InsightsPagePage {
 
   ionViewWillEnter() {
     this.filter = this.dataService.createEmptyFilter();
-    this.logsToDisplay = this.dataService.getLogs();
     this.medsToDisplay = this.MedService.getMeds();
-    this.createCharts();
+    this.dataService.logSubj.subscribe(logs => {
+      if (this.filter === this.dataService.createEmptyFilter()) {
+        console.log("filtering");
+        this.filterLogs();
+      } else {
+        console.log("displaying");
+        this.logsToDisplay = logs;
+      }
+      console.log("before createCharts", this.logsToDisplay);
+      this.createCharts();
+    });
   }
 
   createCharts() {
-    // if this.logsToDisplay is not sorted by datetime, we need to do .sort((a, b) => a.datetime - b.datetime)
+    console.log(this.logsToDisplay);
     const intensity_time_data = this.logsToDisplay.map(log => {
       return {
         x: log.datetime,
