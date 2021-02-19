@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Login</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form #f="ngForm" (ngSubmit)="onSubmit()">
+    <ion-item>
+      <ion-label position="floating">User name:</ion-label>
+      <ion-input #fName="ngModel" type="text" name="text" [(ngModel)]="user.userName" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Email address:</ion-label>
+      <ion-input #fName="ngModel" type="email" name="email" [(ngModel)]="user.email" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Password:</ion-label>
+      <ion-input type="password" name="password" [(ngModel)]="user.password" required minlength="6">
+      </ion-input>
+      <ion-text class="password-info">
+        (must be at least 6 characters long; do not use the password you use to log in to your email account)
+      </ion-text>
+    </ion-item>
+    <ion-item>
+      <ion-button type="submit" [disabled]="!f.valid">Log in</ion-button>
+      <ion-text class="reset-password" slot="end" detail="false" button (click)="resetPassword()">
+        Reset password
+      </ion-text>
+    </ion-item>
+    <!-- Should only enable the below if the user filled in the email. -->
+    <ion-item>
+      <ion-button [disabled]="!f.valid" (click)="createAccount()">Create new account</ion-button>
+    </ion-item>
+  </form>
+</ion-content>
