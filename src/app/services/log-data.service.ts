@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subscription } from 'rxjs';
 import { AuthService } from './auth.service';
-import { UserDataService } from './user-data.service';
 
 export interface LogEntry {
   id: number;
@@ -47,10 +46,18 @@ export class LogDataService {
   public isEnteredSubj: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(undefined);
   private logCollection: AngularFirestoreCollection<LogEntry>;
   logSubj: BehaviorSubject<LogEntry[]> = new BehaviorSubject<LogEntry[]>([]);
+  private dbSubscription: Subscription;
 
   constructor(private db: AngularFirestore, private authSvc: AuthService) {
-    this.logCollection = db.collection<LogEntry>('logs', ref => ref.where('uid', '==', authSvc.getUid()).orderBy('datetime'));
-    this.logCollection.snapshotChanges().subscribe(
+    this.authSvc.uidSubj.subscribe(value => this.dbSubscribe(value));
+  }
+
+  private dbSubscribe(uid) {
+    if (this.dbSubscription) {
+      this.dbSubscription.unsubscribe();
+    }
+    this.logCollection = this.db.collection<LogEntry>('logs', ref => ref.where('uid', '==', uid).orderBy('datetime'));
+    this.dbSubscription = this.logCollection.snapshotChanges().subscribe(
       (value: any) => {
         const logs = value.map(item => {
           const data = item.payload.doc.data();
@@ -121,7 +128,7 @@ export class LogDataService {
 
   // submit the current log entry
   public submitLogEntry() {
-    this.currentLog.uid = this.authSvc.getUid();
+    this.currentLog.uid = this.authSvc.uidSubj.value;
     if (this.editing) {
       this.editLogEntry();
       return;

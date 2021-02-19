@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/firestore';
+import { BehaviorSubject } from 'rxjs';
 import { UserDataService } from './user-data.service';
 
 @Injectable({
@@ -9,7 +10,7 @@ import { UserDataService } from './user-data.service';
 })
 export class AuthService {
 
-  private uid: string = '';
+  public uidSubj: BehaviorSubject<string> = new BehaviorSubject<string>("");
   private email: string = '';
   private userName: string = '';
 
@@ -24,7 +25,7 @@ export class AuthService {
         console.log('loginUser: calling signInWithEmail')
         const res = await firebase.auth().signInWithEmailAndPassword(email, password);
         console.log('loginUser: calling signInWithEmail DONE, res: ', res)
-        this.uid = res.user.uid;
+        this.uidSubj.next(res.user.uid);
         resolve(res);
       } catch (error) {
         reject(error);
@@ -40,9 +41,9 @@ export class AuthService {
         console.log('loginUser: calling createUser')
         const res = await firebase.auth().createUserWithEmailAndPassword(email, password);
         console.log('loginUser: calling createUser DONE, res: ', res)
-        this.uid = res.user.uid;
+        this.uidSubj.next(res.user.uid);
         // New user: remember their userName, uid, etc.
-        this.dataSvc.saveUserInfo(this.uid, userName, email);
+        this.dataSvc.saveUserInfo(this.uidSubj.value, userName, email);
         this.userName = userName;
         resolve(res);
       } catch (error) {
@@ -61,10 +62,6 @@ export class AuthService {
 
   getCurrentUser(): string {
     return firebase.auth().currentUser.email;
-  }
-
-  getUid() {
-    return this.uid;
   }
 
   getUserName() {
