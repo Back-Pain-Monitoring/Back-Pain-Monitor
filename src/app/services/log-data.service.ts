@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subscription } from 'rxjs';
+import { AuthService } from './auth.service';
 
 export interface LogEntry {
   id: number;
@@ -17,6 +18,7 @@ export interface LogEntry {
   is_constant: boolean;  // assumes pain is either constant or intermittent
   redflag_symptoms: string[];
   comment: string;
+  uid: string;  // id of the user whose log this is
 }
 
 export interface LogFilter {
@@ -44,10 +46,18 @@ export class LogDataService {
   public isEnteredSubj: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(undefined);
   private logCollection: AngularFirestoreCollection<LogEntry>;
   logSubj: BehaviorSubject<LogEntry[]> = new BehaviorSubject<LogEntry[]>([]);
+  private dbSubscription: Subscription;
 
-  constructor(private db: AngularFirestore) {
-    this.logCollection = db.collection<LogEntry>('logs', ref => ref.orderBy('datetime'));
-    this.logCollection.snapshotChanges().subscribe(
+  constructor(private db: AngularFirestore, private authSvc: AuthService) {
+    this.authSvc.uidSubj.subscribe(value => this.dbSubscribe(value));
+  }
+
+  private dbSubscribe(uid) {
+    if (this.dbSubscription) {
+      this.dbSubscription.unsubscribe();
+    }
+    this.logCollection = this.db.collection<LogEntry>('logs', ref => ref.where('uid', '==', uid).orderBy('datetime'));
+    this.dbSubscription = this.logCollection.snapshotChanges().subscribe(
       (value: any) => {
         const logs = value.map(item => {
           const data = item.payload.doc.data();
@@ -81,7 +91,8 @@ export class LogDataService {
       mobility: undefined,
       is_constant: undefined,
       redflag_symptoms: [],
-      comment: ""
+      comment: "",
+      uid: ""
     }
   }
 
@@ -117,6 +128,7 @@ export class LogDataService {
 
   // submit the current log entry
   public submitLogEntry() {
+    this.currentLog.uid = this.authSvc.uidSubj.value;
     if (this.editing) {
       this.editLogEntry();
       return;
@@ -161,12 +173,6 @@ export class LogDataService {
   public printLogEntries() {
     this.logSubj.value.forEach((entry: LogEntry) => this.printLogEntry(entry));
   }
-
-
-
-  // public getLogs(): LogEntry[] {
-  //   return this.logSubj.vla;
-  // }
 
   /*
   lastIndex: the index 1 after the last retrieved log
