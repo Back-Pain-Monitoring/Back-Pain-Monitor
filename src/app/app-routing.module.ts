@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { DatetimeAuthguardService } from './services/datetime-authguard.service';
+import { MakeLogAuthguardService } from './services/make-log-authguard.service';
 import { SymptomsAuthguardService } from './services/symptoms-authguard.service';
 
 const routes: Routes = [
@@ -11,7 +12,7 @@ const routes: Routes = [
   {
     path: 'datetime',
     loadChildren: () => import('./datetime-page/datetime-page.module').then(m => m.DatetimePagePageModule),
-    canDeactivate: [DatetimeAuthguardService],
+    canActivate: [MakeLogAuthguardService], canDeactivate: [DatetimeAuthguardService],
   },
   {
     path: 'viewlogs-page',
@@ -44,7 +45,7 @@ const routes: Routes = [
   },
   {
     path: 'login',
-    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
+    loadChildren: () => import('./login/login.module').then(m => m.LoginPageModule)
   },
 
 ];
