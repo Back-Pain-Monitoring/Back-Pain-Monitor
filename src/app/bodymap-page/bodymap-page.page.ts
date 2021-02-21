@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LogDataService } from '../services/log-data.service';
+import imageMapResize from 'image-map-resizer';
 
 @Component({
   selector: 'app-bodymap-page',
@@ -26,6 +27,16 @@ export class BodymapPagePage implements OnInit {
     if (this.dataService.currentLogBody_part != undefined) {
       this.body_part = this.dataService.currentLogBody_part;
     }
+  }
+
+  selectPart(part: string) {
+    console.log(part, "selected");
+    this.body_part = part;
+  }
+
+  ionViewDidEnter() {
+    console.log("resizing");
+    imageMapResize();
   }
 
 }
