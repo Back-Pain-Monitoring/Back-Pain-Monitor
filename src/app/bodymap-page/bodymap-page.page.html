@@ -174,60 +174,63 @@
     <img src="./assets/body_map_back.png" usemap="#body-map-portrait-back">
 
     <map name="body-map-portrait-back">
-      <area target="" alt="Head (back left)" title="Head (back left)" coords="620,6,652,71" shape="rect"
+      <area target="" alt="Head (back left)" title="Head (back left)" coords="193,6,156,71" shape="rect"
         (click)="selectPart('Head (back left)')">
-      <area target="" alt="Head (back right)" title="Head (back right)" coords="658,7,688,71" shape="rect"
+      <area target="" alt="Head (back right)" title="Head (back right)" coords="194,7,224,71" shape="rect"
         (click)="selectPart('Head (back right)')">
-      <area target="" alt="Neck (back)" title="Neck (back)" coords="610,75,708,105" shape="rect"
+      <area target="" alt="Neck (back)" title="Neck (back)" coords="174,71,212,70,240,106,148,104" shape="poly"
         (click)="selectPart('Neck (back)')">
       <area target="" alt="Shoulder (back left)" title="Shoulder (back left)"
-        coords="585,107,652,108,655,133,608,157,581,157,568,148" shape="poly"
+        coords="119,107,193,106,191,133,148,157,121,162,104,149" shape="poly"
         (click)="selectPart('Shoulder (back left)')">
       <area target="" alt="Shoulder (back right)" title="Shoulder (back right)"
-        coords="659,109,711,106,734,117,744,141,722,161,672,138,658,133" shape="poly"
+        coords="195,108,244,105,271,114,282,143,263,161,239,157,195,13" shape="poly"
         (click)="selectPart('Shoulder (back right)')">
-      <area target="" alt="Upper arm (back left)" title="Upper arm (back left)" coords="567,153,597,164,571,207,550,192"
+      <area target="" alt="Upper arm (back left)" title="Upper arm (back left)" coords="103,153,138,162,109,210,86,192"
         shape="poly" (click)="selectPart('Upper arm (back left)')">
       <area target="" alt="Upper arm (back right)" title="Upper arm (back right)"
-        coords="717,164,746,149,768,195,747,207" shape="poly" (click)="selectPart('Upper arm (back right)')">
-      <area target="" alt="Lower arm (back left)" title="Lower arm (back left)" coords="544,197,568,210,521,285,504,274"
+        coords="256,168,282,147,308,195,285,211" shape="poly" (click)="selectPart('Upper arm (back right)')">
+      <area target="" alt="Lower arm (back left)" title="Lower arm (back left)" coords="81,194,109,212,60,292,42,276"
         shape="poly" (click)="selectPart('Lower arm (back left)')">
       <area target="" alt="Lower arm (back right)" title="Lower arm (back right)"
-        coords="752,215,770,201,816,277,802,286" shape="poly" (click)="selectPart('Lower arm (back right)')">
-      <area target="" alt="Hand (back left)" title="Hand (back left)" coords="499,280,519,292,490,341,462,307"
-        shape="poly" (click)="selectPart('Hand (back left)')">
-      <area target="" alt="Hand (back right)" title="Hand (back right)" coords="794,288,817,276,849,310,824,348,804,307"
-        shape="poly" (click)="selectPart('Hand (back right)')">
-      <area target="" alt="Upper back (left)" title="Upper back (left)" coords="601,169,652,139,656,189,611,215"
+        coords="287,212,311,196,356,275,335,288" shape="poly" (click)="selectPart('Lower arm (back right)')">
+      <area target="" alt="Hand (back left)" title="Hand (back left)" coords="39,277,59,294,28,348,0,312" shape="poly"
+        (click)="selectPart('Hand (back left)')">
+      <area target="" alt="Hand (back right)" title="Hand (back right)"
+        coords="331,290,355,277,378,289,387,320,373,336,344,317" shape="poly" (click)="selectPart('Hand (back right)')">
+      <area target="" alt="Upper back (left)" title="Upper back (left)" coords="138,165,192,136,191,191,142,225"
         shape="poly" (click)="selectPart('Upper back (left)')">
-      <area target="" alt="Upper back (right)" title="Upper back (right)" coords="659,139,713,170,704,215,658,188"
+      <area target="" alt="Upper back (right)" title="Upper back (right)" coords="196,135,257,164,240,224,192,188"
         shape="poly" (click)="selectPart('Upper back (right)')">
-      <area target="" alt="Lower back (left)" title="Lower back (left)" coords="608,225,652,198,652,241,639,254,610,250"
+      <area target="" alt="Lower back (left)" title="Lower back (left)" coords="145,221,191,193,193,241,178,257,144,255"
         shape="poly" (click)="selectPart('Lower back (left)')">
       <area target="" alt="Lower back (right)" title="Lower back (right)"
-        coords="659,195,702,222,705,254,676,257,659,241" shape="poly" (click)="selectPart('Lower back (right)')">
-      <area target="" alt="Tailbone" title="Tailbone" coords="656,244,643,257,657,275,672,257" shape="poly"
+        coords="195,190,240,221,242,255,211,256,194,240" shape="poly" (click)="selectPart('Lower back (right)')">
+      <area target="" alt="Tailbone" title="Tailbone" coords="178,258,193,242,212,258,195,278" shape="poly"
         (click)="selectPart('Tailbone')">
       <area target="" alt="Buttocks (left)" title="Buttocks (left)"
-        coords="606,257,637,258,658,282,658,319,625,333,598,310" shape="poly" (click)="selectPart('Buttocks (left)')">
+        coords="145,259,169,254,194,281,197,316,173,330,137,325,136,292" shape="poly"
+        (click)="selectPart('Buttocks (left)')">
       <area target="" alt="Buttocks (right)" title="Buttocks (right)"
-        coords="660,279,675,258,705,258,712,311,690,324,660,314" shape="poly" (click)="selectPart('Buttocks (right)')">
-      <area target="" alt="Upper leg (back left)" title="Upper leg (back left)" coords="594,332,658,449" shape="rect"
+        coords="196,283,212,255,243,257,251,307,239,322,216,326,198,317" shape="poly"
+        (click)="selectPart('Buttocks (right)')">
+      <area target="" alt="Upper leg (back left)" title="Upper leg (back left)" coords="133,327,194,452" shape="rect"
         (click)="selectPart('Upper leg (back left)')">
-      <area target="" alt="Upper leg (back right)" title="Upper leg (back right)" coords="660,327,717,448" shape="rect"
+      <area target="" alt="Upper leg (back right)" title="Upper leg (back right)" coords="195,324,254,452" shape="rect"
         (click)="selectPart('Upper leg (back right)')">
-      <area target="" alt="Lower leg (back left)" title="Lower leg (back left)" coords="608,455,654,570" shape="rect"
+      <area target="" alt="Lower leg (back left)" title="Lower leg (back left)" coords="146,453,191,571" shape="rect"
         (click)="selectPart('Lower leg (back left)')">
-      <area target="" alt="Lower leg (back right)" title="Lower leg (back right)" coords="661,455,705,565" shape="rect"
+      <area target="" alt="Lower leg (back right)" title="Lower leg (back right)" coords="196,452,243,570" shape="rect"
         (click)="selectPart('Lower leg (back right)')">
-      <area target="" alt="Ankle (left)" title="Ankle (left)" coords="618,573,650,592" shape="rect"
+      <area target="" alt="Ankle (left)" title="Ankle (left)" coords="156,574,183,591" shape="rect"
         (click)="selectPart('Ankle (left)')">
-      <area target="" alt="Ankle (right)" title="Ankle (right)" coords="665,571,690,587" shape="rect"
+      <area target="" alt="Ankle (right)" title="Ankle (right)" coords="203,570,229,588" shape="rect"
         (click)="selectPart('Ankle (right)')">
-      <area target="" alt="Foot (back left)" title="Foot (back left)" coords="596,581,648,595,651,619,588,594"
-        shape="poly" (click)="selectPart('Foot (back left)')">
-      <area target="" alt="Foot (back right)" title="Foot (back right)" coords="662,592,696,583,732,595,661,614"
-        shape="poly" (click)="selectPart('Foot (back right)')">
+      <area target="" alt="Foot (back left)" title="Foot (back left)"
+        coords="132,583,156,583,162,589,185,594,190,617,158,613,132,597" shape="poly"
+        (click)="selectPart('Foot (back left)')">
+      <area target="" alt="Foot (back right)" title="Foot (back right)"
+        coords="204,591,230,583,261,589,265,600,206,615,200,602" shape="poly" (click)="selectPart('Foot (back right)')">
     </map>
   </div>
 
