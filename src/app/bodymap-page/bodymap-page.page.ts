@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LogDataService } from '../services/log-data.service';
 import imageMapResize from 'image-map-resizer';
+import { Platform } from '@ionic/angular';
 
 @Component({
   selector: 'app-bodymap-page',
@@ -10,8 +11,19 @@ import imageMapResize from 'image-map-resizer';
 export class BodymapPagePage implements OnInit {
 
   public body_part: string;
+  public isLandscape: boolean;
 
-  constructor(private dataService: LogDataService) { }
+  constructor(public dataService: LogDataService, private platform: Platform) {
+    platform.ready().then(() => {
+      this.isLandscape = platform.isLandscape();
+    });
+    platform.resize.subscribe(() => {
+      console.log("resized");
+      console.log('Width: ' + platform.width());
+      console.log('Height: ' + platform.height());
+      this.isLandscape = platform.isLandscape();
+    });
+  }
 
   ngOnInit() {
     this.updateUIFromLog();
@@ -35,7 +47,7 @@ export class BodymapPagePage implements OnInit {
   }
 
   ionViewDidEnter() {
-    console.log("resizing");
+    console.log("resizing imageMap");
     imageMapResize();
   }
 
