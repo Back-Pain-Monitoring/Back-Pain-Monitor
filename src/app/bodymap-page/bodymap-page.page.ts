@@ -11,18 +11,8 @@ import { Platform } from '@ionic/angular';
 export class BodymapPagePage implements OnInit {
 
   public body_part: string;
-  public isLandscape: boolean = false;
 
   constructor(public dataService: LogDataService, private platform: Platform) {
-    // platform.ready().then(() => {
-    //   this.isLandscape = platform.isLandscape();
-    // });
-    // platform.resize.subscribe(() => {
-    //   console.log("resized");
-    //   console.log('Width: ' + platform.width());
-    //   console.log('Height: ' + platform.height());
-    //   this.isLandscape = platform.isLandscape();
-    // });
   }
 
   ngOnInit() {
