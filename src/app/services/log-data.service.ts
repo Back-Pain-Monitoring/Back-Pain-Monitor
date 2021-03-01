@@ -6,6 +6,7 @@ export interface LogEntry {
   id: number;
   datetime: Date;
   body_part: string;
+  body_parts: string[];
   intensity: number;
   type: string;
   timesBefore: number;
@@ -24,7 +25,7 @@ export interface LogFilter {
   datetime_max: Date;
   intensity_min: Number;
   intensity_max: Number;
-  body_part: String;
+  body_part: string;
   type: String;
   timesBefore_lower: Number;
   timesBefore_upper: Number;
@@ -71,6 +72,7 @@ export class LogDataService {
       id: -1,
       datetime: undefined,
       body_part: undefined,
+      body_parts: [],
       intensity: undefined,
       type: undefined,
       timesBefore: undefined,
@@ -92,6 +94,8 @@ export class LogDataService {
   public get currentLogDatetime() { return this.currentLog.datetime; }
   public set currentLogBody_part(body_part: string) { this.currentLog.body_part = ""; }
   public get currentLogBody_part() { return this.currentLog.body_part; }
+  public set currentLogBodyParts(body_parts: string[]) { this.currentLogBodyParts = body_parts; }
+  public get currentLogBodyParts() { return this.currentLogBodyParts; }
   public set currentLogIntensity(intensity: number) { this.currentLog.intensity = intensity; }
   public get currentLogIntensity() { return this.currentLog.intensity; }
   public set currentLogType(type: string) { this.currentLog.type = type; }
@@ -147,6 +151,7 @@ export class LogDataService {
     console.log(`id: ${entry.id}`);
     console.log(`datetime: ${entry.datetime}`);
     console.log(`body_part: ${entry.body_part}`);
+    console.log(`body_parts: ${entry.body_parts}`);
     console.log(`intensity: ${entry.intensity}`);
     console.log(`type: ${entry.type}`);
     console.log(`times before: ${entry.timesBefore}`);
@@ -161,12 +166,6 @@ export class LogDataService {
   public printLogEntries() {
     this.logSubj.value.forEach((entry: LogEntry) => this.printLogEntry(entry));
   }
-
-
-
-  // public getLogs(): LogEntry[] {
-  //   return this.logSubj.vla;
-  // }
 
   /*
   lastIndex: the index 1 after the last retrieved log
@@ -206,7 +205,7 @@ export class LogDataService {
         (f.datetime_max === undefined || log.datetime <= f.datetime_max) &&
         (f.intensity_min === undefined || log.intensity >= f.intensity_min) &&
         (f.intensity_max === undefined || log.intensity <= f.intensity_max) &&
-        (f.body_part === undefined || log.body_part === f.body_part) &&
+        (f.body_part === undefined || log.body_part === f.body_part || log.body_parts.includes(f.body_part)) &&
         (f.type === undefined || log.type === f.type) &&
         (f.timesBefore_lower === undefined || log.timesBefore >= f.timesBefore_lower) &&
         (f.timesBefore_upper === undefined || log.timesBefore <= f.timesBefore_upper);
