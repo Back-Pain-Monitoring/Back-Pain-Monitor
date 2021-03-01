@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { LogDataService } from '../services/log-data.service';
 import imageMapResize from 'image-map-resizer';
-import { Platform } from '@ionic/angular';
 
 @Component({
   selector: 'app-bodymap-page',
@@ -10,10 +9,9 @@ import { Platform } from '@ionic/angular';
 })
 export class BodymapPagePage implements OnInit {
 
-  public body_part: string;
   public body_parts: string[] = [];
 
-  constructor(public dataService: LogDataService, private platform: Platform) {
+  constructor(public dataService: LogDataService) {
   }
 
   ngOnInit() {
@@ -21,17 +19,13 @@ export class BodymapPagePage implements OnInit {
   }
 
   updateLog() {
-    this.dataService.currentLogBody_part = this.body_part;
     this.dataService.currentLogBodyParts = this.body_parts;
     this.dataService.updateIsEntered(true);
   }
 
   updateUIFromLog() {
     this.dataService.updateIsEntered(false);
-    if (this.dataService.currentLogBody_part != undefined) {
-      this.body_part = this.dataService.currentLogBody_part;
-      this.body_parts = this.dataService.currentLogBodyParts;
-    }
+    this.body_parts = this.dataService.currentLogBodyParts;
   }
 
   selectPart(part: string) {
@@ -41,7 +35,6 @@ export class BodymapPagePage implements OnInit {
     } else {
       console.log(part, "selected");
       this.body_parts.push(part);
-      this.body_part = part;
     }
   }
 
