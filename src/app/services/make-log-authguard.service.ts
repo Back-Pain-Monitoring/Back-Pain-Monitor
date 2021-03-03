@@ -14,7 +14,7 @@ export class MakeLogAuthguardService implements CanActivate {
   canActivate(): boolean {
     if (!this.authSvc.uidSubj.value) {
       this.alertCtrl.create({
-        message: 'You need to sign in before you can create a log.',
+        message: 'You need to sign in before you can report pain or medication use.',
         buttons: ['OK']
       }).then((prompt) => {
         prompt.present();

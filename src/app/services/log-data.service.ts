@@ -4,7 +4,7 @@ import { BehaviorSubject, Subscription } from 'rxjs';
 import { AuthService } from './auth.service';
 
 export interface LogEntry {
-  id: number;
+  id: string;
   datetime: Date;
   body_part: string;
   intensity: number;
@@ -45,7 +45,7 @@ export class LogDataService {
     "am", "as the day progresses", "pm", "still", "moving"];
   public isEnteredSubj: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(undefined);
   private logCollection: AngularFirestoreCollection<LogEntry>;
-  logSubj: BehaviorSubject<LogEntry[]> = new BehaviorSubject<LogEntry[]>([]);
+  public logSubj: BehaviorSubject<LogEntry[]> = new BehaviorSubject<LogEntry[]>([]);
   private dbSubscription: Subscription;
 
   constructor(private db: AngularFirestore, private authSvc: AuthService) {
@@ -78,7 +78,7 @@ export class LogDataService {
 
   private createEmptyLog(): LogEntry {
     return {
-      id: -1,
+      id: "-1",
       datetime: undefined,
       body_part: undefined,
       intensity: undefined,

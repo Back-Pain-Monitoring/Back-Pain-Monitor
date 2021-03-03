@@ -26,10 +26,10 @@ export class MedicationPage implements OnInit {
 
   intensityTitle: string = this.intensityInfo[0][0];
   intensityDescription: string = this.intensityInfo[0][1];
-  datetime: Date;
-  med_type: Array<string> = [];
-  med_comment: string;
-  intensity: number;
+  datetime: string;
+  med_type: string = "";
+  med_comment: string = "";
+  intensity: number = 0;
 
   constructor(private alertCtrl: AlertController, private navCtrl: NavController, public dataService: MedicationDataService) {
 
@@ -52,7 +52,7 @@ export class MedicationPage implements OnInit {
   backToHome() {
     this.updateMeds();
     this.dataService.submitMedEntry();
-    this.navCtrl.navigateRoot('/tabs/home')
+    this.navCtrl.navigateRoot('/tabs/home');
   }
 
   // Submit Medication Use
@@ -74,7 +74,7 @@ export class MedicationPage implements OnInit {
 
   updateMeds() {
     console.log("Updating UI from dataservice");
-    this.dataService.currentMedDateTime = this.datetime;
+    this.dataService.currentMedDateTime = new Date(this.datetime);
     this.dataService.currentMedMed_type = this.med_type;
     this.dataService.currentMedIntensity = this.intensity;
     this.dataService.currentMedComment = this.med_comment;
@@ -83,7 +83,7 @@ export class MedicationPage implements OnInit {
 
   updateUIFromMed() {
     this.dataService.printMedEntry();
-    this.datetime = this.dataService.currentMedDateTime;
+    this.datetime = this.dataService.currentMedDateTime.toISOString();
     this.med_type = this.dataService.currentMedMed_type;
     this.intensity = this.dataService.currentMedIntensity;
     this.med_comment = this.dataService.currentMedComment;

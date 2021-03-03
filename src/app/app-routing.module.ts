@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { DatetimeAuthguardService } from './services/datetime-authguard.service';
 import { MakeLogAuthguardService } from './services/make-log-authguard.service';
+import { MedicationAuthguardService } from './services/medication-authguard.service';
 import { SymptomsAuthguardService } from './services/symptoms-authguard.service';
 
 const routes: Routes = [
@@ -10,13 +11,14 @@ const routes: Routes = [
     loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
   },
   {
+    path: 'medication',
+    loadChildren: () => import('./medication/medication.module').then(m => m.MedicationPageModule),
+    canActivate: [MakeLogAuthguardService], canDeactivate: [MedicationAuthguardService]
+  },
+  {
     path: 'datetime',
     loadChildren: () => import('./datetime-page/datetime-page.module').then(m => m.DatetimePagePageModule),
     canActivate: [MakeLogAuthguardService], canDeactivate: [DatetimeAuthguardService],
-  },
-  {
-    path: 'viewlogs-page',
-    loadChildren: () => import('./view-logs/view-logs.module').then(m => m.ViewLogsPageModule)
   },
   {
     path: 'bodymap',

@@ -6,6 +6,7 @@ import { FilterModalPageComponent } from '../filter-modal/filter-modal.component
 import { ModalController } from '@ionic/angular';
 import { element } from 'protractor';
 import { MedicationDataService } from '../services/medication-data.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-insights-page',
@@ -24,8 +25,6 @@ export class InsightsPagePage {
   @ViewChild('nightPainPieCanvas') nightPainPieCanvas: ElementRef;
   @ViewChild('worseBetterCanvas') worseBetterCanvas: ElementRef;
 
-
-
   // Creating the Chart objects
   private intensityTimeChart: Chart;
   private intensityFreqChart: Chart;
@@ -37,32 +36,39 @@ export class InsightsPagePage {
   private nightPainPieChart: Chart;
   private worseBetterChart: Chart;
 
-
   private filter: LogFilter;
   private logsToDisplay = [];
   private medsToDisplay = [];
+
+  private medSubscription: Subscription;
+  private logSubscription: Subscription;
 
   constructor(private dataService: LogDataService, public modalCtrl: ModalController, private MedService: MedicationDataService) {
   }
 
   ionViewWillEnter() {
     this.filter = this.dataService.createEmptyFilter();
-    this.medsToDisplay = this.MedService.getMeds();
-    this.dataService.logSubj.subscribe(logs => {
-      if (this.filter === this.dataService.createEmptyFilter()) {
-        console.log("filtering");
-        this.filterLogs();
-      } else {
-        console.log("displaying");
-        this.logsToDisplay = logs;
-      }
-      console.log("before createCharts", this.logsToDisplay);
+    this.medSubscription = this.MedService.medSubj.subscribe(meds => {
+      console.log("displaying meds", meds);
+      this.medsToDisplay = meds;
       this.createCharts();
     });
+    this.logSubscription = this.dataService.logSubj.subscribe(logs => {
+      if (this.filter === this.dataService.createEmptyFilter()) {
+        console.log("filtering logs");
+        this.filterLogs();
+      } else {
+        console.log("displaying logs", logs);
+        this.logsToDisplay = logs;
+      }
+      this.createCharts();
+    });
+    // this.createCharts();
   }
 
   createCharts() {
-    console.log(this.logsToDisplay);
+    console.log('create charts');
+    console.log("creating charts", this.logsToDisplay, this.medsToDisplay);
     const intensity_time_data = this.logsToDisplay.map(log => {
       return {
         x: log.datetime,
@@ -342,12 +348,10 @@ export class InsightsPagePage {
 
 
 
-    const medication_fd = { "NSAID": 0, "Acetaminiophen": 0, "COX-2 Inhibitors": 0, "Antidepressants": 0, "Anti-Seizure": 0 };
-    const medication_labels = ["NSAID", "Acetaminiophen", "COX-2 Inhibitors", "Antidepressants", "Anti-Seizure"]
+    const medication_fd = { "NSAID": 0, "Acetaminophen": 0, "COX-2 Inhibitor": 0, "Antidepressant": 0, "Anti-seizure": 0 };
+    const medication_labels = ["NSAID", "Acetaminophen", "COX-2 Inhibitor", "Antidepressant", "Anti-seizure"]
     this.medsToDisplay.forEach(element => {
-      element.med_type.forEach(med_type => {
-        medication_fd[med_type] += 1;
-      });
+      medication_fd[element.med_type] += 1;
     });
 
     this.medicationUseChart = new Chart(this.medicationUseCanvas.nativeElement, {
