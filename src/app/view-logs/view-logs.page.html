@@ -5,68 +5,64 @@
 </ion-header>
 
 <ion-content>
+  <div class="log-display">
+    <mat-expansion-panel *ngFor="let log of this.logsToDisplay">
+      <mat-expansion-panel-header collapsedHeight="*" expandedHeight="*">
+        <mat-panel-title>
+          {{log.datetime | date:'short'}}
+        </mat-panel-title>
+        <mat-panel-description>
+          <ion-grid>
+            <ion-row>
+              <ion-col>
+                <ion-label>Intensity: {{log.intensity}}</ion-label>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <ion-list>
+        <ion-item>
+          <ion-label text-wrap>Body parts: {{log.body_parts}}</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label text-wrap>Type: {{log.type}}</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label text-wrap>Experienced {{log.timesBefore}} times before</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label text-wrap>Pain made worse by: {{log.worse}}</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label text-wrap>Pain made better by: {{log.better}}</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label text-wrap>Cause: {{log.cause}}</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label text-wrap>Mobility: {{log.mobility}}</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label text-wrap>Constant or intermittent: {{log.is_constant ? 'Constant' : 'Intermittent'}}</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label text-wrap>Redflags symptoms: {{log.redflag_symptoms}}</ion-label>
+        </ion-item>
+      </ion-list>
 
-  <!-- <ion-card *ngFor="let log of this.logsToDisplay"> -->
-  <mat-expansion-panel *ngFor="let log of this.logsToDisplay">
-    <mat-expansion-panel-header collapsedHeight="*" expandedHeight="*">
-      <mat-panel-title>
-        {{log.datetime | date:'short'}}
-      </mat-panel-title>
-      <mat-panel-description>
-        <ion-grid>
-          <ion-row>
-            <ion-col>
-              <ion-label>Body part: {{log.body_part}}</ion-label>
-            </ion-col>
-            <ion-col>
-              <ion-label>Intensity: {{log.intensity}}</ion-label>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-      </mat-panel-description>
-    </mat-expansion-panel-header>
-    <ion-list>
-      <ion-item>
-        <ion-label text-wrap>Type: {{log.type}}</ion-label>
-      </ion-item>
-      <ion-item>
-        <ion-label text-wrap>Experienced {{log.timesBefore}} times before</ion-label>
-      </ion-item>
-      <ion-item>
-        <ion-label text-wrap>Pain made worse by: {{log.worse}}</ion-label>
-      </ion-item>
-      <ion-item>
-        <ion-label text-wrap>Pain made better by: {{log.better}}</ion-label>
-      </ion-item>
-      <ion-item>
-        <ion-label text-wrap>Cause: {{log.cause}}</ion-label>
-      </ion-item>
-      <ion-item>
-        <ion-label text-wrap>Mobility: {{log.mobility}}</ion-label>
-      </ion-item>
-      <ion-item>
-        <ion-label text-wrap>Constant or intermittent: {{log.is_constant ? 'Constant' : 'Intermittent'}}</ion-label>
-      </ion-item>
-      <ion-item>
-        <ion-label text-wrap>Redflags symptoms: {{log.redflag_symptoms}}</ion-label>
-      </ion-item>
-    </ion-list>
+      <ion-toolbar>
+        <ion-button (click)="editLog(log)" color="primary">
+          <ion-icon slot="icon-only" name="create-outline" size="large"></ion-icon>
+        </ion-button>
+        <ion-button (click)="deleteLog(log)" slot="end" color="danger">
+          <ion-icon slot="icon-only" name="trash" size="large"></ion-icon>
+        </ion-button>
+      </ion-toolbar>
 
-    <ion-toolbar>
-      <ion-button (click)="editLog(log)" color="primary">
-        <ion-icon slot="icon-only" name="create-outline" size="large"></ion-icon>
-      </ion-button>
-      <ion-button (click)="deleteLog(log)" slot="end" color="danger">
-        <ion-icon slot="icon-only" name="trash" size="large"></ion-icon>
-      </ion-button>
-    </ion-toolbar>
+    </mat-expansion-panel>
+  </div>
 
-  </mat-expansion-panel>
-  <!--currently unused, but will re-enable when we get to database-->
-  <!-- <ion-infinite-scroll threshold="15%" (ionInfinite)="loadData($event)">
-    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
-    </ion-infinite-scroll-content>
-  </ion-infinite-scroll> -->
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button (click)="presentModal()">
       <ion-icon name="filter" color="dark"></ion-icon>
