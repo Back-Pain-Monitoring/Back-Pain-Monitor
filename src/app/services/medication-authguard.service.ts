@@ -4,13 +4,13 @@ import { AlertController } from '@ionic/angular';
 import { Observable } from 'rxjs';
 import { MedicationDataService } from './medication-data.service';
 
-@Injectable({
-  providedIn: 'root'
-})
-
 export interface CanComponentDeactivate {
   canDeactivate: () => Observable<boolean> | Promise<boolean> | boolean;
 }
+
+@Injectable({
+  providedIn: 'root'
+})
 
 export class MedicationAuthguardService {
 
