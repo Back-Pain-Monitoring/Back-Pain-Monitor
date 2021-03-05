@@ -11,7 +11,7 @@ export class BodymapPagePage implements OnInit {
 
   public body_parts: string[] = [];
 
-  constructor(public dataService: LogDataService) {
+  constructor(public dataService: LogDataService, private cd: ChangeDetectorRef) {
   }
 
   ngOnInit() {
@@ -36,6 +36,7 @@ export class BodymapPagePage implements OnInit {
       console.log(part, "selected");
       this.body_parts.push(part);
     }
+    this.cd.markForCheck();
   }
 
   ionViewDidEnter() {

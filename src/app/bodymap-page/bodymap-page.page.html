@@ -156,7 +156,7 @@
     <ion-select-option value="Shoulder (back left)">26. Shoulder</ion-select-option>
     <ion-select-option value="Shoulder (back right)">27. Shoulder</ion-select-option>
     <ion-select-option value="Upper arm (back left)">28. Upper arm</ion-select-option>
-    <ion-select-option value="Upper arm (back right)">39. Upper arm</ion-select-option>
+    <ion-select-option value="Upper arm (back right)">29. Upper arm</ion-select-option>
     <ion-select-option value="Lower arm (back left)">30. Lower arm</ion-select-option>
     <ion-select-option value="Lower arm (back right)">31. Lower arm</ion-select-option>
     <ion-select-option value="Hand (back left)">32. Hand</ion-select-option>
@@ -177,6 +177,12 @@
     <ion-select-option value="Foot (back left)">44. Foot</ion-select-option>
     <ion-select-option value="Foot (back right)">45. Foot</ion-select-option>
   </ion-select>
+
+  <ion-list>
+    <ion-item *ngFor='let part of body_parts'>
+      <ion-label>{{part}}</ion-label>
+    </ion-item>
+  </ion-list>
 
   <ion-fab vertical="bottom" horizontal="start" slot="fixed" (click)="updateLog()">
     <app-log-nav-button direction="back" link="/datetime"></app-log-nav-button>
