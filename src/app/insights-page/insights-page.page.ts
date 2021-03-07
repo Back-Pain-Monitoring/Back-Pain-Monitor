@@ -49,10 +49,11 @@ export class InsightsPagePage {
 
   loading: any;
 
-  constructor(private dataService: LogDataService, public modalCtrl: ModalController, private MedService: MedicationDataService, public loadingCtrl: LoadingController, private fileOpener: FileOpener ) {
+  constructor(private dataService: LogDataService, public modalCtrl: ModalController, private MedService: MedicationDataService, public loadingCtrl: LoadingController, private file: File, private fileOpener: FileOpener ) {
   }
 
-  async exportButton(msg) {
+  // credits https://www.djamware.com/post/5bb6009580aca74669894418/ionic-4-angular-6-and-cordova-export-and-view-pdf-file
+  async presentLoading(msg) {
     const presentLoading = await this.loadingCtrl.create({
       message: msg
     })
@@ -64,28 +65,21 @@ export class InsightsPagePage {
     const div = document.getElementById("printable-area");
     const options = { background: "white", height: div.clientWidth, width: div.clientHeight };
     domtoimage.toPng(div, options).then((dataUrl)=> {
-      //Initialize JSPDF
       var doc = new jsPDF("p","mm","a4");
-      //Add image Url to PDF
       doc.addImage(dataUrl, 'PNG', 20, 20, 240, 180);
   
       let pdfOutput = doc.output();
-      // using ArrayBuffer will allow you to put image inside PDF
       let buffer = new ArrayBuffer(pdfOutput.length);
       let array = new Uint8Array(buffer);
       for (var i = 0; i < pdfOutput.length; i++) {
           array[i] = pdfOutput.charCodeAt(i);
       }
-  
-  
-      //This is where the PDF file will stored , you can change it as you like
-      // for more information please visit https://ionicframework.com/docs/native/file/
+
       const directory = this.file.dataDirectory ;
       const fileName = "invoice.pdf";
       let options: IWriteOptions = { replace: true };
   
       this.file.checkFile(directory, fileName).then((success)=> {
-        //Writing File to Device
         this.file.writeFile(directory,fileName,buffer, options)
         .then((success)=> {
           this.loading.dismiss();
@@ -100,7 +94,6 @@ export class InsightsPagePage {
         });
       })
       .catch((error)=> {
-        //Writing File to Device
         this.file.writeFile(directory,fileName,buffer)
         .then((success)=> {
           this.loading.dismiss();
