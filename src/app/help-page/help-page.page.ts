@@ -7,6 +7,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HelpPagePage implements OnInit {
 
+  private appNameHere;
+  private doctorShown;
+  private filter;
+  
   constructor() { }
 
   ngOnInit() {

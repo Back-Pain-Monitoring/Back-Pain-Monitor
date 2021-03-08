@@ -77,7 +77,7 @@ export class FilterModalPageComponent implements OnInit, OnDestroy {
   }
 
   // Updating Intensity dual knobs
-  private onIntensityChange(newIntensity) {
+  public onIntensityChange(newIntensity) {
     this.intensity.lower = newIntensity.lower;
     this.intensity.upper = newIntensity.upper;
   }

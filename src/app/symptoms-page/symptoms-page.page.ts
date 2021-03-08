@@ -45,7 +45,7 @@ export class SymptomsPagePage implements OnInit {
     this.updateUIFromLog();
   }
 
-  private onIntensityChange(newIntensity) {
+  public onIntensityChange(newIntensity) {
     if (!(newIntensity in this.intensityInfo)) {
       newIntensity = 0;
     }
