@@ -83,8 +83,24 @@ export class InsightsPagePage {
       }
     });
 
-    const min_x = intensity_time_data[0].x < medication_use_data[0].x ? intensity_time_data[0].x : medication_use_data[0].x;
-    const max_x = intensity_time_data[intensity_time_data.length - 1].x > medication_use_data[medication_use_data.length - 1].x ? intensity_time_data[intensity_time_data.length - 1].x : medication_use_data[medication_use_data.length - 1].x;
+    let min_x = 0;
+    let max_x = 1;
+
+    if (this.logsToDisplay.length > 0) {
+      if (this.medsToDisplay.length > 0) {
+        min_x = intensity_time_data[0].x < medication_use_data[0].x ? intensity_time_data[0].x : medication_use_data[0].x;
+        max_x = intensity_time_data[intensity_time_data.length - 1].x > medication_use_data[medication_use_data.length - 1].x ? intensity_time_data[intensity_time_data.length - 1].x : medication_use_data[medication_use_data.length - 1].x;
+      } else {
+        min_x = intensity_time_data[0].x;
+        max_x = intensity_time_data[intensity_time_data.length - 1].x;
+      }
+    } else if (this.medsToDisplay.length > 0) {
+      min_x = medication_use_data[0].x;
+      max_x = medication_use_data[medication_use_data.length - 1].x;
+    }
+
+    // const min_x = intensity_time_data[0].x < medication_use_data[0].x ? intensity_time_data[0].x : medication_use_data[0].x;
+    // const max_x = intensity_time_data[intensity_time_data.length - 1].x > medication_use_data[medication_use_data.length - 1].x ? intensity_time_data[intensity_time_data.length - 1].x : medication_use_data[medication_use_data.length - 1].x;
 
     this.intensityTimeChart = new Chart(this.intensityTimeCanvas.nativeElement, {
       type: 'line',
@@ -185,7 +201,6 @@ export class InsightsPagePage {
       }
     });
 
-
     const mobility_labels = ["moving", "resting", "moving and resting"];
     const mobility_fd = { "moving": 0, "resting": 0, "moving and resting": 0 };
     this.logsToDisplay.forEach(element => {
@@ -273,8 +288,6 @@ export class InsightsPagePage {
       }
     });
 
-
-
     const nightData = [0, 0];
     this.logsToDisplay.forEach(element => {
       if (element.nightPain) {
@@ -344,9 +357,9 @@ export class InsightsPagePage {
       }
     });
 
-
-
-
+    if (this.medsToDisplay.length === 0) {
+      return;
+    }
 
     const medication_fd = { "NSAID": 0, "Acetaminophen": 0, "COX-2 Inhibitor": 0, "Antidepressant": 0, "Anti-seizure": 0 };
     const medication_labels = ["NSAID", "Acetaminophen", "COX-2 Inhibitor", "Antidepressant", "Anti-seizure"]
