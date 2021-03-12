@@ -1,20 +1,19 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { DatetimeAuthguardService } from './services/datetime-authguard.service';
-import { MakeLogAuthguardService } from './services/make-log-authguard.service';
-import { MedicationAuthguardService } from './services/medication-authguard.service';
 import { SymptomsAuthguardService } from './services/symptoms-authguard.service';
+import { MakeLogAuthguardService } from './services/make-log-authguard.service';
 
 const routes: Routes = [
   {
     path: '',
     loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
   },
-  {
-    path: 'medication',
-    loadChildren: () => import('./medication/medication.module').then(m => m.MedicationPageModule),
-    canActivate: [MakeLogAuthguardService], canDeactivate: [MedicationAuthguardService]
-  },
+  // {
+  //   path: 'medication',
+  //   loadChildren: () => import('./medication/medication.module').then(m => m.MedicationPageModule),
+  //   canActivate: [MakeLogAuthguardService], canDeactivate: [MedicationAuthguardService]
+  // },
   {
     path: 'datetime',
     loadChildren: () => import('./datetime-page/datetime-page.module').then(m => m.DatetimePagePageModule),
@@ -45,10 +44,10 @@ const routes: Routes = [
     path: 'log',
     loadChildren: () => import('./log-page/log-page.module').then(m => m.LogPagePageModule)
   },
-  {
-    path: 'login',
-    loadChildren: () => import('./login/login.module').then(m => m.LoginPageModule)
-  },
+  // {
+  //   path: 'login',
+  //   loadChildren: () => import('./login/login.module').then(m => m.LoginPageModule)
+  // },
 
 ];
 
