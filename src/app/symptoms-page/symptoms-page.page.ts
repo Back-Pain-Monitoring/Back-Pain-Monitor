@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { AlertController } from '@ionic/angular';
 
 import { LogDataService } from '../services/log-data.service';
 

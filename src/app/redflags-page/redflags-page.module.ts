@@ -17,6 +17,7 @@ import { LogNavButtonComponent } from '../components/log-nav-button/log-nav-butt
     IonicModule,
     RedflagsPagePageRoutingModule
   ],
-  declarations: [RedflagsPagePage, LogNavButtonComponent]
+  exports: [LogNavButtonComponent],
+  declarations: [RedflagsPagePage]
 })
 export class RedflagsPagePageModule { }

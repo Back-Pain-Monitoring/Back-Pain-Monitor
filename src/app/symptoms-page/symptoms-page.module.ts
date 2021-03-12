@@ -17,6 +17,7 @@ import { LogNavButtonComponent } from '../components/log-nav-button/log-nav-butt
     IonicModule,
     SymptomsPagePageRoutingModule
   ],
-  declarations: [SymptomsPagePage, LogNavButtonComponent]
+  exports: [LogNavButtonComponent],
+  declarations: [SymptomsPagePage]
 })
 export class SymptomsPagePageModule { }
