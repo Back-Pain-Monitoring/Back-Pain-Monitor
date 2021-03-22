@@ -7,9 +7,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HelpPagePage implements OnInit {
 
-  public appNameHere;
-  public doctorShown;
-  public filter;
+  public appNameHere = false;
+  public doctorShown = false;
+  public filter = false;
   
   constructor() { }
 

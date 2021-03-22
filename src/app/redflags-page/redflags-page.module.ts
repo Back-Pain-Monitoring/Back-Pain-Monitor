@@ -6,18 +6,18 @@ import { IonicModule } from '@ionic/angular';
 
 import { RedflagsPagePageRoutingModule } from './redflags-page-routing.module';
 
-import { RedflagsPagePage } from './redflags-page.page';
+import { LogNavButtonModule } from '../components/log-nav-button/log-nav-button.module';
 
-import { LogNavButtonComponent } from '../components/log-nav-button/log-nav-button.component';
+import { RedflagsPagePage } from './redflags-page.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    RedflagsPagePageRoutingModule
+    RedflagsPagePageRoutingModule,
+    LogNavButtonModule,
   ],
-  exports: [LogNavButtonComponent],
   declarations: [RedflagsPagePage]
 })
 export class RedflagsPagePageModule { }

@@ -6,18 +6,18 @@ import { IonicModule } from '@ionic/angular';
 
 import { SymptomsPagePageRoutingModule } from './symptoms-page-routing.module';
 
-import { SymptomsPagePage } from './symptoms-page.page';
+import { LogNavButtonModule } from '../components/log-nav-button/log-nav-button.module';
 
-import { LogNavButtonComponent } from '../components/log-nav-button/log-nav-button.component';
+import { SymptomsPagePage } from './symptoms-page.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    SymptomsPagePageRoutingModule
+    SymptomsPagePageRoutingModule,
+    ,LogNavButtonModule,
   ],
-  exports: [LogNavButtonComponent],
   declarations: [SymptomsPagePage]
 })
 export class SymptomsPagePageModule { }

@@ -8,7 +8,6 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { LogDataService } from './services/log-data.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatExpansionModule } from '@angular/material/expansion';
 
@@ -17,11 +16,15 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { firebaseConfig } from './credentials';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [
+    AppComponent
+  ],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,
-    AngularFireModule.initializeApp(firebaseConfig),
-    AngularFirestoreModule, BrowserAnimationsModule, MatExpansionModule],
+  imports: [
+    BrowserModule, IonicModule.forRoot(),
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    MatExpansionModule],
   providers: [
     StatusBar,
     SplashScreen,
