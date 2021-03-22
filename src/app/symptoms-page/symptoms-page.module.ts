@@ -16,7 +16,7 @@ import { SymptomsPagePage } from './symptoms-page.page';
     FormsModule,
     IonicModule,
     SymptomsPagePageRoutingModule,
-    ,LogNavButtonModule,
+    LogNavButtonModule,
   ],
   declarations: [SymptomsPagePage]
 })

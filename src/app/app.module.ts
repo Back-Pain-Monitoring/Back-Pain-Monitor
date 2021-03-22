@@ -15,6 +15,8 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { firebaseConfig } from './credentials';
 
+import { LogNavButtonModule } from './components/log-nav-button/log-nav-button.module';
+
 @NgModule({
   declarations: [
     AppComponent

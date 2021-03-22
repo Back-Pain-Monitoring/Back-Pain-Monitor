@@ -6,9 +6,9 @@ import { IonicModule } from '@ionic/angular';
 
 import { RedflagsPagePageRoutingModule } from './redflags-page-routing.module';
 
-import { LogNavButtonModule } from '../components/log-nav-button/log-nav-button.module';
-
 import { RedflagsPagePage } from './redflags-page.page';
+
+import { LogNavButtonModule } from '../components/log-nav-button/log-nav-button.module';
 
 @NgModule({
   imports: [
