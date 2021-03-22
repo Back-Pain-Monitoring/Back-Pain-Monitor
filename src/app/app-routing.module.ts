@@ -3,6 +3,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { DatetimeAuthguardService } from './services/datetime-authguard.service';
 import { SymptomsAuthguardService } from './services/symptoms-authguard.service';
 import { MakeLogAuthguardService } from './services/make-log-authguard.service';
+import { BodymapAuthguardService } from './services/bodymap-authguard.service';
 
 const routes: Routes = [
   {
@@ -17,16 +18,17 @@ const routes: Routes = [
   {
     path: 'datetime',
     loadChildren: () => import('./datetime-page/datetime-page.module').then(m => m.DatetimePagePageModule),
-    canActivate: [MakeLogAuthguardService], canDeactivate: [DatetimeAuthguardService],
+    canActivate: [MakeLogAuthguardService],
   },
   {
     path: 'bodymap',
-    loadChildren: () => import('./bodymap-page/bodymap-page.module').then(m => m.BodymapPagePageModule)
+    loadChildren: () => import('./bodymap-page/bodymap-page.module').then(m => m.BodymapPagePageModule),
+    canActivate: [DatetimeAuthguardService]
   },
   {
     path: 'symptoms',
     loadChildren: () => import('./symptoms-page/symptoms-page.module').then(m => m.SymptomsPagePageModule),
-    canDeactivate: [SymptomsAuthguardService]
+    canActivate: [BodymapAuthguardService]
   },
   {
     path: 'comments',
@@ -34,7 +36,8 @@ const routes: Routes = [
   },
   {
     path: 'redflags',
-    loadChildren: () => import('./redflags-page/redflags-page.module').then(m => m.RedflagsPagePageModule)
+    loadChildren: () => import('./redflags-page/redflags-page.module').then(m => m.RedflagsPagePageModule),
+    canActivate: [SymptomsAuthguardService]
   },
   {
     path: 'view-logs',
