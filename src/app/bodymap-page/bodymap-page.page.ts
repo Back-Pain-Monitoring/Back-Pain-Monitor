@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { LogDataService } from '../services/log-data.service';
-// import imageMapResize from 'image-map-resizer';
+import imageMapResize from 'image-map-resizer';
 
 @Component({
   selector: 'app-bodymap-page',
@@ -41,7 +41,7 @@ export class BodymapPagePage implements OnInit {
 
   ionViewDidEnter() {
     console.log("resizing imageMap");
-    // imageMapResize();
+    imageMapResize();
   }
 
 }
