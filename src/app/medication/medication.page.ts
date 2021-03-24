@@ -39,7 +39,7 @@ export class MedicationPage implements OnInit {
     this.updateUIFromMed;
   }
 
-  private onIntensityChange(newIntensity) {
+  public onIntensityChange(newIntensity) {
     if (!(newIntensity in this.intensityInfo)) {
       newIntensity = 0;
     }

@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { LogNavButtonComponent } from '../components/log-nav-button/log-nav-button.component';
+import { LogNavButtonModule } from '../components/log-nav-button/log-nav-button.module';
 
 import { CommentsPagePageRoutingModule } from './comments-page-routing.module';
 
@@ -15,8 +15,9 @@ import { CommentsPagePage } from './comments-page.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    CommentsPagePageRoutingModule
+    CommentsPagePageRoutingModule,
+    LogNavButtonModule,
   ],
-  declarations: [CommentsPagePage, LogNavButtonComponent]
+  declarations: [CommentsPagePage]
 })
 export class CommentsPagePageModule { }

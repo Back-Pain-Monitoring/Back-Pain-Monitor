@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { AlertController } from '@ionic/angular';
 
 import { LogDataService } from '../services/log-data.service';
 
@@ -45,7 +44,7 @@ export class SymptomsPagePage implements OnInit {
     this.updateUIFromLog();
   }
 
-  private onIntensityChange(newIntensity) {
+  public onIntensityChange(newIntensity) {
     if (!(newIntensity in this.intensityInfo)) {
       newIntensity = 0;
     }
