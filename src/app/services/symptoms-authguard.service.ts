@@ -1,21 +1,16 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
+import { CanActivate, Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
-import { Observable } from 'rxjs';
 import { LogDataService } from './log-data.service';
-
-export interface CanComponentDeactivate {
-  canDeactivate: () => Observable<boolean> | Promise<boolean> | boolean;
-}
 
 @Injectable({
   providedIn: 'root'
 })
-export class SymptomsAuthguardService {
+export class SymptomsAuthguardService implements CanActivate {
 
   constructor(private router: Router, private dataService: LogDataService, private alertCtrl: AlertController) { }
 
-  canDeactivate(component: CanComponentDeactivate): boolean {
+  canActivate(): boolean {
     console.log("checking candeactivate");
     const missingFields: string[] = [];
     if (this.dataService.currentLogIntensity === undefined) {
