@@ -25,6 +25,8 @@ import { LogNavButtonModule } from './components/log-nav-button/log-nav-button.m
   imports: [
     BrowserModule, IonicModule.forRoot(),
     AppRoutingModule,
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFirestoreModule,
     BrowserAnimationsModule,
     MatExpansionModule],
   providers: [
