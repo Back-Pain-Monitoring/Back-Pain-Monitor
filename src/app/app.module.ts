@@ -14,7 +14,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { firebaseConfig } from './credentials';
-import { EmailComposer } from '@ionic-native/email-composer/ngx';
+import { EmailComposer } from '@ionic-native/email-composer'
 
 import { LogNavButtonModule } from './components/log-nav-button/log-nav-button.module';
 
