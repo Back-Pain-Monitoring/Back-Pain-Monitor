@@ -15,15 +15,6 @@ const routes: Routes = [
   //   canActivate: [MakeLogAuthguardService], canDeactivate: [MedicationAuthguardService]
   // },
   {
-    path: 'datetime',
-    loadChildren: () => import('./datetime-page/datetime-page.module').then(m => m.DatetimePagePageModule),
-    canActivate: [MakeLogAuthguardService], canDeactivate: [DatetimeAuthguardService],
-  },
-  {
-    path: 'bodymap',
-    loadChildren: () => import('./bodymap-page/bodymap-page.module').then(m => m.BodymapPagePageModule)
-  },
-  {
     path: 'symptoms',
     loadChildren: () => import('./symptoms-page/symptoms-page.module').then(m => m.SymptomsPagePageModule),
     canDeactivate: [SymptomsAuthguardService]
@@ -44,6 +35,7 @@ const routes: Routes = [
     path: 'log',
     loadChildren: () => import('./log-page/log-page.module').then(m => m.LogPagePageModule)
   },
+
   // {
   //   path: 'login',
   //   loadChildren: () => import('./login/login.module').then(m => m.LoginPageModule)

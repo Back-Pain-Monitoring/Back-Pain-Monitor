@@ -40,6 +40,14 @@ const routes: Routes = [
         loadChildren: () => import('../login/login.module').then(m => m.LoginPageModule)
       },
       {
+        path: 'datetime',
+        loadChildren: () => import('../datetime-page/datetime-page.module').then(m => m.DatetimePagePageModule)
+      },
+      {
+        path: 'bodymap',
+        loadChildren: () => import('../bodymap-page/bodymap-page.module').then(m => m.BodymapPagePageModule)
+      },
+      {
         path: '',
         redirectTo: '/tabs/home',
         pathMatch: 'full'
