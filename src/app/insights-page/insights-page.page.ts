@@ -8,11 +8,15 @@ import { element } from 'protractor';
 import { MedicationDataService } from '../services/medication-data.service';
 import { Subscription } from 'rxjs';
 
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
+
 @Component({
   selector: 'app-insights-page',
   templateUrl: './insights-page.page.html',
   styleUrls: ['./insights-page.page.scss'],
 })
+
 export class InsightsPagePage {
 
   @ViewChild("intensityTimeCanvas") intensityTimeCanvas: ElementRef;
@@ -24,6 +28,8 @@ export class InsightsPagePage {
   @ViewChild("medicationUseCanvas") medicationUseCanvas: ElementRef;
   @ViewChild('nightPainPieCanvas') nightPainPieCanvas: ElementRef;
   @ViewChild('worseBetterCanvas') worseBetterCanvas: ElementRef;
+
+  @ViewChild('chartsData') chartsData:ElementRef;
 
   // Creating the Chart objects
   private intensityTimeChart: Chart;
@@ -44,6 +50,23 @@ export class InsightsPagePage {
   private logSubscription: Subscription;
 
   constructor(private dataService: LogDataService, public modalCtrl: ModalController, private MedService: MedicationDataService) {
+  }
+
+  public openPDF():void {
+    let DATA = document.getElementById('chartsData');
+      
+    html2canvas(DATA).then(canvas => {
+        
+        let fileWidth = 208;
+        let fileHeight = canvas.height * fileWidth / canvas.width / 2;
+        
+        const FILEURI = canvas.toDataURL('image/png')
+        let PDF = new jsPDF('p', 'mm', 'a4');
+        let position = 0;
+        PDF.addImage(FILEURI, 'PNG', 0, position, fileWidth, fileHeight)
+        
+        PDF.save('charts-demo.pdf');
+    });     
   }
 
   ionViewWillEnter() {
