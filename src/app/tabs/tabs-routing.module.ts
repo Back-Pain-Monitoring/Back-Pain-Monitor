@@ -48,6 +48,18 @@ const routes: Routes = [
         loadChildren: () => import('../bodymap-page/bodymap-page.module').then(m => m.BodymapPagePageModule)
       },
       {
+        path: 'symptoms',
+        loadChildren: () => import('../symptoms-page/symptoms-page.module').then(m => m.SymptomsPagePageModule)
+      },
+      {
+        path: 'redflags',
+        loadChildren: () => import('../redflags-page/redflags-page.module').then(m => m.RedflagsPagePageModule)
+      },
+      {
+        path: 'comments',
+        loadChildren: () => import('../comments-page/comments-page.module').then(m => m.CommentsPagePageModule)
+      },
+      {
         path: '',
         redirectTo: '/tabs/home',
         pathMatch: 'full'
