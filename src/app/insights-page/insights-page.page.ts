@@ -63,7 +63,7 @@ export class InsightsPagePage {
         const FILEURI = canvas.toDataURL('image/png')
         let PDF = new jsPDF('p', 'mm', 'a4');
         let position = 0;
-        PDF.addImage(FILEURI, 'PNG', 0, position, fileWidth, fileHeight)
+        PDF.addImage(FILEURI, 'PNG', 0, position, 130, 280)
         
         PDF.save('charts-demo.pdf');
     });     
