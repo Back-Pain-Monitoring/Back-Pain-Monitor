@@ -33,7 +33,8 @@ const routes: Routes = [
       {
         path: 'medication',
         loadChildren: () => import('../medication/medication.module').then(m => m.MedicationPageModule),
-        canActivate: [MakeLogAuthguardService], canDeactivate: [MedicationAuthguardService]
+        canActivate: [MakeLogAuthguardService]
+        // , canDeactivate: [MedicationAuthguardService]
       },
       {
         path: 'login',
