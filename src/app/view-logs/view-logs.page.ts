@@ -71,7 +71,7 @@ export class ViewLogsPage {
 
   editLog(log: LogEntry) {
     this.dataService.startEditLog(log);
-    this.navCtrl.navigateRoot('/datetime');
+    this.navCtrl.navigateRoot('/tabs/datetime');
   }
 
   deleteLog(log: LogEntry) {
