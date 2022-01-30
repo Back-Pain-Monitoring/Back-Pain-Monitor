@@ -5,4 +5,30 @@
 </ion-header>
 
 <ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-label>Please select start date to send</ion-label>
+        <ion-datetime displayFormat="D MM YYYY" placeholder="Start Date" [(ngModel)]="startDate"></ion-datetime>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-label>Please select end date</ion-label>
+        <ion-datetime displayFormat="D MM YYYY" placeholder="End Date" [(ngModel)]="endDate">
+        </ion-datetime>
+      </ion-col>
+    </ion-row>
+    <ion-col>
+      <ion-row>
+        <ion-label>Would you like to send logs with specific details?</ion-label>
+        <ion-checkbox></ion-checkbox>
+      </ion-row>
+    </ion-col>
+    <ion-col>
+      <ion-row>
+        <ion-button class="center" size="large" (click)="sendEmail()">Send Email</ion-button>
+      </ion-row>
+    </ion-col>
+  </ion-grid>
 </ion-content>

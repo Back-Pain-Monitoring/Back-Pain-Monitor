@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { EmailComposer, EmailComposerOptions } from '@ionic-native/email-composer';
+import { IonDatetime } from '@ionic/angular';
+import { DatetimeAuthguardService } from '../services/datetime-authguard.service';
 
 @Component({
   selector: 'app-send-logs-page',
@@ -7,9 +10,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SendLogsPagePage implements OnInit {
 
-  constructor() { }
+  startDate: string;
+  endDate: string;
+
+  constructor(private emailComposer: EmailComposer) { }
 
   ngOnInit() {
   }
+
+  // sendEmail() {
+  //    let email = {
+  //      to:
+  //        cc:
+  //      attachments: [
+
+  //      ]
+  //    }
+  // }
 
 }
