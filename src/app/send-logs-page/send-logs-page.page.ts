@@ -13,19 +13,19 @@ export class SendLogsPagePage implements OnInit {
   startDate: string;
   endDate: string;
 
-  constructor(private emailComp: EmailComposer) { }
+  constructor(private emailComposer: EmailComposer) { }
 
   ngOnInit() {
   }
 
-  async sendEmail() {
-    this.emailComp.addAlias('gmail', 'com.google.android.gm')
-    const email: EmailComposerOptions = {
-      app: 'gmail',
-      subject: "Back Pain Report",
-      isHtml: false,
-    };
-    await this.emailComp.open(email);
-  }
+  // sendEmail() {
+  //    let email = {
+  //      to:
+  //        cc:
+  //      attachments: [
+
+  //      ]
+  //    }
+  // }
 
 }
